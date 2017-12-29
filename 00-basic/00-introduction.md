@@ -141,9 +141,13 @@ JavaScript 是一种开放的语言。它的标准 ECMA-262 是 ISO 国际标准
 
 作为尝试，你可以将下面的程序复制到“控制台”，按下回车后，就可以看到运行结果。
 
+```javascript
 function greetMe(yourName) {
   console.log('Hello ' + yourName);
 }
 
 greetMe('World')
 // Hello World
+```
+
+
