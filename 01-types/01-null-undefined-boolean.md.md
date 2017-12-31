@@ -52,3 +52,31 @@ Number(null) // 0
 Number(undefined) // NaN
 5 + undefined // NaN
 ```
+
+### 用法和含义
+
+对于`null`和`undefined`，大致可以像下面这样理解。
+
+`null`表示空值，即该处的值现在为空。调用函数时，某个参数未设置任何值，这时就可以传入`null`，表示该参数为空。比如，某个函数接受引擎抛出的错误作为参数，如果运行过程中未出错，那么这个参数就会传入`null`，表示未发生错误。
+
+`undefined`表示“未定义”，下面是返回`undefined`的典型场景。
+
+```
+// 变量声明了，但没有赋值
+var i;
+i // undefined
+
+// 调用函数时，应该提供的参数没有提供，该参数等于 undefined
+function f(x) {
+  return x;
+}
+f() // undefined
+
+// 对象没有赋值的属性
+var  o = new Object();
+o.p // undefined
+
+// 函数没有返回值时，默认返回 undefined
+function f() {}
+f() // undefined
+```
