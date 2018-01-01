@@ -279,3 +279,102 @@ NaN - 32 // NaN
 NaN * 32 // NaN
 NaN / 32 // NaN
 ```
+
+### Infinity
+
+**（1）含义**
+
+`Infinity`表示“无穷”，用来表示两种场景。一种是一个正的数值太大，或一个负的数值太小，无法表示；另一种是非0数值除以0，得到`Infinity`。
+
+```
+// 场景一
+Math.pow(2, 1024)
+// Infinity
+
+// 场景二
+0 / 0 // NaN
+1 / 0 // Infinity
+```
+
+上面代码中，第一个场景是一个表达式的计算结果太大，超出了能够表示的范围，因此返回`Infinity`。第二个场景是`0`除以`0`会得到`NaN`，而非0数值除以`0`，会返回`Infinity`。
+
+`Infinity`有正负之分，`Infinity`表示正的无穷，`-Infinity`表示负的无穷。
+
+```
+Infinity === -Infinity // false
+
+1 / -0 // -Infinity
+-1 / -0 // Infinity
+```
+
+上面代码中，非零正数除以`-0`，会得到`-Infinity`，负数除以`-0`，会得到`Infinity`。
+
+由于数值正向溢出（overflow）、负向溢出（underflow）和被`0`除，JavaScript 都不报错，所以单纯的数学运算几乎没有可能抛出错误。
+
+`Infinity`大于一切数值（除了`NaN`），`-Infinity`小于一切数值（除了`NaN`）。
+
+```
+Infinity > 1000 // true
+-Infinity < -1000 // true
+```
+
+`Infinity`与`NaN`比较，总是返回`false`。
+
+```
+Infinity > NaN // false
+-Infinity > NaN // false
+
+Infinity < NaN // false
+-Infinity < NaN // false
+```
+
+**（2）运算规则**
+
+`Infinity`的四则运算，符合无穷的数学计算规则。
+
+```
+5 * Infinity // Infinity
+5 - Infinity // -Infinity
+Infinity / 5 // Infinity
+5 / Infinity // 0
+```
+
+0乘以`Infinity`，返回`NaN`；0除以`Infinity`，返回`0`；`Infinity`除以0，返回`Infinity`。
+
+```
+0 * Infinity // NaN
+0 / Infinity // 0
+Infinity / 0 // Infinity
+```
+
+`Infinity`加上或乘以`Infinity`，返回的还是`Infinity`。
+
+```
+Infinity + Infinity // Infinity
+Infinity * Infinity // Infinity
+```
+
+`Infinity`减去或除以`Infinity`，得到`NaN`。
+
+```
+Infinity - Infinity // NaN
+Infinity / Infinity // NaN
+```
+
+`Infinity`与`null`计算时，`null`会转成0，等同于与`0`的计算。
+
+```
+null * Infinity // NaN
+null / Infinity // 0
+Infinity / null // Infinity
+```
+
+`Infinity`与`undefined`计算，返回的都是`NaN`。
+
+```
+undefined + Infinity // NaN
+undefined - Infinity // NaN
+undefined * Infinity // NaN
+undefined / Infinity // NaN
+Infinity / undefined // NaN
+```
