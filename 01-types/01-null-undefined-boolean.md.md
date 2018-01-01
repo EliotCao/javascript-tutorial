@@ -80,3 +80,7 @@ o.p // undefined
 function f() {}
 f() // undefined
 ```
+
+## 布尔值
+
+布尔值代表“真”和“假”两个状态。“真”用关键字`true`表示，“假”用关键字`false`表示。布尔值只有这两个值。
