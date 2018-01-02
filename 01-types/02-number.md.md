@@ -378,3 +378,5 @@ undefined * Infinity // NaN
 undefined / Infinity // NaN
 Infinity / undefined // NaN
 ```
+
+## 与数值相关的全局方法
