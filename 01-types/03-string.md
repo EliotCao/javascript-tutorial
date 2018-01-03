@@ -239,3 +239,47 @@ JavaScript 对 UTF-16 的支持是不完整的，由于历史原因，只支持�
 上面代码中，JavaScript 认为`𝌆`的长度为2，而不是1。
 
 总结一下，对于码点在`U+10000`到`U+10FFFF`之间的字符，JavaScript 总是认为它们是两个字符（`length`属性为2）。所以处理的时候，必须把这一点考虑在内，也就是说，JavaScript 返回的字符串长度可能是不正确的。
+
+## Base64 转码
+
+有时，文本里面包含一些不可打印的符号，比如 ASCII 码0到31的符号都无法打印出来，这时可以使用 Base64 编码，将它们转成可以打印的字符。另一个场景是，有时需要以文本格式传递二进制数据，那么也可以使用 Base64 编码。
+
+所谓 Base64 就是一种编码方法，可以将任意值转成 0～9、A～Z、a-z、`+`和`/`这64个字符组成的可打印字符。使用它的主要目的，不是为了加密，而是为了不出现特殊字符，简化程序的处理。
+
+JavaScript 原生提供两个 Base64 相关的方法。
+
+- `btoa()`：任意值转为 Base64 编码
+- `atob()`：Base64 编码转为原来的值
+
+```
+var string = 'Hello World!';
+btoa(string) // "SGVsbG8gV29ybGQh"
+atob('SGVsbG8gV29ybGQh') // "Hello World!"
+```
+
+注意，这两个方法不适合非 ASCII 码的字符，会报错。
+
+```
+btoa('你好') // 报错
+```
+
+要将非 ASCII 码字符转为 Base64 编码，必须中间插入一个转码环节，再使用这两个方法。
+
+```
+function b64Encode(str) {
+  return btoa(encodeURIComponent(str));
+}
+
+function b64Decode(str) {
+  return decodeURIComponent(atob(str));
+}
+
+b64Encode('你好') // "JUU0JUJEJUEwJUU1JUE1JUJE"
+b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
+```
+
+## 参考链接
+
+- Mathias Bynens, [JavaScript’s internal character encoding: UCS-2 or UTF-16?](http://mathiasbynens.be/notes/javascript-encoding)
+- Mathias Bynens, [JavaScript has a Unicode problem](http://mathiasbynens.be/notes/javascript-unicode)
+- Mozilla Developer Network, [Window.btoa](https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa)
