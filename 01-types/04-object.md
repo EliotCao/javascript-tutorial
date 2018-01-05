@@ -298,3 +298,41 @@ var obj = {
 Object.keys(obj);
 // ['key1', 'key2']
 ```
+
+### 属性的删除：delete 命令
+
+`delete`命令用于删除对象的属性，删除成功后返回`true`。
+
+```
+var obj = { p: 1 };
+Object.keys(obj) // ["p"]
+
+delete obj.p // true
+obj.p // undefined
+Object.keys(obj) // []
+```
+
+上面代码中，`delete`命令删除对象`obj`的`p`属性。删除后，再读取`p`属性就会返回`undefined`，而且`Object.keys`方法的返回值也不再包括该属性。
+
+注意，删除一个不存在的属性，`delete`不报错，而且返回`true`。
+
+```
+var obj = {};
+delete obj.p // true
+```
+
+上面代码中，对象`obj`并没有`p`属性，但是`delete`命令照样返回`true`。因此，不能根据`delete`命令的结果，认定某个属性是存在的。
+
+只有一种情况，`delete`命令会返回`false`，那就是该属性存在，且不得删除。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  value: 123,
+  configurable: false
+});
+
+obj.p // 123
+delete obj.p // false
+```
+
+上面代码之中，对象`obj`的`p`属性是不能删除的，所以`delete`命令返回`false`（关于`Object.defineProperty`方法的介绍，请看《标准库》的 Object 对象一章）。
