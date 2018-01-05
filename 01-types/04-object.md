@@ -391,3 +391,18 @@ for (var i in obj) {
 
 - 它遍历的是对象所有可遍历（enumerable）的属性，会跳过不可遍历的属性。
 - 它不仅遍历对象自身的属性，还遍历继承的属性。
+
+举例来说，对象都继承了`toString`属性，但是`for...in`循环不会遍历到这个属性。
+
+```
+var obj = {};
+
+// toString 属性是存在的
+obj.toString // toString() { [native code] }
+
+for (var p in obj) {
+  console.log(p);
+} // 没有任何输出
+```
+
+上面代码中，对象`obj`继承了`toString`属性，该属性不会被`for...in`循环遍历到，因为它默认是“不可遍历”的。关于对象属性的可遍历性，参见《标准库》章节中 Object 一章的介绍。
