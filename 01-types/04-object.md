@@ -367,3 +367,27 @@ if ('toString' in obj) {
   console.log(obj.hasOwnProperty('toString')) // false
 }
 ```
+
+### 属性的遍历：for...in 循环
+
+`for...in`循环用来遍历一个对象的全部属性。
+
+```
+var obj = {a: 1, b: 2, c: 3};
+
+for (var i in obj) {
+  console.log('键名：', i);
+  console.log('键值：', obj[i]);
+}
+// 键名： a
+// 键值： 1
+// 键名： b
+// 键值： 2
+// 键名： c
+// 键值： 3
+```
+
+`for...in`循环有两个使用注意点。
+
+- 它遍历的是对象所有可遍历（enumerable）的属性，会跳过不可遍历的属性。
+- 它不仅遍历对象自身的属性，还遍历继承的属性。
