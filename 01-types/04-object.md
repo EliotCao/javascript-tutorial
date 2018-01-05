@@ -284,3 +284,17 @@ var obj = { p: 1 };
 var obj = {};
 obj.p = 1;
 ```
+
+### 属性的查看
+
+查看一个对象本身的所有属性，可以使用`Object.keys`方法。
+
+```
+var obj = {
+  key1: 1,
+  key2: 2
+};
+
+Object.keys(obj);
+// ['key1', 'key2']
+```
