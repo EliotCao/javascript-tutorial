@@ -257,3 +257,64 @@ f.length // 2
 上面代码定义了空函数`f`，它的`length`属性就是定义时的参数个数。不管调用时输入了多少个参数，`length`属性始终等于2。
 
 `length`属性提供了一种机制，判断定义时和调用时参数的差异，以便实现面向对象编程的“方法重载”（overload）。
+
+### toString()
+
+函数的`toString()`方法返回一个字符串，内容是函数的源码。
+
+```
+function f() {
+  a();
+  b();
+  c();
+}
+
+f.toString()
+// function f() {
+//  a();
+//  b();
+//  c();
+// }
+```
+
+对于那些原生的函数，`toString()`方法返回`function (){[native code]}`。
+
+```
+Math.sqrt.toString()
+// "function sqrt() { [native code] }"
+```
+
+上面代码中，`Math.sqrt()`是 JavaScript 引擎提供的原生函数，`toString()`方法就返回原生代码的提示。
+
+函数内部的注释也可以返回。
+
+```
+function f() {/*
+  这是一个
+  多行注释
+*/}
+
+f.toString()
+// "function f(){/*
+//   这是一个
+//   多行注释
+// */}"
+```
+
+利用这一点，可以变相实现多行字符串。
+
+```
+var multiline = function (fn) {
+  var arr = fn.toString().split('\n');
+  return arr.slice(1, arr.length - 1).join('\n');
+};
+
+function f() {/*
+  这是一个
+  多行注释
+*/}
+
+multiline(f);
+// " 这是一个
+//   多行注释"
+```
