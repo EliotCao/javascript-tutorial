@@ -53,3 +53,39 @@ var f = function f() {};
 ```
 
 需要注意的是，函数的表达式需要在语句的结尾加上分号，表示语句结束。而函数的声明在结尾的大括号后面不用加分号。总的来说，这两种声明函数的方式，差别很细微，可以近似认为是等价的。
+
+**（3）Function 构造函数**
+
+第三种声明函数的方式是`Function`构造函数。
+
+```
+var add = new Function(
+  'x',
+  'y',
+  'return x + y'
+);
+
+// 等同于
+function add(x, y) {
+  return x + y;
+}
+```
+
+上面代码中，`Function`构造函数接受三个参数，除了最后一个参数是`add`函数的“函数体”，其他参数都是`add`函数的参数。
+
+你可以传递任意数量的参数给`Function`构造函数，只有最后一个参数会被当做函数体，如果只有一个参数，该参数就是函数体。
+
+```
+var foo = new Function(
+  'return "hello world";'
+);
+
+// 等同于
+function foo() {
+  return 'hello world';
+}
+```
+
+`Function`构造函数可以不使用`new`命令，返回结果完全一样。
+
+总的来说，这种声明函数的方式非常不直观，几乎无人使用。
