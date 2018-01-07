@@ -661,3 +661,17 @@ for (var i = 0; i < arguments.length; i++) {
   args.push(arguments[i]);
 }
 ```
+
+**3）callee 属性**
+
+`arguments`对象带有一个`callee`属性，返回它所对应的原函数。
+
+```
+var f = function () {
+  console.log(arguments.callee === f);
+}
+
+f() // true
+```
+
+可以通过`arguments.callee`，达到调用函数自身的目的。这个属性在严格模式里面是禁用的，因此不建议使用。
