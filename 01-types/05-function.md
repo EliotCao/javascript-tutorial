@@ -957,3 +957,39 @@ x // 1
 ```
 
 上面代码中，变量`m`是`eval`的别名。静态代码分析阶段，引擎分辨不出`m('var x = 1')`执行的是`eval`命令。
+
+为了保证`eval`的别名不影响代码优化，JavaScript 的标准规定，凡是使用别名执行`eval`，`eval`内部一律是全局作用域。
+
+```
+var a = 1;
+
+function f() {
+  var a = 2;
+  var e = eval;
+  e('console.log(a)');
+}
+
+f() // 1
+```
+
+上面代码中，`eval`是别名调用，所以即使它是在函数中，它的作用域还是全局作用域，因此输出的`a`为全局变量。这样的话，引擎就能确认`e()`不会对当前的函数作用域产生影响，优化的时候就可以把这一行排除掉。
+
+`eval`的别名调用的形式五花八门，只要不是直接调用，都属于别名调用，因为引擎只能分辨`eval()`这一种形式是直接调用。
+
+```
+eval.call(null, '...')
+window.eval('...')
+(1, eval)('...')
+(eval, eval)('...')
+```
+
+上面这些形式都是`eval`的别名调用，作用域都是全局作用域。
+
+## 参考链接
+
+- Ben Alman, [Immediately-Invoked Function Expression (IIFE)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
+- Mark Daggett, [Functions Explained](http://markdaggett.com/blog/2013/02/15/functions-explained/)
+- Juriy Zaytsev, [Named function expressions demystified](http://kangax.github.com/nfe/)
+- Marco Rogers polotek, [What is the arguments object?](http://docs.nodejitsu.com/articles/javascript-conventions/what-is-the-arguments-object)
+- Juriy Zaytsev, [Global eval. What are the options?](http://perfectionkills.com/global-eval-what-are-the-options/)
+- Axel Rauschmayer, [Evaluating JavaScript code via eval() and new Function()](http://www.2ality.com/2014/01/eval.html)
