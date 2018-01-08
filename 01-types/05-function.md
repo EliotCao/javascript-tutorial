@@ -759,3 +759,31 @@ inc() // 7
 上面代码中，`start`是函数`createIncrementor`的内部变量。通过闭包，`start`的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。从中可以看到，闭包`inc`使得函数`createIncrementor`的内部环境，一直存在。所以，闭包可以看作是函数内部作用域的一个接口。
 
 为什么会这样呢？原因就在于`inc`始终在内存中，而`inc`的存在依赖于`createIncrementor`，因此也始终在内存中，不会在调用结束后，被垃圾回收机制回收。
+
+闭包的另一个用处，是封装对象的私有属性和私有方法。
+
+```
+function Person(name) {
+  var _age;
+  function setAge(n) {
+    _age = n;
+  }
+  function getAge() {
+    return _age;
+  }
+
+  return {
+    name: name,
+    getAge: getAge,
+    setAge: setAge
+  };
+}
+
+var p1 = Person('张三');
+p1.setAge(25);
+p1.getAge() // 25
+```
+
+上面代码中，函数`Person`的内部变量`_age`，通过闭包`getAge`和`setAge`，变成了返回对象`p1`的私有变量。
+
+注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。
