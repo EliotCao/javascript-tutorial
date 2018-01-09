@@ -155,3 +155,33 @@ a[1] // undefined
 ```
 
 上面代码表示，当`length`属性设为大于数组个数时，读取新增的位置都会返回`undefined`。
+
+如果人为设置`length`为不合法的值，JavaScript 会报错。
+
+```
+// 设置负值
+[].length = -1
+// RangeError: Invalid array length
+
+// 数组元素个数大于等于2的32次方
+[].length = Math.pow(2, 32)
+// RangeError: Invalid array length
+
+// 设置字符串
+[].length = 'abc'
+// RangeError: Invalid array length
+```
+
+值得注意的是，由于数组本质上是一种对象，所以可以为数组添加属性，但是这不影响`length`属性的值。
+
+```
+var a = [];
+
+a['p'] = 'abc';
+a.length // 0
+
+a[2.1] = 'abc';
+a.length // 0
+```
+
+上面代码将数组的键分别设为字符串和小数，结果都不影响`length`属性。因为，`length`属性的值就是等于最大的数字键加1，而这个数组没有整数键，所以`length`属性保持为`0`。
