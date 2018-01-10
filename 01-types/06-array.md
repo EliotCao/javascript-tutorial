@@ -224,3 +224,60 @@ arr[100] = 'a';
 ```
 
 上面代码中，数组`arr`只有一个成员`arr[100]`，其他位置的键名都会返回`false`。
+
+## for...in 循环和数组的遍历
+
+`for...in`循环不仅可以遍历对象，也可以遍历数组，毕竟数组只是一种特殊对象。
+
+```
+var a = [1, 2, 3];
+
+for (var i in a) {
+  console.log(a[i]);
+}
+// 1
+// 2
+// 3
+```
+
+但是，`for...in`不仅会遍历数组所有的数字键，还会遍历非数字键。
+
+```
+var a = [1, 2, 3];
+a.foo = true;
+
+for (var key in a) {
+  console.log(key);
+}
+// 0
+// 1
+// 2
+// foo
+```
+
+上面代码在遍历数组时，也遍历到了非整数键`foo`。所以，不推荐使用`for...in`遍历数组。
+
+数组的遍历可以考虑使用`for`循环或`while`循环。
+
+```
+var a = [1, 2, 3];
+
+// for循环
+for(var i = 0; i < a.length; i++) {
+  console.log(a[i]);
+}
+
+// while循环
+var i = 0;
+while (i < a.length) {
+  console.log(a[i]);
+  i++;
+}
+
+var l = a.length;
+while (l--) {
+  console.log(a[l]);
+}
+```
+
+上面代码是三种遍历数组的写法。最后一种写法是逆向遍历，即从最后一个元素向第一个元素遍历。
