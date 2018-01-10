@@ -281,3 +281,15 @@ while (l--) {
 ```
 
 上面代码是三种遍历数组的写法。最后一种写法是逆向遍历，即从最后一个元素向第一个元素遍历。
+
+数组的`forEach`方法，也可以用来遍历数组，详见《标准库》的 Array 对象一章。
+
+```
+var colors = ['red', 'green', 'blue'];
+colors.forEach(function (color) {
+  console.log(color);
+});
+// red
+// green
+// blue
+```
