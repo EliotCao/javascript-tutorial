@@ -112,3 +112,29 @@ obj + 2 // 3
 ```
 
 上面代码中，我们定义`obj`对象的`valueOf`方法返回`1`，于是`obj + 2`就得到了`3`。这个例子中，由于`valueOf`方法直接返回一个原始类型的值，所以不再调用`toString`方法。
+
+下面是自定义`toString`方法的例子。
+
+```
+var obj = {
+  toString: function () {
+    return 'hello';
+  }
+};
+
+obj + 2 // "hello2"
+```
+
+上面代码中，对象`obj`的`toString`方法返回字符串`hello`。前面说过，只要有一个运算子是字符串，加法运算符就变成连接运算符，返回连接后的字符串。
+
+这里有一个特例，如果运算子是一个`Date`对象的实例，那么会优先执行`toString`方法。
+
+```
+var obj = new Date();
+obj.valueOf = function () { return 1 };
+obj.toString = function () { return 'hello' };
+
+obj + 2 // "hello2"
+```
+
+上面代码中，对象`obj`是一个`Date`对象的实例，并且自定义了`valueOf`方法和`toString`方法，结果`toString`方法优先执行。
