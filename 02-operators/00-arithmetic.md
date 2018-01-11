@@ -69,3 +69,46 @@ false + 'a' // "falsea"
 ```
 
 上面代码中，减法、除法和乘法运算符，都是将字符串自动转为数值，然后再运算。
+
+### 对象的相加
+
+如果运算子是对象，必须先转成原始类型的值，然后再相加。
+
+```
+var obj = { p: 1 };
+obj + 2 // "[object Object]2"
+```
+
+上面代码中，对象`obj`转成原始类型的值是`[object Object]`，再加`2`就得到了上面的结果。
+
+对象转成原始类型的值，规则如下。
+
+首先，自动调用对象的`valueOf`方法。
+
+```
+var obj = { p: 1 };
+obj.valueOf() // { p: 1 }
+```
+
+一般来说，对象的`valueOf`方法总是返回对象自身，这时再自动调用对象的`toString`方法，将其转为字符串。
+
+```
+var obj = { p: 1 };
+obj.valueOf().toString() // "[object Object]"
+```
+
+对象的`toString`方法默认返回`[object Object]`，所以就得到了最前面那个例子的结果。
+
+知道了这个规则以后，就可以自己定义`valueOf`方法或`toString`方法，得到想要的结果。
+
+```
+var obj = {
+  valueOf: function () {
+    return 1;
+  }
+};
+
+obj + 2 // 3
+```
+
+上面代码中，我们定义`obj`对象的`valueOf`方法返回`1`，于是`obj + 2`就得到了`3`。这个例子中，由于`valueOf`方法直接返回一个原始类型的值，所以不再调用`toString`方法。
