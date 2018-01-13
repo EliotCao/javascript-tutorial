@@ -49,3 +49,38 @@ JavaScript 引擎内部首先比较首字符的 Unicode 码点。如果相等，
 ```
 
 上面代码中，“大”的 Unicode 码点是22823，“小”是23567，因此返回`false`。
+
+## 非相等运算符：非字符串的比较
+
+如果两个运算子之中，至少有一个不是字符串，需要分成以下两种情况。
+
+**（1）原始类型值**
+
+如果两个运算子都是原始类型的值，则是先转成数值再比较。
+
+```
+5 > '4' // true
+// 等同于 5 > Number('4')
+// 即 5 > 4
+
+true > false // true
+// 等同于 Number(true) > Number(false)
+// 即 1 > 0
+
+2 > true // true
+// 等同于 2 > Number(true)
+// 即 2 > 1
+```
+
+上面代码中，字符串和布尔值都会先转成数值，再进行比较。
+
+这里需要注意与`NaN`的比较。任何值（包括`NaN`本身）与`NaN`比较，返回的都是`false`。
+
+```
+1 > NaN // false
+1 <= NaN // false
+'1' > NaN // false
+'1' <= NaN // false
+NaN > NaN // false
+NaN <= NaN // false
+```
