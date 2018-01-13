@@ -84,3 +84,37 @@ true > false // true
 NaN > NaN // false
 NaN <= NaN // false
 ```
+
+**（2）对象**
+
+如果运算子是对象，会转为原始类型的值，再进行比较。
+
+对象转换成原始类型的值，算法是先调用`valueOf`方法；如果返回的还是对象，再接着调用`toString`方法，详细解释参见《数据类型的转换》一章。
+
+```
+var x = [2];
+x > '11' // true
+// 等同于 [2].valueOf().toString() > '11'
+// 即 '2' > '11'
+
+x.valueOf = function () { return '1' };
+x > '11' // false
+// 等同于 [2].valueOf() > '11'
+// 即 '1' > '11'
+```
+
+两个对象之间的比较也是如此。
+
+```
+[2] > [1] // true
+// 等同于 [2].valueOf().toString() > [1].valueOf().toString()
+// 即 '2' > '1'
+
+[2] > [11] // true
+// 等同于 [2].valueOf().toString() > [11].valueOf().toString()
+// 即 '2' > '11'
+
+{ x: 2 } >= { x: 1 } // true
+// 等同于 { x: 2 }.valueOf().toString() >= { x: 1 }.valueOf().toString()
+// 即 '[object Object]' >= '[object Object]'
+```
