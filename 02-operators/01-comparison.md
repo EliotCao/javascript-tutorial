@@ -187,3 +187,20 @@ obj1 === obj2 // false
 ```
 
 上面的三个比较，前两个比较的是值，最后一个比较的是地址，所以都返回`false`。
+
+**（4）undefined 和 null**
+
+`undefined`和`null`与自身严格相等。
+
+```
+undefined === undefined // true
+null === null // true
+```
+
+由于变量声明后默认值是`undefined`，因此两个只声明未赋值的变量是相等的。
+
+```
+var v1;
+var v2;
+v1 === v2 // true
+```
