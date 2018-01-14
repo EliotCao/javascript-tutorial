@@ -291,3 +291,17 @@ v1 === v2 // true
 ```
 
 上面代码中，数组`[1]`与数值进行比较，会先转成数值，再进行比较；与字符串进行比较，会先转成字符串，再进行比较；与布尔值进行比较，对象和布尔值都会先转成数值，再进行比较。
+
+**（3）undefined 和 null**
+
+`undefined`和`null`与其他类型的值比较时，结果都为`false`，它们互相比较时结果为`true`。
+
+```
+false == null // false
+false == undefined // false
+
+0 == null // false
+0 == undefined // false
+
+undefined == null // true
+```
