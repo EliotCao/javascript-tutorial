@@ -305,3 +305,26 @@ false == undefined // false
 
 undefined == null // true
 ```
+
+**（4）相等运算符的缺点**
+
+相等运算符隐藏的类型转换，会带来一些违反直觉的结果。
+
+```
+0 == ''             // true
+0 == '0'            // true
+
+2 == true           // false
+2 == false          // false
+
+false == 'false'    // false
+false == '0'        // true
+
+false == undefined  // false
+false == null       // false
+null == undefined   // true
+
+' \t\r\n ' == 0     // true
+```
+
+上面这些表达式都不同于直觉，很容易出错。因此建议不要使用相等运算符（`==`），最好只使用严格相等运算符（`===`）。
