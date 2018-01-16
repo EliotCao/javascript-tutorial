@@ -286,3 +286,72 @@ rgb2hex(color.r, color.g, color.b)
 ```
 
 上面代码表示，`-1`作为32位整数时，内部的储存形式使用无符号整数格式解读，值为 4294967295（即`(2^32)-1`，等于`11111111111111111111111111111111`）。
+
+## 开关作用
+
+位运算符可以用作设置对象属性的开关。
+
+假定某个对象有四个开关，每个开关都是一个变量。那么，可以设置一个四位的二进制数，它的每个位对应一个开关。
+
+```
+var FLAG_A = 1; // 0001
+var FLAG_B = 2; // 0010
+var FLAG_C = 4; // 0100
+var FLAG_D = 8; // 1000
+```
+
+上面代码设置 A、B、C、D 四个开关，每个开关分别占有一个二进制位。
+
+然后，就可以用二进制与运算，检查当前设置是否打开了指定开关。
+
+```
+var flags = 5; // 二进制的0101
+
+if (flags & FLAG_C) {
+  // ...
+}
+// 0101 & 0100 => 0100 => true
+```
+
+上面代码检验是否打开了开关`C`。如果打开，会返回`true`，否则返回`false`。
+
+现在假设需要打开`A`、`B`、`D`三个开关，我们可以构造一个掩码变量。
+
+```
+var mask = FLAG_A | FLAG_B | FLAG_D;
+// 0001 | 0010 | 1000 => 1011
+```
+
+上面代码对`A`、`B`、`D`三个变量进行二进制或运算，得到掩码值为二进制的`1011`。
+
+有了掩码，二进制或运算可以确保打开指定的开关。
+
+```
+flags = flags | mask;
+```
+
+上面代码中，计算后得到的`flags`变量，代表三个开关的二进制位都打开了。
+
+二进制与运算可以将当前设置中凡是与开关设置不一样的项，全部关闭。
+
+```
+flags = flags & mask;
+```
+
+异或运算可以切换（toggle）当前设置，即第一次执行可以得到当前设置的相反值，再执行一次又得到原来的值。
+
+```
+flags = flags ^ mask;
+```
+
+二进制否运算可以翻转当前设置，即原设置为`0`，运算后变为`1`；原设置为`1`，运算后变为`0`。
+
+```
+flags = ~flags;
+```
+
+## 参考链接
+
+- Michal Budzynski, [JavaScript: The less known parts. Bitwise Operators](http://michalbe.blogspot.co.uk/2013/03/javascript-less-known-parts-bitwise.html)
+- Axel Rauschmayer, [Basic JavaScript for the impatient programmer](http://www.2ality.com/2013/06/basic-javascript.html)
+- Mozilla Developer Network, [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators)
