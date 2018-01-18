@@ -161,3 +161,23 @@ Number({
 ```
 
 上面代码对三个对象使用`Number`函数。第一个对象返回`valueOf`方法的值，第二个对象返回`toString`方法的值，第三个对象表示`valueOf`方法先于`toString`方法执行。
+
+### String()
+
+`String`函数可以将任意类型的值转化成字符串，转换规则如下。
+
+**（1）原始类型值**
+
+- **数值**：转为相应的字符串。
+- **字符串**：转换后还是原来的值。
+- **布尔值**：`true`转为字符串`"true"`，`false`转为字符串`"false"`。
+- **undefined**：转为字符串`"undefined"`。
+- **null**：转为字符串`"null"`。
+
+```
+String(123) // "123"
+String('abc') // "abc"
+String(true) // "true"
+String(undefined) // "undefined"
+String(null) // "null"
+```
