@@ -73,3 +73,37 @@ Number('42 cats') // NaN
 parseInt('\t\v\r12.34\n') // 12
 Number('\t\v\r12.34\n') // 12.34
 ```
+
+**（2）对象**
+
+简单的规则是，`Number`方法的参数是对象时，将返回`NaN`，除非是包含单个数值的数组。
+
+```
+Number({a: 1}) // NaN
+Number([1, 2, 3]) // NaN
+Number([5]) // 5
+```
+
+之所以会这样，是因为`Number`背后的转换规则比较复杂。
+
+第一步，调用对象自身的`valueOf`方法。如果返回原始类型的值，则直接对该值使用`Number`函数，不再进行后续步骤。
+
+第二步，如果`valueOf`方法返回的还是对象，则改为调用对象自身的`toString`方法。如果`toString`方法返回原始类型的值，则对该值使用`Number`函数，不再进行后续步骤。
+
+第三步，如果`toString`方法返回的是对象，就报错。
+
+请看下面的例子。
+
+```
+var obj = {x: 1};
+Number(obj) // NaN
+
+// 等同于
+if (typeof obj.valueOf() === 'object') {
+  Number(obj.toString());
+} else {
+  Number(obj.valueOf());
+}
+```
+
+上面代码中，`Number`函数将`obj`对象转为数值。背后发生了一连串的操作，首先调用`obj.valueOf`方法, 结果返回对象本身；于是，继续调用`obj.toString`方法，这时返回字符串`[object Object]`，对这个字符串使用`Number`函数，得到`NaN`。
