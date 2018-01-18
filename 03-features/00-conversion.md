@@ -196,3 +196,62 @@ String([1, 2, 3]) // "1,2,3"
 1. 先调用对象自身的`toString`方法。如果返回原始类型的值，则对该值使用`String`函数，不再进行以下步骤。
 2. 如果`toString`方法返回的是对象，再调用原对象的`valueOf`方法。如果`valueOf`方法返回原始类型的值，则对该值使用`String`函数，不再进行以下步骤。
 3. 如果`valueOf`方法返回的是对象，就报错。
+
+下面是一个例子。
+
+```
+String({a: 1})
+// "[object Object]"
+
+// 等同于
+String({a: 1}.toString())
+// "[object Object]"
+```
+
+上面代码先调用对象的`toString`方法，发现返回的是字符串`[object Object]`，就不再调用`valueOf`方法了。
+
+如果`toString`法和`valueOf`方法，返回的都是对象，就会报错。
+
+```
+var obj = {
+  valueOf: function () {
+    return {};
+  },
+  toString: function () {
+    return {};
+  }
+};
+
+String(obj)
+// TypeError: Cannot convert object to primitive value
+```
+
+下面是通过自定义`toString`方法，改变返回值的例子。
+
+```
+String({
+  toString: function () {
+    return 3;
+  }
+})
+// "3"
+
+String({
+  valueOf: function () {
+    return 2;
+  }
+})
+// "[object Object]"
+
+String({
+  valueOf: function () {
+    return 2;
+  },
+  toString: function () {
+    return 3;
+  }
+})
+// "3"
+```
+
+上面代码对三个对象使用`String`函数。第一个对象返回`toString`方法的值（数值3），第二个对象返回的还是`toString`方法的值（`[object Object]`），第三个对象表示`toString`方法先于`valueOf`方法执行。
