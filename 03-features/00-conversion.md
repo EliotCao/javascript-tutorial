@@ -107,3 +107,25 @@ if (typeof obj.valueOf() === 'object') {
 ```
 
 上面代码中，`Number`函数将`obj`对象转为数值。背后发生了一连串的操作，首先调用`obj.valueOf`方法, 结果返回对象本身；于是，继续调用`obj.toString`方法，这时返回字符串`[object Object]`，对这个字符串使用`Number`函数，得到`NaN`。
+
+默认情况下，对象的`valueOf`方法返回对象本身，所以一般总是会调用`toString`方法，而`toString`方法返回对象的类型字符串（比如`[object Object]`）。所以，会有下面的结果。
+
+```
+Number({}) // NaN
+```
+
+如果`toString`方法返回的不是原始类型的值，结果就会报错。
+
+```
+var obj = {
+  valueOf: function () {
+    return {};
+  },
+  toString: function () {
+    return {};
+  }
+};
+
+Number(obj)
+// TypeError: Cannot convert object to primitive value
+```
