@@ -129,3 +129,35 @@ var obj = {
 Number(obj)
 // TypeError: Cannot convert object to primitive value
 ```
+
+上面代码的`valueOf`和`toString`方法，返回的都是对象，所以转成数值时会报错。
+
+从上例还可以看到，`valueOf`和`toString`方法，都是可以自定义的。
+
+```
+Number({
+  valueOf: function () {
+    return 2;
+  }
+})
+// 2
+
+Number({
+  toString: function () {
+    return 3;
+  }
+})
+// 3
+
+Number({
+  valueOf: function () {
+    return 2;
+  },
+  toString: function () {
+    return 3;
+  }
+})
+// 2
+```
+
+上面代码对三个对象使用`Number`函数。第一个对象返回`valueOf`方法的值，第二个对象返回`toString`方法的值，第三个对象表示`valueOf`方法先于`toString`方法执行。
