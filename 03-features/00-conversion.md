@@ -255,3 +255,40 @@ String({
 ```
 
 上面代码对三个对象使用`String`函数。第一个对象返回`toString`方法的值（数值3），第二个对象返回的还是`toString`方法的值（`[object Object]`），第三个对象表示`toString`方法先于`valueOf`方法执行。
+
+### Boolean()
+
+`Boolean()`函数可以将任意类型的值转为布尔值。
+
+它的转换规则相对简单：除了以下五个值的转换结果为`false`，其他的值全部为`true`。
+
+- `undefined`
+- `null`
+- `0`（包含`-0`和`+0`）
+- `NaN`
+- `''`（空字符串）
+
+```
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean(NaN) // false
+Boolean('') // false
+```
+
+当然，`true`和`false`这两个布尔值不会发生变化。
+
+```
+Boolean(true) // true
+Boolean(false) // false
+```
+
+注意，所有对象（包括空对象）的转换结果都是`true`，甚至连`false`对应的布尔对象`new Boolean(false)`也是`true`（详见《原始类型值的包装对象》一章）。
+
+```
+Boolean({}) // true
+Boolean([]) // true
+Boolean(new Boolean(false)) // true
+```
+
+所有对象的布尔值都是`true`，这是因为 JavaScript 语言设计的时候，出于性能的考虑，如果对象需要计算才能得到布尔值，对于`obj1 && obj2`这样的场景，可能会需要较多的计算。为了保证性能，就统一规定，对象的布尔值为`true`。
