@@ -113,3 +113,12 @@ obj.unknownMethod()
 ```
 
 上面代码的第二种情况，调用对象不存在的方法，也会抛出`TypeError`错误，因为`obj.unknownMethod`的值是`undefined`，而不是一个函数。
+
+### URIError 对象
+
+`URIError`对象是 URI 相关函数的参数不正确时抛出的错误，主要涉及`encodeURI()`、`decodeURI()`、`encodeURIComponent()`、`decodeURIComponent()`、`escape()`和`unescape()`这六个函数。
+
+```
+decodeURI('%2')
+// URIError: URI malformed
+```
