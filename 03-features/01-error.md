@@ -213,3 +213,33 @@ throw {
 ```
 
 对于 JavaScript 引擎来说，遇到`throw`语句，程序就中止了。引擎会接收到`throw`抛出的信息，可能是一个错误实例，也可能是其他类型的值。
+
+## try...catch 结构
+
+一旦发生错误，程序就中止执行了。JavaScript 提供了`try...catch`结构，允许对错误进行处理，选择是否往下执行。
+
+```
+try {
+  throw new Error('出错了!');
+} catch (e) {
+  console.log(e.name + ": " + e.message);
+  console.log(e.stack);
+}
+// Error: 出错了!
+//   at <anonymous>:3:9
+//   ...
+```
+
+上面代码中，`try`代码块抛出错误（上例用的是`throw`语句），JavaScript 引擎就立即把代码的执行，转到`catch`代码块，或者说错误被`catch`代码块捕获了。`catch`接受一个参数，表示`try`代码块抛出的值。
+
+如果你不确定某些代码是否会报错，就可以把它们放在`try...catch`代码块之中，便于进一步对错误进行处理。
+
+```
+try {
+  f();
+} catch(e) {
+  // 处理错误
+}
+```
+
+上面代码中，如果函数`f`执行报错，就会进行`catch`代码块，接着对错误进行处理。
