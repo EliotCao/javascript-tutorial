@@ -173,3 +173,17 @@ if (x <= 0) {
 ```
 
 上面代码中，如果变量`x`小于等于`0`，就手动抛出一个错误，告诉用户`x`的值不正确，整个程序就会在这里中断执行。可以看到，`throw`抛出的错误就是它的参数，这里是一个`Error`实例。
+
+`throw`也可以抛出自定义错误。
+
+```
+function UserError(message) {
+  this.message = message || '默认信息';
+  this.name = 'UserError';
+}
+
+throw new UserError('出错了！');
+// Uncaught UserError {message: "出错了！", name: "UserError"}
+```
+
+上面代码中，`throw`抛出的是一个`UserError`实例。
