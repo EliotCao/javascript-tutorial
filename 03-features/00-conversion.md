@@ -387,3 +387,41 @@ obj.width + 20 // "10020"
 ```
 
 上面代码中，开发者可能期望返回`120`，但是由于自动转换，实际上返回了一个字符`10020`。
+
+### 自动转换为数值
+
+JavaScript 遇到预期为数值的地方，就会将参数值自动转换为数值。系统内部会自动调用`Number`函数。
+
+除了加法运算符（`+`）有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值。
+
+```
+'5' - '2' // 3
+'5' * '2' // 10
+true - 1  // 0
+false - 1 // -1
+'1' - 1   // 0
+'5' * []    // 0
+false / '5' // 0
+'abc' - 1   // NaN
+null + 1 // 1
+undefined + 1 // NaN
+```
+
+上面代码中，运算符两侧的运算子，都被转成了数值。
+
+> 注意：`null`转为数值时为`0`，而`undefined`转为数值时为`NaN`。
+
+一元运算符也会把运算子转成数值。
+
+```
++'abc' // NaN
+-'abc' // NaN
++true // 1
+-false // 0
+```
+
+## 参考链接
+
+- Axel Rauschmayer, [What is {} + {} in JavaScript?](http://www.2ality.com/2012/01/object-plus-object.html)
+- Axel Rauschmayer, [JavaScript quirk 1: implicit conversion of values](http://www.2ality.com/2013/04/quirk-implicit-conversion.html)
+- Benjie Gillam, [Quantum JavaScript?](http://www.benjiegillam.com/2013/06/quantum-javascript/)
