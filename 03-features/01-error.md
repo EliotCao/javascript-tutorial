@@ -98,3 +98,18 @@ console.log() = 1
 new Array(-1)
 // Uncaught RangeError: Invalid array length
 ```
+
+### TypeError 对象
+
+`TypeError`对象是变量或参数不是预期类型时发生的错误。比如，对字符串、布尔值、数值等原始类型的值使用`new`命令，就会抛出这种错误，因为`new`命令的参数应该是一个构造函数。
+
+```
+new 123
+// Uncaught TypeError: number is not a func
+
+var obj = {};
+obj.unknownMethod()
+// Uncaught TypeError: obj.unknownMethod is not a function
+```
+
+上面代码的第二种情况，调用对象不存在的方法，也会抛出`TypeError`错误，因为`obj.unknownMethod`的值是`undefined`，而不是一个函数。
