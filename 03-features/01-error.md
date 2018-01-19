@@ -68,3 +68,23 @@ console.log 'hello');
 ```
 
 上面代码的错误，都是在语法解析阶段就可以发现，所以会抛出`SyntaxError`。第一个错误提示是“token 非法”，第二个错误提示是“字符串不符合要求”。
+
+### ReferenceError 对象
+
+`ReferenceError`对象是引用一个不存在的变量时发生的错误。
+
+```
+// 使用一个不存在的变量
+unknownVariable
+// Uncaught ReferenceError: unknownVariable is not defined
+```
+
+另一种触发场景是，将一个值分配给无法分配的对象，比如对函数的运行结果赋值。
+
+```
+// 等号左侧不是变量
+console.log() = 1
+// Uncaught ReferenceError: Invalid left-hand side in assignment
+```
+
+上面代码对函数`console.log`的运行结果赋值，结果引发了`ReferenceError`错误。
