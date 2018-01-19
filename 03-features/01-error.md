@@ -317,3 +317,40 @@ cleansUp()
 ```
 
 上面代码中，由于没有`catch`语句块，一旦发生错误，代码就会中断执行。中断执行之前，会先执行`finally`代码块，然后再向用户提示报错信息。
+
+```
+function idle(x) {
+  try {
+    console.log(x);
+    return 'result';
+  } finally {
+    console.log('FINALLY');
+  }
+}
+
+idle('hello')
+// hello
+// FINALLY
+```
+
+上面代码中，`try`代码块没有发生错误，而且里面还包括`return`语句，但是`finally`代码块依然会执行。而且，这个函数的返回值还是`result`。
+
+下面的例子说明，`return`语句的执行是排在`finally`代码之前，只是等`finally`代码执行完毕后才返回。
+
+```
+var count = 0;
+function countUp() {
+  try {
+    return count;
+  } finally {
+    count++;
+  }
+}
+
+countUp()
+// 0
+count
+// 1
+```
+
+上面代码说明，`return`语句里面的`count`的值，是在`finally`代码块运行之前就获取了。
