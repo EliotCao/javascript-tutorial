@@ -354,3 +354,76 @@ count
 ```
 
 上面代码说明，`return`语句里面的`count`的值，是在`finally`代码块运行之前就获取了。
+
+下面是`finally`代码块用法的典型场景。
+
+```
+openFile();
+
+try {
+  writeFile(Data);
+} catch(e) {
+  handleError(e);
+} finally {
+  closeFile();
+}
+```
+
+上面代码首先打开一个文件，然后在`try`代码块中写入文件，如果没有发生错误，则运行`finally`代码块关闭文件；一旦发生错误，则先使用`catch`代码块处理错误，再使用`finally`代码块关闭文件。
+
+下面的例子充分反映了`try...catch...finally`这三者之间的执行顺序。
+
+```
+function f() {
+  try {
+    console.log(0);
+    throw 'bug';
+  } catch(e) {
+    console.log(1);
+    return true; // 这句原本会延迟到 finally 代码块结束再执行
+    console.log(2); // 不会运行
+  } finally {
+    console.log(3);
+    return false; // 这句会覆盖掉前面那句 return
+    console.log(4); // 不会运行
+  }
+
+  console.log(5); // 不会运行
+}
+
+var result = f();
+// 0
+// 1
+// 3
+
+result
+// false
+```
+
+上面代码中，`catch`代码块结束执行之前，会先执行`finally`代码块。
+
+`catch`代码块之中，触发转入`finally`代码块的标志，不仅有`return`语句，还有`throw`语句。
+
+```
+function f() {
+  try {
+    throw '出错了！';
+  } catch(e) {
+    console.log('捕捉到内部错误');
+    throw e; // 这句原本会等到finally结束再执行
+  } finally {
+    return false; // 直接返回
+  }
+}
+
+try {
+  f();
+} catch(e) {
+  // 此处不会执行
+  console.log('caught outer "bogus"');
+}
+
+//  捕捉到内部错误
+```
+
+上面代码中，进入`catch`代码块之后，一遇到`throw`语句，就会去执行`finally`代码块，其中有`return false`语句，因此就直接返回了，不再会回去执行`catch`代码块剩下的部分了。
