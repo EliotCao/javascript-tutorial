@@ -160,3 +160,16 @@ UserError.prototype.constructor = UserError;
 ```
 new UserError('这是自定义的错误！');
 ```
+
+## throw 语句
+
+`throw`语句的作用是手动中断程序执行，抛出一个错误。
+
+```
+if (x <= 0) {
+  throw new Error('x 必须为正数');
+}
+// Uncaught ReferenceError: x is not defined
+```
+
+上面代码中，如果变量`x`小于等于`0`，就手动抛出一个错误，告诉用户`x`的值不正确，整个程序就会在这里中断执行。可以看到，`throw`抛出的错误就是它的参数，这里是一个`Error`实例。
