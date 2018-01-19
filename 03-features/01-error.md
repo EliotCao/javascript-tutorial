@@ -294,3 +294,26 @@ try {
 ```
 
 上面代码中，`catch`捕获错误之后，会判断错误类型（`EvalError`还是`RangeError`），进行不同的处理。
+
+## finally 代码块
+
+`try...catch`结构允许在最后添加一个`finally`代码块，表示不管是否出现错误，都必需在最后运行的语句。
+
+```
+function cleansUp() {
+  try {
+    throw new Error('出错了……');
+    console.log('此行不会执行');
+  } finally {
+    console.log('完成清理工作');
+  }
+}
+
+cleansUp()
+// 完成清理工作
+// Uncaught Error: 出错了……
+//    at cleansUp (<anonymous>:3:11)
+//    at <anonymous>:10:1
+```
+
+上面代码中，由于没有`catch`语句块，一旦发生错误，代码就会中断执行。中断执行之前，会先执行`finally`代码块，然后再向用户提示报错信息。
