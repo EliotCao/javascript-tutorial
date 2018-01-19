@@ -140,3 +140,23 @@ err1.message // "出错了！"
 err2.message // "出错了，变量超出有效范围！"
 err3.message // "出错了，变量类型无效！"
 ```
+
+## 自定义错误
+
+除了 JavaScript 原生提供的七种错误对象，还可以定义自己的错误对象。
+
+```
+function UserError(message) {
+  this.message = message || '默认信息';
+  this.name = 'UserError';
+}
+
+UserError.prototype = new Error();
+UserError.prototype.constructor = UserError;
+```
+
+上面代码自定义一个错误对象`UserError`，让它继承`Error`对象。然后，就可以生成这种自定义类型的错误了。
+
+```
+new UserError('这是自定义的错误！');
+```
