@@ -48,3 +48,23 @@ catchit()
 ```
 
 上面代码中，错误堆栈的最内层是`throwit`函数，然后是`catchit`函数，最后是函数的运行环境。
+
+## 原生错误类型
+
+`Error`实例对象是最一般的错误类型，在它的基础上，JavaScript 还定义了其他6种错误对象。也就是说，存在`Error`的6个派生对象。
+
+### SyntaxError 对象
+
+`SyntaxError`对象是解析代码时发生的语法错误。
+
+```
+// 变量名错误
+var 1a;
+// Uncaught SyntaxError: Invalid or unexpected token
+
+// 缺少括号
+console.log 'hello');
+// Uncaught SyntaxError: Unexpected string
+```
+
+上面代码的错误，都是在语法解析阶段就可以发现，所以会抛出`SyntaxError`。第一个错误提示是“token 非法”，第二个错误提示是“字符串不符合要求”。
