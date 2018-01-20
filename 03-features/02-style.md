@@ -373,3 +373,118 @@ foo = o.bar;
 ```
 
 这四种结果都可能发生，取决于不同的变量是否有定义。因此，不要使用`with`语句。
+
+## 相等和严格相等
+
+JavaScript 有两个表示相等的运算符：“相等”（`==`）和“严格相等”（`===`）。
+
+相等运算符会自动转换变量类型，造成很多意想不到的情况。
+
+```
+0 == ''// true
+1 == true // true
+2 == true // false
+0 == '0' // true
+false == 'false' // false
+false == '0' // true
+' \t\r\n ' == 0 // true
+```
+
+因此，建议不要使用相等运算符（`==`），只使用严格相等运算符（`===`）。
+
+## 语句的合并
+
+有些程序员追求简洁，喜欢合并不同目的的语句。比如，原来的语句是
+
+```
+a = b;
+if (a) {
+  // ...
+}
+```
+
+他喜欢写成下面这样。
+
+```
+if (a = b) {
+  // ...
+}
+```
+
+虽然语句少了一行，但是可读性大打折扣，而且会造成误读，让别人误解这行代码的意思是下面这样。
+
+```
+if （a === b）{
+  // ...
+}
+```
+
+建议不要将不同目的的语句，合并成一行。
+
+## 自增和自减运算符
+
+自增（`++`）和自减（`--`）运算符，放在变量的前面或后面，返回的值不一样，很容易发生错误。事实上，所有的`++`运算符都可以用`+= 1`代替。
+
+```
+++x
+// 等同于
+x += 1;
+```
+
+改用`+= 1`，代码变得更清晰了。
+
+建议自增（`++`）和自减（`--`）运算符尽量使用`+=`和`-=`代替。
+
+## switch...case 结构
+
+`switch...case`结构要求，在每一个`case`的最后一行必须是`break`语句，否则会接着运行下一个`case`。这样不仅容易忘记，还会造成代码的冗长。
+
+而且，`switch...case`不使用大括号，不利于代码形式的统一。此外，这种结构类似于`goto`语句，容易造成程序流程的混乱，使得代码结构混乱不堪，不符合面向对象编程的原则。
+
+```
+function doAction(action) {
+  switch (action) {
+    case 'hack':
+      return 'hack';
+    case 'slash':
+      return 'slash';
+    case 'run':
+      return 'run';
+    default:
+      throw new Error('Invalid action.');
+  }
+}
+```
+
+上面的代码建议改写成对象结构。
+
+```
+function doAction(action) {
+  var actions = {
+    'hack': function () {
+      return 'hack';
+    },
+    'slash': function () {
+      return 'slash';
+    },
+    'run': function () {
+      return 'run';
+    }
+  };
+
+  if (typeof actions[action] !== 'function') {
+    throw new Error('Invalid action.');
+  }
+
+  return actions[action]();
+}
+```
+
+因此，建议`switch...case`结构可以用对象结构代替。
+
+## 参考链接
+
+- Eric Elliott, Programming JavaScript Applications, [Chapter 2. JavaScript Style Guide](http://chimera.labs.oreilly.com/books/1234000000262/ch02.html), O'Reilly, 2013
+- Axel Rauschmayer, [A meta style guide for JavaScript](http://www.2ality.com/2013/07/meta-style-guide.html)
+- Axel Rauschmayer, [Automatic semicolon insertion in JavaScript](http://www.2ality.com/2011/05/semicolon-insertion.html)
+- Rod Vagg, [JavaScript and Semicolons](http://dailyjs.com/2012/04/19/semicolons/)
