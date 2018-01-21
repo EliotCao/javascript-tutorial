@@ -131,3 +131,56 @@ console.log("出错了！");
 ```
 
 上面代码表示，使用自定义的`console.log`方法，可以在显示结果添加当前时间。
+
+### console.warn()，console.error()
+
+`warn`方法和`error`方法也是在控制台输出信息，它们与`log`方法的不同之处在于，`warn`方法输出信息时，在最前面加一个黄色三角，表示警告；`error`方法输出信息时，在最前面加一个红色的叉，表示出错。同时，还会高亮显示输出文字和错误发生的堆栈。其他方面都一样。
+
+```
+console.error('Error: %s (%i)', 'Server is not responding', 500)
+// Error: Server is not responding (500)
+console.warn('Warning! Too few nodes (%d)', document.childNodes.length)
+// Warning! Too few nodes (1)
+```
+
+可以这样理解，`log`方法是写入标准输出（`stdout`），`warn`方法和`error`方法是写入标准错误（`stderr`）。
+
+### console.table()
+
+对于某些复合类型的数据，`console.table`方法可以将其转为表格显示。
+
+```
+var languages = [
+  { name: "JavaScript", fileExtension: ".js" },
+  { name: "TypeScript", fileExtension: ".ts" },
+  { name: "CoffeeScript", fileExtension: ".coffee" }
+];
+
+console.table(languages);
+```
+
+上面代码的`language`变量，转为表格显示如下。
+
+| (index) | name           | fileExtension |
+| ------- | -------------- | ------------- |
+| 0       | "JavaScript"   | ".js"         |
+| 1       | "TypeScript"   | ".ts"         |
+| 2       | "CoffeeScript" | ".coffee"     |
+
+下面是显示表格内容的例子。
+
+```
+var languages = {
+  csharp: { name: "C#", paradigm: "object-oriented" },
+  fsharp: { name: "F#", paradigm: "functional" }
+};
+
+console.table(languages);
+```
+
+上面代码的`language`，转为表格显示如下。
+
+| (index) | name | paradigm          |
+| ------- | ---- | ----------------- |
+| csharp  | "C#" | "object-oriented" |
+| fsharp  | "F#" | "functional"      |
