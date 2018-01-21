@@ -232,3 +232,46 @@ greet('bob')
 ```
 
 上面代码根据参数的不同，显示`bob`执行了两次，`alice`执行了一次。
+
+### console.dir()，console.dirxml()
+
+`dir`方法用来对一个对象进行检查（inspect），并以易于阅读和打印的格式显示。
+
+```
+console.log({f1: 'foo', f2: 'bar'})
+// Object {f1: "foo", f2: "bar"}
+
+console.dir({f1: 'foo', f2: 'bar'})
+// Object
+//   f1: "foo"
+//   f2: "bar"
+//   __proto__: Object
+```
+
+上面代码显示`dir`方法的输出结果，比`log`方法更易读，信息也更丰富。
+
+该方法对于输出 DOM 对象非常有用，因为会显示 DOM 对象的所有属性。
+
+```
+console.dir(document.body)
+```
+
+Node 环境之中，还可以指定以代码高亮的形式输出。
+
+```
+console.dir(obj, {colors: true})
+```
+
+`dirxml`方法主要用于以目录树的形式，显示 DOM 节点。
+
+```
+console.dirxml(document.body)
+```
+
+如果参数不是 DOM 节点，而是普通的 JavaScript 对象，`console.dirxml`等同于`console.dir`。
+
+```
+console.dirxml([1, 2, 3])
+// 等同于
+console.dir([1, 2, 3])
+```
