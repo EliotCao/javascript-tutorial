@@ -28,3 +28,106 @@
 这些面板都有各自的用途，以下只介绍`Console`面板（又称为控制台）。
 
 `Console`面板基本上就是一个命令行窗口，你可以在提示符下，键入各种命令。
+
+## console 对象的静态方法
+
+`console`对象提供的各种静态方法，用来与控制台窗口互动。
+
+### console.log()，console.info()，console.debug()
+
+`console.log`方法用于在控制台输出信息。它可以接受一个或多个参数，将它们连接起来输出。
+
+```
+console.log('Hello World')
+// Hello World
+console.log('a', 'b', 'c')
+// a b c
+```
+
+`console.log`方法会自动在每次输出的结尾，添加换行符。
+
+```
+console.log(1);
+console.log(2);
+console.log(3);
+// 1
+// 2
+// 3
+```
+
+如果第一个参数是格式字符串（使用了格式占位符），`console.log`方法将依次用后面的参数替换占位符，然后再进行输出。
+
+```
+console.log(' %s + %s = %s', 1, 1, 2)
+//  1 + 1 = 2
+```
+
+上面代码中，`console.log`方法的第一个参数有三个占位符（`%s`），第二、三、四个参数会在显示时，依次替换掉这个三个占位符。
+
+`console.log`方法支持以下占位符，不同类型的数据必须使用对应的占位符。
+
+- `%s` 字符串
+- `%d` 整数
+- `%i` 整数
+- `%f` 浮点数
+- `%o` 对象的链接
+- `%c` CSS 格式字符串
+
+```
+var number = 11 * 9;
+var color = 'red';
+
+console.log('%d %s balloons', number, color);
+// 99 red balloons
+```
+
+上面代码中，第二个参数是数值，对应的占位符是`%d`，第三个参数是字符串，对应的占位符是`%s`。
+
+使用`%c`占位符时，对应的参数必须是 CSS 代码，用来对输出内容进行 CSS 渲染。
+
+```
+console.log(
+  '%cThis text is styled!',
+  'color: red; background: yellow; font-size: 24px;'
+)
+```
+
+上面代码运行后，输出的内容将显示为黄底红字。
+
+`console.log`方法的两种参数格式，可以结合在一起使用。
+
+```
+console.log(' %s + %s ', 1, 1, '= 2')
+// 1 + 1  = 2
+```
+
+如果参数是一个对象，`console.log`会显示该对象的值。
+
+```
+console.log({foo: 'bar'})
+// Object {foo: "bar"}
+console.log(Date)
+// function Date() { [native code] }
+```
+
+上面代码输出`Date`对象的值，结果为一个构造函数。
+
+`console.info`是`console.log`方法的别名，用法完全一样。只不过`console.info`方法会在输出信息的前面，加上一个蓝色图标。
+
+`console.debug`方法与`console.log`方法类似，会在控制台输出调试信息。但是，默认情况下，`console.debug`输出的信息不会显示，只有在打开显示级别在`verbose`的情况下，才会显示。
+
+`console`对象的所有方法，都可以被覆盖。因此，可以按照自己的需要，定义`console.log`方法。
+
+```
+['log', 'info', 'warn', 'error'].forEach(function(method) {
+  console[method] = console[method].bind(
+    console,
+    new Date().toISOString()
+  );
+});
+
+console.log("出错了！");
+// 2014-05-18T09:00.000Z 出错了！
+```
+
+上面代码表示，使用自定义的`console.log`方法，可以在显示结果添加当前时间。
