@@ -303,3 +303,21 @@ console.assert(list.childNodes.length < 500, '节点个数大于等于500')
 ```
 
 上面代码中，如果符合条件的节点小于500个，不会有任何输出；只有大于等于500时，才会在控制台提示错误，并且显示指定文本。
+
+### console.time()，console.timeEnd()
+
+这两个方法用于计时，可以算出一个操作所花费的准确时间。
+
+```
+console.time('Array initialize');
+
+var array= new Array(1000000);
+for (var i = array.length - 1; i >= 0; i--) {
+  array[i] = new Object();
+};
+
+console.timeEnd('Array initialize');
+// Array initialize: 1914.481ms
+```
+
+`time`方法表示计时开始，`timeEnd`方法表示计时结束。它们的参数是计时器的名称。调用`timeEnd`方法之后，控制台会显示“计时器名称: 所耗费的时间”。
