@@ -321,3 +321,33 @@ console.timeEnd('Array initialize');
 ```
 
 `time`方法表示计时开始，`timeEnd`方法表示计时结束。它们的参数是计时器的名称。调用`timeEnd`方法之后，控制台会显示“计时器名称: 所耗费的时间”。
+
+### console.group()，console.groupEnd()，console.groupCollapsed()
+
+`console.group`和`console.groupEnd`这两个方法用于将显示的信息分组。它只在输出大量信息时有用，分在一组的信息，可以用鼠标折叠/展开。
+
+```
+console.group('一级分组');
+console.log('一级分组的内容');
+
+console.group('二级分组');
+console.log('二级分组的内容');
+
+console.groupEnd(); // 二级分组结束
+console.groupEnd(); // 一级分组结束
+```
+
+上面代码会将“二级分组”显示在“一级分组”内部，并且“一级分组”和“二级分组”前面都有一个折叠符号，可以用来折叠本级的内容。
+
+`console.groupCollapsed`方法与`console.group`方法很类似，唯一的区别是该组的内容，在第一次显示时是收起的（collapsed），而不是展开的。
+
+```
+console.groupCollapsed('Fetching Data');
+
+console.log('Request Sent');
+console.error('Error: Server not responding (500)');
+
+console.groupEnd();
+```
+
+上面代码只显示一行”Fetching Data“，点击后才会展开，显示其中包含的两行。
