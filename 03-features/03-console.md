@@ -351,3 +351,18 @@ console.groupEnd();
 ```
 
 上面代码只显示一行”Fetching Data“，点击后才会展开，显示其中包含的两行。
+
+### console.trace()，console.clear()
+
+`console.trace`方法显示当前执行的代码在堆栈中的调用路径。
+
+```
+console.trace()
+// console.trace()
+//   (anonymous function)
+//   InjectedScript._evaluateOn
+//   InjectedScript._evaluateAndWrap
+//   InjectedScript.evaluate
+```
+
+`console.clear`方法用于清除当前控制台的所有输出，将光标回置到第一行。如果用户选中了控制台的“Preserve log”选项，`console.clear`方法将不起作用。
