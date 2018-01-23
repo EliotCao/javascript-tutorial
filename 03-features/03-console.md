@@ -366,3 +366,103 @@ console.trace()
 ```
 
 `console.clear`方法用于清除当前控制台的所有输出，将光标回置到第一行。如果用户选中了控制台的“Preserve log”选项，`console.clear`方法将不起作用。
+
+## 控制台命令行 API
+
+浏览器控制台中，除了使用`console`对象，还可以使用一些控制台自带的命令行方法。
+
+（1）`$_`
+
+`$_`属性返回上一个表达式的值。
+
+```
+2 + 2
+// 4
+$_
+// 4
+```
+
+（2）`$0` - `$4`
+
+控制台保存了最近5个在 Elements 面板选中的 DOM 元素，`$0`代表倒数第一个（最近一个），`$1`代表倒数第二个，以此类推直到`$4`。
+
+（3）`$(selector)`
+
+`$(selector)`返回第一个匹配的元素，等同于`document.querySelector()`。注意，如果页面脚本对`$`有定义，则会覆盖原始的定义。比如，页面里面有 jQuery，控制台执行`$(selector)`就会采用 jQuery 的实现，返回一个数组。
+
+（4）`$$(selector)`
+
+`$$(selector)`返回选中的 DOM 对象，等同于`document.querySelectorAll`。
+
+（5）`$x(path)`
+
+`$x(path)`方法返回一个数组，包含匹配特定 XPath 表达式的所有 DOM 元素。
+
+```
+$x("//p[a]")
+```
+
+上面代码返回所有包含`a`元素的`p`元素。
+
+（6）`inspect(object)`
+
+`inspect(object)`方法打开相关面板，并选中相应的元素，显示它的细节。DOM 元素在`Elements`面板中显示，比如`inspect(document)`会在 Elements 面板显示`document`元素。JavaScript 对象在控制台面板`Profiles`面板中显示，比如`inspect(window)`。
+
+（7）`getEventListeners(object)`
+
+`getEventListeners(object)`方法返回一个对象，该对象的成员为`object`登记了回调函数的各种事件（比如`click`或`keydown`），每个事件对应一个数组，数组的成员为该事件的回调函数。
+
+（8）`keys(object)`，`values(object)`
+
+`keys(object)`方法返回一个数组，包含`object`的所有键名。
+
+`values(object)`方法返回一个数组，包含`object`的所有键值。
+
+```
+var o = {'p1': 'a', 'p2': 'b'};
+
+keys(o)
+// ["p1", "p2"]
+values(o)
+// ["a", "b"]
+```
+
+（9）`monitorEvents(object[, events]) ，unmonitorEvents(object[, events])`
+
+`monitorEvents(object[, events])`方法监听特定对象上发生的特定事件。事件发生时，会返回一个`Event`对象，包含该事件的相关信息。`unmonitorEvents`方法用于停止监听。
+
+```
+monitorEvents(window, "resize");
+monitorEvents(window, ["resize", "scroll"])
+```
+
+上面代码分别表示单个事件和多个事件的监听方法。
+
+```
+monitorEvents($0, 'mouse');
+unmonitorEvents($0, 'mousemove');
+```
+
+上面代码表示如何停止监听。
+
+`monitorEvents`允许监听同一大类的事件。所有事件可以分成四个大类。
+
+- mouse："mousedown", "mouseup", "click", "dblclick", "mousemove", "mouseover", "mouseout", "mousewheel"
+- key："keydown", "keyup", "keypress", "textInput"
+- touch："touchstart", "touchmove", "touchend", "touchcancel"
+- control："resize", "scroll", "zoom", "focus", "blur", "select", "change", "submit", "reset"
+
+```
+monitorEvents($("#msg"), "key");
+```
+
+上面代码表示监听所有`key`大类的事件。
+
+（10）其他方法
+
+命令行 API 还提供以下方法。
+
+- `clear()`：清除控制台的历史。
+- `copy(object)`：复制特定 DOM 元素到剪贴板。
+- `dir(object)`：显示特定对象的所有属性，是`console.dir`方法的别名。
+- `dirxml(object)`：显示特定对象的 XML 形式，是`console.dirxml`方法的别名。
