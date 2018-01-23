@@ -466,3 +466,27 @@ monitorEvents($("#msg"), "key");
 - `copy(object)`：复制特定 DOM 元素到剪贴板。
 - `dir(object)`：显示特定对象的所有属性，是`console.dir`方法的别名。
 - `dirxml(object)`：显示特定对象的 XML 形式，是`console.dirxml`方法的别名。
+
+## debugger 语句
+
+`debugger`语句主要用于除错，作用是设置断点。如果有正在运行的除错工具，程序运行到`debugger`语句时会自动停下。如果没有除错工具，`debugger`语句不会产生任何结果，JavaScript 引擎自动跳过这一句。
+
+Chrome 浏览器中，当代码运行到`debugger`语句时，就会暂停运行，自动打开脚本源码界面。
+
+```
+for(var i = 0; i < 5; i++){
+  console.log(i);
+  if (i === 2) debugger;
+}
+```
+
+上面代码打印出0，1，2以后，就会暂停，自动打开源码界面，等待进一步处理。
+
+## 参考链接
+
+- Chrome Developer Tools, [Using the Console](https://developers.google.com/chrome-developer-tools/docs/console)
+- Matt West, [Mastering The Developer Tools Console](http://blog.teamtreehouse.com/mastering-developer-tools-console)
+- Firebug Wiki, [Console API](https://getfirebug.com/wiki/index.php/Console_API)
+- Axel Rauschmayer, [The JavaScript console API](http://www.2ality.com/2013/10/console-api.html)
+- Marius Schulz, [Advanced JavaScript Debugging with console.table()](http://blog.mariusschulz.com/2013/11/13/advanced-javascript-debugging-with-consoletable)
+- Google Developer, [Command Line API Reference](https://developers.google.com/chrome-developer-tools/docs/commandline-api)
