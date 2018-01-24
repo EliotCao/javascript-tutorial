@@ -100,3 +100,28 @@ function isObject(value) {
 isObject([]) // true
 isObject(true) // false
 ```
+
+## Object 构造函数
+
+`Object`不仅可以当作工具函数使用，还可以当作构造函数使用，即前面可以使用`new`命令。
+
+`Object`构造函数的首要用途，是直接通过它来生成新对象。
+
+```
+var obj = new Object();
+```
+
+> 注意，通过`var obj = new Object()`的写法生成新对象，与字面量的写法`var obj = {}`是等价的。或者说，后者只是前者的一种简便写法。
+
+`Object`构造函数的用法与工具方法很相似，几乎一模一样。使用时，可以接受一个参数，如果该参数是一个对象，则直接返回这个对象；如果是一个原始类型的值，则返回该值对应的包装对象（详见《包装对象》一章）。
+
+```
+var o1 = {a: 1};
+var o2 = new Object(o1);
+o1 === o2 // true
+
+var obj = new Object(123);
+obj instanceof Number // true
+```
+
+虽然用法相似，但是`Object(value)`与`new Object(value)`两者的语义是不同的，`Object(value)`表示将`value`转成一个对象，`new Object(value)`则表示新生成一个对象，它的值是`value`。
