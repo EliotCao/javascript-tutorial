@@ -125,3 +125,58 @@ obj instanceof Number // true
 ```
 
 虽然用法相似，但是`Object(value)`与`new Object(value)`两者的语义是不同的，`Object(value)`表示将`value`转成一个对象，`new Object(value)`则表示新生成一个对象，它的值是`value`。
+
+## Object 的静态方法
+
+所谓“静态方法”，是指部署在`Object`对象自身的方法。
+
+### Object.keys()，Object.getOwnPropertyNames()
+
+`Object.keys`方法和`Object.getOwnPropertyNames`方法都用来遍历对象的属性。
+
+`Object.keys`方法的参数是一个对象，返回一个数组。该数组的成员都是该对象自身的（而不是继承的）所有属性名。
+
+```
+var obj = {
+  p1: 123,
+  p2: 456
+};
+
+Object.keys(obj) // ["p1", "p2"]
+```
+
+`Object.getOwnPropertyNames`方法与`Object.keys`类似，也是接受一个对象作为参数，返回一个数组，包含了该对象自身的所有属性名。
+
+```
+var obj = {
+  p1: 123,
+  p2: 456
+};
+
+Object.getOwnPropertyNames(obj) // ["p1", "p2"]
+```
+
+对于一般的对象来说，`Object.keys()`和`Object.getOwnPropertyNames()`返回的结果是一样的。只有涉及不可枚举属性时，才会有不一样的结果。`Object.keys`方法只返回可枚举的属性（详见《对象属性的描述对象》一章），`Object.getOwnPropertyNames`方法还返回不可枚举的属性名。
+
+```
+var a = ['Hello', 'World'];
+
+Object.keys(a) // ["0", "1"]
+Object.getOwnPropertyNames(a) // ["0", "1", "length"]
+```
+
+上面代码中，数组的`length`属性是不可枚举的属性，所以只出现在`Object.getOwnPropertyNames`方法的返回结果中。
+
+由于 JavaScript 没有提供计算对象属性个数的方法，所以可以用这两个方法代替。
+
+```
+var obj = {
+  p1: 123,
+  p2: 456
+};
+
+Object.keys(obj).length // 2
+Object.getOwnPropertyNames(obj).length // 2
+```
+
+一般情况下，几乎总是使用`Object.keys`方法，遍历对象的属性。
