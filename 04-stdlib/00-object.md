@@ -180,3 +180,27 @@ Object.getOwnPropertyNames(obj).length // 2
 ```
 
 一般情况下，几乎总是使用`Object.keys`方法，遍历对象的属性。
+
+### 其他方法
+
+除了上面提到的两个方法，`Object`还有不少其他静态方法，将在后文逐一详细介绍。
+
+**（1）对象属性模型的相关方法**
+
+- `Object.getOwnPropertyDescriptor()`：获取某个属性的描述对象。
+- `Object.defineProperty()`：通过描述对象，定义某个属性。
+- `Object.defineProperties()`：通过描述对象，定义多个属性。
+
+**（2）控制对象状态的方法**
+
+- `Object.preventExtensions()`：防止对象扩展。
+- `Object.isExtensible()`：判断对象是否可扩展。
+- `Object.seal()`：禁止对象配置。
+- `Object.isSealed()`：判断一个对象是否可配置。
+- `Object.freeze()`：冻结一个对象。
+- `Object.isFrozen()`：判断一个对象是否被冻结。
+
+**（3）原型链相关方法**
+
+- `Object.create()`：该方法可以指定原型对象和属性，返回一个新的对象。
+- `Object.getPrototypeOf()`：获取对象的`Prototype`对象。
