@@ -204,3 +204,18 @@ Object.getOwnPropertyNames(obj).length // 2
 
 - `Object.create()`：该方法可以指定原型对象和属性，返回一个新的对象。
 - `Object.getPrototypeOf()`：获取对象的`Prototype`对象。
+
+## Object 的实例方法
+
+除了静态方法，还有不少方法定义在`Object.prototype`对象。它们称为实例方法，所有`Object`的实例对象都继承了这些方法。
+
+`Object`实例对象的方法，主要有以下六个。
+
+- `Object.prototype.valueOf()`：返回当前对象对应的值。
+- `Object.prototype.toString()`：返回当前对象对应的字符串形式。
+- `Object.prototype.toLocaleString()`：返回当前对象对应的本地字符串形式。
+- `Object.prototype.hasOwnProperty()`：判断某个属性是否为当前对象自身的属性，还是继承自原型对象的属性。
+- `Object.prototype.isPrototypeOf()`：判断当前对象是否为另一个对象的原型。
+- `Object.prototype.propertyIsEnumerable()`：判断某个属性是否可枚举。
+
+本节介绍前四个方法，另外两个方法将在后文相关章节介绍。
