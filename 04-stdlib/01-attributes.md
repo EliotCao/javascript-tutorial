@@ -314,3 +314,30 @@ var obj = {};
 上面代码中，`toString`不是`obj`对象自身的属性，但是`in`运算符也返回`true`，这导致了`toString`属性也会被`for...in`循环遍历。
 
 这显然不太合理，后来就引入了“可遍历性”这个概念。只有可遍历的属性，才会被`for...in`循环遍历，同时还规定`toString`这一类实例对象继承的原生属性，都是不可遍历的，这样就保证了`for...in`循环的可用性。
+
+具体来说，如果一个属性的`enumerable`为`false`，下面三个操作不会取到该属性。
+
+- `for..in`循环
+- `Object.keys`方法
+- `JSON.stringify`方法
+
+因此，`enumerable`可以用来设置“秘密”属性。
+
+```
+var obj = {};
+
+Object.defineProperty(obj, 'x', {
+  value: 123,
+  enumerable: false
+});
+
+obj.x // 123
+
+for (var key in obj) {
+  console.log(key);
+}
+// undefined
+
+Object.keys(obj)  // []
+JSON.stringify(obj) // "{}"
+```
