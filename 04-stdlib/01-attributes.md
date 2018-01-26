@@ -105,3 +105,56 @@ Object.getOwnPropertyNames(Object.prototype)
 ```
 
 上面代码中，数组自身的`length`属性是不可遍历的，`Object.keys`不会返回该属性。第二个例子的`Object.prototype`也是一个对象，所有实例对象都会继承它，它自身的属性都是不可遍历的。
+
+## Object.defineProperty()，Object.defineProperties()
+
+`Object.defineProperty()`方法允许通过属性描述对象，定义或修改一个属性，然后返回修改后的对象，它的用法如下。
+
+```
+Object.defineProperty(object, propertyName, attributesObject)
+```
+
+`Object.defineProperty`方法接受三个参数，依次如下。
+
+- object：属性所在的对象
+- propertyName：字符串，表示属性名
+- attributesObject：属性描述对象
+
+举例来说，定义`obj.p`可以写成下面这样。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  value: 123,
+  writable: false,
+  enumerable: true,
+  configurable: false
+});
+
+obj.p // 123
+
+obj.p = 246;
+obj.p // 123
+```
+
+上面代码中，`Object.defineProperty()`方法定义了`obj.p`属性。由于属性描述对象的`writable`属性为`false`，所以`obj.p`属性不可写。注意，这里的`Object.defineProperty`方法的第一个参数是`{}`（一个新建的空对象），`p`属性直接定义在这个空对象上面，然后返回这个对象，这是`Object.defineProperty()`的常见用法。
+
+如果属性已经存在，`Object.defineProperty()`方法相当于更新该属性的属性描述对象。
+
+如果一次性定义或修改多个属性，可以使用`Object.defineProperties()`方法。
+
+```
+var obj = Object.defineProperties({}, {
+  p1: { value: 123, enumerable: true },
+  p2: { value: 'abc', enumerable: true },
+  p3: { get: function () { return this.p1 + this.p2 },
+    enumerable:true,
+    configurable:true
+  }
+});
+
+obj.p1 // 123
+obj.p2 // "abc"
+obj.p3 // "123abc"
+```
+
+上面代码中，`Object.defineProperties()`同时定义了`obj`对象的三个属性。其中，`p3`属性定义了取值函数`get`，即每次读取该属性，都会调用这个取值函数。
