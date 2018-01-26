@@ -283,3 +283,19 @@ obj.foo // 'a'
 ```
 
 上面代码中，`proto`是原型对象，它的`foo`属性不可写。`obj`对象继承`proto`，也不可以再自定义这个属性了。如果是严格模式，这样做还会抛出一个错误。
+
+但是，有一个规避方法，就是通过覆盖属性描述对象，绕过这个限制。原因是这种情况下，原型链会被完全忽视。
+
+```
+var proto = Object.defineProperty({}, 'foo', {
+  value: 'a',
+  writable: false
+});
+
+var obj = Object.create(proto);
+Object.defineProperty(obj, 'foo', {
+  value: 'b'
+});
+
+obj.foo // "b"
+```
