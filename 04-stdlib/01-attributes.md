@@ -653,3 +653,23 @@ obj.p // 'b'
 ```
 
 上面代码中，`Object.seal`方法对`p`属性的`value`无效，是因为此时`p`属性的可写性由`writable`决定。
+
+### Object.isSealed()
+
+`Object.isSealed`方法用于检查一个对象是否使用了`Object.seal`方法。
+
+```
+var obj = { p: 'a' };
+
+Object.seal(obj);
+Object.isSealed(obj) // true
+```
+
+这时，`Object.isExtensible`方法也返回`false`。
+
+```
+var obj = { p: 'a' };
+
+Object.seal(obj);
+Object.isExtensible(obj) // false
+```
