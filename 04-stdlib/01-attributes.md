@@ -576,3 +576,17 @@ obj.p // undefined
 ```
 
 上面代码中，`obj`对象经过`Object.preventExtensions`以后，就无法添加新属性了。
+
+### Object.isExtensible()
+
+`Object.isExtensible`方法用于检查一个对象是否使用了`Object.preventExtensions`方法。也就是说，检查是否可以为一个对象添加属性。
+
+```
+var obj = new Object();
+
+Object.isExtensible(obj) // true
+Object.preventExtensions(obj);
+Object.isExtensible(obj) // false
+```
+
+上面代码中，对`obj`对象使用`Object.preventExtensions`方法以后，再使用`Object.isExtensible`方法，返回`false`，表示已经不能添加新属性了。
