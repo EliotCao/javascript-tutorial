@@ -70,3 +70,38 @@ Object.getOwnPropertyDescriptor(obj, 'toString')
 ```
 
 上面代码中，`toString`是`obj`对象继承的属性，`Object.getOwnPropertyDescriptor()`无法获取。
+
+## Object.getOwnPropertyNames()
+
+`Object.getOwnPropertyNames`方法返回一个数组，成员是参数对象自身的全部属性的属性名，不管该属性是否可遍历。
+
+```
+var obj = Object.defineProperties({}, {
+  p1: { value: 1, enumerable: true },
+  p2: { value: 2, enumerable: false }
+});
+
+Object.getOwnPropertyNames(obj)
+// ["p1", "p2"]
+```
+
+上面代码中，`obj.p1`是可遍历的，`obj.p2`是不可遍历的。`Object.getOwnPropertyNames`会将它们都返回。
+
+这跟`Object.keys`的行为不同，`Object.keys`只返回对象自身的可遍历属性的全部属性名。
+
+```
+Object.keys([]) // []
+Object.getOwnPropertyNames([]) // [ 'length' ]
+
+Object.keys(Object.prototype) // []
+Object.getOwnPropertyNames(Object.prototype)
+// ['hasOwnProperty',
+//  'valueOf',
+//  'constructor',
+//  'toLocaleString',
+//  'isPrototypeOf',
+//  'propertyIsEnumerable',
+//  'toString']
+```
+
+上面代码中，数组自身的`length`属性是不可遍历的，`Object.keys`不会返回该属性。第二个例子的`Object.prototype`也是一个对象，所有实例对象都会继承它，它自身的属性都是不可遍历的。
