@@ -180,3 +180,19 @@ Object.defineProperty(obj, 'p', {
 ```
 
 上面代码中，同时定义了`get`属性和`value`属性，以及将`writable`属性设为`true`，就会报错。
+
+`Object.defineProperty()`和`Object.defineProperties()`参数里面的属性描述对象，`writable`、`configurable`、`enumerable`这三个属性的默认值都为`false`。
+
+```
+var obj = {};
+Object.defineProperty(obj, 'foo', {});
+Object.getOwnPropertyDescriptor(obj, 'foo')
+// {
+//   value: undefined,
+//   writable: false,
+//   enumerable: false,
+//   configurable: false
+// }
+```
+
+上面代码中，定义`obj.foo`时用了一个空的属性描述对象，就可以看到各个元属性的默认值。
