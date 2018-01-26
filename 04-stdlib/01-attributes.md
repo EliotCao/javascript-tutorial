@@ -231,3 +231,55 @@ obj.p // 246
 ```
 
 上面代码是通过`value`属性，读取或改写`obj.p`的例子。
+
+### writable
+
+`writable`属性是一个布尔值，决定了目标属性的值（value）是否可以被改变。
+
+```
+var obj = {};
+
+Object.defineProperty(obj, 'a', {
+  value: 37,
+  writable: false
+});
+
+obj.a // 37
+obj.a = 25;
+obj.a // 37
+```
+
+上面代码中，`obj.a`的`writable`属性是`false`。然后，改变`obj.a`的值，不会有任何效果。
+
+注意，正常模式下，对`writable`为`false`的属性赋值不会报错，只会默默失败。但是，严格模式下会报错，即使对`a`属性重新赋予一个同样的值。
+
+```
+'use strict';
+var obj = {};
+
+Object.defineProperty(obj, 'a', {
+  value: 37,
+  writable: false
+});
+
+obj.a = 37;
+// Uncaught TypeError: Cannot assign to read only property 'a' of object
+```
+
+上面代码是严格模式，对`obj.a`任何赋值行为都会报错。
+
+如果原型对象的某个属性的`writable`为`false`，那么子对象将无法自定义这个属性。
+
+```
+var proto = Object.defineProperty({}, 'foo', {
+  value: 'a',
+  writable: false
+});
+
+var obj = Object.create(proto);
+
+obj.foo = 'b';
+obj.foo // 'a'
+```
+
+上面代码中，`proto`是原型对象，它的`foo`属性不可写。`obj`对象继承`proto`，也不可以再自定义这个属性了。如果是严格模式，这样做还会抛出一个错误。
