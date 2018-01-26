@@ -590,3 +590,66 @@ Object.isExtensible(obj) // false
 ```
 
 上面代码中，对`obj`对象使用`Object.preventExtensions`方法以后，再使用`Object.isExtensible`方法，返回`false`，表示已经不能添加新属性了。
+
+### Object.seal()
+
+`Object.seal`方法使得一个对象既无法添加新属性，也无法删除旧属性。
+
+```
+var obj = { p: 'hello' };
+Object.seal(obj);
+
+delete obj.p;
+obj.p // "hello"
+
+obj.x = 'world';
+obj.x // undefined
+```
+
+上面代码中，`obj`对象执行`Object.seal`方法以后，就无法添加新属性和删除旧属性了。
+
+`Object.seal`实质是把属性描述对象的`configurable`属性设为`false`，因此属性描述对象不再能改变了。
+
+```
+var obj = {
+  p: 'a'
+};
+
+// seal方法之前
+Object.getOwnPropertyDescriptor(obj, 'p')
+// Object {
+//   value: "a",
+//   writable: true,
+//   enumerable: true,
+//   configurable: true
+// }
+
+Object.seal(obj);
+
+// seal方法之后
+Object.getOwnPropertyDescriptor(obj, 'p')
+// Object {
+//   value: "a",
+//   writable: true,
+//   enumerable: true,
+//   configurable: false
+// }
+
+Object.defineProperty(o, 'p', {
+  enumerable: false
+})
+// TypeError: Cannot redefine property: p
+```
+
+上面代码中，使用`Object.seal`方法之后，属性描述对象的`configurable`属性就变成了`false`，然后改变`enumerable`属性就会报错。
+
+`Object.seal`只是禁止新增或删除属性，并不影响修改某个属性的值。
+
+```
+var obj = { p: 'a' };
+Object.seal(obj);
+obj.p = 'b';
+obj.p // 'b'
+```
+
+上面代码中，`Object.seal`方法对`p`属性的`value`无效，是因为此时`p`属性的可写性由`writable`决定。
