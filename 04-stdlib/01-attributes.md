@@ -347,3 +347,159 @@ JSON.stringify(obj) // "{}"
 注意，`for...in`循环包括继承的属性，`Object.keys`方法不包括继承的属性。如果需要获取对象自身的所有属性，不管是否可遍历，可以使用`Object.getOwnPropertyNames`方法。
 
 另外，`JSON.stringify`方法会排除`enumerable`为`false`的属性，有时可以利用这一点。如果对象的 JSON 格式输出要排除某些属性，就可以把这些属性的`enumerable`设为`false`。
+
+### configurable
+
+`configurable`(可配置性）返回一个布尔值，决定了是否可以修改属性描述对象。也就是说，`configurable`为`false`时，`value`、`writable`、`enumerable`和`configurable`都不能被修改了。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  value: 1,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
+Object.defineProperty(obj, 'p', {value: 2})
+// TypeError: Cannot redefine property: p
+
+Object.defineProperty(obj, 'p', {writable: true})
+// TypeError: Cannot redefine property: p
+
+Object.defineProperty(obj, 'p', {enumerable: true})
+// TypeError: Cannot redefine property: p
+
+Object.defineProperty(obj, 'p', {configurable: true})
+// TypeError: Cannot redefine property: p
+```
+
+上面代码中，`obj.p`的`configurable`为`false`。然后，改动`value`、`writable`、`enumerable`、`configurable`，结果都报错。
+
+注意，`writable`只有在`false`改为`true`会报错，`true`改为`false`是允许的。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  writable: true,
+  configurable: false
+});
+
+Object.defineProperty(obj, 'p', {writable: false})
+// 修改成功
+```
+
+至于`value`，只要`writable`和`configurable`有一个为`true`，就允许改动。
+
+```
+var o1 = Object.defineProperty({}, 'p', {
+  value: 1,
+  writable: true,
+  configurable: false
+});
+
+Object.defineProperty(o1, 'p', {value: 2})
+// 修改成功
+
+var o2 = Object.defineProperty({}, 'p', {
+  value: 1,
+  writable: false,
+  configurable: true
+});
+
+Object.defineProperty(o2, 'p', {value: 2})
+// 修改成功
+```
+
+另外，`writable`为`false`时，直接目标属性赋值，不报错，但不会成功。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  value: 1,
+  writable: false,
+  configurable: false
+});
+
+obj.p = 2;
+obj.p // 1
+```
+
+上面代码中，`obj.p`的`writable`为`false`，对`obj.p`直接赋值不会生效。如果是严格模式，还会报错。
+
+可配置性决定了目标属性是否可以被删除（delete）。
+
+```
+var obj = Object.defineProperties({}, {
+  p1: { value: 1, configurable: true },
+  p2: { value: 2, configurable: false }
+});
+
+delete obj.p1 // true
+delete obj.p2 // false
+
+obj.p1 // undefined
+obj.p2 // 2
+```
+
+上面代码中，`obj.p1`的`configurable`是`true`，所以可以被删除，`obj.p2`就无法删除。
+
+## 存取器
+
+除了直接定义以外，属性还可以用存取器（accessor）定义。其中，存值函数称为`setter`，使用属性描述对象的`set`属性；取值函数称为`getter`，使用属性描述对象的`get`属性。
+
+一旦对目标属性定义了存取器，那么存取的时候，都将执行对应的函数。利用这个功能，可以实现许多高级特性，比如定制属性的读取和赋值行为。
+
+```
+var obj = Object.defineProperty({}, 'p', {
+  get: function () {
+    return 'getter';
+  },
+  set: function (value) {
+    console.log('setter: ' + value);
+  }
+});
+
+obj.p // "getter"
+obj.p = 123 // "setter: 123"
+```
+
+上面代码中，`obj.p`定义了`get`和`set`属性。`obj.p`取值时，就会调用`get`；赋值时，就会调用`set`。
+
+JavaScript 还提供了存取器的另一种写法。
+
+```
+// 写法二
+var obj = {
+  get p() {
+    return 'getter';
+  },
+  set p(value) {
+    console.log('setter: ' + value);
+  }
+};
+```
+
+上面两种写法，虽然属性`p`的读取和赋值行为是一样的，但是有一些细微的区别。第一种写法，属性`p`的`configurable`和`enumerable`都为`false`，从而导致属性`p`是不可遍历的；第二种写法，属性`p`的`configurable`和`enumerable`都为`true`，因此属性`p`是可遍历的。实际开发中，写法二更常用。
+
+注意，取值函数`get`不能接受参数，存值函数`set`只能接受一个参数（即属性的值）。
+
+存取器往往用于，属性的值依赖对象内部数据的场合。
+
+```
+var obj ={
+  $n : 5,
+  get next() { return this.$n++ },
+  set next(n) {
+    if (n >= this.$n) this.$n = n;
+    else throw new Error('新的值必须大于当前值');
+  }
+};
+
+obj.next // 5
+
+obj.next = 10;
+obj.next // 10
+
+obj.next = 5;
+// Uncaught Error: 新的值必须大于当前值
+```
+
+上面代码中，`next`属性的存值函数和取值函数，都依赖于内部属性`$n`。
