@@ -557,3 +557,22 @@ extend({}, { get a(){ return 1 } })
 ## 控制对象状态
 
 有时需要冻结对象的读写状态，防止对象被改变。JavaScript 提供了三种冻结方法，最弱的一种是`Object.preventExtensions`，其次是`Object.seal`，最强的是`Object.freeze`。
+
+### Object.preventExtensions()
+
+`Object.preventExtensions`方法可以使得一个对象无法再添加新的属性。
+
+```
+var obj = new Object();
+Object.preventExtensions(obj);
+
+Object.defineProperty(obj, 'p', {
+  value: 'hello'
+});
+// TypeError: Cannot define property:p, object is not extensible.
+
+obj.p = 1;
+obj.p // undefined
+```
+
+上面代码中，`obj`对象经过`Object.preventExtensions`以后，就无法添加新属性了。
