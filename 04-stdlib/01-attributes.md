@@ -673,3 +673,26 @@ var obj = { p: 'a' };
 Object.seal(obj);
 Object.isExtensible(obj) // false
 ```
+
+### Object.freeze()
+
+`Object.freeze`方法可以使得一个对象无法添加新属性、无法删除旧属性、也无法改变属性的值，使得这个对象实际上变成了常量。
+
+```
+var obj = {
+  p: 'hello'
+};
+
+Object.freeze(obj);
+
+obj.p = 'world';
+obj.p // "hello"
+
+obj.t = 'hello';
+obj.t // undefined
+
+delete obj.p // false
+obj.p // "hello"
+```
+
+上面代码中，对`obj`对象进行`Object.freeze()`以后，修改属性、新增属性、删除属性都无效了。这些操作并不报错，只是默默地失败。如果在严格模式下，则会报错。
