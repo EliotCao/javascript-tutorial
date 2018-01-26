@@ -503,3 +503,53 @@ obj.next = 5;
 ```
 
 上面代码中，`next`属性的存值函数和取值函数，都依赖于内部属性`$n`。
+
+## 对象的拷贝
+
+有时，我们需要将一个对象的所有属性，拷贝到另一个对象，可以用下面的方法实现。
+
+```
+var extend = function (to, from) {
+  for (var property in from) {
+    to[property] = from[property];
+  }
+
+  return to;
+}
+
+extend({}, {
+  a: 1
+})
+// {a: 1}
+```
+
+上面这个方法的问题在于，如果遇到存取器定义的属性，会只拷贝值。
+
+```
+extend({}, {
+  get a() { return 1 }
+})
+// {a: 1}
+```
+
+为了解决这个问题，我们可以通过`Object.defineProperty`方法来拷贝属性。
+
+```
+var extend = function (to, from) {
+  for (var property in from) {
+    if (!from.hasOwnProperty(property)) continue;
+    Object.defineProperty(
+      to,
+      property,
+      Object.getOwnPropertyDescriptor(from, property)
+    );
+  }
+
+  return to;
+}
+
+extend({}, { get a(){ return 1 } })
+// { get a(){ return 1 } })
+```
+
+上面代码中，`hasOwnProperty`那一行用来过滤掉继承的属性，否则可能会报错，因为`Object.getOwnPropertyDescriptor`读不到继承属性的属性描述对象。
