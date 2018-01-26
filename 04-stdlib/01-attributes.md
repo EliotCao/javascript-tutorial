@@ -696,3 +696,45 @@ obj.p // "hello"
 ```
 
 上面代码中，对`obj`对象进行`Object.freeze()`以后，修改属性、新增属性、删除属性都无效了。这些操作并不报错，只是默默地失败。如果在严格模式下，则会报错。
+
+### Object.isFrozen()
+
+`Object.isFrozen`方法用于检查一个对象是否使用了`Object.freeze`方法。
+
+```
+var obj = {
+  p: 'hello'
+};
+
+Object.freeze(obj);
+Object.isFrozen(obj) // true
+```
+
+使用`Object.freeze`方法以后，`Object.isSealed`将会返回`true`，`Object.isExtensible`返回`false`。
+
+```
+var obj = {
+  p: 'hello'
+};
+
+Object.freeze(obj);
+
+Object.isSealed(obj) // true
+Object.isExtensible(obj) // false
+```
+
+`Object.isFrozen`的一个用途是，确认某个对象没有被冻结后，再对它的属性赋值。
+
+```
+var obj = {
+  p: 'hello'
+};
+
+Object.freeze(obj);
+
+if (!Object.isFrozen(obj)) {
+  obj.p = 'world';
+}
+```
+
+上面代码中，确认`obj`没有被冻结后，再对它的属性赋值，就不会报错了。
