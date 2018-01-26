@@ -211,4 +211,23 @@ obj.propertyIsEnumerable('toString') // false
 
 上面代码中，`obj.p`是可遍历的，而`obj.toString`是继承的属性。
 
-## 
+## 元属性
+
+属性描述对象的各个属性称为“元属性”，因为它们可以看作是控制属性的属性。
+
+### value
+
+`value`属性是目标属性的值。
+
+```
+var obj = {};
+obj.p = 123;
+
+Object.getOwnPropertyDescriptor(obj, 'p').value
+// 123
+
+Object.defineProperty(obj, 'p', { value: 246 });
+obj.p // 246
+```
+
+上面代码是通过`value`属性，读取或改写`obj.p`的例子。
