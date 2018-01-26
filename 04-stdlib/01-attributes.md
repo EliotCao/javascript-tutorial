@@ -158,3 +158,25 @@ obj.p3 // "123abc"
 ```
 
 上面代码中，`Object.defineProperties()`同时定义了`obj`对象的三个属性。其中，`p3`属性定义了取值函数`get`，即每次读取该属性，都会调用这个取值函数。
+
+注意，一旦定义了取值函数`get`（或存值函数`set`），就不能将`writable`属性设为`true`，或者同时定义`value`属性，否则会报错。
+
+```
+var obj = {};
+
+Object.defineProperty(obj, 'p', {
+  value: 123,
+  get: function() { return 456; }
+});
+// TypeError: Invalid property.
+// A property cannot both have accessors and be writable or have a value
+
+Object.defineProperty(obj, 'p', {
+  writable: true,
+  get: function() { return 456; }
+});
+// TypeError: Invalid property descriptor.
+// Cannot both specify accessors and a value or writable attribute
+```
+
+上面代码中，同时定义了`get`属性和`value`属性，以及将`writable`属性设为`true`，就会报错。
