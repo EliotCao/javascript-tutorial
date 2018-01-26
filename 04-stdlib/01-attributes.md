@@ -299,3 +299,18 @@ Object.defineProperty(obj, 'foo', {
 
 obj.foo // "b"
 ```
+
+### enumerable
+
+`enumerable`（可遍历性）返回一个布尔值，表示目标属性是否可遍历。
+
+JavaScript 的早期版本，`for...in`循环是基于`in`运算符的。我们知道，`in`运算符不管某个属性是对象自身的还是继承的，都会返回`true`。
+
+```
+var obj = {};
+'toString' in obj // true
+```
+
+上面代码中，`toString`不是`obj`对象自身的属性，但是`in`运算符也返回`true`，这导致了`toString`属性也会被`for...in`循环遍历。
+
+这显然不太合理，后来就引入了“可遍历性”这个概念。只有可遍历的属性，才会被`for...in`循环遍历，同时还规定`toString`这一类实例对象继承的原生属性，都是不可遍历的，这样就保证了`for...in`循环的可用性。
