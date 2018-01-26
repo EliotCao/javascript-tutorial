@@ -196,3 +196,19 @@ Object.getOwnPropertyDescriptor(obj, 'foo')
 ```
 
 上面代码中，定义`obj.foo`时用了一个空的属性描述对象，就可以看到各个元属性的默认值。
+
+## Object.prototype.propertyIsEnumerable()
+
+实例对象的`propertyIsEnumerable()`方法返回一个布尔值，用来判断某个属性是否可遍历。注意，这个方法只能用于判断对象自身的属性，对于继承的属性一律返回`false`。
+
+```
+var obj = {};
+obj.p = 123;
+
+obj.propertyIsEnumerable('p') // true
+obj.propertyIsEnumerable('toString') // false
+```
+
+上面代码中，`obj.p`是可遍历的，而`obj.toString`是继承的属性。
+
+## 
