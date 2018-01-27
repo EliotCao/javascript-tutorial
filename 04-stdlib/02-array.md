@@ -55,3 +55,21 @@ var arr = new Array(1, 2);
 // good
 var arr = [1, 2];
 ```
+
+注意，如果参数是一个正整数，返回数组的成员都是空位。虽然读取的时候返回`undefined`，但实际上该位置没有任何值。虽然这时可以读取到`length`属性，但是取不到键名。
+
+```
+var a = new Array(3);
+var b = [undefined, undefined, undefined];
+
+a.length // 3
+b.length // 3
+
+a[0] // undefined
+b[0] // undefined
+
+0 in a // false
+0 in b // true
+```
+
+上面代码中，`a`是`Array()`生成的一个长度为3的空数组，`b`是一个三个成员都是`undefined`的数组，这两个数组是不一样的。读取键值的时候，`a`和`b`都返回`undefined`，但是`a`的键名（成员的序号）都是空的，`b`的键名是有值的。
