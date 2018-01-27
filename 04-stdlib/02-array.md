@@ -73,3 +73,18 @@ b[0] // undefined
 ```
 
 上面代码中，`a`是`Array()`生成的一个长度为3的空数组，`b`是一个三个成员都是`undefined`的数组，这两个数组是不一样的。读取键值的时候，`a`和`b`都返回`undefined`，但是`a`的键名（成员的序号）都是空的，`b`的键名是有值的。
+
+## 静态方法
+
+### Array.isArray()
+
+`Array.isArray`方法返回一个布尔值，表示参数是否为数组。它可以弥补`typeof`运算符的不足。
+
+```
+var arr = [1, 2, 3];
+
+typeof arr // "object"
+Array.isArray(arr) // true
+```
+
+上面代码中，`typeof`运算符只能显示数组的类型是`Object`，而`Array.isArray`方法可以识别数组。
