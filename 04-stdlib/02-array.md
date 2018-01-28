@@ -676,3 +676,65 @@ function isEven(x) { return x % 2 === 0 }
 ```
 
 上面代码中，`reduce`方法求出数组所有成员的和。第一次执行，`a`是数组的第一个成员`1`，`b`是数组的第二个成员`2`。第二次执行，`a`为上一轮的返回值`3`，`b`为第三个成员`3`。第三次执行，`a`为上一轮的返回值`6`，`b`为第四个成员`4`。第四次执行，`a`为上一轮返回值`10`，`b`为第五个成员`5`。至此所有成员遍历完成，整个方法的返回值就是最后一轮的返回值`15`。
+
+`reduce`方法和`reduceRight`方法的第一个参数都是一个函数。该函数接受以下四个参数。
+
+1. 累积变量，默认为数组的第一个成员
+2. 当前变量，默认为数组的第二个成员
+3. 当前位置（从0开始）
+4. 原数组
+
+这四个参数之中，只有前两个是必须的，后两个则是可选的。
+
+如果要对累积变量指定初值，可以把它放在`reduce`方法和`reduceRight`方法的第二个参数。
+
+```
+[1, 2, 3, 4, 5].reduce(function (a, b) {
+  return a + b;
+}, 10);
+// 25
+```
+
+上面代码指定参数`a`的初值为10，所以数组从10开始累加，最终结果为25。注意，这时`b`是从数组的第一个成员开始遍历。
+
+上面的第二个参数相当于设定了默认值，处理空数组时尤其有用。
+
+```
+function add(prev, cur) {
+  return prev + cur;
+}
+
+[].reduce(add)
+// TypeError: Reduce of empty array with no initial value
+[].reduce(add, 1)
+// 1
+```
+
+上面代码中，由于空数组取不到初始值，`reduce`方法会报错。这时，加上第二个参数，就能保证总是会返回一个值。
+
+下面是一个`reduceRight`方法的例子。
+
+```
+function subtract(prev, cur) {
+  return prev - cur;
+}
+
+[3, 2, 1].reduce(subtract) // 0
+[3, 2, 1].reduceRight(subtract) // -4
+```
+
+上面代码中，`reduce`方法相当于`3`减去`2`再减去`1`，`reduceRight`方法相当于`1`减去`2`再减去`3`。
+
+由于这两个方法会遍历数组，所以实际上还可以用来做一些遍历相关的操作。比如，找出字符长度最长的数组成员。
+
+```
+function findLongest(entries) {
+  return entries.reduce(function (longest, entry) {
+    return entry.length > longest.length ? entry : longest;
+  }, '');
+}
+
+findLongest(['aaa', 'bb', 'c']) // "aaa"
+```
+
+上面代码中，`reduce`的参数函数会将字符长度较长的那个数组成员，作为累积值。这导致遍历所有成员之后，累积值就是字符长度最长的那个成员。
