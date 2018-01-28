@@ -64,3 +64,29 @@ new Number(123).toString() // "123"
 new String('abc').toString() // "abc"
 new Boolean(true).toString() // "true"
 ```
+
+## 原始类型与实例对象的自动转换
+
+某些场合，原始类型的值会自动当作包装对象调用，即调用包装对象的属性和方法。这时，JavaScript 引擎会自动将原始类型的值转为包装对象实例，并在使用后立刻销毁实例。
+
+比如，字符串可以调用`length`属性，返回字符串的长度。
+
+```
+'abc'.length // 3
+```
+
+上面代码中，`abc`是一个字符串，本身不是对象，不能调用`length`属性。JavaScript 引擎自动将其转为包装对象，在这个对象上调用`length`属性。调用结束后，这个临时对象就会被销毁。这就叫原始类型与实例对象的自动转换。
+
+```
+var str = 'abc';
+str.length // 3
+
+// 等同于
+var strObj = new String(str)
+// String {
+//   0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"
+// }
+strObj.length // 3
+```
+
+上面代码中，字符串`abc`的包装对象提供了多个属性，`length`只是其中之一。
