@@ -544,3 +544,27 @@ for (var i = 0; i < arr.length; i++) {
 ```
 
 上面代码中，执行到数组的第二个成员时，就会中断执行。`forEach`方法做不到这一点。
+
+`forEach`方法也会跳过数组的空位。
+
+```
+var log = function (n) {
+  console.log(n + 1);
+};
+
+[1, undefined, 2].forEach(log)
+// 2
+// NaN
+// 3
+
+[1, null, 2].forEach(log)
+// 2
+// 1
+// 3
+
+[1, , 2].forEach(log)
+// 2
+// 3
+```
+
+上面代码中，`forEach`方法不会跳过`undefined`和`null`，但会跳过空位。
