@@ -774,3 +774,32 @@ a.lastIndexOf(7) // -1
 ```
 
 这是因为这两个方法内部，使用严格相等运算符（`===`）进行比较，而`NaN`是唯一一个不等于自身的值。
+
+### 链式使用
+
+上面这些数组方法之中，有不少返回的还是数组，所以可以链式使用。
+
+```
+var users = [
+  {name: 'tom', email: 'tom@example.com'},
+  {name: 'peter', email: 'peter@example.com'}
+];
+
+users
+.map(function (user) {
+  return user.email;
+})
+.filter(function (email) {
+  return /^t/.test(email);
+})
+.forEach(function (email) {
+  console.log(email);
+});
+// "tom@example.com"
+```
+
+上面代码中，先产生一个所有 Email 地址组成的数组，然后再过滤出以`t`开头的 Email 地址，最后将它打印出来。
+
+## 参考链接
+
+- Nicolas Bevacqua, [Fun with JavaScript Native Array Functions](http://flippinawesome.org/2013/11/25/fun-with-javascript-native-array-functions/)
