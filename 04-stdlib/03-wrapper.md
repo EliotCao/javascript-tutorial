@@ -40,3 +40,27 @@ Boolean(123) // true
 上面这种数据类型的转换，详见《数据类型转换》一节。
 
 总结一下，这三个对象作为构造函数使用（带有`new`）时，可以将原始类型的值转为对象；作为普通函数使用时（不带有`new`），可以将任意类型的值，转为原始类型的值。
+
+## 实例方法
+
+三种包装对象各自提供了许多实例方法，详见后文。这里介绍两种它们共同具有、从`Object`对象继承的方法：`valueOf()`和`toString()`。
+
+### valueOf()
+
+`valueOf()`方法返回包装对象实例对应的原始类型的值。
+
+```
+new Number(123).valueOf()  // 123
+new String('abc').valueOf() // "abc"
+new Boolean(true).valueOf() // true
+```
+
+### toString()
+
+`toString()`方法返回对应的字符串形式。
+
+```
+new Number(123).toString() // "123"
+new String('abc').toString() // "abc"
+new Boolean(true).toString() // "true"
+```
