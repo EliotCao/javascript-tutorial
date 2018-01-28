@@ -516,3 +516,31 @@ function log(element, index, array) {
 ```
 
 上面代码中，`forEach`遍历数组不是为了得到返回值，而是为了在屏幕输出内容，所以不必使用`map`方法。
+
+`forEach`方法也可以接受第二个参数，绑定参数函数的`this`变量。
+
+```
+var out = [];
+
+[1, 2, 3].forEach(function(elem) {
+  this.push(elem * elem);
+}, out);
+
+out // [1, 4, 9]
+```
+
+上面代码中，空数组`out`是`forEach`方法的第二个参数，结果，回调函数内部的`this`关键字就指向`out`。
+
+注意，`forEach`方法无法中断执行，总是会将所有成员遍历完。如果希望符合某种条件时，就中断遍历，要使用`for`循环。
+
+```
+var arr = [1, 2, 3];
+
+for (var i = 0; i < arr.length; i++) {
+  if (arr[i] === 2) break;
+  console.log(arr[i]);
+}
+// 1
+```
+
+上面代码中，执行到数组的第二个成员时，就会中断执行。`forEach`方法做不到这一点。
