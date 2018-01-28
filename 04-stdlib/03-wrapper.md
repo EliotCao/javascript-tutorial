@@ -102,3 +102,26 @@ s.x // undefined
 上面代码为字符串`s`添加了一个`x`属性，结果无效，总是返回`undefined`。
 
 另一方面，调用结束后，包装对象实例会自动销毁。这意味着，下一次调用字符串的属性时，实际是调用一个新生成的对象，而不是上一次调用时生成的那个对象，所以取不到赋值在上一个对象的属性。如果要为字符串添加属性，只有在它的原型对象`String.prototype`上定义（参见《面向对象编程》章节）。
+
+## 自定义方法
+
+除了原生的实例方法，包装对象还可以自定义方法和属性，供原始类型的值直接调用。
+
+比如，我们可以新增一个`double`方法，使得字符串和数字翻倍。
+
+```
+String.prototype.double = function () {
+  return this.valueOf() + this.valueOf();
+};
+
+'abc'.double()
+// abcabc
+
+Number.prototype.double = function () {
+  return this.valueOf() + this.valueOf();
+};
+
+(123).double() // 246
+```
+
+上面代码在`String`和`Number`这两个对象的原型上面，分别自定义了一个方法，从而可以在所有实例对象上调用。注意，最后一行的`123`外面必须要加上圆括号，否则后面的点运算符（`.`）会被解释成小数点。
