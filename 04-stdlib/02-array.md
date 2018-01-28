@@ -497,3 +497,22 @@ var f = function (n) { return 'a' };
 ```
 
 上面代码中，`map`方法不会跳过`undefined`和`null`，但是会跳过空位。
+
+### forEach()
+
+`forEach`方法与`map`方法很相似，也是对数组的所有成员依次执行参数函数。但是，`forEach`方法不返回值，只用来操作数据。这就是说，如果数组遍历的目的是为了得到返回值，那么使用`map`方法，否则使用`forEach`方法。
+
+`forEach`的用法与`map`方法一致，参数是一个函数，该函数同样接受三个参数：当前值、当前位置、整个数组。
+
+```
+function log(element, index, array) {
+  console.log('[' + index + '] = ' + element);
+}
+
+[2, 5, 9].forEach(log);
+// [0] = 2
+// [1] = 5
+// [2] = 9
+```
+
+上面代码中，`forEach`遍历数组不是为了得到返回值，而是为了在屏幕输出内容，所以不必使用`map`方法。
