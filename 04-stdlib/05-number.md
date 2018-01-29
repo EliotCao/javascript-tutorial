@@ -125,3 +125,19 @@ Number.MIN_SAFE_INTEGER // -9007199254740991
 (10.055).toFixed(2) // 10.05
 (10.005).toFixed(2) // 10.01
 ```
+
+### Number.prototype.toExponential()
+
+`toExponential`方法用于将一个数转为科学计数法形式。
+
+```
+(10).toExponential()  // "1e+1"
+(10).toExponential(1) // "1.0e+1"
+(10).toExponential(2) // "1.00e+1"
+
+(1234).toExponential()  // "1.234e+3"
+(1234).toExponential(1) // "1.2e+3"
+(1234).toExponential(2) // "1.23e+3"
+```
+
+`toExponential`方法的参数是小数点后有效数字的位数，范围为0到100，超出这个范围，会抛出一个 RangeError 错误。
