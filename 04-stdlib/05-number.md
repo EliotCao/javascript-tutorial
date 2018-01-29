@@ -199,3 +199,55 @@ Number.MIN_SAFE_INTEGER // -9007199254740991
 ```
 (123).toLocaleString('123') // 出错
 ```
+
+## 自定义方法
+
+与其他对象一样，`Number.prototype`对象上面可以自定义方法，被`Number`的实例继承。
+
+```
+Number.prototype.add = function (x) {
+  return this + x;
+};
+
+8['add'](2) // 10
+```
+
+上面代码为`Number`对象实例定义了一个`add`方法。在数值上调用某个方法，数值会自动转为`Number`的实例对象，所以就可以调用`add`方法了。由于`add`方法返回的还是数值，所以可以链式运算。
+
+```
+Number.prototype.subtract = function (x) {
+  return this - x;
+};
+
+(8).add(2).subtract(4)
+// 6
+```
+
+上面代码在`Number`对象的实例上部署了`subtract`方法，它可以与`add`方法链式调用。
+
+我们还可以部署更复杂的方法。
+
+```
+Number.prototype.iterate = function () {
+  var result = [];
+  for (var i = 0; i <= this; i++) {
+    result.push(i);
+  }
+  return result;
+};
+
+(8).iterate()
+// [0, 1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+上面代码在`Number`对象的原型上部署了`iterate`方法，将一个数值自动遍历为一个数组。
+
+注意，数值的自定义方法，只能定义在它的原型对象`Number.prototype`上面，数值本身是无法自定义属性的。
+
+```
+var n = 1;
+n.x = 1;
+n.x // undefined
+```
+
+上面代码中，`n`是一个原始类型的数值。直接在它上面新增一个属性`x`，不会报错，但毫无作用，总是返回`undefined`。这是因为一旦被调用属性，`n`就自动转为`Number`的实例对象，调用结束后，该对象自动销毁。所以，下一次调用`n`的属性时，实际取到的是另一个对象，属性`x`当然就读不出来。
