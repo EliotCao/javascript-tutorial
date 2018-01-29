@@ -141,3 +141,26 @@ Number.MIN_SAFE_INTEGER // -9007199254740991
 ```
 
 `toExponential`方法的参数是小数点后有效数字的位数，范围为0到100，超出这个范围，会抛出一个 RangeError 错误。
+
+### Number.prototype.toPrecision()
+
+`Number.prototype.toPrecision()`方法用于将一个数转为指定位数的有效数字。
+
+```
+(12.34).toPrecision(1) // "1e+1"
+(12.34).toPrecision(2) // "12"
+(12.34).toPrecision(3) // "12.3"
+(12.34).toPrecision(4) // "12.34"
+(12.34).toPrecision(5) // "12.340"
+```
+
+该方法的参数为有效数字的位数，范围是1到100，超出这个范围会抛出 RangeError 错误。
+
+该方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。
+
+```
+(12.35).toPrecision(3) // "12.3"
+(12.25).toPrecision(3) // "12.3"
+(12.15).toPrecision(3) // "12.2"
+(12.45).toPrecision(3) // "12.4"
+```
