@@ -35,3 +35,38 @@ String(5) // "5"
 ```
 
 上面代码将布尔值`true`和数值`5`，分别转换为字符串。
+
+## 静态方法
+
+### String.fromCharCode()
+
+`String`对象提供的静态方法（即定义在对象本身，而不是定义在对象实例的方法），主要是`String.fromCharCode()`。该方法的参数是一个或多个数值，代表 Unicode 码点，返回值是这些码点组成的字符串。
+
+```
+String.fromCharCode() // ""
+String.fromCharCode(97) // "a"
+String.fromCharCode(104, 101, 108, 108, 111)
+// "hello"
+```
+
+上面代码中，`String.fromCharCode`方法的参数为空，就返回空字符串；否则，返回参数对应的 Unicode 字符串。
+
+注意，该方法不支持 Unicode 码点大于`0xFFFF`的字符，即传入的参数不能大于`0xFFFF`（即十进制的 65535）。
+
+```
+String.fromCharCode(0x20BB7)
+// "ஷ"
+String.fromCharCode(0x20BB7) === String.fromCharCode(0x0BB7)
+// true
+```
+
+上面代码中，`String.fromCharCode`参数`0x20BB7`大于`0xFFFF`，导致返回结果出错。`0x20BB7`对应的字符是汉字`𠮷`，但是返回结果却是另一个字符（码点`0x0BB7`）。这是因为`String.fromCharCode`发现参数值大于`0xFFFF`，就会忽略多出的位（即忽略`0x20BB7`里面的`2`）。
+
+这种现象的根本原因在于，码点大于`0xFFFF`的字符占用四个字节，而 JavaScript 默认支持两个字节的字符。这种情况下，必须把`0x20BB7`拆成两个字符表示。
+
+```
+String.fromCharCode(0xD842, 0xDFB7)
+// "𠮷"
+```
+
+上面代码中，`0x20BB7`拆成两个字符`0xD842`和`0xDFB7`（即两个两字节字符，合成一个四字节字符），就能得到正确的结果。码点大于`0xFFFF`的字符的四字节表示法，由 UTF-16 编码方法决定。
