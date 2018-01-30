@@ -70,3 +70,13 @@ String.fromCharCode(0xD842, 0xDFB7)
 ```
 
 上面代码中，`0x20BB7`拆成两个字符`0xD842`和`0xDFB7`（即两个两字节字符，合成一个四字节字符），就能得到正确的结果。码点大于`0xFFFF`的字符的四字节表示法，由 UTF-16 编码方法决定。
+
+## 实例属性
+
+### String.prototype.length
+
+字符串实例的`length`属性返回字符串的长度。
+
+```
+'abc'.length // 3
+```
