@@ -132,3 +132,34 @@ s.charAt(s.length - 1) // "c"
 ```
 
 注意，`charCodeAt`方法返回的 Unicode 码点不会大于65536（0xFFFF），也就是说，只返回两个字节的字符的码点。如果遇到码点大于 65536 的字符（四个字节的字符），必须连续使用两次`charCodeAt`，不仅读入`charCodeAt(i)`，还要读入`charCodeAt(i+1)`，将两个值放在一起，才能得到准确的字符。
+
+### String.prototype.concat()
+
+`concat`方法用于连接两个字符串，返回一个新字符串，不改变原字符串。
+
+```
+var s1 = 'abc';
+var s2 = 'def';
+
+s1.concat(s2) // "abcdef"
+s1 // "abc"
+```
+
+该方法可以接受多个参数。
+
+```
+'a'.concat('b', 'c') // "abc"
+```
+
+如果参数不是字符串，`concat`方法会将其先转为字符串，然后再连接。
+
+```
+var one = 1;
+var two = 2;
+var three = '3';
+
+''.concat(one, two, three) // "123"
+one + two + three // "33"
+```
+
+上面代码中，`concat`方法将参数先转成字符串再连接，所以返回的是一个三个字符的字符串。作为对比，加号运算符在两个运算数都是数值时，不会转换类型，所以返回的是一个两个字符的字符串。
