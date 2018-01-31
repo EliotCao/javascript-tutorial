@@ -107,3 +107,28 @@ s.charAt(s.length - 1) // "c"
 'abc'.charAt(-1) // ""
 'abc'.charAt(3) // ""
 ```
+
+### String.prototype.charCodeAt()
+
+`charCodeAt()`方法返回字符串指定位置的 Unicode 码点（十进制表示），相当于`String.fromCharCode()`的逆操作。
+
+```
+'abc'.charCodeAt(1) // 98
+```
+
+上面代码中，`abc`的`1`号位置的字符是`b`，它的 Unicode 码点是`98`。
+
+如果没有任何参数，`charCodeAt`返回首字符的 Unicode 码点。
+
+```
+'abc'.charCodeAt() // 97
+```
+
+如果参数为负数，或大于等于字符串的长度，`charCodeAt`返回`NaN`。
+
+```
+'abc'.charCodeAt(-1) // NaN
+'abc'.charCodeAt(4) // NaN
+```
+
+注意，`charCodeAt`方法返回的 Unicode 码点不会大于65536（0xFFFF），也就是说，只返回两个字节的字符的码点。如果遇到码点大于 65536 的字符（四个字节的字符），必须连续使用两次`charCodeAt`，不仅读入`charCodeAt(i)`，还要读入`charCodeAt(i+1)`，将两个值放在一起，才能得到准确的字符。
