@@ -336,3 +336,22 @@ one + two + three // "33"
 'Hello World'.toUpperCase()
 // "HELLO WORLD"
 ```
+
+### String.prototype.match()
+
+`match`方法用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回`null`。
+
+```
+'cat, bat, sat, fat'.match('at') // ["at"]
+'cat, bat, sat, fat'.match('xt') // null
+```
+
+返回的数组还有`index`属性和`input`属性，分别表示匹配字符串开始的位置和原始字符串。
+
+```
+var matches = 'cat, bat, sat, fat'.match('at');
+matches.index // 1
+matches.input // "cat, bat, sat, fat"
+```
+
+`match`方法还可以使用正则表达式作为参数，详见《正则表达式》一章。
