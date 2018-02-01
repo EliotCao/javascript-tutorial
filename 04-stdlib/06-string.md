@@ -324,3 +324,15 @@ one + two + three // "33"
 ```
 '\r\nabc \t'.trim() // 'abc'
 ```
+
+### String.prototype.toLowerCase()，String.prototype.toUpperCase()
+
+`toLowerCase`方法用于将一个字符串全部转为小写，`toUpperCase`则是全部转为大写。它们都返回一个新字符串，不改变原字符串。
+
+```
+'Hello World'.toLowerCase()
+// "hello world"
+
+'Hello World'.toUpperCase()
+// "HELLO WORLD"
+```
