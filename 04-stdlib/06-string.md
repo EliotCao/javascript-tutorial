@@ -309,3 +309,18 @@ one + two + three // "33"
 ```
 'hello world'.lastIndexOf('o', 6) // 4
 ```
+
+### String.prototype.trim()
+
+`trim`方法用于去除字符串两端的空格，返回一个新字符串，不改变原字符串。
+
+```
+'  hello world  '.trim()
+// "hello world"
+```
+
+该方法去除的不仅是空格，还包括制表符（`\t`、`\v`）、换行符（`\n`）和回车符（`\r`）。
+
+```
+'\r\nabc \t'.trim() // 'abc'
+```
