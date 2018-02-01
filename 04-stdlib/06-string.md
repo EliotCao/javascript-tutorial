@@ -282,3 +282,30 @@ one + two + three // "33"
 ```
 
 上面代码中，第二个例子的参数`-1`自动转为`0`，表示子字符串长度为`0`，所以返回空字符串。
+
+### String.prototype.indexOf()，String.prototype.lastIndexOf()
+
+`indexOf`方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回`-1`，就表示不匹配。
+
+```
+'hello world'.indexOf('o') // 4
+'JavaScript'.indexOf('script') // -1
+```
+
+`indexOf`方法还可以接受第二个参数，表示从该位置开始向后匹配。
+
+```
+'hello world'.indexOf('o', 6) // 7
+```
+
+`lastIndexOf`方法的用法跟`indexOf`方法一致，主要的区别是`lastIndexOf`从尾部开始匹配，`indexOf`则是从头部开始匹配。
+
+```
+'hello world'.lastIndexOf('o') // 7
+```
+
+另外，`lastIndexOf`的第二个参数表示从该位置起向前匹配。
+
+```
+'hello world'.lastIndexOf('o', 6) // 4
+```
