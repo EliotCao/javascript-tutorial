@@ -52,3 +52,14 @@ Math.SQRT2 // 1.4142135623730951
 Math.abs(1) // 1
 Math.abs(-1) // 1
 ```
+
+### Math.max()，Math.min()
+
+`Math.max`方法返回参数之中最大的那个值，`Math.min`返回最小的那个值。如果参数为空, `Math.min`返回`Infinity`, `Math.max`返回`-Infinity`。
+
+```
+Math.max(2, -1, 5) // 5
+Math.min(2, -1, 5) // -1
+Math.min() // Infinity
+Math.max() // -Infinity
+```
