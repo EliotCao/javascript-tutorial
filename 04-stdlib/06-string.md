@@ -355,3 +355,21 @@ matches.input // "cat, bat, sat, fat"
 ```
 
 `match`方法还可以使用正则表达式作为参数，详见《正则表达式》一章。
+
+### String.prototype.search()，String.prototype.replace()
+
+`search`方法的用法基本等同于`match`，但是返回值为匹配的第一个位置。如果没有找到匹配，则返回`-1`。
+
+```
+'cat, bat, sat, fat'.search('at') // 1
+```
+
+`search`方法还可以使用正则表达式作为参数，详见《正则表达式》一节。
+
+`replace`方法用于替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有`g`修饰符的正则表达式）。
+
+```
+'aaa'.replace('a', 'b') // "baa"
+```
+
+`replace`方法还可以使用正则表达式作为参数，详见《正则表达式》一节。
