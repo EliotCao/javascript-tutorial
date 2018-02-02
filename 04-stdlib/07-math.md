@@ -43,3 +43,12 @@ Math.SQRT2 // 1.4142135623730951
 - `Math.exp()`：`e`的指数
 - `Math.round()`：四舍五入
 - `Math.random()`：随机数
+
+### Math.abs()
+
+`Math.abs`方法返回参数值的绝对值。
+
+```
+Math.abs(1) // 1
+Math.abs(-1) // 1
+```
