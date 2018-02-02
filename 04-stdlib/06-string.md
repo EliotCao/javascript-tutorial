@@ -420,3 +420,41 @@ matches.input // "cat, bat, sat, fat"
 上面代码中，`split`方法的第二个参数，决定了返回数组的成员数。
 
 `split`方法还可以使用正则表达式作为参数，详见《正则表达式》一节。
+
+### String.prototype.localeCompare()
+
+`localeCompare`方法用于比较两个字符串。它返回一个整数，如果小于0，表示第一个字符串小于第二个字符串；如果等于0，表示两者相等；如果大于0，表示第一个字符串大于第二个字符串。
+
+```
+'apple'.localeCompare('banana') // -1
+'apple'.localeCompare('apple') // 0
+```
+
+该方法的最大特点，就是会考虑自然语言的顺序。举例来说，正常情况下，大写的英文字母小于小写字母。
+
+```
+'B' > 'a' // false
+```
+
+上面代码中，字母`B`小于字母`a`。因为 JavaScript 采用的是 Unicode 码点比较，`B`的码点是66，而`a`的码点是97。
+
+但是，`localeCompare`方法会考虑自然语言的排序情况，将`B`排在`a`的前面。
+
+```
+'B'.localeCompare('a') // 1
+```
+
+上面代码中，`localeCompare`方法返回整数1，表示`B`较大。
+
+`localeCompare`还可以有第二个参数，指定所使用的语言（默认是英语），然后根据该语言的规则进行比较。
+
+```
+'ä'.localeCompare('z', 'de') // -1
+'ä'.localeCompare('z', 'sv') // 1
+```
+
+上面代码中，`de`表示德语，`sv`表示瑞典语。德语中，`ä`小于`z`，所以返回`-1`；瑞典语中，`ä`大于`z`，所以返回`1`。
+
+## 参考链接
+
+- Ariya Hidayat, [JavaScript String: substring, substr, slice](http://ariya.ofilabs.com/2014/02/javascript-string-substring-substr-slice.html)
