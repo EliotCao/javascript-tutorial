@@ -97,3 +97,24 @@ ToInteger(-3.8) // -3
 ```
 
 上面代码中，不管正数或负数，`ToInteger`函数总是返回一个数值的整数部分。
+
+### Math.round()
+
+`Math.round`方法用于四舍五入。
+
+```
+Math.round(0.1) // 0
+Math.round(0.5) // 1
+Math.round(0.6) // 1
+
+// 等同于
+Math.floor(x + 0.5)
+```
+
+注意，它对负数的处理（主要是对`0.5`的处理）。
+
+```
+Math.round(-1.1) // -1
+Math.round(-1.5) // -1
+Math.round(-1.6) // -2
+```
