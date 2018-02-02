@@ -27,3 +27,19 @@ Math.SQRT2 // 1.4142135623730951
 ```
 
 这些属性都是只读的，不能修改。
+
+## 静态方法
+
+`Math`对象提供以下一些静态方法。
+
+- `Math.abs()`：绝对值
+- `Math.ceil()`：向上取整
+- `Math.floor()`：向下取整
+- `Math.max()`：最大值
+- `Math.min()`：最小值
+- `Math.pow()`：幂运算
+- `Math.sqrt()`：平方根
+- `Math.log()`：自然对数
+- `Math.exp()`：`e`的指数
+- `Math.round()`：四舍五入
+- `Math.random()`：随机数
