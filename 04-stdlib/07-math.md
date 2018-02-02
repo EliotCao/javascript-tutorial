@@ -118,3 +118,21 @@ Math.round(-1.1) // -1
 Math.round(-1.5) // -1
 Math.round(-1.6) // -2
 ```
+
+### Math.pow()
+
+`Math.pow`方法返回以第一个参数为底数、第二个参数为指数的幂运算值。
+
+```
+// 等同于 2 ** 2
+Math.pow(2, 2) // 4
+// 等同于 2 ** 3
+Math.pow(2, 3) // 8
+```
+
+下面是计算圆面积的方法。
+
+```Math.pow()
+var radius = 20;
+var area = Math.PI * Math.pow(radius, 2);
+```
