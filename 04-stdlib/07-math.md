@@ -170,3 +170,52 @@ Math.log(8)/Math.LN2 // 3
 Math.exp(1) // 2.718281828459045
 Math.exp(3) // 20.085536923187668
 ```
+
+### Math.random()
+
+`Math.random()`返回0到1之间的一个伪随机数，可能等于0，但是一定小于1。
+
+```
+Math.random() // 0.7151307314634323
+```
+
+任意范围的随机数生成函数如下。
+
+```
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+getRandomArbitrary(1.5, 6.5)
+// 2.4942810038223864
+```
+
+任意范围的随机整数生成函数如下。
+
+```
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+getRandomInt(1, 6) // 5
+```
+
+返回随机字符的例子如下。
+
+```
+function random_str(length) {
+  var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  ALPHABET += 'abcdefghijklmnopqrstuvwxyz';
+  ALPHABET += '0123456789-_';
+  var str = '';
+  for (var i = 0; i < length; ++i) {
+    var rand = Math.floor(Math.random() * ALPHABET.length);
+    str += ALPHABET.substring(rand, rand + 1);
+  }
+  return str;
+}
+
+random_str(6) // "NdQKOr"
+```
+
+上面代码中，`random_str`函数接受一个整数作为参数，返回变量`ALPHABET`内的随机字符所组成的指定长度的字符串。
