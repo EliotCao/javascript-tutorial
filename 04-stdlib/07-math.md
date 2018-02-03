@@ -145,3 +145,19 @@ var area = Math.PI * Math.pow(radius, 2);
 Math.sqrt(4) // 2
 Math.sqrt(-4) // NaN
 ```
+
+### Math.log()
+
+`Math.log`方法返回以`e`为底的自然对数值。
+
+```
+Math.log(Math.E) // 1
+Math.log(10) // 2.302585092994046
+```
+
+如果要计算以10为底的对数，可以先用`Math.log`求出自然对数，然后除以`Math.LN10`；求以2为底的对数，可以除以`Math.LN2`。
+
+```
+Math.log(100)/Math.LN10 // 2
+Math.log(8)/Math.LN2 // 3
+```
