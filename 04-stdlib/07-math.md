@@ -136,3 +136,12 @@ Math.pow(2, 3) // 8
 var radius = 20;
 var area = Math.PI * Math.pow(radius, 2);
 ```
+
+### Math.sqrt()
+
+`Math.sqrt`方法返回参数值的平方根。如果参数是一个负值，则返回`NaN`。
+
+```
+Math.sqrt(4) // 2
+Math.sqrt(-4) // NaN
+```
