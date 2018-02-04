@@ -232,3 +232,81 @@ var start = new Date();
 var end = new Date();
 var elapsed = end - start;
 ```
+
+### to 类方法
+
+**（1）Date.prototype.toString()**
+
+`toString`方法返回一个完整的日期字符串。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toString()
+// "Tue Jan 01 2013 00:00:00 GMT+0800 (CST)"
+d
+// "Tue Jan 01 2013 00:00:00 GMT+0800 (CST)"
+```
+
+因为`toString`是默认的调用方法，所以如果直接读取`Date`实例，就相当于调用这个方法。
+
+**（2）Date.prototype.toUTCString()**
+
+`toUTCString`方法返回对应的 UTC 时间，也就是比北京时间晚8个小时。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toUTCString()
+// "Mon, 31 Dec 2012 16:00:00 GMT"
+```
+
+**（3）Date.prototype.toISOString()**
+
+`toISOString`方法返回对应时间的 ISO8601 写法。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toISOString()
+// "2012-12-31T16:00:00.000Z"
+```
+
+注意，`toISOString`方法返回的总是 UTC 时区的时间。
+
+**（4）Date.prototype.toJSON()**
+
+`toJSON`方法返回一个符合 JSON 格式的 ISO 日期字符串，与`toISOString`方法的返回结果完全相同。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toJSON()
+// "2012-12-31T16:00:00.000Z"
+```
+
+**（5）Date.prototype.toDateString()**
+
+`toDateString`方法返回日期字符串（不含小时、分和秒）。
+
+```
+var d = new Date(2013, 0, 1);
+d.toDateString() // "Tue Jan 01 2013"
+```
+
+**（6）Date.prototype.toTimeString()**
+
+`toTimeString`方法返回时间字符串（不含年月日）。
+
+```
+var d = new Date(2013, 0, 1);
+d.toTimeString() // "00:00:00 GMT+0800 (CST)"
+```
+
+**（7）本地时间**
+
+以下三种方法，可以将 Date 实例转为表示本地时间的字符串。
+
+- `Date.prototype.toLocaleString()`：完整的本地时间。
+- `Date.prototype.toLocaleDateString()`：本地日期（不含小时、分和秒）。
+- `Date.prototype.toLocaleTimeString()`：本地时间（不含年月日）。
