@@ -310,3 +310,44 @@ d.toTimeString() // "00:00:00 GMT+0800 (CST)"
 - `Date.prototype.toLocaleString()`：完整的本地时间。
 - `Date.prototype.toLocaleDateString()`：本地日期（不含小时、分和秒）。
 - `Date.prototype.toLocaleTimeString()`：本地时间（不含年月日）。
+
+下面是用法实例。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toLocaleString()
+// 中文版浏览器为"2013年1月1日 上午12:00:00"
+// 英文版浏览器为"1/1/2013 12:00:00 AM"
+
+d.toLocaleDateString()
+// 中文版浏览器为"2013年1月1日"
+// 英文版浏览器为"1/1/2013"
+
+d.toLocaleTimeString()
+// 中文版浏览器为"上午12:00:00"
+// 英文版浏览器为"12:00:00 AM"
+```
+
+这三个方法都有两个可选的参数。
+
+```
+dateObj.toLocaleString([locales[, options]])
+dateObj.toLocaleDateString([locales[, options]])
+dateObj.toLocaleTimeString([locales[, options]])
+```
+
+这两个参数中，`locales`是一个指定所用语言的字符串，`options`是一个配置对象。下面是`locales`的例子，分别采用`en-US`和`zh-CN`语言设定。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toLocaleString('en-US') // "1/1/2013, 12:00:00 AM"
+d.toLocaleString('zh-CN') // "2013/1/1 上午12:00:00"
+
+d.toLocaleDateString('en-US') // "1/1/2013"
+d.toLocaleDateString('zh-CN') // "2013/1/1"
+
+d.toLocaleTimeString('en-US') // "12:00:00 AM"
+d.toLocaleTimeString('zh-CN') // "上午12:00:00"
+```
