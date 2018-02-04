@@ -166,3 +166,26 @@ d2 + d1
 ```
 Date.now() // 1364026285194
 ```
+
+### Date.parse()
+
+`Date.parse`方法用来解析日期字符串，返回该时间距离时间零点（1970年1月1日 00:00:00）的毫秒数。
+
+日期字符串应该符合 RFC 2822 和 ISO 8061 这两个标准，即`YYYY-MM-DDTHH:mm:ss.sssZ`格式，其中最后的`Z`表示时区。但是，其他格式也可以被解析，请看下面的例子。
+
+```
+Date.parse('Aug 9, 1995')
+Date.parse('January 26, 2011 13:51:50')
+Date.parse('Mon, 25 Dec 1995 13:30:00 GMT')
+Date.parse('Mon, 25 Dec 1995 13:30:00 +0430')
+Date.parse('2011-10-10')
+Date.parse('2011-10-10T14:48:00')
+```
+
+上面的日期字符串都可以解析。
+
+如果解析失败，返回`NaN`。
+
+```
+Date.parse('xxx') // NaN
+```
