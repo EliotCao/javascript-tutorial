@@ -523,3 +523,27 @@ d.setHours(d.getHours() + 6);
 // 将年份设为去年
 d.setFullYear(d.getFullYear() - 1);
 ```
+
+`set*`系列方法除了`setTime()`，都有对应的 UTC 版本，即设置 UTC 时区的时间。
+
+- `setUTCDate()`
+- `setUTCFullYear()`
+- `setUTCHours()`
+- `setUTCMilliseconds()`
+- `setUTCMinutes()`
+- `setUTCMonth()`
+- `setUTCSeconds()`
+
+```
+var d = new Date('January 6, 2013');
+d.getUTCHours() // 16
+d.setUTCHours(22) // 1357423200000
+d // Sun Jan 06 2013 06:00:00 GMT+0800 (CST)
+```
+
+上面代码中，本地时区（东八时区）的1月6日0点0分，是 UTC 时区的前一天下午16点。设为 UTC 时区的22点以后，就变为本地时区的上午6点。
+
+## 参考链接
+
+- Rakhitha Nimesh，[Getting Started with the Date Object](http://jspro.com/raw-javascript/beginners-guide-to-javascript-date-and-time/)
+- Ilya Kantor, [Date/Time functions](http://javascript.info/tutorial/datetime-functions)
