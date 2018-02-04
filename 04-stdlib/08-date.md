@@ -351,3 +351,58 @@ d.toLocaleDateString('zh-CN') // "2013/1/1"
 d.toLocaleTimeString('en-US') // "12:00:00 AM"
 d.toLocaleTimeString('zh-CN') // "上午12:00:00"
 ```
+
+`options`配置对象有以下属性。
+
+- `dateStyle`：可能的值为`full`、`long`、`medium`、`short`。
+- `timeStyle`：可能的值为`full`、`long`、`medium`、`short`。
+- `month`：可能的值为`numeric`、`2-digit`、`long`、`short`、`narrow`。
+- `year`：可能的值为`numeric`、`2-digit`。
+- `weekday`：可能的值为`long`、`short`、`narrow`。
+- `day`、`hour`、`minute`、`second`：可能的值为`numeric`、`2-digit`。
+- `timeZone`：可能的值为 IANA 的时区数据库。
+- `timeZooneName`：可能的值为`long`、`short`。
+- `hour12`：24小时周期还是12小时周期，可能的值为`true`、`false`。
+
+下面是用法实例。
+
+```
+var d = new Date(2013, 0, 1);
+
+d.toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+})
+// "Tuesday, January 1, 2013"
+
+d.toLocaleDateString('en-US', {
+  day: "2-digit",
+  month: "long",
+  year: "2-digit"
+});
+// "January 01, 13"
+
+d.toLocaleTimeString('en-US', {
+  timeZone: 'UTC',
+  timeZoneName: 'short'
+})
+// "4:00:00 PM UTC"
+
+d.toLocaleTimeString('en-US', {
+  timeZone: 'Asia/Shanghai',
+  timeZoneName: 'long'
+})
+// "12:00:00 AM China Standard Time"
+
+d.toLocaleTimeString('en-US', {
+  hour12: false
+})
+// "00:00:00"
+
+d.toLocaleTimeString('en-US', {
+  hour12: true
+})
+// "12:00:00 AM"
+```
