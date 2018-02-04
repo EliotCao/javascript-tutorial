@@ -510,3 +510,16 @@ d2 // Sun Dec 30 2012 00:00:00 GMT+0800 (CST)
 ```
 
 上面代码中，`d1.setDate(32)`将日期设为1月份的32号，因为1月份只有31号，所以自动折算为2月1日。`d2.setDate(-1)`表示设为上个月的倒数第二天，即12月30日。
+
+`set`类方法和`get`类方法，可以结合使用，得到相对时间。
+
+```
+var d = new Date();
+
+// 将日期向后推1000天
+d.setDate(d.getDate() + 1000);
+// 将时间设为6小时后
+d.setHours(d.getHours() + 6);
+// 将年份设为去年
+d.setFullYear(d.getFullYear() - 1);
+```
