@@ -440,3 +440,34 @@ d.getTimezoneOffset() // -480
 ```
 
 上面代码中，最后一行返回`-480`，即 UTC 时间减去当前时间，单位是分钟。`-480`表示 UTC 比当前时间少480分钟，即当前时区比 UTC 早8个小时。
+
+下面是一个例子，计算本年度还剩下多少天。
+
+```
+function leftDays() {
+  var today = new Date();
+  var endYear = new Date(today.getFullYear(), 11, 31, 23, 59, 59, 999);
+  var msPerDay = 24 * 60 * 60 * 1000;
+  return Math.round((endYear.getTime() - today.getTime()) / msPerDay);
+}
+```
+
+上面这些`get*`方法返回的都是当前时区的时间，`Date`对象还提供了这些方法对应的 UTC 版本，用来返回 UTC 时间。
+
+- `getUTCDate()`
+- `getUTCFullYear()`
+- `getUTCMonth()`
+- `getUTCDay()`
+- `getUTCHours()`
+- `getUTCMinutes()`
+- `getUTCSeconds()`
+- `getUTCMilliseconds()`
+
+```
+var d = new Date('January 6, 2013');
+
+d.getDate() // 6
+d.getUTCDate() // 5
+```
+
+上面代码中，实例对象`d`表示当前时区（东八时区）的1月6日0点0分0秒，这个时间对于当前时区来说是1月6日，所以`getDate`方法返回6，对于 UTC 时区来说是1月5日，所以`getUTCDate`方法返回5。
