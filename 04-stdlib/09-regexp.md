@@ -63,3 +63,33 @@ var r = /abc/igm;
 r.lastIndex // 0
 r.source // "abc"
 ```
+
+## 实例方法
+
+### RegExp.prototype.test()
+
+正则实例对象的`test`方法返回一个布尔值，表示当前模式是否能匹配参数字符串。
+
+```
+/cat/.test('cats and dogs') // true
+```
+
+上面代码验证参数字符串之中是否包含`cat`，结果返回`true`。
+
+如果正则表达式带有`g`修饰符，则每一次`test`方法都从上一次结束的位置开始向后匹配。
+
+```
+var r = /x/g;
+var s = '_x_x';
+
+r.lastIndex // 0
+r.test(s) // true
+
+r.lastIndex // 2
+r.test(s) // true
+
+r.lastIndex // 4
+r.test(s) // false
+```
+
+上面代码的正则表达式使用了`g`修饰符，表示是全局搜索，会有多个结果。接着，三次使用`test`方法，每一次开始搜索的位置都是上一次匹配的后一个位置。
