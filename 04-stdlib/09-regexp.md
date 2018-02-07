@@ -177,3 +177,31 @@ arr.input // "_abbba_aba_"
 ```
 
 上面代码中的`index`属性等于1，是因为从原字符串的第二个位置开始匹配成功。
+
+如果正则表达式加上`g`修饰符，则可以使用多次`exec()`方法，下一次搜索的位置从上一次匹配成功结束的位置开始。
+
+```
+var reg = /a/g;
+var str = 'abc_abc_abc'
+
+var r1 = reg.exec(str);
+r1 // ["a"]
+r1.index // 0
+reg.lastIndex // 1
+
+var r2 = reg.exec(str);
+r2 // ["a"]
+r2.index // 4
+reg.lastIndex // 5
+
+var r3 = reg.exec(str);
+r3 // ["a"]
+r3.index // 8
+reg.lastIndex // 9
+
+var r4 = reg.exec(str);
+r4 // null
+reg.lastIndex // 0
+```
+
+上面代码连续用了四次`exec()`方法，前三次都是从上一次匹配结束的位置向后匹配。当第三次匹配结束以后，整个字符串已经到达尾部，匹配结果返回`null`，正则实例对象的`lastIndex`属性也重置为`0`，意味着第四次匹配将从头开始。
