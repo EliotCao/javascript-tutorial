@@ -227,3 +227,48 @@ while(true) {
 上面代码中，只要`exec()`方法不返回`null`，就会一直循环下去，每次输出匹配的位置和匹配的文本。
 
 正则实例对象的`lastIndex`属性不仅可读，还可写。设置了`g`修饰符的时候，只要手动设置了`lastIndex`的值，就会从指定位置开始匹配。
+
+## 字符串的实例方法
+
+字符串的实例方法之中，有4种与正则表达式有关。
+
+- `String.prototype.match()`：返回一个数组，成员是所有匹配的子字符串。
+- `String.prototype.search()`：按照给定的正则表达式进行搜索，返回一个整数，表示匹配开始的位置。
+- `String.prototype.replace()`：按照给定的正则表达式进行替换，返回替换后的字符串。
+- `String.prototype.split()`：按照给定规则进行字符串分割，返回一个数组，包含分割后的各个成员。
+
+### String.prototype.match()
+
+字符串实例对象的`match`方法对字符串进行正则匹配，返回匹配结果。
+
+```
+var s = '_x_x';
+var r1 = /x/;
+var r2 = /y/;
+
+s.match(r1) // ["x"]
+s.match(r2) // null
+```
+
+从上面代码可以看到，字符串的`match`方法与正则对象的`exec`方法非常类似：匹配成功返回一个数组，匹配失败返回`null`。
+
+如果正则表达式带有`g`修饰符，则该方法与正则对象的`exec`方法行为不同，会一次性返回所有匹配成功的结果。
+
+```
+var s = 'abba';
+var r = /a/g;
+
+s.match(r) // ["a", "a"]
+r.exec(s) // ["a"]
+```
+
+设置正则表达式的`lastIndex`属性，对`match`方法无效，匹配总是从字符串的第一个字符开始。
+
+```
+var r = /a|b/g;
+r.lastIndex = 7;
+'xaxb'.match(r) // ['a', 'b']
+r.lastIndex // 0
+```
+
+上面代码表示，设置正则对象的`lastIndex`属性是无效的。
