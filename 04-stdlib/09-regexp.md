@@ -283,3 +283,21 @@ r.lastIndex // 0
 ```
 
 上面代码中，第一个匹配结果出现在字符串的`1`号位置。
+
+### String.prototype.replace()
+
+字符串对象的`replace`方法可以替换匹配的值。它接受两个参数，第一个是正则表达式，表示搜索模式，第二个是替换的内容。
+
+```
+str.replace(search, replacement)
+```
+
+正则表达式如果不加`g`修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值。
+
+```
+'aaa'.replace('a', 'b') // "baa"
+'aaa'.replace(/a/, 'b') // "baa"
+'aaa'.replace(/a/g, 'b') // "bbb"
+```
+
+上面代码中，最后一个正则表达式使用了`g`修饰符，导致所有的`a`都被替换掉了。
