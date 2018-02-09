@@ -442,3 +442,22 @@ str.split(separator, [limit])
 ```
 
 上面代码中，`c.t`匹配`c`和`t`之间包含任意一个字符的情况，只要这三个字符在同一行，比如`cat`、`c2t`、`c-t`等等，但是不匹配`coot`。
+
+**（2）位置字符**
+
+位置字符用来提示字符所处的位置，主要有两个字符。
+
+- `^` 表示字符串的开始位置
+- `$` 表示字符串的结束位置
+
+```
+// test必须出现在开始位置
+/^test/.test('test123') // true
+
+// test必须出现在结束位置
+/test$/.test('new test') // true
+
+// 从开始位置到结束位置只有test
+/^test$/.test('test') // true
+/^test$/.test('test test') // false
+```
