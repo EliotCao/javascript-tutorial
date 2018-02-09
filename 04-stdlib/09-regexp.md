@@ -328,3 +328,44 @@ str.replace(/^\s+|\s+$/g, '')
 ```
 
 上面代码中，第一个例子是将匹配的组互换位置，第二个例子是改写匹配的值。
+
+`replace`方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。
+
+```
+'3 and 5'.replace(/[0-9]+/g, function (match) {
+  return 2 * match;
+})
+// "6 and 10"
+
+var a = 'The quick brown fox jumped over the lazy dog.';
+var pattern = /quick|brown|lazy/ig;
+
+a.replace(pattern, function replacer(match) {
+  return match.toUpperCase();
+});
+// The QUICK BROWN fox jumped over the LAZY dog.
+```
+
+作为`replace`方法第二个参数的替换函数，可以接受多个参数。其中，第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子。
+
+```
+var prices = {
+  'p1': '$1.99',
+  'p2': '$9.99',
+  'p3': '$5.00'
+};
+
+var template = '<span id="p1"></span>'
+  + '<span id="p2"></span>'
+  + '<span id="p3"></span>';
+
+template.replace(
+  /(<span id=")(.*?)(">)(<\/span>)/g,
+  function(match, $1, $2, $3, $4){
+    return $1 + $2 + $3 + prices[$2] + $4;
+  }
+);
+// "<span id="p1">$1.99</span><span id="p2">$9.99</span><span id="p3">$5.00</span>"
+```
+
+上面代码的捕捉模式中，有四个括号，所以会产生四个组匹配，在匹配函数中用`$1`到`$4`表示。匹配函数的作用是将价格插入模板中。
