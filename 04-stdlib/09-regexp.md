@@ -668,3 +668,28 @@ var html = "<b>Hello</b>\n<i>world!</i>";
 ```
 
 上面代码中，第一个模式指定`o`连续出现2次，第二个模式指定`o`连续出现2次到5次之间。
+
+### 量词符
+
+量词符用来设定某个模式出现的次数。
+
+- `?` 问号表示某个模式出现0次或1次，等同于`{0, 1}`。
+- `*` 星号表示某个模式出现0次或多次，等同于`{0,}`。
+- `+` 加号表示某个模式出现1次或多次，等同于`{1,}`。
+
+```
+// t 出现0次或1次
+/t?est/.test('test') // true
+/t?est/.test('est') // true
+
+// t 出现1次或多次
+/t+est/.test('test') // true
+/t+est/.test('ttest') // true
+/t+est/.test('est') // false
+
+// t 出现0次或多次
+/t*est/.test('test') // true
+/t*est/.test('ttest') // true
+/t*est/.test('tttest') // true
+/t*est/.test('est') // true
+```
