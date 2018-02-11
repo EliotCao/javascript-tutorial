@@ -743,3 +743,29 @@ var regex = /test/i;
 // 多个修饰符
 var regex = /test/ig;
 ```
+
+**（1）g 修饰符**
+
+默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。`g`修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部符合条件的结果，主要用于搜索和替换。
+
+```
+var regex = /b/;
+var str = 'abba';
+
+regex.test(str); // true
+regex.test(str); // true
+regex.test(str); // true
+```
+
+上面代码中，正则模式不含`g`修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回`true`。
+
+```
+var regex = /b/g;
+var str = 'abba';
+
+regex.test(str); // true
+regex.test(str); // true
+regex.test(str); // false
+```
+
+上面代码中，正则模式含有`g`修饰符，每次都是从上一次匹配成功处，开始向后匹配。因为字符串`abba`只有两个`b`，所以前两次匹配结果为`true`，第三次匹配结果为`false`。
