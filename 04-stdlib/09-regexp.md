@@ -940,3 +940,30 @@ m // ["b"]
 ```
 
 上面的代码使用了先行断言，`b`在`c`前面所以被匹配，但是括号对应的`c`不会被返回。
+
+**（4）先行否定断言**
+
+`x(?!y)`称为先行否定断言（Negative look-ahead），`x`只有不在`y`前面才匹配，`y`不会被计入返回结果。比如，要匹配后面跟的不是百分号的数字，就要写成`/\d+(?!%)/`。
+
+```
+/\d+(?!\.)/.exec('3.14')
+// ["14"]
+```
+
+上面代码中，正则表达式指定，只有不在小数点前面的数字才会被匹配，因此返回的结果就是`14`。
+
+“先行否定断言”中，括号里的部分是不会返回的。
+
+```
+var m = 'abd'.match(/b(?!c)/);
+m // ['b']
+```
+
+上面的代码使用了先行否定断言，`b`不在`c`前面所以被匹配，而且括号对应的`d`不会被返回。
+
+## 参考链接
+
+- Axel Rauschmayer, [JavaScript: an overview of the regular expression API](http://www.2ality.com/2011/04/javascript-overview-of-regular.html)
+- Mozilla Developer Network, [Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+- Axel Rauschmayer, [The flag /g of JavaScript’s regular expressions](http://www.2ality.com/2013/08/regexp-g.html)
+- Sam Hughes, [Learn regular expressions in about 55 minutes](http://qntm.org/files/re/re.html)
