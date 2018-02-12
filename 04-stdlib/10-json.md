@@ -167,3 +167,72 @@ JSON.stringify({0: 'a', 1: 'b'}, ['0'])
 ```
 
 上面代码中，第二个参数指定 JSON 格式只转`0`号属性，实际上对数组是无效的，只对对象有效。
+
+第二个参数还可以是一个函数，用来更改`JSON.stringify`的返回值。
+
+```
+function f(key, value) {
+  if (typeof value === "number") {
+    value = 2 * value;
+  }
+  return value;
+}
+
+JSON.stringify({ a: 1, b: 2 }, f)
+// '{"a": 2,"b": 4}'
+```
+
+上面代码中的`f`函数，接受两个参数，分别是被转换的对象的键名和键值。如果键值是数值，就将它乘以`2`，否则就原样返回。
+
+注意，这个处理函数是递归处理所有的键。
+
+```
+var o = {a: {b: 1}};
+
+function f(key, value) {
+  console.log("["+ key +"]:" + value);
+  return value;
+}
+
+JSON.stringify(o, f)
+// []:[object Object]
+// [a]:[object Object]
+// [b]:1
+// '{"a":{"b":1}}'
+```
+
+上面代码中，对象`o`一共会被`f`函数处理三次，最后那行是`JSON.stringify`的输出。第一次键名为空，键值是整个对象`o`；第二次键名为`a`，键值是`{b: 1}`；第三次键名为`b`，键值为1。
+
+递归处理中，每一次处理的对象，都是前一次返回的值。
+
+```
+var o = {a: 1};
+
+function f(key, value) {
+  if (typeof value === 'object') {
+    return {b: 2};
+  }
+  return value * 2;
+}
+
+JSON.stringify(o, f)
+// "{"b": 4}"
+```
+
+上面代码中，`f`函数修改了对象`o`，接着`JSON.stringify`方法就递归处理修改后的对象`o`。
+
+如果处理函数返回`undefined`或没有返回值，则该属性会被忽略。
+
+```
+function f(key, value) {
+  if (typeof(value) === "string") {
+    return undefined;
+  }
+  return value;
+}
+
+JSON.stringify({ a: "abc", b: 123 }, f)
+// '{"b": 123}'
+```
+
+上面代码中，`a`属性经过处理后，返回`undefined`，于是该属性被忽略了。
