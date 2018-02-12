@@ -46,3 +46,31 @@ JSON 对值的类型和格式有严格的规定。
 ```
 
 注意，`null`、空数组和空对象都是合法的 JSON 值。
+
+## JSON 对象
+
+`JSON`对象是 JavaScript 的原生对象，用来处理 JSON 格式数据。它有两个静态方法：`JSON.stringify()`和`JSON.parse()`。
+
+## JSON.stringify()
+
+### 基本用法
+
+`JSON.stringify`方法用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被`JSON.parse`方法还原。
+
+```
+JSON.stringify('abc') // ""abc""
+JSON.stringify(1) // "1"
+JSON.stringify(false) // "false"
+JSON.stringify([]) // "[]"
+JSON.stringify({}) // "{}"
+
+JSON.stringify([1, "false", false])
+// '[1,"false",false]'
+
+JSON.stringify({ name: "张三" })
+// '{"name":"张三"}'
+```
+
+上面代码将各种类型的值，转成 JSON 字符串。
+
+注意，对于原始类型的字符串，转换结果会带双引号。
