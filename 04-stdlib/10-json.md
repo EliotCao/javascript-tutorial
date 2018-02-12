@@ -136,3 +136,34 @@ JSON.stringify(obj); // "{"foo":1}"
 ```
 
 上面代码中，`bar`是`obj`对象的不可遍历属性，`JSON.stringify`方法会忽略这个属性。
+
+### 第二个参数
+
+`JSON.stringify`方法还可以接受一个数组，作为第二个参数，指定需要转成字符串的属性。
+
+```
+var obj = {
+  'prop1': 'value1',
+  'prop2': 'value2',
+  'prop3': 'value3'
+};
+
+var selectedProperties = ['prop1', 'prop2'];
+
+JSON.stringify(obj, selectedProperties)
+// "{"prop1":"value1","prop2":"value2"}"
+```
+
+上面代码中，`JSON.stringify`方法的第二个参数指定，只转`prop1`和`prop2`两个属性。
+
+这个类似白名单的数组，只对对象的属性有效，对数组无效。
+
+```
+JSON.stringify(['a', 'b'], ['0'])
+// "["a","b"]"
+
+JSON.stringify({0: 'a', 1: 'b'}, ['0'])
+// "{"0":"a"}"
+```
+
+上面代码中，第二个参数指定 JSON 格式只转`0`号属性，实际上对数组是无效的，只对对象有效。
