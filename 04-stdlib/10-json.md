@@ -101,3 +101,38 @@ JSON.stringify(obj) // "{}"
 ```
 
 上面代码中，对象`obj`的`a`属性是`undefined`，而`b`属性是一个函数，结果都被`JSON.stringify`过滤。
+
+如果数组的成员是`undefined`、函数或 XML 对象，则这些值被转成`null`。
+
+```
+var arr = [undefined, function () {}];
+JSON.stringify(arr) // "[null,null]"
+```
+
+上面代码中，数组`arr`的成员是`undefined`和函数，它们都被转成了`null`。
+
+正则对象会被转成空对象。
+
+```
+JSON.stringify(/foo/) // "{}"
+```
+
+`JSON.stringify`方法会忽略对象的不可遍历的属性。
+
+```
+var obj = {};
+Object.defineProperties(obj, {
+  'foo': {
+    value: 1,
+    enumerable: true
+  },
+  'bar': {
+    value: 2,
+    enumerable: false
+  }
+});
+
+JSON.stringify(obj); // "{"foo":1}"
+```
+
+上面代码中，`bar`是`obj`对象的不可遍历属性，`JSON.stringify`方法会忽略这个属性。
