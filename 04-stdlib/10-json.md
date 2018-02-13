@@ -329,3 +329,61 @@ JSON.stringify(/foo/) // ""/foo/""
 ```
 
 上面代码在正则对象的原型上面部署了`toJSON()`方法，将其指向`toString()`方法，因此转换成 JSON 格式时，正则对象就先调用`toJSON()`方法转为字符串，然后再被`JSON.stringify()`方法处理。
+
+## JSON.parse()
+
+`JSON.parse`方法用于将 JSON 字符串转换成对应的值。
+
+```
+JSON.parse('{}') // {}
+JSON.parse('true') // true
+JSON.parse('"foo"') // "foo"
+JSON.parse('[1, 5, "false"]') // [1, 5, "false"]
+JSON.parse('null') // null
+
+var o = JSON.parse('{"name": "张三"}');
+o.name // 张三
+```
+
+如果传入的字符串不是有效的 JSON 格式，`JSON.parse`方法将报错。
+
+```
+JSON.parse("'String'") // illegal single quotes
+// SyntaxError: Unexpected token ILLEGAL
+```
+
+上面代码中，双引号字符串中是一个单引号字符串，因为单引号字符串不符合 JSON 格式，所以报错。
+
+为了处理解析错误，可以将`JSON.parse`方法放在`try...catch`代码块中。
+
+```
+try {
+  JSON.parse("'String'");
+} catch(e) {
+  console.log('parsing error');
+}
+```
+
+`JSON.parse`方法可以接受一个处理函数，作为第二个参数，用法与`JSON.stringify`方法类似。
+
+```
+function f(key, value) {
+  if (key === 'a') {
+    return value + 10;
+  }
+  return value;
+}
+
+JSON.parse('{"a": 1, "b": 2}', f)
+// {a: 11, b: 2}
+```
+
+上面代码中，`JSON.parse`的第二个参数是一个函数，如果键名是`a`，该函数会将键值加上10。
+
+## 参考链接
+
+- MDN, [Using native JSON](https://developer.mozilla.org/en-US/docs/Using_native_JSON)
+- MDN, [JSON.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON/parse)
+- Dr. Axel Rauschmayer, [JavaScript’s JSON API](http://www.2ality.com/2011/08/json-api.html)
+- Jim Cowart, [What You Might Not Know About JSON.stringify()](http://freshbrewedcode.com/jimcowart/2013/01/29/what-you-might-not-know-about-json-stringify/)
+- Marco Rogers, [What is JSON?](https://docs.nodejitsu.com/articles/javascript-conventions/what-is-json/)
