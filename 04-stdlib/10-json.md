@@ -258,3 +258,74 @@ JSON.stringify({ p1:1, p2:2 }, null, '|-');
 }"
 */
 ```
+
+### 参数对象的 toJSON 方法
+
+如果参数对象有自定义的`toJSON`方法，那么`JSON.stringify`会使用这个方法的返回值作为参数，而忽略原对象的其他属性。
+
+下面是一个普通的对象。
+
+```
+var user = {
+  firstName: '三',
+  lastName: '张',
+
+  get fullName(){
+    return this.lastName + this.firstName;
+  }
+};
+
+JSON.stringify(user)
+// "{"firstName":"三","lastName":"张","fullName":"张三"}"
+```
+
+现在，为这个对象加上`toJSON`方法。
+
+```
+var user = {
+  firstName: '三',
+  lastName: '张',
+
+  get fullName(){
+    return this.lastName + this.firstName;
+  },
+
+  toJSON: function () {
+    return {
+      name: this.lastName + this.firstName
+    };
+  }
+};
+
+JSON.stringify(user)
+// "{"name":"张三"}"
+```
+
+上面代码中，`JSON.stringify`发现参数对象有`toJSON`方法，就直接使用这个方法的返回值作为参数，而忽略原对象的其他参数。
+
+`Date`对象就有一个自己的`toJSON`方法。
+
+```
+var date = new Date('2015-01-01');
+date.toJSON() // "2015-01-01T00:00:00.000Z"
+JSON.stringify(date) // ""2015-01-01T00:00:00.000Z""
+```
+
+上面代码中，`JSON.stringify`发现处理的是`Date`对象实例，就会调用这个实例对象的`toJSON`方法，将该方法的返回值作为参数。
+
+`toJSON`方法的一个应用是，将正则对象自动转为字符串。因为`JSON.stringify`默认不能转换正则对象，但是设置了`toJSON`方法以后，就可以转换正则对象了。
+
+```
+var obj = {
+  reg: /foo/
+};
+
+// 不设置 toJSON 方法时
+JSON.stringify(obj) // "{"reg":{}}"
+
+// 设置 toJSON 方法时
+RegExp.prototype.toJSON = RegExp.prototype.toString;
+JSON.stringify(/foo/) // ""/foo/""
+```
+
+上面代码在正则对象的原型上面部署了`toJSON()`方法，将其指向`toString()`方法，因此转换成 JSON 格式时，正则对象就先调用`toJSON()`方法转为字符串，然后再被`JSON.stringify()`方法处理。
