@@ -94,3 +94,36 @@ price // 1000
 ```
 
 上面代码中，调用`Vehicle`构造函数时，忘了加上`new`命令。结果，变量`v`变成了`undefined`，而`price`属性变成了全局变量。因此，应该非常小心，避免不使用`new`命令、直接调用构造函数。
+
+为了保证构造函数必须与`new`命令一起使用，一个解决办法是，构造函数内部使用严格模式，即第一行加上`use strict`。这样的话，一旦忘了使用`new`命令，直接调用构造函数就会报错。
+
+```
+function Fubar(foo, bar){
+  'use strict';
+  this._foo = foo;
+  this._bar = bar;
+}
+
+Fubar()
+// TypeError: Cannot set property '_foo' of undefined
+```
+
+上面代码的`Fubar`为构造函数，`use strict`命令保证了该函数在严格模式下运行。由于严格模式中，函数内部的`this`不能指向全局对象，默认等于`undefined`，导致不加`new`调用会报错（JavaScript 不允许对`undefined`添加属性）。
+
+另一个解决办法，构造函数内部判断是否使用`new`命令，如果发现没有使用，则直接返回一个实例对象。
+
+```
+function Fubar(foo, bar) {
+  if (!(this instanceof Fubar)) {
+    return new Fubar(foo, bar);
+  }
+
+  this._foo = foo;
+  this._bar = bar;
+}
+
+Fubar(1, 2)._foo // 1
+(new Fubar(1, 2))._foo // 1
+```
+
+上面代码中的构造函数，不管加不加`new`命令，都会得到同样的结果。
