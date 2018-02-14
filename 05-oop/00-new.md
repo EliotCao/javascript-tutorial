@@ -40,3 +40,57 @@ var Vehicle = function () {
 
 - 函数体内部使用了`this`关键字，代表了所要生成的对象实例。
 - 生成对象的时候，必须使用`new`命令。
+
+下面先介绍`new`命令。
+
+## new 命令
+
+### 基本用法
+
+`new`命令的作用，就是执行构造函数，返回一个实例对象。
+
+```
+var Vehicle = function () {
+  this.price = 1000;
+};
+
+var v = new Vehicle();
+v.price // 1000
+```
+
+上面代码通过`new`命令，让构造函数`Vehicle`生成一个实例对象，保存在变量`v`中。这个新生成的实例对象，从构造函数`Vehicle`得到了`price`属性。`new`命令执行时，构造函数内部的`this`，就代表了新生成的实例对象，`this.price`表示实例对象有一个`price`属性，值是1000。
+
+使用`new`命令时，根据需要，构造函数也可以接受参数。
+
+```
+var Vehicle = function (p) {
+  this.price = p;
+};
+
+var v = new Vehicle(500);
+```
+
+`new`命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。下面两行代码是等价的，但是为了表示这里是函数调用，推荐使用括号。
+
+```
+// 推荐的写法
+var v = new Vehicle();
+// 不推荐的写法
+var v = new Vehicle;
+```
+
+一个很自然的问题是，如果忘了使用`new`命令，直接调用构造函数会发生什么事？
+
+这种情况下，构造函数就变成了普通函数，并不会生成实例对象。而且由于后面会说到的原因，`this`这时代表全局对象，将造成一些意想不到的结果。
+
+```
+var Vehicle = function (){
+  this.price = 1000;
+};
+
+var v = Vehicle();
+v // undefined
+price // 1000
+```
+
+上面代码中，调用`Vehicle`构造函数时，忘了加上`new`命令。结果，变量`v`变成了`undefined`，而`price`属性变成了全局变量。因此，应该非常小心，避免不使用`new`命令、直接调用构造函数。
