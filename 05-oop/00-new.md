@@ -201,3 +201,31 @@ function _new(/* 构造函数 */ constructor, /* 构造函数参数 */ params) {
 // 实例
 var actor = _new(Person, '张三', 28);
 ```
+
+### new.target
+
+函数内部可以使用`new.target`属性。如果当前函数是`new`命令调用，`new.target`指向当前函数，否则为`undefined`。
+
+```
+function f() {
+  console.log(new.target === f);
+}
+
+f() // false
+new f() // true
+```
+
+使用这个属性，可以判断函数调用的时候，是否使用`new`命令。
+
+```
+function f() {
+  if (!new.target) {
+    throw new Error('请使用 new 命令调用！');
+  }
+  // ...
+}
+
+f() // Uncaught Error: 请使用 new 命令调用！
+```
+
+上面代码中，构造函数`f`调用时，没有使用`new`命令，就抛出一个错误。
