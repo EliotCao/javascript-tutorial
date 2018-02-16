@@ -229,3 +229,26 @@ f() // Uncaught Error: 请使用 new 命令调用！
 ```
 
 上面代码中，构造函数`f`调用时，没有使用`new`命令，就抛出一个错误。
+
+## Object.create() 创建实例对象
+
+构造函数作为模板，可以生成实例对象。但是，有时拿不到构造函数，只能拿到一个现有的对象。我们希望以这个现有的对象作为模板，生成新的实例对象，这时就可以使用`Object.create()`方法。
+
+```
+var person1 = {
+  name: '张三',
+  age: 38,
+  greeting: function() {
+    console.log('Hi! I\'m ' + this.name + '.');
+  }
+};
+
+var person2 = Object.create(person1);
+
+person2.name // 张三
+person2.greeting() // Hi! I'm 张三.
+```
+
+上面代码中，对象`person1`是`person2`的模板，后者继承了前者的属性和方法。
+
+`Object.create()`的详细介绍，请看后面的相关章节。
