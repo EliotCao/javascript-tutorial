@@ -50,3 +50,43 @@ B.describe()
 ```
 
 上面代码中，`A.describe`属性被赋给`B`，于是`B.describe`就表示`describe`方法所在的当前对象是`B`，所以`this.name`就指向`B.name`。
+
+稍稍重构这个例子，`this`的动态指向就能看得更清楚。
+
+```
+function f() {
+  return '姓名：'+ this.name;
+}
+
+var A = {
+  name: '张三',
+  describe: f
+};
+
+var B = {
+  name: '李四',
+  describe: f
+};
+
+A.describe() // "姓名：张三"
+B.describe() // "姓名：李四"
+```
+
+上面代码中，函数`f`内部使用了`this`关键字，随着`f`所在的对象不同，`this`的指向也不同。
+
+只要函数被赋给另一个变量，`this`的指向就会变。
+
+```
+var A = {
+  name: '张三',
+  describe: function () {
+    return '姓名：'+ this.name;
+  }
+};
+
+var name = '李四';
+var f = A.describe;
+f() // "姓名：李四"
+```
+
+上面代码中，`A.describe`被赋值给变量`f`，内部的`this`就会指向`f`运行时所在的对象（本例是顶层对象）。
