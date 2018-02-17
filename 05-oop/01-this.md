@@ -90,3 +90,20 @@ f() // "姓名：李四"
 ```
 
 上面代码中，`A.describe`被赋值给变量`f`，内部的`this`就会指向`f`运行时所在的对象（本例是顶层对象）。
+
+再看一个网页编程的例子。
+
+```
+<input type="text" name="age" size=3 onChange="validate(this, 18, 99);">
+
+<script>
+function validate(obj, lowval, hival){
+  if ((obj.value < lowval) || (obj.value > hival))
+    console.log('Invalid Value!');
+}
+</script>
+```
+
+上面代码是一个文本输入框，每当用户输入一个值，就会调用`onChange`回调函数，验证这个值是否在指定范围。浏览器会向回调函数传入当前对象，因此`this`就代表传入当前对象（即文本框），然后就可以从`this.value`上面读到用户的输入值。
+
+总结一下，JavaScript 语言之中，一切皆对象，运行环境也是对象，所以函数都是在某个对象之中运行，`this`就是函数运行时所在的对象（环境）。这本来并不会让用户糊涂，但是 JavaScript 支持运行环境动态切换，也就是说，`this`的指向是动态的，没有办法事先确定到底指向哪个对象，这才是最让初学者感到困惑的地方。
