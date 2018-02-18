@@ -600,3 +600,35 @@ Object.prototype.hasOwnProperty.call(obj, 'toString') // false
 ```
 
 上面代码中，`hasOwnProperty`是`obj`对象继承的方法，如果这个方法一旦被覆盖，就不会得到正确结果。`call`方法可以解决这个问题，它将`hasOwnProperty`方法的原始定义放到`obj`对象上执行，这样无论`obj`上有没有同名方法，都不会影响结果。
+
+### Function.prototype.apply()
+
+`apply`方法的作用与`call`方法类似，也是改变`this`指向，然后再调用该函数。唯一的区别就是，它接收一个数组作为函数执行时的参数，使用格式如下。
+
+```
+func.apply(thisValue, [arg1, arg2, ...])
+```
+
+`apply`方法的第一个参数也是`this`所要指向的那个对象，如果设为`null`或`undefined`，则等同于指定全局对象。第二个参数则是一个数组，该数组的所有成员依次作为参数，传入原函数。原函数的参数，在`call`方法中必须一个个添加，但是在`apply`方法中，必须以数组形式添加。
+
+```
+function f(x, y){
+  console.log(x + y);
+}
+
+f.call(null, 1, 1) // 2
+f.apply(null, [1, 1]) // 2
+```
+
+上面代码中，`f`函数本来接受两个参数，使用`apply`方法以后，就变成可以接受一个数组作为参数。
+
+利用这一点，可以做一些有趣的应用。
+
+**（1）找出数组最大元素**
+
+JavaScript 不提供找出数组最大元素的函数。结合使用`apply`方法和`Math.max`方法，就可以返回数组的最大元素。
+
+```
+var a = [10, 2, 4, 15, 9];
+Math.max.apply(null, a) // 15
+```
