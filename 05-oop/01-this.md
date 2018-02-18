@@ -435,3 +435,62 @@ f()
 ```
 
 上面代码中，`inc`方法通过`'use strict'`声明采用严格模式，这时内部的`this`一旦指向顶层对象，就会报错。
+
+### 避免数组处理方法中的 this
+
+数组的`map`和`foreach`方法，允许提供一个函数作为参数。这个函数内部不应该使用`this`。
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    this.p.forEach(function (item) {
+      console.log(this.v + ' ' + item);
+    });
+  }
+}
+
+o.f()
+// undefined a1
+// undefined a2
+```
+
+上面代码中，`foreach`方法的回调函数中的`this`，其实是指向`window`对象，因此取不到`o.v`的值。原因跟上一段的多层`this`是一样的，就是内层的`this`不指向外部，而指向顶层对象。
+
+解决这个问题的一种方法，就是前面提到的，使用中间变量固定`this`。
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    var that = this;
+    this.p.forEach(function (item) {
+      console.log(that.v+' '+item);
+    });
+  }
+}
+
+o.f()
+// hello a1
+// hello a2
+```
+
+另一种方法是将`this`当作`foreach`方法的第二个参数，固定它的运行环境。
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    this.p.forEach(function (item) {
+      console.log(this.v + ' ' + item);
+    }, this);
+  }
+}
+
+o.f()
+// hello a1
+// hello a2
+```
