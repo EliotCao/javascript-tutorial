@@ -660,3 +660,16 @@ Array.apply(null, a).forEach(print)
 // undefined
 // b
 ```
+
+**（3）转换类似数组的对象**
+
+另外，利用数组对象的`slice`方法，可以将一个类似数组的对象（比如`arguments`对象）转为真正的数组。
+
+```
+Array.prototype.slice.apply({0: 1, length: 1}) // [1]
+Array.prototype.slice.apply({0: 1}) // []
+Array.prototype.slice.apply({0: 1, length: 2}) // [1, undefined]
+Array.prototype.slice.apply({length: 1}) // [undefined]
+```
+
+上面代码的`apply`方法的参数都是对象，但是返回结果都是数组，这就起到了将对象转成数组的目的。从上面代码可以看到，这个方法起作用的前提是，被处理的对象必须有`length`属性，以及相对应的数字键。
