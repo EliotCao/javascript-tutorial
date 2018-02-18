@@ -202,3 +202,22 @@ obj.f() // 2
 ```
 
 上面代码中，函数`f`在全局环境执行，`this.x`指向全局环境的`x`；在`obj`环境执行，`this.x`指向`obj.x`。
+
+## 使用场合
+
+`this`主要有以下几个使用场合。
+
+**（1）全局环境**
+
+全局环境使用`this`，它指的就是顶层对象`window`。
+
+```
+this === window // true
+
+function f() {
+  console.log(this === window);
+}
+f() // true
+```
+
+上面代码说明，不管是不是在函数内部，只要是在全局环境下运行，`this`就是指顶层对象`window`。
