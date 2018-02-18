@@ -416,3 +416,22 @@ o.f1()
 ```
 
 上面代码定义了变量`that`，固定指向外层的`this`，然后在内层使用`that`，就不会发生`this`指向的改变。
+
+事实上，使用一个变量固定`this`的值，然后内层函数调用这个变量，是非常常见的做法，请务必掌握。
+
+JavaScript 提供了严格模式，也可以硬性避免这种问题。严格模式下，如果函数内部的`this`指向顶层对象，就会报错。
+
+```
+var counter = {
+  count: 0
+};
+counter.inc = function () {
+  'use strict';
+  this.count++
+};
+var f = counter.inc;
+f()
+// TypeError: Cannot read property 'count' of undefined
+```
+
+上面代码中，`inc`方法通过`'use strict'`声明采用严格模式，这时内部的`this`一旦指向顶层对象，就会报错。
