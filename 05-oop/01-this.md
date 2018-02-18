@@ -360,3 +360,59 @@ hello() // undefined
 var hello = a.b;
 hello.m() // Hello
 ```
+
+## 使用注意点
+
+### 避免多层 this
+
+由于`this`的指向是不确定的，所以切勿在函数中包含多层的`this`。
+
+```
+var o = {
+  f1: function () {
+    console.log(this);
+    var f2 = function () {
+      console.log(this);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Window
+```
+
+上面代码包含两层`this`，结果运行后，第一层指向对象`o`，第二层指向全局对象，因为实际执行的是下面的代码。
+
+```
+var temp = function () {
+  console.log(this);
+};
+
+var o = {
+  f1: function () {
+    console.log(this);
+    var f2 = temp();
+  }
+}
+```
+
+一个解决方法是在第二层改用一个指向外层`this`的变量。
+
+```
+var o = {
+  f1: function() {
+    console.log(this);
+    var that = this;
+    var f2 = function() {
+      console.log(that);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Object
+```
+
+上面代码定义了变量`that`，固定指向外层的`this`，然后在内层使用`that`，就不会发生`this`指向的改变。
