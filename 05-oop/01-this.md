@@ -673,3 +673,25 @@ Array.prototype.slice.apply({length: 1}) // [undefined]
 ```
 
 上面代码的`apply`方法的参数都是对象，但是返回结果都是数组，这就起到了将对象转成数组的目的。从上面代码可以看到，这个方法起作用的前提是，被处理的对象必须有`length`属性，以及相对应的数字键。
+
+**（4）绑定回调函数的对象**
+
+前面的按钮点击事件的例子，可以改写如下。
+
+```
+var o = new Object();
+
+o.f = function () {
+  console.log(this === o);
+}
+
+var f = function (){
+  o.f.apply(o);
+  // 或者 o.f.call(o);
+};
+
+// jQuery 的写法
+$('#button').on('click', f);
+```
+
+上面代码中，点击按钮以后，控制台将会显示`true`。由于`apply()`方法（或者`call()`方法）不仅绑定函数执行时所在的对象，还会立即执行函数，因此不得不把绑定语句写在一个函数体内。更简洁的写法是采用下面介绍的`bind()`方法。
