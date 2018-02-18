@@ -632,3 +632,31 @@ JavaScript 不提供找出数组最大元素的函数。结合使用`apply`方�
 var a = [10, 2, 4, 15, 9];
 Math.max.apply(null, a) // 15
 ```
+
+**（2）将数组的空元素变为`undefined`**
+
+通过`apply`方法，利用`Array`构造函数将数组的空元素变成`undefined`。
+
+```
+Array.apply(null, ['a', ,'b'])
+// [ 'a', undefined, 'b' ]
+```
+
+空元素与`undefined`的差别在于，数组的`forEach`方法会跳过空元素，但是不会跳过`undefined`。因此，遍历内部元素的时候，会得到不同的结果。
+
+```
+var a = ['a', , 'b'];
+
+function print(i) {
+  console.log(i);
+}
+
+a.forEach(print)
+// a
+// b
+
+Array.apply(null, a).forEach(print)
+// a
+// undefined
+// b
+```
