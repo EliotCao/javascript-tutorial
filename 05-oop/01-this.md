@@ -786,3 +786,28 @@ plus5(10) // 15
 ```
 
 上面代码中，函数`add()`内部并没有`this`，使用`bind()`方法的主要目的是绑定参数`x`，以后每次运行新函数`plus5()`，就只需要提供另一个参数`y`就够了。而且因为`add()`内部没有`this`，所以`bind()`的第一个参数是`null`，不过这里如果是其他对象，也没有影响。
+
+`bind()`方法有一些使用注意点。
+
+**（1）每一次返回一个新函数**
+
+`bind()`方法每运行一次，就返回一个新函数，这会产生一些问题。比如，监听事件的时候，不能写成下面这样。
+
+```
+element.addEventListener('click', o.m.bind(o));
+```
+
+上面代码中，`click`事件绑定`bind()`方法生成的一个匿名函数。这样会导致无法取消绑定，所以下面的代码是无效的。
+
+```
+element.removeEventListener('click', o.m.bind(o));
+```
+
+正确的方法是写成下面这样：
+
+```
+var listener = o.m.bind(o);
+element.addEventListener('click', listener);
+//  ...
+element.removeEventListener('click', listener);
+```
