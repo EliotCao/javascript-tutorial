@@ -695,3 +695,26 @@ $('#button').on('click', f);
 ```
 
 上面代码中，点击按钮以后，控制台将会显示`true`。由于`apply()`方法（或者`call()`方法）不仅绑定函数执行时所在的对象，还会立即执行函数，因此不得不把绑定语句写在一个函数体内。更简洁的写法是采用下面介绍的`bind()`方法。
+
+### Function.prototype.bind()
+
+`bind()`方法用于将函数体内的`this`绑定到某个对象，然后返回一个新函数。
+
+```
+var d = new Date();
+d.getTime() // 1481869925657
+
+var print = d.getTime;
+print() // Uncaught TypeError: this is not a Date object.
+```
+
+上面代码中，我们将`d.getTime()`方法赋给变量`print`，然后调用`print()`就报错了。这是因为`getTime()`方法内部的`this`，绑定`Date`对象的实例，赋给变量`print`以后，内部的`this`已经不指向`Date`对象的实例了。
+
+`bind()`方法可以解决这个问题。
+
+```
+var print = d.getTime.bind(d);
+print() // 1481869925657
+```
+
+上面代码中，`bind()`方法将`getTime()`方法内部的`this`绑定到`d`对象，这时就可以安全地将这个方法赋值给其他变量了。
