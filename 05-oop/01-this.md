@@ -718,3 +718,40 @@ print() // 1481869925657
 ```
 
 上面代码中，`bind()`方法将`getTime()`方法内部的`this`绑定到`d`对象，这时就可以安全地将这个方法赋值给其他变量了。
+
+`bind`方法的参数就是所要绑定`this`的对象，下面是一个更清晰的例子。
+
+```
+var counter = {
+  count: 0,
+  inc: function () {
+    this.count++;
+  }
+};
+
+var func = counter.inc.bind(counter);
+func();
+counter.count // 1
+```
+
+上面代码中，`counter.inc()`方法被赋值给变量`func`。这时必须用`bind()`方法将`inc()`内部的`this`，绑定到`counter`，否则就会出错。
+
+`this`绑定到其他对象也是可以的。
+
+```
+var counter = {
+  count: 0,
+  inc: function () {
+    this.count++;
+  }
+};
+
+var obj = {
+  count: 100
+};
+var func = counter.inc.bind(obj);
+func();
+obj.count // 101
+```
+
+上面代码中，`bind()`方法将`inc()`方法内部的`this`，绑定到`obj`对象。结果调用`func`函数以后，递增的就是`obj`内部的`count`属性。
