@@ -811,3 +811,73 @@ element.addEventListener('click', listener);
 //  ...
 element.removeEventListener('click', listener);
 ```
+
+**（2）结合回调函数使用**
+
+回调函数是 JavaScript 最常用的模式之一，但是一个常见的错误是，将包含`this`的方法直接当作回调函数。解决方法就是使用`bind()`方法，将`counter.inc()`绑定`counter`。
+
+```
+var counter = {
+  count: 0,
+  inc: function () {
+    'use strict';
+    this.count++;
+  }
+};
+
+function callIt(callback) {
+  callback();
+}
+
+callIt(counter.inc.bind(counter));
+counter.count // 1
+```
+
+上面代码中，`callIt()`方法会调用回调函数。这时如果直接把`counter.inc`传入，调用时`counter.inc()`内部的`this`就会指向全局对象。使用`bind()`方法将`counter.inc`绑定`counter`以后，就不会有这个问题，`this`总是指向`counter`。
+
+还有一种情况比较隐蔽，就是某些数组方法可以接受一个函数当作参数。这些函数内部的`this`指向，很可能也会出错。
+
+```
+var obj = {
+  name: '张三',
+  times: [1, 2, 3],
+  print: function () {
+    this.times.forEach(function (n) {
+      console.log(this.name);
+    });
+  }
+};
+
+obj.print()
+// 没有任何输出
+```
+
+上面代码中，`obj.print`内部`this.times`的`this`是指向`obj`的，这个没有问题。但是，`forEach()`方法的回调函数内部的`this.name`却是指向全局对象，导致没有办法取到值。稍微改动一下，就可以看得更清楚。
+
+```
+obj.print = function () {
+  this.times.forEach(function (n) {
+    console.log(this === window);
+  });
+};
+
+obj.print()
+// true
+// true
+// true
+```
+
+解决这个问题，也是通过`bind()`方法绑定`this`。
+
+```
+obj.print = function () {
+  this.times.forEach(function (n) {
+    console.log(this.name);
+  }.bind(this));
+};
+
+obj.print()
+// 张三
+// 张三
+// 张三
+```
