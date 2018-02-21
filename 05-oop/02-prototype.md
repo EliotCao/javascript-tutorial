@@ -47,3 +47,66 @@ cat1.meow === cat2.meow
 上面代码中，`cat1`和`cat2`是同一个构造函数的两个实例，它们都具有`meow`方法。由于`meow`方法是生成在每个实例对象上面，所以两个实例就生成了两次。也就是说，每新建一个实例，就会新建一个`meow`方法。这既没有必要，又浪费系统资源，因为所有`meow`方法都是同样的行为，完全应该共享。
 
 这个问题的解决方法，就是 JavaScript 的原型对象（prototype）。
+
+### prototype 属性的作用
+
+JavaScript 继承机制的设计思想就是，原型对象的所有属性和方法，都能被实例对象共享。也就是说，如果属性和方法定义在原型上，那么所有实例对象就能共享，不仅节省了内存，还体现了实例对象之间的联系。
+
+下面，先看怎么为对象指定原型。JavaScript 规定，每个函数都有一个`prototype`属性，指向一个对象。
+
+```
+function f() {}
+typeof f.prototype // "object"
+```
+
+上面代码中，函数`f`默认具有`prototype`属性，指向一个对象。
+
+对于普通函数来说，该属性基本无用。但是，对于构造函数来说，生成实例的时候，该属性会自动成为实例对象的原型。
+
+```
+function Animal(name) {
+  this.name = name;
+}
+Animal.prototype.color = 'white';
+
+var cat1 = new Animal('大毛');
+var cat2 = new Animal('二毛');
+
+cat1.color // 'white'
+cat2.color // 'white'
+```
+
+上面代码中，构造函数`Animal`的`prototype`属性，就是实例对象`cat1`和`cat2`的原型对象。原型对象上添加一个`color`属性，结果，实例对象都共享了该属性。
+
+原型对象的属性不是实例对象自身的属性。只要修改原型对象，变动就立刻会体现在**所有**实例对象上。
+
+```
+Animal.prototype.color = 'yellow';
+
+cat1.color // "yellow"
+cat2.color // "yellow"
+```
+
+上面代码中，原型对象的`color`属性的值变为`yellow`，两个实例对象的`color`属性立刻跟着变了。这是因为实例对象其实没有`color`属性，都是读取原型对象的`color`属性。也就是说，当实例对象本身没有某个属性或方法的时候，它会到原型对象去寻找该属性或方法。这就是原型对象的特殊之处。
+
+如果实例对象自身就有某个属性或方法，它就不会再去原型对象寻找这个属性或方法。
+
+```
+cat1.color = 'black';
+
+cat1.color // 'black'
+cat2.color // 'yellow'
+Animal.prototype.color // 'yellow';
+```
+
+上面代码中，实例对象`cat1`的`color`属性改为`black`，就使得它不再去原型对象读取`color`属性，后者的值依然为`yellow`。
+
+总结一下，原型对象的作用，就是定义所有实例对象共享的属性和方法。这也是它被称为原型对象的原因，而实例对象可以视作从原型对象衍生出来的子对象。
+
+```
+Animal.prototype.walk = function () {
+  console.log(this.name + ' is walking');
+};
+```
+
+上面代码中，`Animal.prototype`对象上面定义了一个`walk`方法，这个方法将可以在所有`Animal`实例对象上面调用。
