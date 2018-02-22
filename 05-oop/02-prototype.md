@@ -147,3 +147,106 @@ mine instanceof Array // true
 上面代码中，`mine`是构造函数`MyArray`的实例对象，由于`MyArray.prototype`指向一个数组实例，使得`mine`可以调用数组方法（这些方法定义在数组实例的`prototype`对象上面）。最后那行`instanceof`表达式，用来比较一个对象是否为某个构造函数的实例，结果就是证明`mine`为`Array`的实例，`instanceof`运算符的详细解释详见后文。
 
 上面代码还出现了原型对象的`constructor`属性，这个属性的含义下一节就来解释。
+
+### constructor 属性
+
+`prototype`对象有一个`constructor`属性，默认指向`prototype`对象所在的构造函数。
+
+```
+function P() {}
+P.prototype.constructor === P // true
+```
+
+由于`constructor`属性定义在`prototype`对象上面，意味着可以被所有实例对象继承。
+
+```
+function P() {}
+var p = new P();
+
+p.constructor === P // true
+p.constructor === P.prototype.constructor // true
+p.hasOwnProperty('constructor') // false
+```
+
+上面代码中，`p`是构造函数`P`的实例对象，但是`p`自身没有`constructor`属性，该属性其实是读取原型链上面的`P.prototype.constructor`属性。
+
+`constructor`属性的作用是，可以得知某个实例对象，到底是哪一个构造函数产生的。
+
+```
+function F() {};
+var f = new F();
+
+f.constructor === F // true
+f.constructor === RegExp // false
+```
+
+上面代码中，`constructor`属性确定了实例对象`f`的构造函数是`F`，而不是`RegExp`。
+
+另一方面，有了`constructor`属性，就可以从一个实例对象新建另一个实例。
+
+```
+function Constr() {}
+var x = new Constr();
+
+var y = new x.constructor();
+y instanceof Constr // true
+```
+
+上面代码中，`x`是构造函数`Constr`的实例，可以从`x.constructor`间接调用构造函数。这使得在实例方法中，调用自身的构造函数成为可能。
+
+```
+Constr.prototype.createCopy = function () {
+  return new this.constructor();
+};
+```
+
+上面代码中，`createCopy`方法调用构造函数，新建另一个实例。
+
+`constructor`属性表示原型对象与构造函数之间的关联关系，如果修改了原型对象，一般会同时修改`constructor`属性，防止引用的时候出错。
+
+```
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.constructor === Person // true
+
+Person.prototype = {
+  method: function () {}
+};
+
+Person.prototype.constructor === Person // false
+Person.prototype.constructor === Object // true
+```
+
+上面代码中，构造函数`Person`的原型对象改掉了，但是没有修改`constructor`属性，导致这个属性不再指向`Person`。由于`Person`的新原型是一个普通对象，而普通对象的`constructor`属性指向`Object`构造函数，导致`Person.prototype.constructor`变成了`Object`。
+
+所以，修改原型对象时，一般要同时修改`constructor`属性的指向。
+
+```
+// 坏的写法
+C.prototype = {
+  method1: function (...) { ... },
+  // ...
+};
+
+// 好的写法
+C.prototype = {
+  constructor: C,
+  method1: function (...) { ... },
+  // ...
+};
+
+// 更好的写法
+C.prototype.method1 = function (...) { ... };
+```
+
+上面代码中，要么将`constructor`属性重新指向原来的构造函数，要么只在原型对象上添加方法，这样可以保证`instanceof`运算符不会失真。
+
+如果不能确定`constructor`属性是什么函数，还有一个办法：通过`name`属性，从实例得到构造函数的名称。
+
+```
+function Foo() {}
+var f = new Foo();
+f.constructor.name // "Foo"
+```
