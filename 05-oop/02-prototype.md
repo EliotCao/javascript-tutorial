@@ -410,3 +410,21 @@ Rectangle.prototype.constructor = Rectangle;
 ```
 
 采用这样的写法以后，`instanceof`运算符会对子类和父类的构造函数，都返回`true`。
+
+```
+var rect = new Rectangle();
+
+rect instanceof Rectangle  // true
+rect instanceof Shape  // true
+```
+
+上面代码中，子类是整体继承父类。有时只需要单个方法的继承，这时可以采用下面的写法。
+
+```
+ClassB.prototype.print = function() {
+  ClassA.prototype.print.call(this);
+  // some code
+}
+```
+
+上面代码中，子类`B`的`print`方法先调用父类`A`的`print`方法，再部署自己的代码。这就等于继承了父类`A`的`print`方法。
