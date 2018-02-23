@@ -538,3 +538,31 @@ StringBuilder.prototype = {
 ```
 
 这种方法将私有变量放入实例对象中，好处是看上去更自然，但是它的私有变量可以从外部读写，不是很安全。
+
+### 封装私有变量：立即执行函数的写法
+
+另一种做法是使用“立即执行函数”（Immediately-Invoked Function Expression，IIFE），将相关的属性和方法封装在一个函数作用域里面，可以达到不暴露私有成员的目的。
+
+```
+var module1 = (function () {
+　var _count = 0;
+　var m1 = function () {
+　  //...
+　};
+　var m2 = function () {
+　　//...
+　};
+　return {
+　　m1 : m1,
+　　m2 : m2
+　};
+})();
+```
+
+使用上面的写法，外部代码无法读取内部的`_count`变量。
+
+```
+console.info(module1._count); //undefined
+```
+
+上面的`module1`就是 JavaScript 模块的基本写法。下面，再对这种写法进行加工。
