@@ -428,3 +428,36 @@ ClassB.prototype.print = function() {
 ```
 
 上面代码中，子类`B`的`print`方法先调用父类`A`的`print`方法，再部署自己的代码。这就等于继承了父类`A`的`print`方法。
+
+## 多重继承
+
+JavaScript 不提供多重继承功能，即不允许一个对象同时继承多个对象。但是，可以通过变通方法，实现这个功能。
+
+```
+function M1() {
+  this.hello = 'hello';
+}
+
+function M2() {
+  this.world = 'world';
+}
+
+function S() {
+  M1.call(this);
+  M2.call(this);
+}
+
+// 继承 M1
+S.prototype = Object.create(M1.prototype);
+// 继承链上加入 M2
+Object.assign(S.prototype, M2.prototype);
+
+// 指定构造函数
+S.prototype.constructor = S;
+
+var s = new S();
+s.hello // 'hello'
+s.world // 'world'
+```
+
+上面代码中，子类`S`同时继承了父类`M1`和`M2`。这种模式又称为 Mixin（混入）。
