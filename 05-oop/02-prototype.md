@@ -344,3 +344,34 @@ function Fubar (foo, bar) {
 ```
 
 上面代码使用`instanceof`运算符，在函数体内部判断`this`关键字是否为构造函数`Fubar`的实例。如果不是，就表明忘了加`new`命令。
+
+## 构造函数的继承
+
+让一个构造函数继承另一个构造函数，是非常常见的需求。这可以分成两步实现。第一步是在子类的构造函数中，调用父类的构造函数。
+
+```
+function Sub(value) {
+  Super.call(this);
+  this.prop = value;
+}
+```
+
+上面代码中，`Sub`是子类的构造函数，`this`是子类的实例。在实例上调用父类的构造函数`Super`，就会让子类实例具有父类实例的属性。
+
+第二步，是让子类的原型指向父类的原型，这样子类就可以继承父类原型。
+
+```
+Sub.prototype = Object.create(Super.prototype);
+Sub.prototype.constructor = Sub;
+Sub.prototype.method = '...';
+```
+
+上面代码中，`Sub.prototype`是子类的原型，要将它赋值为`Object.create(Super.prototype)`，而不是直接等于`Super.prototype`。否则后面两行对`Sub.prototype`的操作，会连父类的原型`Super.prototype`一起修改掉。
+
+另外一种写法是`Sub.prototype`等于一个父类实例。
+
+```
+Sub.prototype = new Super();
+```
+
+上面这种写法也有继承的效果，但是子类会具有父类实例的方法。有时，这可能不是我们需要的，所以不推荐使用这种写法。
