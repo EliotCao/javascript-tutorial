@@ -292,3 +292,13 @@ null instanceof Object // false
 ```
 
 上面代码中，除了`null`，其他对象的`instanceOf Object`的运算结果都是`true`。
+
+`instanceof`的原理是检查右边构造函数的`prototype`属性，是否在左边对象的原型链上。有一种特殊情况，就是左边对象的原型链上，只有`null`对象。这时，`instanceof`判断会失真。
+
+```
+var obj = Object.create(null);
+typeof obj // "object"
+Object.create(null) instanceof Object // false
+```
+
+上面代码中，`Object.create(null)`返回一个新对象`obj`，它的原型是`null`（`Object.create`的详细介绍见后文）。右边的构造函数`Object`的`prototype`属性，不在左边的原型链上，因此`instanceof`就认为`obj`不是`Object`的实例。但是，只要一个对象的原型不是`null`，`instanceof`运算符的判断就不会失真。
