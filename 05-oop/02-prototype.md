@@ -250,3 +250,45 @@ function Foo() {}
 var f = new Foo();
 f.constructor.name // "Foo"
 ```
+
+## instanceof 运算符
+
+`instanceof`运算符返回一个布尔值，表示对象是否为某个构造函数的实例。
+
+```
+var v = new Vehicle();
+v instanceof Vehicle // true
+```
+
+上面代码中，对象`v`是构造函数`Vehicle`的实例，所以返回`true`。
+
+`instanceof`运算符的左边是实例对象，右边是构造函数。它会检查右边构建函数的原型对象（prototype），是否在左边对象的原型链上。因此，下面两种写法是等价的。
+
+```
+v instanceof Vehicle
+// 等同于
+Vehicle.prototype.isPrototypeOf(v)
+```
+
+上面代码中，`Object.prototype.isPrototypeOf`的详细解释见后文。
+
+由于`instanceof`检查整个原型链，因此同一个实例对象，可能会对多个构造函数都返回`true`。
+
+```
+var d = new Date();
+d instanceof Date // true
+d instanceof Object // true
+```
+
+上面代码中，`d`同时是`Date`和`Object`的实例，因此对这两个构造函数都返回`true`。
+
+由于任意对象（除了`null`）都是`Object`的实例，所以`instanceof`运算符可以判断一个值是否为非`null`的对象。
+
+```
+var obj = { foo: 123 };
+obj instanceof Object // true
+
+null instanceof Object // false
+```
+
+上面代码中，除了`null`，其他对象的`instanceOf Object`的运算结果都是`true`。
