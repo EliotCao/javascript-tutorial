@@ -520,3 +520,21 @@ function StringBuilder() {
 ```
 
 上面代码中，`buffer`是模块的私有变量。一旦生成实例对象，外部是无法直接访问`buffer`的。但是，这种方法将私有变量封装在构造函数中，导致构造函数与实例对象是一体的，总是存在于内存之中，无法在使用完成后清除。这意味着，构造函数有双重作用，既用来塑造实例对象，又用来保存实例对象的数据，违背了构造函数与实例对象在数据上相分离的原则（即实例对象的数据，不应该保存在实例对象以外）。同时，非常耗费内存。
+
+```
+function StringBuilder() {
+  this._buffer = [];
+}
+
+StringBuilder.prototype = {
+  constructor: StringBuilder,
+  add: function (str) {
+    this._buffer.push(str);
+  },
+  toString: function () {
+    return this._buffer.join('');
+  }
+};
+```
+
+这种方法将私有变量放入实例对象中，好处是看上去更自然，但是它的私有变量可以从外部读写，不是很安全。
