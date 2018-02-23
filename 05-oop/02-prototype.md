@@ -375,3 +375,38 @@ Sub.prototype = new Super();
 ```
 
 上面这种写法也有继承的效果，但是子类会具有父类实例的方法。有时，这可能不是我们需要的，所以不推荐使用这种写法。
+
+举例来说，下面是一个`Shape`构造函数。
+
+```
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+}
+
+Shape.prototype.move = function (x, y) {
+  this.x += x;
+  this.y += y;
+  console.info('Shape moved.');
+};
+```
+
+我们需要让`Rectangle`构造函数继承`Shape`。
+
+```
+// 第一步，子类继承父类的实例
+function Rectangle() {
+  Shape.call(this); // 调用父类构造函数
+}
+// 另一种写法
+function Rectangle() {
+  this.base = Shape;
+  this.base();
+}
+
+// 第二步，子类继承父类的原型
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;
+```
+
+采用这样的写法以后，`instanceof`运算符会对子类和父类的构造函数，都返回`true`。
