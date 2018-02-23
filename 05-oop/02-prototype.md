@@ -566,3 +566,29 @@ console.info(module1._count); //undefined
 ```
 
 上面的`module1`就是 JavaScript 模块的基本写法。下面，再对这种写法进行加工。
+
+### 模块的放大模式
+
+如果一个模块很大，必须分成几个部分，或者一个模块需要继承另一个模块，这时就有必要采用“放大模式”（augmentation）。
+
+```
+var module1 = (function (mod){
+　mod.m3 = function () {
+　　//...
+　};
+　return mod;
+})(module1);
+```
+
+上面的代码为`module1`模块添加了一个新方法`m3()`，然后返回新的`module1`模块。
+
+在浏览器环境中，模块的各个部分通常都是从网上获取的，有时无法知道哪个部分会先加载。如果采用上面的写法，第一个执行的部分有可能加载一个不存在空对象，这时就要采用"宽放大模式"（Loose augmentation）。
+
+```
+var module1 = (function (mod) {
+　//...
+　return mod;
+})(window.module1 || {});
+```
+
+与"放大模式"相比，“宽放大模式”就是“立即执行函数”的参数可以是空对象。
