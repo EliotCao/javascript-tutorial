@@ -114,3 +114,24 @@ obj.valueOf()
 ```
 
 上面代码中，对象`obj`的原型是`null`，它就不具备一些定义在`Object.prototype`对象上面的属性，比如`valueOf`方法。
+
+使用`Object.create`方法的时候，必须提供对象原型，即参数不能为空，或者不是对象，否则会报错。
+
+```
+Object.create()
+// TypeError: Object prototype may only be an Object or null
+Object.create(123)
+// TypeError: Object prototype may only be an Object or null
+```
+
+`Object.create`方法生成的新对象，动态继承了原型。在原型上添加或修改任何方法，会立刻反映在新对象之上。
+
+```
+var obj1 = { p: 1 };
+var obj2 = Object.create(obj1);
+
+obj1.p = 2;
+obj2.p // 2
+```
+
+上面代码中，修改对象原型`obj1`会影响到实例对象`obj2`。
