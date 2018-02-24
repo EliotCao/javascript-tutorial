@@ -13,3 +13,17 @@ Object.getPrototypeOf(f) === F.prototype // true
 ```
 
 上面代码中，实例对象`f`的原型是`F.prototype`。
+
+下面是几种特殊对象的原型。
+
+```
+// 空对象的原型是 Object.prototype
+Object.getPrototypeOf({}) === Object.prototype // true
+
+// Object.prototype 的原型是 null
+Object.getPrototypeOf(Object.prototype) === null // true
+
+// 函数的原型是 Function.prototype
+function f() {}
+Object.getPrototypeOf(f) === Function.prototype // true
+```
