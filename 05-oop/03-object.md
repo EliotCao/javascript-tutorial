@@ -212,3 +212,32 @@ Object.getPrototypeOf(obj) === p // true
 上面代码通过`__proto__`属性，将`p`对象设为`obj`对象的原型。
 
 根据语言标准，`__proto__`属性只有浏览器才需要部署，其他环境可以没有这个属性。它前后的两根下划线，表明它本质是一个内部属性，不应该对使用者暴露。因此，应该尽量少用这个属性，而是用`Object.getPrototypeOf()`和`Object.setPrototypeOf()`，进行原型对象的读写操作。
+
+原型链可以用`__proto__`很直观地表示。
+
+```
+var A = {
+  name: '张三'
+};
+var B = {
+  name: '李四'
+};
+
+var proto = {
+  print: function () {
+    console.log(this.name);
+  }
+};
+
+A.__proto__ = proto;
+B.__proto__ = proto;
+
+A.print() // 张三
+B.print() // 李四
+
+A.print === B.print // true
+A.print === proto.print // true
+B.print === proto.print // true
+```
+
+上面代码中，`A`对象和`B`对象的原型都是`proto`对象，它们都共享`proto`对象的`print`方法。也就是说，`A`和`B`的`print`方法，都是在调用`proto`对象的`print`方法。
