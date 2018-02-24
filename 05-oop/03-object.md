@@ -27,3 +27,18 @@ Object.getPrototypeOf(Object.prototype) === null // true
 function f() {}
 Object.getPrototypeOf(f) === Function.prototype // true
 ```
+
+## Object.setPrototypeOf()
+
+`Object.setPrototypeOf`方法为参数对象设置原型，返回该参数对象。它接受两个参数，第一个是现有对象，第二个是原型对象。
+
+```
+var a = {};
+var b = {x: 1};
+Object.setPrototypeOf(a, b);
+
+Object.getPrototypeOf(a) === b // true
+a.x // 1
+```
+
+上面代码中，`Object.setPrototypeOf`方法将对象`a`的原型，设置为对象`b`，因此`a`可以共享`b`的属性。
