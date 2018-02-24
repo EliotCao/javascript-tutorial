@@ -196,3 +196,19 @@ Object.prototype.isPrototypeOf(Object.create(null)) // false
 ```
 
 上面代码中，由于`Object.prototype`处于原型链的最顶端，所以对各种实例都返回`true`，只有直接继承自`null`的对象除外。
+
+## Object.prototype.__proto__
+
+实例对象的`__proto__`属性（前后各两个下划线），返回该对象的原型。该属性可读写。
+
+```
+var obj = {};
+var p = {};
+
+obj.__proto__ = p;
+Object.getPrototypeOf(obj) === p // true
+```
+
+上面代码通过`__proto__`属性，将`p`对象设为`obj`对象的原型。
+
+根据语言标准，`__proto__`属性只有浏览器才需要部署，其他环境可以没有这个属性。它前后的两根下划线，表明它本质是一个内部属性，不应该对使用者暴露。因此，应该尽量少用这个属性，而是用`Object.getPrototypeOf()`和`Object.setPrototypeOf()`，进行原型对象的读写操作。
