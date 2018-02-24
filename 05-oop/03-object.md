@@ -172,3 +172,27 @@ b instanceof A // true
 ```
 
 上面代码中，`b`对象的原型是`a`对象，因此继承了`a`对象的构造函数`A`。
+
+## Object.prototype.isPrototypeOf()
+
+实例对象的`isPrototypeOf`方法，用来判断该对象是否为参数对象的原型。
+
+```
+var o1 = {};
+var o2 = Object.create(o1);
+var o3 = Object.create(o2);
+
+o2.isPrototypeOf(o3) // true
+o1.isPrototypeOf(o3) // true
+```
+
+上面代码中，`o1`和`o2`都是`o3`的原型。这表明只要实例对象处在参数对象的原型链上，`isPrototypeOf`方法都返回`true`。
+
+```
+Object.prototype.isPrototypeOf({}) // true
+Object.prototype.isPrototypeOf([]) // true
+Object.prototype.isPrototypeOf(/xyz/) // true
+Object.prototype.isPrototypeOf(Object.create(null)) // false
+```
+
+上面代码中，由于`Object.prototype`处于原型链的最顶端，所以对各种实例都返回`true`，只有直接继承自`null`的对象除外。
