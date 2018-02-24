@@ -241,3 +241,26 @@ B.print === proto.print // true
 ```
 
 上面代码中，`A`对象和`B`对象的原型都是`proto`对象，它们都共享`proto`对象的`print`方法。也就是说，`A`和`B`的`print`方法，都是在调用`proto`对象的`print`方法。
+
+## 获取原型对象方法的比较
+
+如前所述，`__proto__`属性指向当前对象的原型对象，即构造函数的`prototype`属性。
+
+```
+var obj = new Object();
+
+obj.__proto__ === Object.prototype
+// true
+obj.__proto__ === obj.constructor.prototype
+// true
+```
+
+上面代码首先新建了一个对象`obj`，它的`__proto__`属性，指向构造函数（`Object`或`obj.constructor`）的`prototype`属性。
+
+因此，获取实例对象`obj`的原型对象，有三种方法。
+
+- `obj.__proto__`
+- `obj.constructor.prototype`
+- `Object.getPrototypeOf(obj)`
+
+上面三种方法之中，前两种都不是很可靠。`__proto__`属性只有浏览器才需要部署，其他环境可以不部署。而`obj.constructor.prototype`在手动改变原型对象时，可能会失效。
