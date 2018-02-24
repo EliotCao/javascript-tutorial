@@ -95,3 +95,22 @@ if (typeof Object.create !== 'function') {
 ```
 
 上面代码表明，`Object.create`方法的实质是新建一个空的构造函数`F`，然后让`F.prototype`属性指向参数对象`obj`，最后返回一个`F`的实例，从而实现让该实例继承`obj`的属性。
+
+下面三种方式生成的新对象是等价的。
+
+```
+var obj1 = Object.create({});
+var obj2 = Object.create(Object.prototype);
+var obj3 = new Object();
+```
+
+如果想要生成一个不继承任何属性（比如没有`toString`和`valueOf`方法）的对象，可以将`Object.create`的参数设为`null`。
+
+```
+var obj = Object.create(null);
+
+obj.valueOf()
+// TypeError: Object [object Object] has no method 'valueOf'
+```
+
+上面代码中，对象`obj`的原型是`null`，它就不具备一些定义在`Object.prototype`对象上面的属性，比如`valueOf`方法。
