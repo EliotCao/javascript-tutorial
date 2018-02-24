@@ -264,3 +264,26 @@ obj.__proto__ === obj.constructor.prototype
 - `Object.getPrototypeOf(obj)`
 
 上面三种方法之中，前两种都不是很可靠。`__proto__`属性只有浏览器才需要部署，其他环境可以不部署。而`obj.constructor.prototype`在手动改变原型对象时，可能会失效。
+
+```
+var P = function () {};
+var p = new P();
+
+var C = function () {};
+C.prototype = p;
+var c = new C();
+
+c.constructor.prototype === p // false
+```
+
+上面代码中，构造函数`C`的原型对象被改成了`p`，但是实例对象的`c.constructor.prototype`却没有指向`p`。所以，在改变原型对象时，一般要同时设置`constructor`属性。
+
+```
+C.prototype = p;
+C.prototype.constructor = C;
+
+var c = new C();
+c.constructor.prototype === p // true
+```
+
+因此，推荐使用第三种`Object.getPrototypeOf`方法，获取原型对象。
