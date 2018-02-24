@@ -135,3 +135,40 @@ obj2.p // 2
 ```
 
 上面代码中，修改对象原型`obj1`会影响到实例对象`obj2`。
+
+除了对象的原型，`Object.create`方法还可以接受第二个参数。该参数是一个属性描述对象，它所描述的对象属性，会添加到实例对象，作为该对象自身的属性。
+
+```
+var obj = Object.create({}, {
+  p1: {
+    value: 123,
+    enumerable: true,
+    configurable: true,
+    writable: true,
+  },
+  p2: {
+    value: 'abc',
+    enumerable: true,
+    configurable: true,
+    writable: true,
+  }
+});
+
+// 等同于
+var obj = Object.create({});
+obj.p1 = 123;
+obj.p2 = 'abc';
+```
+
+`Object.create`方法生成的对象，继承了它的原型对象的构造函数。
+
+```
+function A() {}
+var a = new A();
+var b = Object.create(a);
+
+b.constructor === A // true
+b instanceof A // true
+```
+
+上面代码中，`b`对象的原型是`a`对象，因此继承了`a`对象的构造函数`A`。
