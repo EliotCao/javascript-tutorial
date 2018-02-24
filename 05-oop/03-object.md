@@ -42,3 +42,18 @@ a.x // 1
 ```
 
 上面代码中，`Object.setPrototypeOf`方法将对象`a`的原型，设置为对象`b`，因此`a`可以共享`b`的属性。
+
+`new`命令可以使用`Object.setPrototypeOf`方法模拟。
+
+```
+var F = function () {
+  this.foo = 'bar';
+};
+
+var f = new F();
+// 等同于
+var f = Object.setPrototypeOf({}, F.prototype);
+F.call(f);
+```
+
+上面代码中，`new`命令新建实例对象，其实可以分成两步。第一步，将一个空对象的原型设为构造函数的`prototype`属性（上例是`F.prototype`）；第二步，将构造函数内部的`this`绑定这个空对象，然后执行构造函数，使得定义在`this`上面的方法和属性（上例是`this.foo`），都转移到这个空对象上。
