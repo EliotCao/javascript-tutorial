@@ -348,3 +348,30 @@ for (p in o2) {
 ```
 
 上面代码中，对象`o2`的`p2`属性是自身的，`p1`属性是继承的。这两个属性都会被`for...in`循环遍历。
+
+为了在`for...in`循环中获得对象自身的属性，可以采用`hasOwnProperty`方法判断一下。
+
+```
+for ( var name in object ) {
+  if ( object.hasOwnProperty(name) ) {
+    /* loop code */
+  }
+}
+```
+
+获得对象的所有属性（不管是自身的还是继承的，也不管是否可枚举），可以使用下面的函数。
+
+```
+function inheritedPropertyNames(obj) {
+  var props = {};
+  while(obj) {
+    Object.getOwnPropertyNames(obj).forEach(function(p) {
+      props[p] = true;
+    });
+    obj = Object.getPrototypeOf(obj);
+  }
+  return Object.getOwnPropertyNames(props);
+}
+```
+
+上面代码依次获取`obj`对象的每一级原型对象“自身”的属性，从而获取`obj`对象的“所有”属性，不管是否可遍历。
