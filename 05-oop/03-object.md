@@ -375,3 +375,16 @@ function inheritedPropertyNames(obj) {
 ```
 
 上面代码依次获取`obj`对象的每一级原型对象“自身”的属性，从而获取`obj`对象的“所有”属性，不管是否可遍历。
+
+下面是一个例子，列出`Date`对象的所有属性。
+
+```
+inheritedPropertyNames(Date)
+// [
+//  "caller",
+//  "constructor",
+//  "toString",
+//  "UTC",
+//  ...
+// ]
+```
