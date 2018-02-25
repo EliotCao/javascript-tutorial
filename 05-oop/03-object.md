@@ -319,3 +319,32 @@ Date.hasOwnProperty('toString') // false
 上面代码表明，`Date.length`（构造函数`Date`可以接受多少个参数）是`Date`自身的属性，`Date.toString`是继承的属性。
 
 另外，`hasOwnProperty`方法是 JavaScript 之中唯一一个处理对象属性时，不会遍历原型链的方法。
+
+## in 运算符和 for...in 循环
+
+`in`运算符返回一个布尔值，表示一个对象是否具有某个属性。它不区分该属性是对象自身的属性，还是继承的属性。
+
+```
+'length' in Date // true
+'toString' in Date // true
+```
+
+`in`运算符常用于检查一个属性是否存在。
+
+获得对象的所有可遍历属性（不管是自身的还是继承的），可以使用`for...in`循环。
+
+```
+var o1 = { p1: 123 };
+
+var o2 = Object.create(o1, {
+  p2: { value: "abc", enumerable: true }
+});
+
+for (p in o2) {
+  console.info(p);
+}
+// p2
+// p1
+```
+
+上面代码中，对象`o2`的`p2`属性是自身的，`p1`属性是继承的。这两个属性都会被`for...in`循环遍历。
