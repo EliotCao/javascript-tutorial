@@ -287,3 +287,22 @@ c.constructor.prototype === p // true
 ```
 
 因此，推荐使用第三种`Object.getPrototypeOf`方法，获取原型对象。
+
+## Object.getOwnPropertyNames()
+
+`Object.getOwnPropertyNames`方法返回一个数组，成员是参数对象本身的所有属性的键名，不包含继承的属性键名。
+
+```
+Object.getOwnPropertyNames(Date)
+// ["parse", "arguments", "UTC", "caller", "name", "prototype", "now", "length"]
+```
+
+上面代码中，`Object.getOwnPropertyNames`方法返回`Date`所有自身的属性名。
+
+对象本身的属性之中，有的是可以遍历的（enumerable），有的是不可以遍历的。`Object.getOwnPropertyNames`方法返回所有键名，不管是否可以遍历。只获取那些可以遍历的属性，使用`Object.keys`方法。
+
+```
+Object.keys(Date) // []
+```
+
+上面代码表明，`Date`对象所有自身的属性，都是不可以遍历的。
