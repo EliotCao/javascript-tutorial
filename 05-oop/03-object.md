@@ -306,3 +306,16 @@ Object.keys(Date) // []
 ```
 
 上面代码表明，`Date`对象所有自身的属性，都是不可以遍历的。
+
+## Object.prototype.hasOwnProperty()
+
+对象实例的`hasOwnProperty`方法返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上。
+
+```
+Date.hasOwnProperty('length') // true
+Date.hasOwnProperty('toString') // false
+```
+
+上面代码表明，`Date.length`（构造函数`Date`可以接受多少个参数）是`Date`自身的属性，`Date.toString`是继承的属性。
+
+另外，`hasOwnProperty`方法是 JavaScript 之中唯一一个处理对象属性时，不会遍历原型链的方法。
