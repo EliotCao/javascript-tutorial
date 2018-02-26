@@ -45,3 +45,44 @@
 ```
 
 上面代码中，一个网页文件依次有两段 JavaScript 代码。前一个`<script>`标签是严格模式，后一个不是。
+
+如果`use strict`写成下面这样，则不起作用，严格模式必须从代码一开始就生效。
+
+```
+<script>
+  console.log('这是正常模式');
+  'use strict';
+</script>
+```
+
+**（2）单个函数**
+
+`use strict`放在函数体的第一行，则整个函数以严格模式运行。
+
+```
+function strict() {
+  'use strict';
+  return '这是严格模式';
+}
+
+function strict2() {
+  'use strict';
+  function f() {
+    return '这也是严格模式';
+  }
+  return f();
+}
+
+function notStrict() {
+  return '这是正常模式';
+}
+```
+
+有时，需要把不同的脚本合并在一个文件里面。如果一个脚本是严格模式，另一个脚本不是，它们的合并就可能出错。严格模式的脚本在前，则合并后的脚本都是严格模式；如果正常模式的脚本在前，则合并后的脚本都是正常模式。这两种情况下，合并后的结果都是不正确的。这时可以考虑把整个脚本文件放在一个立即执行的匿名函数之中。
+
+```
+(function () {
+  'use strict';
+  // some code here
+})();
+```
