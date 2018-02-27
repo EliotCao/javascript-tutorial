@@ -102,3 +102,25 @@ function notStrict() {
 ```
 
 上面代码报错，因为`length`是只读属性，严格模式下不可写。正常模式下，改变`length`属性是无效的，但不会报错。
+
+严格模式下，对只读属性赋值，或者删除不可配置（non-configurable）属性都会报错。
+
+```
+// 对只读属性赋值会报错
+'use strict';
+Object.defineProperty({}, 'a', {
+  value: 37,
+  writable: false
+});
+obj.a = 123;
+// TypeError: Cannot assign to read only property 'a' of object #<Object>
+
+// 删除不可配置的属性会报错
+'use strict';
+var obj = Object.defineProperty({}, 'p', {
+  value: 1,
+  configurable: false
+});
+delete obj.p
+// TypeError: Cannot delete property 'p' of #<Object>
+```
