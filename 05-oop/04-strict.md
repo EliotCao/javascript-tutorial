@@ -86,3 +86,19 @@ function notStrict() {
   // some code here
 })();
 ```
+
+## 显式报错
+
+严格模式使得 JavaScript 的语法变得更严格，更多的操作会显式报错。其中有些操作，在正常模式下只会默默地失败，不会报错。
+
+### 只读属性不可写
+
+严格模式下，设置字符串的`length`属性，会报错。
+
+```
+'use strict';
+'abc'.length = 5;
+// TypeError: Cannot assign to read only property 'length' of string 'abc'
+```
+
+上面代码报错，因为`length`是只读属性，严格模式下不可写。正常模式下，改变`length`属性是无效的，但不会报错。
