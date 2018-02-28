@@ -124,3 +124,18 @@ var obj = Object.defineProperty({}, 'p', {
 delete obj.p
 // TypeError: Cannot delete property 'p' of #<Object>
 ```
+
+### 只设置了取值器的属性不可写
+
+严格模式下，对一个只有取值器（getter）、没有存值器（setter）的属性赋值，会报错。
+
+```
+'use strict';
+var obj = {
+  get v() { return 1; }
+};
+obj.v = 2;
+// Uncaught TypeError: Cannot set property v of #<Object> which has only a getter
+```
+
+上面代码中，`obj.v`只有取值器，没有存值器，对它进行赋值就会报错。
