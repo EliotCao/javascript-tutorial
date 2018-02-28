@@ -153,3 +153,20 @@ obj.v = 1;
 ```
 
 上面代码中，`obj`对象禁止扩展，添加属性就会报错。
+
+### eval、arguments 不可用作标识名
+
+严格模式下，使用`eval`或者`arguments`作为标识名，将会报错。下面的语句都会报错。
+
+```
+'use strict';
+var eval = 17;
+var arguments = 17;
+var obj = { set p(arguments) { } };
+try { } catch (arguments) { }
+function x(eval) { }
+function arguments() { }
+var y = function eval() { };
+var f = new Function('arguments', "'use strict'; return 17;");
+// SyntaxError: Unexpected eval or arguments in strict mode
+```
