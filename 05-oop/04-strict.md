@@ -139,3 +139,17 @@ obj.v = 2;
 ```
 
 上面代码中，`obj.v`只有取值器，没有存值器，对它进行赋值就会报错。
+
+### 禁止扩展的对象不可扩展
+
+严格模式下，对禁止扩展的对象添加新属性，会报错。
+
+```
+'use strict';
+var obj = {};
+Object.preventExtensions(obj);
+obj.v = 1;
+// Uncaught TypeError: Cannot add property v, object is not extensible
+```
+
+上面代码中，`obj`对象禁止扩展，添加属性就会报错。
