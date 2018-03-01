@@ -182,3 +182,13 @@ function f(a, a, b) {
 }
 // Uncaught SyntaxError: Duplicate parameter name not allowed in this context
 ```
+
+### 禁止八进制的前缀0表示法
+
+正常模式下，整数的第一位如果是`0`，表示这是八进制数，比如`0100`等于十进制的64。严格模式禁止这种表示法，整数第一位为`0`，将报错。
+
+```
+'use strict';
+var n = 0100;
+// Uncaught SyntaxError: Octal literals are not allowed in strict mode.
+```
