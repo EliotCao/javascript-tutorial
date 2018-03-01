@@ -170,3 +170,15 @@ var y = function eval() { };
 var f = new Function('arguments', "'use strict'; return 17;");
 // SyntaxError: Unexpected eval or arguments in strict mode
 ```
+
+### 函数不能有重名的参数
+
+正常模式下，如果函数有多个重名的参数，可以用`arguments[i]`读取。严格模式下，这属于语法错误。
+
+```
+function f(a, a, b) {
+  'use strict';
+  return a + b;
+}
+// Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+```
