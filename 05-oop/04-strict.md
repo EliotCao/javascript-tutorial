@@ -424,3 +424,22 @@ for (var i = 0; i < 5; i++) {
 上面代码在`if`代码块和`for`代码块中声明了函数，ES5 环境会报错。
 
 注意，如果是 ES6 环境，上面的代码不会报错，因为 ES6 允许在代码块之中声明函数。
+
+### 保留字
+
+为了向将来 JavaScript 的新版本过渡，严格模式新增了一些保留字（implements、interface、let、package、private、protected、public、static、yield等）。使用这些词作为变量名将会报错。
+
+```
+function package(protected) { // 语法错误
+  'use strict';
+  var implements; // 语法错误
+}
+```
+
+## 参考链接
+
+- MDN, [Strict mode](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode)
+- Dr. Axel Rauschmayer, [JavaScript: Why the hatred for strict mode?](http://www.2ality.com/2011/10/strict-mode-hatred.html)
+- Dr. Axel Rauschmayer，[JavaScript’s strict mode: a summary](http://www.2ality.com/2011/01/javascripts-strict-mode-summary.html)
+- Douglas Crockford, [Strict Mode Is Coming To Town](http://www.yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/)
+- [JavaScript Strict Mode Support](http://java-script.limewebs.com/strictMode/test_hosted.html)
