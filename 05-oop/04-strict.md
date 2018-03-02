@@ -380,3 +380,24 @@ f2('"use strict";undeclared_variable = 1')  // 报错
 ```
 
 上面两种写法，`eval`内部使用的都是严格模式。
+
+### arguments 不再追踪参数的变化
+
+变量`arguments`代表函数的参数。严格模式下，函数内部改变参数与`arguments`的联系被切断了，两者不再存在联动关系。
+
+```
+function f(a) {
+  a = 2;
+  return [a, arguments[0]];
+}
+f(1); // 正常模式为[2, 2]
+
+function f(a) {
+  'use strict';
+  a = 2;
+  return [a, arguments[0]];
+}
+f(1); // 严格模式为[2, 1]
+```
+
+上面代码中，改变函数的参数，不会反应到`arguments`对象上来。
