@@ -305,3 +305,21 @@ var f = function () {
 
 f(); // 报错
 ```
+
+### 禁止删除变量
+
+严格模式下无法删除变量，如果使用`delete`命令删除一个变量，会报错。只有对象的属性，且属性的描述对象的`configurable`属性设置为`true`，才能被`delete`命令删除。
+
+```
+'use strict';
+var x;
+delete x; // 语法错误
+
+var obj = Object.create(null, {
+  x: {
+    value: 1,
+    configurable: true
+  }
+});
+delete obj.x; // 删除成功
+```
