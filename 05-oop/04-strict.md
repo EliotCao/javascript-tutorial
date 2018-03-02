@@ -292,3 +292,16 @@ function f1() {
 
 f1();
 ```
+
+### 禁止使用 arguments.callee、arguments.caller
+
+`arguments.callee`和`arguments.caller`是两个历史遗留的变量，从来没有标准化过，现在已经取消了。正常模式下调用它们没有什么作用，但是不会报错。严格模式明确规定，函数内部使用`arguments.callee`、`arguments.caller`将会报错。
+
+```
+'use strict';
+var f = function () {
+  return arguments.callee;
+};
+
+f(); // 报错
+```
