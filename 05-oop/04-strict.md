@@ -278,3 +278,17 @@ fun.call(undefined) // undefined
 ```
 
 上面代码中，可以把任意类型的值，绑定在`this`上面。
+
+### 禁止使用 fn.callee、fn.caller
+
+函数内部不得使用`fn.caller`、`fn.arguments`，否则会报错。这意味着不能在函数内部得到调用栈了。
+
+```
+function f1() {
+  'use strict';
+  f1.caller;    // 报错
+  f1.arguments; // 报错
+}
+
+f1();
+```
