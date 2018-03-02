@@ -344,3 +344,20 @@ with (obj) {
 }
 // Uncaught SyntaxError: Strict mode code may not include a with statement
 ```
+
+### 创设 eval 作用域
+
+正常模式下，JavaScript 语言有两种变量作用域（scope）：全局作用域和函数作用域。严格模式创设了第三种作用域：`eval`作用域。
+
+正常模式下，`eval`语句的作用域，取决于它处于全局作用域，还是函数作用域。严格模式下，`eval`语句本身就是一个作用域，不再能够在其所运行的作用域创设新的变量了，也就是说，`eval`所生成的变量只能用于`eval`内部。
+
+```
+(function () {
+  'use strict';
+  var x = 2;
+  console.log(eval('var x = 5; x')) // 5
+  console.log(x) // 2
+})()
+```
+
+上面代码中，由于`eval`语句内部是一个独立作用域，所以内部的变量`x`不会泄露到外部。
