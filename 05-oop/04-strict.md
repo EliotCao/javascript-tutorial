@@ -329,3 +329,18 @@ delete obj.x; // 删除成功
 JavaScript 语言的一个特点，就是允许“动态绑定”，即某些属性和方法到底属于哪一个对象，不是在编译时确定的，而是在运行时（runtime）确定的。
 
 严格模式对动态绑定做了一些限制。某些情况下，只允许静态绑定。也就是说，属性和方法到底归属哪个对象，必须在编译阶段就确定。这样做有利于编译效率的提高，也使得代码更容易阅读，更少出现意外。
+
+### 禁止使用 with 语句
+
+严格模式下，使用`with`语句将报错。因为`with`语句无法在编译时就确定，某个属性到底归属哪个对象，从而影响了编译效果。
+
+```
+'use strict';
+var v  = 1;
+var obj = {};
+
+with (obj) {
+  v = 2;
+}
+// Uncaught SyntaxError: Strict mode code may not include a with statement
+```
