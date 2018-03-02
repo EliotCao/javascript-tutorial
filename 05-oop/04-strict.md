@@ -217,3 +217,64 @@ f() // 报错，未声明就创建一个全局变量
 ```
 
 因此，严格模式下，变量都必须先声明，然后再使用。
+
+### 禁止 this 关键字指向全局对象
+
+正常模式下，函数内部的`this`可能会指向全局对象，严格模式禁止这种用法，避免无意间创造全局变量。
+
+```
+// 正常模式
+function f() {
+  console.log(this === window);
+}
+f() // true
+
+// 严格模式
+function f() {
+  'use strict';
+  console.log(this === undefined);
+}
+f() // true
+```
+
+上面代码中，严格模式的函数体内部`this`是`undefined`。
+
+这种限制对于构造函数尤其有用。使用构造函数时，有时忘了加`new`，这时`this`不再指向全局对象，而是报错。
+
+```
+function f() {
+  'use strict';
+  this.a = 1;
+};
+
+f();// 报错，this 未定义
+```
+
+严格模式下，函数直接调用时（不使用`new`调用），函数内部的`this`表示`undefined`（未定义），因此可以用`call`、`apply`和`bind`方法，将任意值绑定在`this`上面。正常模式下，`this`指向全局对象，如果绑定的值是非对象，将被自动转为对象再绑定上去，而`null`和`undefined`这两个无法转成对象的值，将被忽略。
+
+```
+// 正常模式
+function fun() {
+  return this;
+}
+
+fun() // window
+fun.call(2) // Number {2}
+fun.call(true) // Boolean {true}
+fun.call(null) // window
+fun.call(undefined) // window
+
+// 严格模式
+'use strict';
+function fun() {
+  return this;
+}
+
+fun() //undefined
+fun.call(2) // 2
+fun.call(true) // true
+fun.call(null) // null
+fun.call(undefined) // undefined
+```
+
+上面代码中，可以把任意类型的值，绑定在`this`上面。
