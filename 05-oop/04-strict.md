@@ -361,3 +361,22 @@ with (obj) {
 ```
 
 上面代码中，由于`eval`语句内部是一个独立作用域，所以内部的变量`x`不会泄露到外部。
+
+注意，如果希望`eval`语句也使用严格模式，有两种方式。
+
+```
+// 方式一
+function f1(str){
+  'use strict';
+  return eval(str);
+}
+f1('undeclared_variable = 1'); // 报错
+
+// 方式二
+function f2(str){
+  return eval(str);
+}
+f2('"use strict";undeclared_variable = 1')  // 报错
+```
+
+上面两种写法，`eval`内部使用的都是严格模式。
