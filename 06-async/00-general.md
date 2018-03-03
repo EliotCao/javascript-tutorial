@@ -212,3 +212,34 @@ series(items.shift());
 上面代码中，函数`series`就是串行函数，它会依次执行异步任务，所有任务都完成后，才会执行`final`函数。`items`数组保存每一个异步任务的参数，`results`数组保存每一个异步任务的运行结果。
 
 注意，上面的写法需要六秒，才能完成整个脚本。
+
+### 并行执行
+
+流程控制函数也可以是并行执行，即所有异步任务同时执行，等到全部完成以后，才执行`final`函数。
+
+```
+var items = [ 1, 2, 3, 4, 5, 6 ];
+var results = [];
+
+function async(arg, callback) {
+  console.log('参数为 ' + arg +' , 1秒后返回结果');
+  setTimeout(function () { callback(arg * 2); }, 1000);
+}
+
+function final(value) {
+  console.log('完成: ', value);
+}
+
+items.forEach(function(item) {
+  async(item, function(result){
+    results.push(result);
+    if(results.length === items.length) {
+      final(results[results.length - 1]);
+    }
+  })
+});
+```
+
+上面代码中，`forEach`方法会同时发起六个异步任务，等到它们全部完成以后，才会执行`final`函数。
+
+相比而言，上面的写法只要一秒，就能完成整个脚本。这就是说，并行执行的效率较高，比起串行执行一次只能执行一个任务，较为节约时间。但是问题在于如果并行的任务较多，很容易耗尽系统资源，拖慢运行速度。因此有了第三种流程控制方式。
