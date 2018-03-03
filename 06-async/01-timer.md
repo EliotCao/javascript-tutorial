@@ -87,3 +87,19 @@ setTimeout(function () {
 ```
 
 上面代码中，`obj.y`放在一个匿名函数之中，这使得`obj.y`在`obj`的作用域执行，而不是在全局作用域内执行，所以能够显示正确的值。
+
+另一种解决方法是，使用`bind`方法，将`obj.y`这个方法绑定在`obj`上面。
+
+```
+var x = 1;
+
+var obj = {
+  x: 2,
+  y: function () {
+    console.log(this.x);
+  }
+};
+
+setTimeout(obj.y.bind(obj), 1000)
+// 2
+```
