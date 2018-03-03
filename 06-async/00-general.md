@@ -243,3 +243,45 @@ items.forEach(function(item) {
 上面代码中，`forEach`方法会同时发起六个异步任务，等到它们全部完成以后，才会执行`final`函数。
 
 相比而言，上面的写法只要一秒，就能完成整个脚本。这就是说，并行执行的效率较高，比起串行执行一次只能执行一个任务，较为节约时间。但是问题在于如果并行的任务较多，很容易耗尽系统资源，拖慢运行速度。因此有了第三种流程控制方式。
+
+### 并行与串行的结合
+
+所谓并行与串行的结合，就是设置一个门槛，每次最多只能并行执行`n`个异步任务，这样就避免了过分占用系统资源。
+
+```
+var items = [ 1, 2, 3, 4, 5, 6 ];
+var results = [];
+var running = 0;
+var limit = 2;
+
+function async(arg, callback) {
+  console.log('参数为 ' + arg +' , 1秒后返回结果');
+  setTimeout(function () { callback(arg * 2); }, 1000);
+}
+
+function final(value) {
+  console.log('完成: ', value);
+}
+
+function launcher() {
+  while(running < limit && items.length > 0) {
+    var item = items.shift();
+    async(item, function(result) {
+      results.push(result);
+      running--;
+      if(items.length > 0) {
+        launcher();
+      } else if(running == 0) {
+        final(results);
+      }
+    });
+    running++;
+  }
+}
+
+launcher();
+```
+
+上面代码中，最多只能同时运行两个异步任务。变量`running`记录当前正在运行的任务数，只要低于门槛值，就再启动一个新的任务，如果等于`0`，就表示所有任务都执行完了，这时就执行`final`函数。
+
+这段代码需要三秒完成整个脚本，处在串行执行和并行执行之间。通过调节`limit`变量，达到效率和资源的最佳平衡。
