@@ -50,3 +50,40 @@ setTimeout(function (a,b) {
 ```
 
 上面代码中，`setTimeout`共有4个参数。最后那两个参数，将在1000毫秒之后回调函数执行时，作为回调函数的参数。
+
+还有一个需要注意的地方，如果回调函数是对象的方法，那么`setTimeout`使得方法内部的`this`关键字指向全局环境，而不是定义时所在的那个对象。
+
+```
+var x = 1;
+
+var obj = {
+  x: 2,
+  y: function () {
+    console.log(this.x);
+  }
+};
+
+setTimeout(obj.y, 1000) // 1
+```
+
+上面代码输出的是1，而不是2。因为当`obj.y`在1000毫秒后运行时，`this`所指向的已经不是`obj`了，而是全局环境。
+
+为了防止出现这个问题，一种解决方法是将`obj.y`放入一个函数。
+
+```
+var x = 1;
+
+var obj = {
+  x: 2,
+  y: function () {
+    console.log(this.x);
+  }
+};
+
+setTimeout(function () {
+  obj.y();
+}, 1000);
+// 2
+```
+
+上面代码中，`obj.y`放在一个匿名函数之中，这使得`obj.y`在`obj`的作用域执行，而不是在全局作用域内执行，所以能够显示正确的值。
