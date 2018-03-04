@@ -103,3 +103,18 @@ var obj = {
 setTimeout(obj.y.bind(obj), 1000)
 // 2
 ```
+
+## setInterval()
+
+`setInterval`函数的用法与`setTimeout`完全一致，区别仅仅在于`setInterval`指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行。
+
+```
+var i = 1
+var timer = setInterval(function() {
+  console.log(2);
+}, 1000)
+```
+
+上面代码中，每隔1000毫秒就输出一个2，会无限运行下去，直到关闭当前窗口。
+
+与`setTimeout`一样，除了前两个参数，`setInterval`方法还可以接受更多的参数，它们会传入回调函数。
