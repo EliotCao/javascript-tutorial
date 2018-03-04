@@ -249,3 +249,21 @@ veryLongTask();
 ```
 
 上面代码的`setTimeout`，指定100毫秒以后运行一个任务。但是，如果后面的`veryLongTask`函数（同步任务）运行时间非常长，过了100毫秒还无法结束，那么被推迟运行的`someTask`就只有等着，等到`veryLongTask`运行结束，才轮到它执行。
+
+再看一个`setInterval`的例子。
+
+```
+setInterval(function () {
+  console.log(2);
+}, 1000);
+
+sleep(3000);
+
+function sleep(ms) {
+  var start = Date.now();
+  while ((Date.now() - start) < ms) {
+  }
+}
+```
+
+上面代码中，`setInterval`要求每隔1000毫秒，就输出一个2。但是，紧接着的`sleep`语句需要3000毫秒才能完成，那么`setInterval`就必须推迟到3000毫秒之后才开始生效。注意，生效后`setInterval`不会产生累积效应，即不会一下子输出三个2，而是只会输出一个2。
