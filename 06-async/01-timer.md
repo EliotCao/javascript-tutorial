@@ -118,3 +118,20 @@ var timer = setInterval(function() {
 上面代码中，每隔1000毫秒就输出一个2，会无限运行下去，直到关闭当前窗口。
 
 与`setTimeout`一样，除了前两个参数，`setInterval`方法还可以接受更多的参数，它们会传入回调函数。
+
+下面是一个通过`setInterval`方法实现网页动画的例子。
+
+```
+var div = document.getElementById('someDiv');
+var opacity = 1;
+var fader = setInterval(function() {
+  opacity -= 0.1;
+  if (opacity >= 0) {
+    div.style.opacity = opacity;
+  } else {
+    clearInterval(fader);
+  }
+}, 100);
+```
+
+上面代码每隔100毫秒，设置一次`div`元素的透明度，直至其完全透明为止。
