@@ -337,3 +337,30 @@ document.getElementById('input-box').onkeypress = function() {
 ```
 
 上面代码将代码放入`setTimeout`之中，就能使得它在浏览器接收到文本之后触发。
+
+由于`setTimeout(f, 0)`实际上意味着，将任务放到浏览器最早可得的空闲时段执行，所以那些计算量大、耗时长的任务，常常会被放到几个小部分，分别放到`setTimeout(f, 0)`里面执行。
+
+```
+var div = document.getElementsByTagName('div')[0];
+
+// 写法一
+for (var i = 0xA00000; i < 0xFFFFFF; i++) {
+  div.style.backgroundColor = '#' + i.toString(16);
+}
+
+// 写法二
+var timer;
+var i=0x100000;
+
+function func() {
+  timer = setTimeout(func, 0);
+  div.style.backgroundColor = '#' + i.toString(16);
+  if (i++ == 0xFFFFFF) clearTimeout(timer);
+}
+
+timer = setTimeout(func, 0);
+```
+
+上面代码有两种写法，都是改变一个网页元素的背景色。写法一会造成浏览器“堵塞”，因为 JavaScript 执行速度远高于 DOM，会造成大量 DOM 操作“堆积”，而写法二就不会，这就是`setTimeout(f, 0)`的好处。
+
+另一个使用这种技巧的例子是代码高亮的处理。如果代码块很大，一次性处理，可能会对性能造成很大的压力，那么将其分成一个个小块，一次处理一块，比如写成`setTimeout(highlightNext, 50)`的样子，性能压力就会减轻。
