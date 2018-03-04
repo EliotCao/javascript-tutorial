@@ -160,3 +160,17 @@ var timer = setTimeout(function f() {
 ```
 
 上面代码可以确保，下一次执行总是在本次执行结束之后的2000毫秒开始。
+
+## clearTimeout()，clearInterval()
+
+`setTimeout`和`setInterval`函数，都返回一个整数值，表示计数器编号。将该整数传入`clearTimeout`和`clearInterval`函数，就可以取消对应的定时器。
+
+```
+var id1 = setTimeout(f, 1000);
+var id2 = setInterval(f, 1000);
+
+clearTimeout(id1);
+clearInterval(id2);
+```
+
+上面代码中，回调函数`f`不会再执行了，因为两个定时器都被取消了。
