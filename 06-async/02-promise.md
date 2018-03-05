@@ -109,3 +109,25 @@ timeout(100)
 ```
 
 上面代码中，`timeout(100)`返回一个 Promise 实例。100毫秒以后，该实例的状态会变为`fulfilled`。
+
+## Promise.prototype.then()
+
+Promise 实例的`then`方法，用来添加回调函数。
+
+`then`方法可以接受两个回调函数，第一个是异步操作成功时（变为`fulfilled`状态）的回调函数，第二个是异步操作失败（变为`rejected`）时的回调函数（该参数可以省略）。一旦状态改变，就调用相应的回调函数。
+
+```
+var p1 = new Promise(function (resolve, reject) {
+  resolve('成功');
+});
+p1.then(console.log, console.error);
+// "成功"
+
+var p2 = new Promise(function (resolve, reject) {
+  reject(new Error('失败'));
+});
+p2.then(console.log, console.error);
+// Error: 失败
+```
+
+上面代码中，`p1`和`p2`都是Promise 实例，它们的`then`方法绑定两个回调函数：成功时的回调函数`console.log`，失败时的回调函数`console.error`（可以省略）。`p1`的状态变为成功，`p2`的状态变为失败，对应的回调函数会收到异步操作传回的值，然后在控制台输出。
