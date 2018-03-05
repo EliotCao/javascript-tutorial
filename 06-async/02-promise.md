@@ -53,3 +53,25 @@ step1(function (value1) {
 总的来说，传统的回调函数写法使得代码混成一团，变得横向发展而不是向下发展。Promise 就是解决这个问题，使得异步流程可以写成同步流程。
 
 Promise 原本只是社区提出的一个构想，一些函数库率先实现了这个功能。ECMAScript 6 将其写入语言标准，目前 JavaScript 原生支持 Promise 对象。
+
+## Promise 对象的状态
+
+Promise 对象通过自身的状态，来控制异步操作。Promise 实例具有三种状态。
+
+- 异步操作未完成（pending）
+- 异步操作成功（fulfilled）
+- 异步操作失败（rejected）
+
+上面三种状态里面，`fulfilled`和`rejected`合在一起称为`resolved`（已定型）。
+
+这三种的状态的变化途径只有两种。
+
+- 从“未完成”到“成功”
+- 从“未完成”到“失败”
+
+一旦状态发生变化，就凝固了，不会再有新的状态变化。这也是 Promise 这个名字的由来，它的英语意思是“承诺”，一旦承诺成效，就不得再改变了。这也意味着，Promise 实例的状态变化只可能发生一次。
+
+因此，Promise 的最终结果只有两种。
+
+- 异步操作成功，Promise 实例传回一个值（value），状态变为`fulfilled`。
+- 异步操作失败，Promise 实例抛出一个错误（error），状态变为`rejected`。
