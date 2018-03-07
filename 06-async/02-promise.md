@@ -201,3 +201,38 @@ f1().then(f2())
 f1().then(f2)
   .then(f3);
 ```
+
+## 实例：图片加载
+
+下面是使用 Promise 完成图片的加载。
+
+```
+var preloadImage = function (path) {
+  return new Promise(function (resolve, reject) {
+    var image = new Image();
+    image.onload  = resolve;
+    image.onerror = reject;
+    image.src = path;
+  });
+};
+```
+
+上面代码中，`image`是一个图片对象的实例。它有两个事件监听属性，`onload`属性在图片加载成功后调用，`onerror`属性在加载失败调用。
+
+上面的`preloadImage()`函数用法如下。
+
+```
+preloadImage('https://example.com/my.jpg')
+  .then(function (e) { document.body.append(e.target) })
+  .then(function () { console.log('加载成功') })
+```
+
+上面代码中，图片加载成功以后，`onload`属性会返回一个事件对象，因此第一个`then()`方法的回调函数，会接收到这个事件对象。该对象的`target`属性就是图片加载后生成的 DOM 节点。
+
+## 小结
+
+Promise 的优点在于，让回调函数变成了规范的链式写法，程序流程可以看得很清楚。它有一整套接口，可以实现许多强大的功能，比如同时执行多个异步操作，等到它们的状态都改变以后，再执行一个回调函数；再比如，为多个回调函数中抛出的错误，统一指定处理方法等等。
+
+而且，Promise 还有一个传统写法没有的好处：它的状态一旦改变，无论何时查询，都能得到这个状态。这意味着，无论何时为 Promise 实例添加回调函数，该函数都能正确执行。所以，你不用担心是否错过了某个事件或信号。如果是传统写法，通过监听事件来执行回调函数，一旦错过了事件，再添加回调函数是不会执行的。
+
+Promise 的缺点是，编写的难度比传统写法高，而且阅读代码也不是一眼可以看懂。你只会看到一堆`then`，必须自己在`then`的回调函数里面理清逻辑。
