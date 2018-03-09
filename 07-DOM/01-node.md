@@ -40,3 +40,26 @@ if (node.nodeType === Node.ELEMENT_NODE) {
   console.log('该节点是元素节点');
 }
 ```
+
+### Node.prototype.nodeName
+
+`nodeName`属性返回节点的名称。
+
+```
+// HTML 代码如下
+// <div id="d1">hello world</div>
+var div = document.getElementById('d1');
+div.nodeName // "DIV"
+```
+
+上面代码中，元素节点`<div>`的`nodeName`属性就是大写的标签名`DIV`。
+
+不同节点的`nodeName`属性值如下。
+
+- 文档节点（document）：`#document`
+- 元素节点（element）：大写的标签名
+- 属性节点（attr）：属性的名称
+- 文本节点（text）：`#text`
+- 文档片断节点（DocumentFragment）：`#document-fragment`
+- 文档类型节点（DocumentType）：文档的类型
+- 注释节点（Comment）：`#comment`
