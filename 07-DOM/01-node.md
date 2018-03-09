@@ -259,3 +259,17 @@ for (var i = 0; i < children.length; i++) {
 上面代码中，文档节点的第一个子节点的类型是10（即文档类型节点），第二个子节点的类型是1（即元素节点）。
 
 注意，除了元素节点，`childNodes`属性的返回值还包括文本节点和注释节点。如果当前节点不包括任何子节点，则返回一个空的`NodeList`集合。由于`NodeList`对象是一个动态集合，一旦子节点发生变化，立刻会反映在返回结果之中。
+
+### Node.prototype.isConnected
+
+`isConnected`属性返回一个布尔值，表示当前节点是否在文档之中。
+
+```
+var test = document.createElement('p');
+test.isConnected // false
+
+document.body.appendChild(test);
+test.isConnected // true
+```
+
+上面代码中，`test`节点是脚本生成的节点，没有插入文档之前，`isConnected`属性返回`false`，插入之后返回`true`。
