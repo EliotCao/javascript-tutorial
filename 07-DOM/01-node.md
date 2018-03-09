@@ -297,3 +297,43 @@ document.body.appendChild(div);
 上面代码中，插入的是一个已经存在的节点`myDiv`，结果就是该节点会从原来的位置，移动到`document.body`的尾部。
 
 如果`appendChild()`方法的参数是`DocumentFragment`节点，那么插入的是`DocumentFragment`的所有子节点，而不是`DocumentFragment`节点本身。返回值是一个空的`DocumentFragment`节点。
+
+### Node.prototype.hasChildNodes()
+
+`hasChildNodes`方法返回一个布尔值，表示当前节点是否有子节点。
+
+```
+var foo = document.getElementById('foo');
+
+if (foo.hasChildNodes()) {
+  foo.removeChild(foo.childNodes[0]);
+}
+```
+
+上面代码表示，如果`foo`节点有子节点，就移除第一个子节点。
+
+注意，子节点包括所有类型的节点，并不仅仅是元素节点。哪怕节点只包含一个空格，`hasChildNodes`方法也会返回`true`。
+
+判断一个节点有没有子节点，有许多种方法，下面是其中的三种。
+
+- `node.hasChildNodes()`
+- `node.firstChild !== null`
+- `node.childNodes && node.childNodes.length > 0`
+
+`hasChildNodes`方法结合`firstChild`属性和`nextSibling`属性，可以遍历当前节点的所有后代节点。
+
+```
+function DOMComb(parent, callback) {
+  if (parent.hasChildNodes()) {
+    for (var node = parent.firstChild; node; node = node.nextSibling) {
+      DOMComb(node, callback);
+    }
+  }
+  callback(parent);
+}
+
+// 用法
+DOMComb(document.body, console.log)
+```
+
+上面代码中，`DOMComb`函数的第一个参数是某个指定的节点，第二个参数是回调函数。这个回调函数会依次作用于指定节点，以及指定节点的所有后代节点。
