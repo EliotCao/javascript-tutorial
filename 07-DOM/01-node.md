@@ -137,3 +137,33 @@ d === document // true
 ```
 
 `document`对象本身的`ownerDocument`属性，返回`null`。
+
+### Node.prototype.nextSibling
+
+`Node.nextSibling`属性返回紧跟在当前节点后面的第一个同级节点。如果当前节点后面没有同级节点，则返回`null`。
+
+```
+// HTML 代码如下
+// <div id="d1">hello</div><div id="d2">world</div>
+var d1 = document.getElementById('d1');
+var d2 = document.getElementById('d2');
+
+d1.nextSibling === d2 // true
+```
+
+上面代码中，`d1.nextSibling`就是紧跟在`d1`后面的同级节点`d2`。
+
+注意，该属性还包括文本节点和注释节点（`<!-- comment -->`）。因此如果当前节点后面有空格，该属性会返回一个文本节点，内容为空格。
+
+`nextSibling`属性可以用来遍历所有子节点。
+
+```
+var el = document.getElementById('div1').firstChild;
+
+while (el !== null) {
+  console.log(el.nodeName);
+  el = el.nextSibling;
+}
+```
+
+上面代码遍历`div1`节点的所有子节点。
