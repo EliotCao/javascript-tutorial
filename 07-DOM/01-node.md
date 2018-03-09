@@ -105,3 +105,24 @@ document.getElementById('foo').textContent = '<p>GoodBye!</p>';
 对于文本节点（text）、注释节点（comment）和属性节点（attr），`textContent`属性的值与`nodeValue`属性相同。对于其他类型的节点，该属性会将每个子节点（不包括注释节点）的内容连接在一起返回。如果一个节点没有子节点，则返回空字符串。
 
 文档节点（document）和文档类型节点（doctype）的`textContent`属性为`null`。如果要读取整个文档的内容，可以使用`document.documentElement.textContent`。
+
+### Node.prototype.baseURI
+
+`baseURI`属性返回一个字符串，表示当前网页的绝对路径。浏览器根据这个属性，计算网页上的相对路径的 URL。该属性为只读。
+
+```
+// 当前网页的网址为
+// http://www.example.com/index.html
+document.baseURI
+// "http://www.example.com/index.html"
+```
+
+如果无法读到网页的 URL，`baseURI`属性返回`null`。
+
+该属性的值一般由当前网址的 URL（即`window.location`属性）决定，但是可以使用 HTML 的`<base>`标签，改变该属性的值。
+
+```
+<base href="http://www.example.com/page.html">
+```
+
+设置了以后，`baseURI`属性就返回`<base>`标签设置的值。
