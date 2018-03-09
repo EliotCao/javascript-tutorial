@@ -391,3 +391,27 @@ parent.insertBefore(s1, s2.nextSibling);
 上面代码中，`parent`是父节点，`s1`是一个全新的节点，`s2`是可以将`s1`节点，插在`s2`节点的后面。如果`s2`是当前节点的最后一个子节点，则`s2.nextSibling`返回`null`，这时`s1`节点会插在当前节点的最后，变成当前节点的最后一个子节点，等于紧跟在`s2`的后面。
 
 如果要插入的节点是`DocumentFragment`类型，那么插入的将是`DocumentFragment`的所有子节点，而不是`DocumentFragment`节点本身。返回值将是一个空的`DocumentFragment`节点。
+
+### Node.prototype.removeChild()
+
+`removeChild`方法接受一个子节点作为参数，用于从当前节点移除该子节点。返回值是移除的子节点。
+
+```
+var divA = document.getElementById('A');
+divA.parentNode.removeChild(divA);
+```
+
+上面代码移除了`divA`节点。注意，这个方法是在`divA`的父节点上调用的，不是在`divA`上调用的。
+
+下面是如何移除当前节点的所有子节点。
+
+```
+var element = document.getElementById('top');
+while (element.firstChild) {
+  element.removeChild(element.firstChild);
+}
+```
+
+被移除的节点依然存在于内存之中，但不再是 DOM 的一部分。所以，一个节点移除以后，依然可以使用它，比如插入到另一个节点下面。
+
+如果参数节点不是当前节点的子节点，`removeChild`方法将报错。
