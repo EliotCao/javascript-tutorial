@@ -167,3 +167,17 @@ while (el !== null) {
 ```
 
 上面代码遍历`div1`节点的所有子节点。
+
+### Node.prototype.parentNode
+
+`parentNode`属性返回当前节点的父节点。对于一个节点来说，它的父节点只可能是三种类型：元素节点（element）、文档节点（document）和文档片段节点（documentfragment）。
+
+```
+if (node.parentNode) {
+  node.parentNode.removeChild(node);
+}
+```
+
+上面代码中，通过`node.parentNode`属性将`node`节点从文档里面移除。
+
+文档节点（document）和文档片段节点（documentfragment）的父节点都是`null`。另外，对于那些生成后还没插入 DOM 树的节点，父节点也是`null`。
