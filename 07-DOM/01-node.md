@@ -126,3 +126,14 @@ document.baseURI
 ```
 
 设置了以后，`baseURI`属性就返回`<base>`标签设置的值。
+
+### Node.prototype.ownerDocument
+
+`Node.ownerDocument`属性返回当前节点所在的顶层文档对象，即`document`对象。
+
+```
+var d = p.ownerDocument;
+d === document // true
+```
+
+`document`对象本身的`ownerDocument`属性，返回`null`。
