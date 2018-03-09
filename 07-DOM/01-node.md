@@ -63,3 +63,19 @@ div.nodeName // "DIV"
 - 文档片断节点（DocumentFragment）：`#document-fragment`
 - 文档类型节点（DocumentType）：文档的类型
 - 注释节点（Comment）：`#comment`
+
+### Node.prototype.nodeValue
+
+`nodeValue`属性返回一个字符串，表示当前节点本身的文本值，该属性可读写。
+
+只有文本节点（text）、注释节点（comment）和属性节点（attr）有文本值，因此这三类节点的`nodeValue`可以返回结果，其他类型的节点一律返回`null`。同样的，也只有这三类节点可以设置`nodeValue`属性的值，其他类型的节点设置无效。
+
+```
+// HTML 代码如下
+// <div id="d1">hello world</div>
+var div = document.getElementById('d1');
+div.nodeValue // null
+div.firstChild.nodeValue // "hello world"
+```
+
+上面代码中，`div`是元素节点，`nodeValue`属性返回`null`。`div.firstChild`是文本节点，所以可以返回文本值。
