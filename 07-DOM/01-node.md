@@ -223,3 +223,39 @@ p1.firstChild.nodeName // "#text"
 上面代码中，`p`元素与`span`元素之间有空白字符，这导致`firstChild`返回的是文本节点。
 
 `lastChild`属性返回当前节点的最后一个子节点，如果当前节点没有子节点，则返回`null`。用法与`firstChild`属性相同。
+
+### Node.prototype.childNodes
+
+`childNodes`属性返回一个类似数组的对象（`NodeList`集合），成员包括当前节点的所有子节点。
+
+```
+var children = document.querySelector('ul').childNodes;
+```
+
+上面代码中，`children`就是`ul`元素的所有子节点。
+
+使用该属性，可以遍历某个节点的所有子节点。
+
+```
+var div = document.getElementById('div1');
+var children = div.childNodes;
+
+for (var i = 0; i < children.length; i++) {
+  // ...
+}
+```
+
+文档节点（document）就有两个子节点：文档类型节点（docType）和 HTML 根元素节点。
+
+```
+var children = document.childNodes;
+for (var i = 0; i < children.length; i++) {
+  console.log(children[i].nodeType);
+}
+// 10
+// 1
+```
+
+上面代码中，文档节点的第一个子节点的类型是10（即文档类型节点），第二个子节点的类型是1（即元素节点）。
+
+注意，除了元素节点，`childNodes`属性的返回值还包括文本节点和注释节点。如果当前节点不包括任何子节点，则返回一个空的`NodeList`集合。由于`NodeList`对象是一个动态集合，一旦子节点发生变化，立刻会反映在返回结果之中。
