@@ -181,3 +181,45 @@ if (node.parentNode) {
 上面代码中，通过`node.parentNode`属性将`node`节点从文档里面移除。
 
 文档节点（document）和文档片段节点（documentfragment）的父节点都是`null`。另外，对于那些生成后还没插入 DOM 树的节点，父节点也是`null`。
+
+### Node.prototype.parentElement
+
+`parentElement`属性返回当前节点的父元素节点。如果当前节点没有父节点，或者父节点类型不是元素节点，则返回`null`。
+
+```
+if (node.parentElement) {
+  node.parentElement.style.color = 'red';
+}
+```
+
+上面代码中，父元素节点的样式设定了红色。
+
+由于父节点只可能是三种类型：元素节点、文档节点（document）和文档片段节点（documentfragment）。`parentElement`属性相当于把后两种父节点都排除了。
+
+### Node.prototype.firstChild，Node.prototype.lastChild
+
+`firstChild`属性返回当前节点的第一个子节点，如果当前节点没有子节点，则返回`null`。
+
+```
+// HTML 代码如下
+// <p id="p1"><span>First span</span></p>
+var p1 = document.getElementById('p1');
+p1.firstChild.nodeName // "SPAN"
+```
+
+上面代码中，`p`元素的第一个子节点是`span`元素。
+
+注意，`firstChild`返回的除了元素节点，还可能是文本节点或注释节点。
+
+```
+// HTML 代码如下
+// <p id="p1">
+//   <span>First span</span>
+//  </p>
+var p1 = document.getElementById('p1');
+p1.firstChild.nodeName // "#text"
+```
+
+上面代码中，`p`元素与`span`元素之间有空白字符，这导致`firstChild`返回的是文本节点。
+
+`lastChild`属性返回当前节点的最后一个子节点，如果当前节点没有子节点，则返回`null`。用法与`firstChild`属性相同。
