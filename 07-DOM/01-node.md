@@ -415,3 +415,22 @@ while (element.firstChild) {
 被移除的节点依然存在于内存之中，但不再是 DOM 的一部分。所以，一个节点移除以后，依然可以使用它，比如插入到另一个节点下面。
 
 如果参数节点不是当前节点的子节点，`removeChild`方法将报错。
+
+### Node.prototype.replaceChild()
+
+`replaceChild`方法用于将一个新的节点，替换当前节点的某一个子节点。
+
+```
+var replacedNode = parentNode.replaceChild(newChild, oldChild);
+```
+
+上面代码中，`replaceChild`方法接受两个参数，第一个参数`newChild`是用来替换的新节点，第二个参数`oldChild`是将要替换走的子节点。返回值是替换走的那个节点`oldChild`。
+
+```
+var divA = document.getElementById('divA');
+var newSpan = document.createElement('span');
+newSpan.textContent = 'Hello World!';
+divA.parentNode.replaceChild(newSpan, divA);
+```
+
+上面代码是如何将指定节点`divA`替换走。
