@@ -537,3 +537,21 @@ wrapper.childNodes.length // 1
 上面代码使用`normalize`方法之前，`wrapper`节点有两个毗邻的文本子节点。使用`normalize`方法之后，两个文本子节点被合并成一个。
 
 该方法是`Text.splitText`的逆方法，可以查看《Text 节点对象》一章，了解更多内容。
+
+### Node.prototype.getRootNode()
+
+`getRootNode()`方法返回当前节点所在文档的根节点`document`，与`ownerDocument`属性的作用相同。
+
+```
+document.body.firstChild.getRootNode() === document
+// true
+document.body.firstChild.getRootNode() === document.body.firstChild.ownerDocument
+// true
+```
+
+该方法可用于`document`节点自身，这一点与`document.ownerDocument`不同。
+
+```
+document.getRootNode() // document
+document.ownerDocument // null
+```
