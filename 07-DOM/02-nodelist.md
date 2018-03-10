@@ -99,3 +99,33 @@ document.body.childNodes.item(0)
 ```
 document.body.childNodes[0]
 ```
+
+### NodeList.prototype.keys()，NodeList.prototype.values()，NodeList.prototype.entries()
+
+这三个方法都返回一个 ES6 的遍历器对象，可以通过`for...of`循环遍历获取每一个成员的信息。区别在于，`keys()`返回键名的遍历器，`values()`返回键值的遍历器，`entries()`返回的遍历器同时包含键名和键值的信息。
+
+```
+var children = document.body.childNodes;
+
+for (var key of children.keys()) {
+  console.log(key);
+}
+// 0
+// 1
+// 2
+// ...
+
+for (var value of children.values()) {
+  console.log(value);
+}
+// #text
+// <script>
+// ...
+
+for (var entry of children.entries()) {
+  console.log(entry);
+}
+// Array [ 0, #text ]
+// Array [ 1, <script> ]
+// ...
+```
