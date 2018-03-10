@@ -434,3 +434,23 @@ divA.parentNode.replaceChild(newSpan, divA);
 ```
 
 上面代码是如何将指定节点`divA`替换走。
+
+### Node.prototype.contains()
+
+`contains`方法返回一个布尔值，表示参数节点是否满足以下三个条件之一。
+
+- 参数节点为当前节点。
+- 参数节点为当前节点的子节点。
+- 参数节点为当前节点的后代节点。
+
+```
+document.body.contains(node)
+```
+
+上面代码检查参数节点`node`，是否包含在当前文档之中。
+
+注意，当前节点传入`contains`方法，返回`true`。
+
+```
+nodeA.contains(nodeA) // true
+```
