@@ -176,3 +176,15 @@ var img0 = c.item(0);
 上面代码中，`item(0)`表示返回0号位置的成员。由于方括号运算符也具有同样作用，而且使用更方便，所以一般情况下，总是使用方括号运算符。
 
 如果参数值超出成员数量或者不合法（比如小于0），那么`item`方法返回`null`。
+
+### HTMLCollection.prototype.namedItem()
+
+`namedItem`方法的参数是一个字符串，表示`id`属性或`name`属性的值，返回对应的元素节点。如果没有对应的节点，则返回`null`。
+
+```
+// HTML 代码如下
+// <img id="pic" src="http://example.com/foo.jpg">
+
+var pic = document.getElementById('pic');
+document.images.namedItem('pic') === pic // true
+```
