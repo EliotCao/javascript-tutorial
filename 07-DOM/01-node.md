@@ -518,3 +518,22 @@ var p2 = document.createElement('p');
 p1.isSameNode(p2) // false
 p1.isSameNode(p1) // true
 ```
+
+### Node.prototype.normalize()
+
+`normalize`方法用于清理当前节点内部的所有文本节点（text）。它会去除空的文本节点，并且将毗邻的文本节点合并成一个，也就是说不存在空的文本节点，以及毗邻的文本节点。
+
+```
+var wrapper = document.createElement('div');
+
+wrapper.appendChild(document.createTextNode('Part 1 '));
+wrapper.appendChild(document.createTextNode('Part 2 '));
+
+wrapper.childNodes.length // 2
+wrapper.normalize();
+wrapper.childNodes.length // 1
+```
+
+上面代码使用`normalize`方法之前，`wrapper`节点有两个毗邻的文本子节点。使用`normalize`方法之后，两个文本子节点被合并成一个。
+
+该方法是`Text.splitText`的逆方法，可以查看《Text 节点对象》一章，了解更多内容。
