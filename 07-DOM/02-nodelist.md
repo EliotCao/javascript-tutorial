@@ -57,3 +57,14 @@ children.length // 19
 ```
 
 上面代码中，文档增加一个子节点，NodeList 实例`children`的`length`属性就增加了1。
+
+### NodeList.prototype.length
+
+`length`属性返回 NodeList 实例包含的节点数量。
+
+```
+document.querySelectorAll('xxx').length
+// 0
+```
+
+上面代码中，`document.querySelectorAll`返回一个 NodeList 集合。对于那些不存在的 HTML 标签，`length`属性返回`0`。
