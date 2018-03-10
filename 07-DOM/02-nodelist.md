@@ -163,3 +163,16 @@ document.images.pic === pic // true
 ```
 document.links.length // 18
 ```
+
+### HTMLCollection.prototype.item()
+
+`item`方法接受一个整数值作为参数，表示成员的位置，返回该位置上的成员。
+
+```
+var c = document.images;
+var img0 = c.item(0);
+```
+
+上面代码中，`item(0)`表示返回0号位置的成员。由于方括号运算符也具有同样作用，而且使用更方便，所以一般情况下，总是使用方括号运算符。
+
+如果参数值超出成员数量或者不合法（比如小于0），那么`item`方法返回`null`。
