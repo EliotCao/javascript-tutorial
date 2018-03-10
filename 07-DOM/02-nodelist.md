@@ -129,3 +129,29 @@ for (var entry of children.entries()) {
 // Array [ 1, <script> ]
 // ...
 ```
+
+## HTMLCollection 接口
+
+### 概述
+
+`HTMLCollection`是一个节点对象的集合，只能包含元素节点（element），不能包含其他类型的节点。它的返回值是一个类似数组的对象，但是与`NodeList`接口不同，`HTMLCollection`没有`forEach`方法，只能使用`for`循环遍历。
+
+返回`HTMLCollection`实例的，主要是一些`Document`对象的集合属性，比如`document.links`、`document.forms`、`document.images`等。
+
+```
+document.links instanceof HTMLCollection // true
+```
+
+`HTMLCollection`实例都是动态集合，节点的变化会实时反映在集合中。
+
+如果元素节点有`id`或`name`属性，那么`HTMLCollection`实例上面，可以使用`id`属性或`name`属性引用该节点元素。如果没有对应的节点，则返回`null`。
+
+```
+// HTML 代码如下
+// <img id="pic" src="http://example.com/foo.jpg">
+
+var pic = document.getElementById('pic');
+document.images.pic === pic // true
+```
+
+上面代码中，`document.images`是一个`HTMLCollection`实例，可以通过`<img>`元素的`id`属性值，从`HTMLCollection`实例上取到这个元素。
