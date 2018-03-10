@@ -497,3 +497,24 @@ if (head.compareDocumentPosition(body) & 4) {
 ```
 
 上面代码中，`compareDocumentPosition`的返回值与`4`（又称掩码）进行与运算（`&`），得到一个布尔值，表示`<head>`是否在`<body>`前面。
+
+### Node.prototype.isEqualNode()，Node.prototype.isSameNode()
+
+`isEqualNode`方法返回一个布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同。
+
+```
+var p1 = document.createElement('p');
+var p2 = document.createElement('p');
+
+p1.isEqualNode(p2) // true
+```
+
+`isSameNode`方法返回一个布尔值，表示两个节点是否为同一个节点。
+
+```
+var p1 = document.createElement('p');
+var p2 = document.createElement('p');
+
+p1.isSameNode(p2) // false
+p1.isSameNode(p1) // true
+```
