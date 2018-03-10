@@ -81,3 +81,21 @@ children.forEach(function f(item, i, list) {
 ```
 
 上面代码中，回调函数`f`的三个参数依次是当前成员、位置和当前 NodeList 实例。`forEach`方法的第二个参数，用于绑定回调函数内部的`this`，该参数可省略。
+
+### NodeList.prototype.item()
+
+`item`方法接受一个整数值作为参数，表示成员的位置，返回该位置上的成员。
+
+```
+document.body.childNodes.item(0)
+```
+
+上面代码中，`item(0)`返回第一个成员。
+
+如果参数值大于实际长度，或者索引不合法（比如负数），`item`方法返回`null`。如果省略参数，`item`方法会报错。
+
+所有类似数组的对象，都可以使用方括号运算符取出成员。一般情况下，都是使用方括号运算符，而不使用`item`方法。
+
+```
+document.body.childNodes[0]
+```
