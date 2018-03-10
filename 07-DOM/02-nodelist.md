@@ -68,3 +68,16 @@ document.querySelectorAll('xxx').length
 ```
 
 上面代码中，`document.querySelectorAll`返回一个 NodeList 集合。对于那些不存在的 HTML 标签，`length`属性返回`0`。
+
+### NodeList.prototype.forEach()
+
+`forEach`方法用于遍历 NodeList 的所有成员。它接受一个回调函数作为参数，每一轮遍历就执行一次这个回调函数，用法与数组实例的`forEach`方法完全一致。
+
+```
+var children = document.body.childNodes;
+children.forEach(function f(item, i, list) {
+  // ...
+}, this);
+```
+
+上面代码中，回调函数`f`的三个参数依次是当前成员、位置和当前 NodeList 实例。`forEach`方法的第二个参数，用于绑定回调函数内部的`this`，该参数可省略。
