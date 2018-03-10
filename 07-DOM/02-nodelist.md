@@ -155,3 +155,11 @@ document.images.pic === pic // true
 ```
 
 上面代码中，`document.images`是一个`HTMLCollection`实例，可以通过`<img>`元素的`id`属性值，从`HTMLCollection`实例上取到这个元素。
+
+### HTMLCollection.prototype.length
+
+`length`属性返回`HTMLCollection`实例包含的成员数量。
+
+```
+document.links.length // 18
+```
