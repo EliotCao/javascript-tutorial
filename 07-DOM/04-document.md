@@ -75,3 +75,39 @@ if (document.fullscreenElement.nodeName == 'VIDEO') {
 ```
 
 上面代码中，通过`document.fullscreenElement`可以知道`<video>`元素有没有处在全屏状态，从而判断用户行为。
+
+### 节点集合属性
+
+以下属性返回一个`HTMLCollection`实例，表示文档内部特定元素的集合。这些集合都是动态的，原节点有任何变化，立刻会反映在集合中。
+
+**（1）document.links**
+
+`document.links`属性返回当前文档所有设定了`href`属性的`<a>`及`<area>`节点。
+
+```
+// 打印文档所有的链接
+var links = document.links;
+for(var i = 0; i < links.length; i++) {
+  console.log(links[i]);
+}
+```
+
+**（2）document.forms**
+
+`document.forms`属性返回所有`<form>`表单节点。
+
+```
+var selectForm = document.forms[0];
+```
+
+上面代码获取文档第一个表单。
+
+除了使用位置序号，`id`属性和`name`属性也可以用来引用表单。
+
+```
+/* HTML 代码如下
+  <form name="foo" id="bar"></form>
+*/
+document.forms[0] === document.forms.foo // true
+document.forms.bar === document.forms.foo // true
+```
