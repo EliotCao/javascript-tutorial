@@ -63,3 +63,15 @@ document.scrollingElement.scrollTop = 0;
 **（6）document.activeElement**
 
 `document.activeElement`属性返回获得当前焦点（focus）的 DOM 元素。通常，这个属性返回的是`<input>`、`<textarea>`、`<select>`等表单元素，如果当前没有焦点元素，返回`<body>`元素或`null`。
+
+**（7）document.fullscreenElement**
+
+`document.fullscreenElement`属性返回当前以全屏状态展示的 DOM 元素。如果不是全屏状态，该属性返回`null`。
+
+```
+if (document.fullscreenElement.nodeName == 'VIDEO') {
+  console.log('全屏播放视频');
+}
+```
+
+上面代码中，通过`document.fullscreenElement`可以知道`<video>`元素有没有处在全屏状态，从而判断用户行为。
