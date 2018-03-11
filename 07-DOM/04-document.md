@@ -12,3 +12,17 @@
 - 内部节点的`ownerDocument`属性。
 
 `document`对象继承了`EventTarget`接口和`Node`接口，并且混入（mixin）了`ParentNode`接口。这意味着，这些接口的方法都可以在`document`对象上调用。除此之外，`document`对象还有很多自己的属性和方法。
+
+## 属性
+
+### 快捷方式属性
+
+以下属性是指向文档内部的某个节点的快捷方式。
+
+**（1）document.defaultView**
+
+`document.defaultView`属性返回`document`对象所属的`window`对象。如果当前文档不属于`window`对象，该属性返回`null`。
+
+```
+document.defaultView === window // true
+```
