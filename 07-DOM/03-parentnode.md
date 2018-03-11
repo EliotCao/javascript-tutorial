@@ -81,3 +81,17 @@ parent.append('Hello', p);
 注意，该方法没有返回值。
 
 `prepend`方法为当前节点追加一个或多个子节点，位置是第一个元素子节点的前面。它的用法与`append`方法完全一致，也是没有返回值。
+
+## ChildNode 接口
+
+如果一个节点有父节点，那么该节点就拥有了`ChildNode`接口。
+
+### ChildNode.remove()
+
+`remove`方法用于从父节点移除当前节点。
+
+```
+el.remove()
+```
+
+上面代码在 DOM 里面移除了`el`节点。
