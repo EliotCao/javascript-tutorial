@@ -5,3 +5,19 @@
 ## ParentNode 接口
 
 如果当前节点是父节点，就会混入了（mixin）`ParentNode`接口。由于只有元素节点（element）、文档节点（document）和文档片段节点（documentFragment）拥有子节点，因此只有这三类节点会拥有`ParentNode`接口。
+
+### ParentNode.children
+
+`children`属性返回一个`HTMLCollection`实例，成员是当前节点的所有元素子节点。该属性只读。
+
+下面是遍历某个节点的所有元素子节点的示例。
+
+```
+for (var i = 0; i < el.children.length; i++) {
+  // ...
+}
+```
+
+注意，`children`属性只包括元素子节点，不包括其他类型的子节点（比如文本子节点）。如果没有元素类型的子节点，返回值`HTMLCollection`实例的`length`属性为`0`。
+
+另外，`HTMLCollection`是动态集合，会实时反映 DOM 的任何变化。
