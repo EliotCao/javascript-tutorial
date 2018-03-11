@@ -21,3 +21,14 @@ for (var i = 0; i < el.children.length; i++) {
 注意，`children`属性只包括元素子节点，不包括其他类型的子节点（比如文本子节点）。如果没有元素类型的子节点，返回值`HTMLCollection`实例的`length`属性为`0`。
 
 另外，`HTMLCollection`是动态集合，会实时反映 DOM 的任何变化。
+
+### ParentNode.firstElementChild
+
+`firstElementChild`属性返回当前节点的第一个元素子节点。如果没有任何元素子节点，则返回`null`。
+
+```
+document.firstElementChild.nodeName
+// "HTML"
+```
+
+上面代码中，`document`节点的第一个元素子节点是`<HTML>`。
