@@ -48,3 +48,14 @@ doctype.name // "html"
 `document.body`属性指向`<body>`节点，`document.head`属性指向`<head>`节点。
 
 这两个属性总是存在的，如果网页源码里面省略了`<head>`或`<body>`，浏览器会自动创建。另外，这两个属性是可写的，如果改写它们的值，相当于移除所有子节点。
+
+**（5）document.scrollingElement**
+
+`document.scrollingElement`属性返回文档的滚动元素。也就是说，当文档整体滚动时，到底是哪个元素在滚动。
+
+标准模式下，这个属性返回的文档的根元素`document.documentElement`（即`<html>`）。兼容（quirk）模式下，返回的是`<body>`元素，如果该元素不存在，返回`null`。
+
+```
+// 页面滚动到浏览器顶部
+document.scrollingElement.scrollTop = 0;
+```
