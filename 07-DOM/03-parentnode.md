@@ -32,3 +32,14 @@ document.firstElementChild.nodeName
 ```
 
 上面代码中，`document`节点的第一个元素子节点是`<HTML>`。
+
+### ParentNode.lastElementChild
+
+`lastElementChild`属性返回当前节点的最后一个元素子节点，如果不存在任何元素子节点，则返回`null`。
+
+```
+document.lastElementChild.nodeName
+// "HTML"
+```
+
+上面代码中，`document`节点的最后一个元素子节点是`<HTML>`（因为`document`只包含这一个元素子节点）。
