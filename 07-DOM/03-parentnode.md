@@ -43,3 +43,11 @@ document.lastElementChild.nodeName
 ```
 
 上面代码中，`document`节点的最后一个元素子节点是`<HTML>`（因为`document`只包含这一个元素子节点）。
+
+### ParentNode.childElementCount
+
+`childElementCount`属性返回一个整数，表示当前节点的所有元素子节点的数目。如果不包含任何元素子节点，则返回`0`。
+
+```
+document.body.childElementCount // 13
+```
