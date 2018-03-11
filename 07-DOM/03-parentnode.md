@@ -95,3 +95,28 @@ el.remove()
 ```
 
 上面代码在 DOM 里面移除了`el`节点。
+
+### ChildNode.before()，ChildNode.after()
+
+`before`方法用于在当前节点的前面，插入一个或多个同级节点。两者拥有相同的父节点。
+
+注意，该方法不仅可以插入元素节点，还可以插入文本节点。
+
+```
+var p = document.createElement('p');
+var p1 = document.createElement('p');
+
+// 插入元素节点
+el.before(p);
+
+// 插入文本节点
+el.before('Hello');
+
+// 插入多个元素节点
+el.before(p, p1);
+
+// 插入元素节点和文本节点
+el.before(p, 'Hello');
+```
+
+`after`方法用于在当前节点的后面，插入一个或多个同级节点，两者拥有相同的父节点。用法与`before`方法完全相同。
