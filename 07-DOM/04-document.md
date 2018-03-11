@@ -42,3 +42,9 @@ doctype.name // "html"
 **（3）document.documentElement**
 
 `document.documentElement`属性返回当前文档的根元素节点（root）。它通常是`document`节点的第二个子节点，紧跟在`document.doctype`节点后面。HTML网页的该属性，一般是`<html>`节点。
+
+**（4）document.body，document.head**
+
+`document.body`属性指向`<body>`节点，`document.head`属性指向`<head>`节点。
+
+这两个属性总是存在的，如果网页源码里面省略了`<head>`或`<body>`，浏览器会自动创建。另外，这两个属性是可写的，如果改写它们的值，相当于移除所有子节点。
