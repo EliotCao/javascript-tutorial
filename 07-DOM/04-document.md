@@ -38,3 +38,7 @@ doctype.name // "html"
 ```
 
 `document.firstChild`通常就返回这个节点。
+
+**（3）document.documentElement**
+
+`document.documentElement`属性返回当前文档的根元素节点（root）。它通常是`document`节点的第二个子节点，紧跟在`document.doctype`节点后面。HTML网页的该属性，一般是`<html>`节点。
