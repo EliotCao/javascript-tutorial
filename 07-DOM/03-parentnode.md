@@ -120,3 +120,14 @@ el.before(p, 'Hello');
 ```
 
 `after`方法用于在当前节点的后面，插入一个或多个同级节点，两者拥有相同的父节点。用法与`before`方法完全相同。
+
+### ChildNode.replaceWith()
+
+`replaceWith`方法使用参数节点，替换当前节点。参数可以是元素节点，也可以是文本节点。
+
+```
+var span = document.createElement('span');
+el.replaceWith(span);
+```
+
+上面代码中，`el`节点将被`span`节点替换。
