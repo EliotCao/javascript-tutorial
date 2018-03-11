@@ -26,3 +26,15 @@
 ```
 document.defaultView === window // true
 ```
+
+**（2）document.doctype**
+
+对于 HTML 文档来说，`document`对象一般有两个子节点。第一个子节点是`document.doctype`，指向`<DOCTYPE>`节点，即文档类型（Document Type Declaration，简写DTD）节点。HTML 的文档类型节点，一般写成`<!DOCTYPE html>`。如果网页没有声明 DTD，该属性返回`null`。
+
+```
+var doctype = document.doctype;
+doctype // "<!DOCTYPE html>"
+doctype.name // "html"
+```
+
+`document.firstChild`通常就返回这个节点。
