@@ -51,3 +51,33 @@ document.lastElementChild.nodeName
 ```
 document.body.childElementCount // 13
 ```
+
+### ParentNode.append()，ParentNode.prepend()
+
+`append`方法为当前节点追加一个或多个子节点，位置是最后一个元素子节点的后面。
+
+该方法不仅可以添加元素子节点，还可以添加文本子节点。
+
+```
+var parent = document.body;
+
+// 添加元素子节点
+var p = document.createElement('p');
+parent.append(p);
+
+// 添加文本子节点
+parent.append('Hello');
+
+// 添加多个元素子节点
+var p1 = document.createElement('p');
+var p2 = document.createElement('p');
+parent.append(p1, p2);
+
+// 添加元素子节点和文本子节点
+var p = document.createElement('p');
+parent.append('Hello', p);
+```
+
+注意，该方法没有返回值。
+
+`prepend`方法为当前节点追加一个或多个子节点，位置是第一个元素子节点的前面。它的用法与`append`方法完全一致，也是没有返回值。
