@@ -131,3 +131,14 @@ for(var i = 0; i < imglist.length; i++) {
 **（4）document.embeds，document.plugins**
 
 `document.embeds`属性和`document.plugins`属性，都返回所有`<embed>`节点。
+
+**（5）document.scripts**
+
+`document.scripts`属性返回所有`<script>`节点。
+
+```
+var scripts = document.scripts;
+if (scripts.length !== 0 ) {
+  console.log('当前网页有脚本');
+}
+```
