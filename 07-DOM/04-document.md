@@ -142,3 +142,7 @@ if (scripts.length !== 0 ) {
   console.log('当前网页有脚本');
 }
 ```
+
+**（6）document.styleSheets**
+
+`document.styleSheets`属性返回文档内嵌或引入的样式表集合，详细介绍请看《CSS 对象模型》一章。
