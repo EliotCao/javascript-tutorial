@@ -127,3 +127,7 @@ for(var i = 0; i < imglist.length; i++) {
 ```
 
 上面代码在所有`img`标签中，寻找某张图片。
+
+**（4）document.embeds，document.plugins**
+
+`document.embeds`属性和`document.plugins`属性，都返回所有`<embed>`节点。
