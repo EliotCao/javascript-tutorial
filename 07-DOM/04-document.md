@@ -111,3 +111,19 @@ var selectForm = document.forms[0];
 document.forms[0] === document.forms.foo // true
 document.forms.bar === document.forms.foo // true
 ```
+
+**（3）document.images**
+
+`document.images`属性返回页面所有`<img>`图片节点。
+
+```
+var imglist = document.images;
+
+for(var i = 0; i < imglist.length; i++) {
+  if (imglist[i].src === 'banner.gif') {
+    // ...
+  }
+}
+```
+
+上面代码在所有`img`标签中，寻找某张图片。
