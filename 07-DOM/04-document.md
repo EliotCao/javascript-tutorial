@@ -218,3 +218,12 @@ if (Date.parse(document.lastModified) > lastVisitedDate) {
 ```
 
 如果页面上有 JavaScript 生成的内容，`document.lastModified`属性返回的总是当前时间。
+
+**（5）document.title**
+
+`document.title`属性返回当前文档的标题。默认情况下，返回`<title>`节点的值。但是该属性是可写的，一旦被修改，就返回修改后的值。
+
+```
+document.title = '新标题';
+document.title // "新标题"
+```
