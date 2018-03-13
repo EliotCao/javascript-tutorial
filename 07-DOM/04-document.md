@@ -166,3 +166,21 @@ document.scripts instanceof HTMLCollection // true
 // <form name="myForm">
 document.myForm === document.forms.myForm // true
 ```
+
+### 文档静态信息属性
+
+以下属性返回文档信息。
+
+**（1）document.documentURI，document.URL**
+
+`document.documentURI`属性和`document.URL`属性都返回一个字符串，表示当前文档的网址。不同之处是它们继承自不同的接口，`documentURI`继承自`Document`接口，可用于所有文档；`URL`继承自`HTMLDocument`接口，只能用于 HTML 文档。
+
+```
+document.URL
+// http://www.example.com/about
+
+document.documentURI === document.URL
+// true
+```
+
+如果文档的锚点（`#anchor`）变化，这两个属性都会跟着变化。
