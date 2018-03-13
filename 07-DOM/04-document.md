@@ -198,3 +198,23 @@ document.documentURI === document.URL
 `Location`对象是浏览器提供的原生对象，提供 URL 相关的信息和操作方法。通过`window.location`和`document.location`属性，可以拿到这个对象。
 
 关于这个对象的详细介绍，请看《浏览器模型》部分的《Location 对象》章节。
+
+**（4）document.lastModified**
+
+`document.lastModified`属性返回一个字符串，表示当前文档最后修改的时间。不同浏览器的返回值，日期格式是不一样的。
+
+```
+document.lastModified
+// "03/07/2018 11:18:27"
+```
+
+注意，`document.lastModified`属性的值是字符串，所以不能直接用来比较。`Date.parse`方法将其转为`Date`实例，才能比较两个网页。
+
+```
+var lastVisitedDate = Date.parse('01/01/2018');
+if (Date.parse(document.lastModified) > lastVisitedDate) {
+  console.log('网页已经变更');
+}
+```
+
+如果页面上有 JavaScript 生成的内容，`document.lastModified`属性返回的总是当前时间。
