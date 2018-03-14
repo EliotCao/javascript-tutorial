@@ -227,3 +227,7 @@ if (Date.parse(document.lastModified) > lastVisitedDate) {
 document.title = '新标题';
 document.title // "新标题"
 ```
+
+**（6）document.characterSet**
+
+`document.characterSet`属性返回当前文档的编码，比如`UTF-8`、`ISO-8859-1`等等。
