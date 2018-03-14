@@ -231,3 +231,16 @@ document.title // "新标题"
 **（6）document.characterSet**
 
 `document.characterSet`属性返回当前文档的编码，比如`UTF-8`、`ISO-8859-1`等等。
+
+**（7）document.referrer**
+
+`document.referrer`属性返回一个字符串，表示当前文档的访问者来自哪里。
+
+```
+document.referrer
+// "https://example.com/path"
+```
+
+如果无法获取来源，或者用户直接键入网址而不是从其他网页点击进入，`document.referrer`返回一个空字符串。
+
+`document.referrer`的值，总是与 HTTP 头信息的`Referer`字段保持一致。但是，`document.referrer`的拼写有两个`r`，而头信息的`Referer`字段只有一个`r`。
