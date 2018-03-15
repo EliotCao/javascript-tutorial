@@ -254,3 +254,11 @@ document.referrer
 `compatMode`属性返回浏览器处理文档的模式，可能的值为`BackCompat`（向后兼容模式）和`CSS1Compat`（严格模式）。
 
 一般来说，如果网页代码的第一行设置了明确的`DOCTYPE`（比如`<!doctype html>`），`document.compatMode`的值都为`CSS1Compat`。
+
+### 文档状态属性
+
+**（1）document.hidden**
+
+`document.hidden`属性返回一个布尔值，表示当前页面是否可见。如果窗口最小化、浏览器切换了 Tab，都会导致导致页面不可见，使得`document.hidden`返回`true`。
+
+这个属性是 Page Visibility API 引入的，一般都是配合这个 API 使用。
