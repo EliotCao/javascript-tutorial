@@ -309,3 +309,7 @@ var interval = setInterval(function() {
 ```
 
 另外，每次状态变化都会触发一个`readystatechange`事件。
+
+### document.cookie
+
+`document.cookie`属性用来操作浏览器 Cookie，详见《浏览器模型》部分的《Cookie》章节。
