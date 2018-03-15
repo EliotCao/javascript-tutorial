@@ -275,3 +275,37 @@ document.referrer
 > - `unloaded`：页面从内存里面卸载了。
 
 这个属性可以用在页面加载时，防止加载某些资源；或者页面不可见时，停掉一些页面功能。
+
+**（3）document.readyState**
+
+`document.readyState`属性返回当前文档的状态，共有三种可能的值。
+
+- `loading`：加载 HTML 代码阶段（尚未完成解析）
+- `interactive`：加载外部资源阶段
+- `complete`：加载完成
+
+这个属性变化的过程如下。
+
+1. 浏览器开始解析 HTML 文档，`document.readyState`属性等于`loading`。
+2. 浏览器遇到 HTML 文档中的`<script>`元素，并且没有`async`或`defer`属性，就暂停解析，开始执行脚本，这时`document.readyState`属性还是等于`loading`。
+3. HTML 文档解析完成，`document.readyState`属性变成`interactive`。
+4. 浏览器等待图片、样式表、字体文件等外部资源加载完成，一旦全部加载完成，`document.readyState`属性变成`complete`。
+
+下面的代码用来检查网页是否加载成功。
+
+```
+// 基本检查
+if (document.readyState === 'complete') {
+  // ...
+}
+
+// 轮询检查
+var interval = setInterval(function() {
+  if (document.readyState === 'complete') {
+    clearInterval(interval);
+    // ...
+  }
+}, 100);
+```
+
+另外，每次状态变化都会触发一个`readystatechange`事件。
