@@ -262,3 +262,16 @@ document.referrer
 `document.hidden`属性返回一个布尔值，表示当前页面是否可见。如果窗口最小化、浏览器切换了 Tab，都会导致导致页面不可见，使得`document.hidden`返回`true`。
 
 这个属性是 Page Visibility API 引入的，一般都是配合这个 API 使用。
+
+**（2）document.visibilityState**
+
+`document.visibilityState`返回文档的可见状态。
+
+它的值有四种可能。
+
+> - `visible`：页面可见。注意，页面可能是部分可见，即不是焦点窗口，前面被其他窗口部分挡住了。
+> - `hidden`：页面不可见，有可能窗口最小化，或者浏览器切换到了另一个 Tab。
+> - `prerender`：页面处于正在渲染状态，对于用户来说，该页面不可见。
+> - `unloaded`：页面从内存里面卸载了。
+
+这个属性可以用在页面加载时，防止加载某些资源；或者页面不可见时，停掉一些页面功能。
