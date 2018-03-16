@@ -717,3 +717,24 @@ element.appendChild(docfrag);
 ```
 
 上面代码中，文档片断`docfrag`包含四个`<li>`节点，这些子节点被一次性插入了当前文档。
+
+### document.createEvent()
+
+`document.createEvent`方法生成一个事件对象（`Event`实例），该对象可以被`element.dispatchEvent`方法使用，触发指定事件。
+
+```
+var event = document.createEvent(type);
+```
+
+`document.createEvent`方法的参数是事件类型，比如`UIEvents`、`MouseEvents`、`MutationEvents`、`HTMLEvents`。
+
+```
+var event = document.createEvent('Event');
+event.initEvent('build', true, true);
+document.addEventListener('build', function (e) {
+  console.log(e.type); // "build"
+}, false);
+document.dispatchEvent(event);
+```
+
+上面代码新建了一个名为`build`的事件实例，然后触发该事件。
