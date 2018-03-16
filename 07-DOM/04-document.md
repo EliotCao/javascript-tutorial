@@ -659,3 +659,26 @@ div.innerHTML = profileLink;
 ```
 
 上面代码中，由于`createTextNode`方法不转义双引号，导致`onmouseover`方法被注入了代码。
+
+### document.createAttribute()
+
+`document.createAttribute`方法生成一个新的属性节点（`Attr`实例），并返回它。
+
+```
+var attribute = document.createAttribute(name);
+```
+
+`document.createAttribute`方法的参数`name`，是属性的名称。
+
+```
+var node = document.getElementById('div1');
+
+var a = document.createAttribute('my_attrib');
+a.value = 'newVal';
+
+node.setAttributeNode(a);
+// 或者
+node.setAttribute('my_attrib', 'newVal');
+```
+
+上面代码为`div1`节点，插入一个值为`newVal`的`my_attrib`属性。
