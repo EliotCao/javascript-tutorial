@@ -597,3 +597,24 @@ var element = document.elementFromPoint(50, 50);
 ```
 var elements = document.elementsFromPoint(x, y);
 ```
+
+### document.createElement()
+
+`document.createElement`方法用来生成元素节点，并返回该节点。
+
+```
+var newDiv = document.createElement('div');
+```
+
+`createElement`方法的参数为元素的标签名，即元素节点的`tagName`属性，对于 HTML 网页大小写不敏感，即参数为`div`或`DIV`返回的是同一种节点。如果参数里面包含尖括号（即`<`和`>`）会报错。
+
+```
+document.createElement('<div>');
+// DOMException: The tag name provided ('<div>') is not a valid name
+```
+
+注意，`document.createElement`的参数可以是自定义的标签名。
+
+```
+document.createElement('foo');
+```
