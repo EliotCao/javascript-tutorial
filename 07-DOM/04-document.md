@@ -521,3 +521,30 @@ var spans = firstPara.getElementsByTagName('span');
 ```
 
 上面代码选中第一个`p`元素内部的所有`span`元素。
+
+### document.getElementsByClassName()
+
+`document.getElementsByClassName()`方法返回一个类似数组的对象（`HTMLCollection`实例），包括了所有`class`名字符合指定条件的元素，元素的变化实时反映在返回结果中。
+
+```
+var elements = document.getElementsByClassName(names);
+```
+
+由于`class`是保留字，所以 JavaScript 一律使用`className`表示 CSS 的`class`。
+
+参数可以是多个`class`，它们之间使用空格分隔。
+
+```
+var elements = document.getElementsByClassName('foo bar');
+```
+
+上面代码返回同时具有`foo`和`bar`两个`class`的元素，`foo`和`bar`的顺序不重要。
+
+注意，正常模式下，CSS 的`class`是大小写敏感的。（`quirks mode`下，大小写不敏感。）
+
+与`getElementsByTagName()`方法一样，`getElementsByClassName()`方法不仅可以在`document`对象上调用，也可以在任何元素节点上调用。
+
+```
+// 非document对象上调用
+var elements = rootElement.getElementsByClassName(names);
+```
