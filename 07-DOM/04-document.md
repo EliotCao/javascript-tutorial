@@ -682,3 +682,13 @@ node.setAttribute('my_attrib', 'newVal');
 ```
 
 上面代码为`div1`节点，插入一个值为`newVal`的`my_attrib`属性。
+
+### document.createComment()
+
+`document.createComment`方法生成一个新的注释节点，并返回该节点。
+
+```
+var CommentNode = document.createComment(data);
+```
+
+`document.createComment`方法的参数是一个字符串，会成为注释节点的内容。
