@@ -738,3 +738,19 @@ document.dispatchEvent(event);
 ```
 
 上面代码新建了一个名为`build`的事件实例，然后触发该事件。
+
+### document.addEventListener()，document.removeEventListener()，document.dispatchEvent()
+
+这三个方法用于处理`document`节点的事件。它们都继承自`EventTarget`接口，详细介绍参见《EventTarget 接口》一章。
+
+```
+// 添加事件监听函数
+document.addEventListener('click', listener, false);
+
+// 移除事件监听函数
+document.removeEventListener('click', listener, false);
+
+// 触发事件
+var event = new Event('click');
+document.dispatchEvent(event);
+```
