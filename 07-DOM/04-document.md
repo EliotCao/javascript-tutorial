@@ -493,3 +493,31 @@ document.querySelectorAll('DIV, A, SCRIPT');
 如果`querySelectorAll`方法的参数是字符串`*`，则会返回文档中的所有元素节点。另外，`querySelectorAll`的返回结果不是动态集合，不会实时反映元素节点的变化。
 
 最后，这两个方法除了定义在`document`对象上，还定义在元素节点上，即在元素节点上也可以调用。
+
+### document.getElementsByTagName()
+
+`document.getElementsByTagName()`方法搜索 HTML 标签名，返回符合条件的元素。它的返回值是一个类似数组对象（`HTMLCollection`实例），可以实时反映 HTML 文档的变化。如果没有任何匹配的元素，就返回一个空集。
+
+```
+var paras = document.getElementsByTagName('p');
+paras instanceof HTMLCollection // true
+```
+
+上面代码返回当前文档的所有`p`元素节点。
+
+HTML 标签名是大小写不敏感的，因此`getElementsByTagName()`方法的参数也是大小写不敏感的。另外，返回结果中，各个成员的顺序就是它们在文档中出现的顺序。
+
+如果传入`*`，就可以返回文档中所有 HTML 元素。
+
+```
+var allElements = document.getElementsByTagName('*');
+```
+
+注意，元素节点本身也定义了`getElementsByTagName`方法，返回该元素的后代元素中符合条件的元素。也就是说，这个方法不仅可以在`document`对象上调用，也可以在任何元素节点上调用。
+
+```
+var firstPara = document.getElementsByTagName('p')[0];
+var spans = firstPara.getElementsByTagName('span');
+```
+
+上面代码选中第一个`p`元素内部的所有`span`元素。
