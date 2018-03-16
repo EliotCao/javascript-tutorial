@@ -692,3 +692,28 @@ var CommentNode = document.createComment(data);
 ```
 
 `document.createComment`方法的参数是一个字符串，会成为注释节点的内容。
+
+### document.createDocumentFragment()
+
+`document.createDocumentFragment`方法生成一个空的文档片段对象（`DocumentFragment`实例）。
+
+```
+var docFragment = document.createDocumentFragment();
+```
+
+`DocumentFragment`是一个存在于内存的 DOM 片段，不属于当前文档，常常用来生成一段较复杂的 DOM 结构，然后再插入当前文档。这样做的好处在于，因为`DocumentFragment`不属于当前文档，对它的任何改动，都不会引发网页的重新渲染，比直接修改当前文档的 DOM 有更好的性能表现。
+
+```
+var docfrag = document.createDocumentFragment();
+
+[1, 2, 3, 4].forEach(function (e) {
+  var li = document.createElement('li');
+  li.textContent = e;
+  docfrag.appendChild(li);
+});
+
+var element  = document.getElementById('ul');
+element.appendChild(docfrag);
+```
+
+上面代码中，文档片断`docfrag`包含四个`<li>`节点，这些子节点被一次性插入了当前文档。
