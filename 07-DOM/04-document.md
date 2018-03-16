@@ -548,3 +548,13 @@ var elements = document.getElementsByClassName('foo bar');
 // 非document对象上调用
 var elements = rootElement.getElementsByClassName(names);
 ```
+
+### document.getElementsByName()
+
+`document.getElementsByName()`方法用于选择拥有`name`属性的 HTML 元素（比如`<form>`、`<radio>`、`<img>`、`<frame>`、`<embed>`和`<object>`等），返回一个类似数组的的对象（`NodeList`实例），因为`name`属性相同的元素可能不止一个。
+
+```
+// 表单为 <form name="x"></form>
+var forms = document.getElementsByName('x');
+forms[0].tagName // "FORM"
+```
