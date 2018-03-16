@@ -558,3 +558,24 @@ var elements = rootElement.getElementsByClassName(names);
 var forms = document.getElementsByName('x');
 forms[0].tagName // "FORM"
 ```
+
+### document.getElementById()
+
+`document.getElementById()`方法返回匹配指定`id`属性的元素节点。如果没有发现匹配的节点，则返回`null`。
+
+```
+var elem = document.getElementById('para1');
+```
+
+注意，该方法的参数是大小写敏感的。比如，如果某个节点的`id`属性是`main`，那么`document.getElementById('Main')`将返回`null`。
+
+`document.getElementById()`方法与`document.querySelector()`方法都能获取元素节点，不同之处是`document.querySelector()`方法的参数使用 CSS 选择器语法，`document.getElementById()`方法的参数是元素的`id`属性。
+
+```
+document.getElementById('myElement')
+document.querySelector('#myElement')
+```
+
+上面代码中，两个方法都能选中`id`为`myElement`的元素，但是`document.getElementById()`比`document.querySelector()`效率高得多。
+
+另外，这个方法只能在`document`对象上使用，不能在其他元素节点上使用。
