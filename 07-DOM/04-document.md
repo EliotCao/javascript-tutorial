@@ -364,3 +364,17 @@ document.replaceChild(
 ```
 
 上面代码中，第一步生成一个新的 HTML 文档`doc`，然后用它的根元素`document.documentElement`替换掉`document.documentElement`。这会使得当前文档的内容全部消失，变成`hello world`。
+
+## 方法
+
+### document.open()，document.close()
+
+`document.open`方法清除当前文档所有内容，使得文档处于可写状态，供`document.write`方法写入内容。
+
+`document.close`方法用来关闭`document.open()`打开的文档。
+
+```
+document.open();
+document.write('hello world');
+document.close();
+```
