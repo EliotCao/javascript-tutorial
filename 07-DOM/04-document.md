@@ -326,3 +326,17 @@ var interval = setInterval(function() {
 var editor = document.getElementById('editor');
 editor.contentDocument.designMode = 'on';
 ```
+
+### document.currentScript
+
+`document.currentScript`属性只用在`<script>`元素的内嵌脚本或加载的外部脚本之中，返回当前脚本所在的那个 DOM 节点，即`<script>`元素的 DOM 节点。
+
+```
+<script id="foo">
+  console.log(
+    document.currentScript === document.getElementById('foo')
+  ); // true
+</script>
+```
+
+上面代码中，`document.currentScript`就是`<script>`元素节点。
