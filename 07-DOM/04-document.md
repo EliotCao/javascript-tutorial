@@ -579,3 +579,21 @@ document.querySelector('#myElement')
 上面代码中，两个方法都能选中`id`为`myElement`的元素，但是`document.getElementById()`比`document.querySelector()`效率高得多。
 
 另外，这个方法只能在`document`对象上使用，不能在其他元素节点上使用。
+
+### document.elementFromPoint()，document.elementsFromPoint()
+
+`document.elementFromPoint()`方法返回位于页面指定位置最上层的元素节点。
+
+```
+var element = document.elementFromPoint(50, 50);
+```
+
+上面代码选中在`(50, 50)`这个坐标位置的最上层的那个 HTML 元素。
+
+`elementFromPoint`方法的两个参数，依次是相对于当前视口左上角的横坐标和纵坐标，单位是像素。如果位于该位置的 HTML 元素不可返回（比如文本框的滚动条），则返回它的父元素（比如文本框）。如果坐标值无意义（比如负值或超过视口大小），则返回`null`。
+
+`document.elementsFromPoint()`返回一个数组，成员是位于指定坐标（相对于视口）的所有元素。
+
+```
+var elements = document.elementsFromPoint(x, y);
+```
