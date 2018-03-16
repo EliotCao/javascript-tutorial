@@ -754,3 +754,13 @@ document.removeEventListener('click', listener, false);
 var event = new Event('click');
 document.dispatchEvent(event);
 ```
+
+### document.hasFocus()
+
+`document.hasFocus`方法返回一个布尔值，表示当前文档之中是否有元素被激活或获得焦点。
+
+```
+var focused = document.hasFocus();
+```
+
+注意，有焦点的文档必定被激活（active），反之不成立，激活的文档未必有焦点。比如，用户点击按钮，从当前窗口跳出一个新窗口，该新窗口就是激活的，但是不拥有焦点。
