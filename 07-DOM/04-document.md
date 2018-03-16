@@ -378,3 +378,55 @@ document.open();
 document.write('hello world');
 document.close();
 ```
+
+### document.write()，document.writeln()
+
+`document.write`方法用于向当前文档写入内容。
+
+在网页的首次渲染阶段，只要页面没有关闭写入（即没有执行`document.close()`），`document.write`写入的内容就会追加在已有内容的后面。
+
+```
+// 页面显示“helloworld”
+document.open();
+document.write('hello');
+document.write('world');
+document.close();
+```
+
+注意，`document.write`会当作 HTML 代码解析，不会转义。
+
+```
+document.write('<p>hello world</p>');
+```
+
+上面代码中，`document.write`会将`<p>`当作 HTML 标签解释。
+
+如果页面已经解析完成（`DOMContentLoaded`事件发生之后），再调用`write`方法，它会先调用`open`方法，擦除当前文档所有内容，然后再写入。
+
+```
+document.addEventListener('DOMContentLoaded', function (event) {
+  document.write('<p>Hello World!</p>');
+});
+
+// 等同于
+document.addEventListener('DOMContentLoaded', function (event) {
+  document.open();
+  document.write('<p>Hello World!</p>');
+  document.close();
+});
+```
+
+如果在页面渲染过程中调用`write`方法，并不会自动调用`open`方法。（可以理解成，`open`方法已调用，但`close`方法还未调用。）
+
+```
+<html>
+<body>
+hello
+<script type="text/javascript">
+  document.write("world")
+</script>
+</body>
+</html>
+```
+
+在浏览器打开上面网页，将会显示`hello world`。
