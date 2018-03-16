@@ -618,3 +618,44 @@ document.createElement('<div>');
 ```
 document.createElement('foo');
 ```
+
+### document.createTextNode()
+
+`document.createTextNode`方法用来生成文本节点（`Text`实例），并返回该节点。它的参数是文本节点的内容。
+
+```
+var newDiv = document.createElement('div');
+var newContent = document.createTextNode('Hello');
+newDiv.appendChild(newContent);
+```
+
+上面代码新建一个`div`节点和一个文本节点，然后将文本节点插入`div`节点。
+
+这个方法可以确保返回的节点，被浏览器当作文本渲染，而不是当作 HTML 代码渲染。因此，可以用来展示用户的输入，避免 XSS 攻击。
+
+```
+var div = document.createElement('div');
+div.appendChild(document.createTextNode('<span>Foo & bar</span>'));
+console.log(div.innerHTML)
+// &lt;span&gt;Foo &amp; bar&lt;/span&gt;
+```
+
+上面代码中，`createTextNode`方法对大于号和小于号进行转义，从而保证即使用户输入的内容包含恶意代码，也能正确显示。
+
+需要注意的是，该方法不对单引号和双引号转义，所以不能用来对 HTML 属性赋值。
+
+```
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+var userWebsite = '" onmouseover="alert(\'derp\')" "';
+var profileLink = '<a href="' + escapeHtml(userWebsite) + '">Bob</a>';
+var div = document.getElementById('target');
+div.innerHTML = profileLink;
+// <a href="" onmouseover="alert('derp')" "">Bob</a>
+```
+
+上面代码中，由于`createTextNode`方法不转义双引号，导致`onmouseover`方法被注入了代码。
