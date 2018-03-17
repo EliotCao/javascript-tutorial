@@ -869,3 +869,29 @@ while(treeWalker.nextNode()) {
 ```
 
 上面代码遍历`<body>`节点下属的所有元素节点，将它们插入`nodeList`数组。
+
+### document.execCommand()，document.queryCommandSupported()，document.queryCommandEnabled()
+
+**（1）document.execCommand()**
+
+如果`document.designMode`属性设为`on`，那么整个文档用户可编辑；如果元素的`contenteditable`属性设为`true`，那么该元素可编辑。这两种情况下，可以使用`document.execCommand()`方法，改变内容的样式，比如`document.execCommand('bold')`会使得字体加粗。
+
+```
+document.execCommand(command, showDefaultUI, input)
+```
+
+该方法接受三个参数。
+
+- `command`：字符串，表示所要实施的样式。
+- `showDefaultUI`：布尔值，表示是否要使用默认的用户界面，建议总是设为`false`。
+- `input`：字符串，表示该样式的辅助内容，比如生成超级链接时，这个参数就是所要链接的网址。如果第二个参数设为`true`，那么浏览器会弹出提示框，要求用户在提示框输入该参数。但是，不是所有浏览器都支持这样做，为了兼容性，还是需要自己部署获取这个参数的方式。
+
+```
+var url = window.prompt('请输入网址');
+
+if (url) {
+  document.execCommand('createlink', false, url);
+}
+```
+
+上面代码中，先提示用户输入所要链接的网址，然后手动生成超级链接。注意，第二个参数是`false`，表示此时不需要自动弹出提示框。
