@@ -901,3 +901,13 @@ if (url) {
 这个方法大部分情况下，只对选中的内容生效。如果有多个内容可编辑区域，那么只对当前焦点所在的元素生效。
 
 `document.execCommand()`方法可以执行的样式改变有很多种，下面是其中的一些：bold、insertLineBreak、selectAll、createLink、insertOrderedList、subscript、delete、insertUnorderedList、superscript、formatBlock、insertParagraph、undo、forwardDelete、insertText、unlink、insertImage、italic、unselect、insertHTML、redo。这些值都可以用作第一个参数，它们的含义不难从字面上看出来。
+
+**（2）document.queryCommandSupported()**
+
+`document.queryCommandSupported()`方法返回一个布尔值，表示浏览器是否支持`document.execCommand()`的某个命令。
+
+```
+if (document.queryCommandSupported('SelectAll')) {
+  console.log('浏览器支持选中可编辑区域的所有内容');
+}
+```
