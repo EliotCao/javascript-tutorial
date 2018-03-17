@@ -848,3 +848,24 @@ currentNode === previousNode // true
 ```
 pars[0] === document.body // true
 ```
+
+### document.createTreeWalker()
+
+`document.createTreeWalker`方法返回一个 DOM 的子树遍历器。它与`document.createNodeIterator`方法基本是类似的，区别在于它返回的是`TreeWalker`实例，后者返回的是`NodeIterator`实例。另外，它的第一个节点不是根节点。
+
+`document.createTreeWalker`方法的第一个参数是所要遍历的根节点，第二个参数指定所要遍历的节点类型（与`document.createNodeIterator`方法的第二个参数相同）。
+
+```
+var treeWalker = document.createTreeWalker(
+  document.body,
+  NodeFilter.SHOW_ELEMENT
+);
+
+var nodeList = [];
+
+while(treeWalker.nextNode()) {
+  nodeList.push(treeWalker.currentNode);
+}
+```
+
+上面代码遍历`<body>`节点下属的所有元素节点，将它们插入`nodeList`数组。
