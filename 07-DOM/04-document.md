@@ -794,3 +794,57 @@ document.getElementById("container").appendChild(newNode);
 ```
 
 上面代码从`iframe`窗口，拷贝一个指定节点`myNode`，插入当前文档。
+
+### document.createNodeIterator()
+
+`document.createNodeIterator`方法返回一个子节点遍历器。
+
+```
+var nodeIterator = document.createNodeIterator(
+  document.body,
+  NodeFilter.SHOW_ELEMENT
+);
+```
+
+上面代码返回`<body>`元素子节点的遍历器。
+
+`document.createNodeIterator`方法第一个参数为所要遍历的根节点，第二个参数为所要遍历的节点类型，这里指定为元素节点（`NodeFilter.SHOW_ELEMENT`）。几种主要的节点类型写法如下。
+
+- 所有节点：NodeFilter.SHOW_ALL
+- 元素节点：NodeFilter.SHOW_ELEMENT
+- 文本节点：NodeFilter.SHOW_TEXT
+- 评论节点：NodeFilter.SHOW_COMMENT
+
+`document.createNodeIterator`方法返回一个“遍历器”对象（`NodeFilter`实例）。该实例的`nextNode()`方法和`previousNode()`方法，可以用来遍历所有子节点。
+
+```
+var nodeIterator = document.createNodeIterator(document.body);
+var pars = [];
+var currentNode;
+
+while (currentNode = nodeIterator.nextNode()) {
+  pars.push(currentNode);
+}
+```
+
+上面代码中，使用遍历器的`nextNode`方法，将根节点的所有子节点，依次读入一个数组。`nextNode`方法先返回遍历器的内部指针所在的节点，然后会将指针移向下一个节点。所有成员遍历完成后，返回`null`。`previousNode`方法则是先将指针移向上一个节点，然后返回该节点。
+
+```
+var nodeIterator = document.createNodeIterator(
+  document.body,
+  NodeFilter.SHOW_ELEMENT
+);
+
+var currentNode = nodeIterator.nextNode();
+var previousNode = nodeIterator.previousNode();
+
+currentNode === previousNode // true
+```
+
+上面代码中，`currentNode`和`previousNode`都指向同一个的节点。
+
+注意，遍历器返回的第一个节点，总是根节点。
+
+```
+pars[0] === document.body // true
+```
