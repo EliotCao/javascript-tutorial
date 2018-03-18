@@ -136,3 +136,27 @@ for (var i = attrs.length - 1; i >= 0; i--) {
 ```
 
 上面代码遍历`p`元素的所有属性。
+
+### Element.className，Element.classList
+
+`className`属性用来读写当前元素节点的`class`属性。它的值是一个字符串，每个`class`之间用空格分割。
+
+`classList`属性返回一个类似数组的对象，当前元素节点的每个`class`就是这个对象的一个成员。
+
+```
+// HTML 代码 <div class="one two three" id="myDiv"></div>
+var div = document.getElementById('myDiv');
+
+div.className
+// "one two three"
+
+div.classList
+// {
+//   0: "one"
+//   1: "two"
+//   2: "three"
+//   length: 3
+// }
+```
+
+上面代码中，`className`属性返回一个空格分隔的字符串，而`classList`属性指向一个类似数组的对象，该对象的`length`属性（只读）返回当前元素的`class`数量。
