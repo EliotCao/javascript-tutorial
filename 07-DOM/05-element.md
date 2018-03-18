@@ -289,3 +289,42 @@ el.innerHTML = name;
 ```
 
 上面代码中，`alert`方法是会执行的。因此为了安全考虑，如果插入的是文本，最好用`textContent`属性代替`innerHTML`。
+
+### Element.outerHTML
+
+`Element.outerHTML`属性返回一个字符串，表示当前元素节点的所有 HTML 代码，包括该元素本身和所有子元素。
+
+```
+// HTML 代码如下
+// <div id="d"><p>Hello</p></div>
+var d = document.getElementById('d');
+d.outerHTML
+// '<div id="d"><p>Hello</p></div>'
+```
+
+`outerHTML`属性是可读写的，对它进行赋值，等于替换掉当前元素。
+
+```
+// HTML 代码如下
+// <div id="container"><div id="d">Hello</div></div>
+var container = document.getElementById('container');
+var d = document.getElementById('d');
+container.firstChild.nodeName // "DIV"
+d.nodeName // "DIV"
+
+d.outerHTML = '<p>Hello</p>';
+container.firstChild.nodeName // "P"
+d.nodeName // "DIV"
+```
+
+上面代码中，变量`d`代表子节点，它的`outerHTML`属性重新赋值以后，内层的`div`元素就不存在了，被`p`元素替换了。但是，变量`d`依然指向原来的`div`元素，这表示被替换的`DIV`元素还存在于内存中。
+
+注意，如果一个节点没有父节点，设置`outerHTML`属性会报错。
+
+```
+var div = document.createElement('div');
+div.outerHTML = '<p>test</p>';
+// DOMException: This element has no parent node.
+```
+
+上面代码中，`div`元素没有父节点，设置`outerHTML`属性会报错。
