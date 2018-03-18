@@ -181,3 +181,30 @@ div.classList.contains('myCssClass'); // 返回 true 或者 false
 div.classList.item(0); // 返回第一个 Class
 div.classList.toString();
 ```
+
+下面比较一下，`className`和`classList`在添加和删除某个 class 时的写法。
+
+```
+var foo = document.getElementById('foo');
+
+// 添加class
+foo.className += 'bold';
+foo.classList.add('bold');
+
+// 删除class
+foo.classList.remove('bold');
+foo.className = foo.className.replace(/^bold$/, '');
+```
+
+`toggle`方法可以接受一个布尔值，作为第二个参数。如果为`true`，则添加该属性；如果为`false`，则去除该属性。
+
+```
+el.classList.toggle('abc', boolValue);
+
+// 等同于
+if (boolValue) {
+  el.classList.add('abc');
+} else {
+  el.classList.remove('abc');
+}
+```
