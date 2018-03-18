@@ -103,3 +103,21 @@ btn.addEventListener('click', function () {
 注意，该属性与 CSS 设置是互相独立的。CSS 对这个元素可见性的设置，`Element.hidden`并不能反映出来。也就是说，这个属性并不能用来判断当前元素的实际可见性。
 
 CSS 的设置高于`Element.hidden`。如果 CSS 指定了该元素不可见（`display: none`）或可见（`display: hidden`），那么`Element.hidden`并不能改变该元素实际的可见性。换言之，这个属性只在 CSS 没有明确设定当前元素的可见性时才有效。
+
+**（2）Element.contentEditable，Element.isContentEditable**
+
+HTML 元素可以设置`contentEditable`属性，使得元素的内容可以编辑。
+
+```
+<div contenteditable>123</div>
+```
+
+上面代码中，`<div>`元素有`contenteditable`属性，因此用户可以在网页上编辑这个区块的内容。
+
+`Element.contentEditable`属性返回一个字符串，表示是否设置了`contenteditable`属性，有三种可能的值。该属性可写。
+
+- `"true"`：元素内容可编辑
+- `"false"`：元素内容不可编辑
+- `"inherit"`：元素是否可编辑，继承了父元素的设置
+
+`Element.isContentEditable`属性返回一个布尔值，同样表示是否设置了`contenteditable`属性。该属性只读。
