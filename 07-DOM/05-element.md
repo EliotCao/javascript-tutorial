@@ -352,3 +352,27 @@ document.body.clientHeight
 `Element.clientLeft`属性等于元素节点左边框（left border）的宽度（单位像素），不包括左侧的`padding`和`margin`。如果没有设置左边框，或者是行内元素（`display: inline`），该属性返回`0`。该属性总是返回整数值，如果是小数，会四舍五入。
 
 `Element.clientTop`属性等于网页元素顶部边框的宽度（单位像素），其他特点都与`clientLeft`相同。
+
+### Element.scrollHeight，Element.scrollWidth
+
+`Element.scrollHeight`属性返回一个整数值（小数会四舍五入），表示当前元素的总高度（单位像素），包括溢出容器、当前不可见的部分。它包括`padding`，但是不包括`border`、`margin`以及水平滚动条的高度（如果有水平滚动条的话），还包括伪元素（`::before`或`::after`）的高度。
+
+`Element.scrollWidth`属性表示当前元素的总宽度（单位像素），其他地方都与`scrollHeight`属性类似。这两个属性只读。
+
+整张网页的总高度可以从`document.documentElement`或`document.body`上读取。
+
+```
+// 返回网页的总高度
+document.documentElement.scrollHeight
+document.body.scrollHeight
+```
+
+注意，如果元素节点的内容出现溢出，即使溢出的内容是隐藏的，`scrollHeight`属性仍然返回元素的总高度。
+
+```
+// HTML 代码如下
+// <div id="myDiv" style="height: 200px; overflow: hidden;">...<div>
+document.getElementById('myDiv').scrollHeight // 356
+```
+
+上面代码中，即使`myDiv`元素的 CSS 高度只有200像素，且溢出部分不可见，但是`scrollHeight`仍然会返回该元素的原始高度。
