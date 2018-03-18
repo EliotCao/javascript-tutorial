@@ -346,3 +346,9 @@ document.documentElement.clientHeight
 // 网页总高度
 document.body.clientHeight
 ```
+
+### Element.clientLeft，Element.clientTop
+
+`Element.clientLeft`属性等于元素节点左边框（left border）的宽度（单位像素），不包括左侧的`padding`和`margin`。如果没有设置左边框，或者是行内元素（`display: inline`），该属性返回`0`。该属性总是返回整数值，如果是小数，会四舍五入。
+
+`Element.clientTop`属性等于网页元素顶部边框的宽度（单位像素），其他特点都与`clientLeft`相同。
