@@ -64,3 +64,13 @@ btn.accessKey // "h"
 **（5）Element.draggable**
 
 `Element.draggable`属性返回一个布尔值，表示当前元素是否可拖动。该属性可读写。
+
+**（6）Element.lang**
+
+`Element.lang`属性返回当前元素的语言设置。该属性可读写。
+
+```
+// HTML 代码如下
+// <html lang="en">
+document.documentElement.lang // "en"
+```
