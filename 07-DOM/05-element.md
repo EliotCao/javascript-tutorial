@@ -160,3 +160,24 @@ div.classList
 ```
 
 上面代码中，`className`属性返回一个空格分隔的字符串，而`classList`属性指向一个类似数组的对象，该对象的`length`属性（只读）返回当前元素的`class`数量。
+
+`classList`对象有下列方法。
+
+- `add()`：增加一个 class。
+- `remove()`：移除一个 class。
+- `contains()`：检查当前元素是否包含某个 class。
+- `toggle()`：将某个 class 移入或移出当前元素。
+- `item()`：返回指定索引位置的 class。
+- `toString()`：将 class 的列表转为字符串。
+
+```
+var div = document.getElementById('myDiv');
+
+div.classList.add('myCssClass');
+div.classList.add('foo', 'bar');
+div.classList.remove('myCssClass');
+div.classList.toggle('myCssClass'); // 如果 myCssClass 不存在就加入，否则移除
+div.classList.contains('myCssClass'); // 返回 true 或者 false
+div.classList.item(0); // 返回第一个 Class
+div.classList.toString();
+```
