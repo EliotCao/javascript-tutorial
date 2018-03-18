@@ -253,3 +253,39 @@ var mydiv = document.getElementById('mydiv');
 mydiv.dataset.foo = 'bar';
 mydiv.getAttribute('data-foo') // "bar"
 ```
+
+### Element.innerHTML
+
+`Element.innerHTML`属性返回一个字符串，等同于该元素包含的所有 HTML 代码。该属性可读写，常用来设置某个节点的内容。它能改写所有元素节点的内容，包括`<HTML>`和`<body>`元素。
+
+如果将`innerHTML`属性设为空，等于删除所有它包含的所有节点。
+
+```
+el.innerHTML = '';
+```
+
+上面代码等于将`el`节点变成了一个空节点，`el`原来包含的节点被全部删除。
+
+注意，读取属性值的时候，如果文本节点包含`&`、小于号（`<`）和大于号（`>`），`innerHTML`属性会将它们转为实体形式`&`、`<`、`>`。如果想得到原文，建议使用`element.textContent`属性。
+
+```
+// HTML代码如下 <p id="para"> 5 > 3 </p>
+document.getElementById('para').innerHTML
+// 5 &gt; 3
+```
+
+写入的时候，如果插入的文本包含 HTML 标签，会被解析成为节点对象插入 DOM。注意，如果文本之中含有`<script>`标签，虽然可以生成`script`节点，但是插入的代码不会执行。
+
+```
+var name = "<script>alert('haha')</script>";
+el.innerHTML = name;
+```
+
+上面代码将脚本插入内容，脚本并不会执行。但是，`innerHTML`还是有安全风险的。
+
+```
+var name = "<img src=x onerror=alert(1)>";
+el.innerHTML = name;
+```
+
+上面代码中，`alert`方法是会执行的。因此为了安全考虑，如果插入的是文本，最好用`textContent`属性代替`innerHTML`。
