@@ -47,3 +47,16 @@ span.tagName // "SPAN"
 **（3）Element.dir**
 
 `Element.dir`属性用于读写当前元素的文字方向，可能是从左到右（`"ltr"`），也可能是从右到左（`"rtl"`）。
+
+**（4）Element.accessKey**
+
+`Element.accessKey`属性用于读写分配给当前元素的快捷键。
+
+```
+// HTML 代码如下
+// <button accesskey="h" id="btn">点击</button>
+var btn = document.getElementById('btn');
+btn.accessKey // "h"
+```
+
+上面代码中，`btn`元素的快捷键是`h`，按下`Alt + h`就能将焦点转移到它上面。
