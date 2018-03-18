@@ -328,3 +328,21 @@ div.outerHTML = '<p>test</p>';
 ```
 
 上面代码中，`div`元素没有父节点，设置`outerHTML`属性会报错。
+
+### Element.clientHeight，Element.clientWidth
+
+`Element.clientHeight`属性返回一个整数值，表示元素节点的 CSS 高度（单位像素），只对块级元素生效，对于行内元素返回`0`。如果块级元素没有设置 CSS 高度，则返回实际高度。
+
+除了元素本身的高度，它还包括`padding`部分，但是不包括`border`、`margin`。如果有水平滚动条，还要减去水平滚动条的高度。注意，这个值始终是整数，如果是小数会被四舍五入。
+
+`Element.clientWidth`属性返回元素节点的 CSS 宽度，同样只对块级元素有效，也是只包括元素本身的宽度和`padding`，如果有垂直滚动条，还要减去垂直滚动条的宽度。
+
+`document.documentElement`的`clientHeight`属性，返回当前视口的高度（即浏览器窗口的高度），等同于`window.innerHeight`属性减去水平滚动条的高度（如果有的话）。`document.body`的高度则是网页的实际高度。一般来说，`document.body.clientHeight`大于`document.documentElement.clientHeight`。
+
+```
+// 视口高度
+document.documentElement.clientHeight
+
+// 网页总高度
+document.body.clientHeight
+```
