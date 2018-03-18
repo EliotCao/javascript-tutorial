@@ -121,3 +121,18 @@ HTML 元素可以设置`contentEditable`属性，使得元素的内容可以编�
 - `"inherit"`：元素是否可编辑，继承了父元素的设置
 
 `Element.isContentEditable`属性返回一个布尔值，同样表示是否设置了`contenteditable`属性。该属性只读。
+
+### Element.attributes
+
+`Element.attributes`属性返回一个类似数组的对象，成员是当前元素节点的所有属性节点，详见《属性的操作》一章。
+
+```
+var p = document.querySelector('p');
+var attrs = p.attributes;
+
+for (var i = attrs.length - 1; i >= 0; i--) {
+  console.log(attrs[i].name + '->' + attrs[i].value);
+}
+```
+
+上面代码遍历`p`元素的所有属性。
