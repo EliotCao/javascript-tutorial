@@ -60,3 +60,7 @@ btn.accessKey // "h"
 ```
 
 上面代码中，`btn`元素的快捷键是`h`，按下`Alt + h`就能将焦点转移到它上面。
+
+**（5）Element.draggable**
+
+`Element.draggable`属性返回一个布尔值，表示当前元素是否可拖动。该属性可读写。
