@@ -208,3 +208,48 @@ if (boolValue) {
   el.classList.remove('abc');
 }
 ```
+
+### Element.dataset
+
+网页元素可以自定义`data-`属性，用来添加数据。
+
+```
+<div data-timestamp="1522907809292"></div>
+```
+
+上面代码中，`<div>`元素有一个自定义的`data-timestamp`属性，用来为该元素添加一个时间戳。
+
+`Element.dataset`属性返回一个对象，可以从这个对象读写`data-`属性。
+
+```
+// <article
+//   id="foo"
+//   data-columns="3"
+//   data-index-number="12314"
+//   data-parent="cars">
+//   ...
+// </article>
+var article = document.getElementById('foo');
+article.dataset.columns // "3"
+article.dataset.indexNumber // "12314"
+article.dataset.parent // "cars"
+```
+
+注意，`dataset`上面的各个属性返回都是字符串。
+
+HTML 代码中，`data-`属性的属性名，只能包含英文字母、数字、连词线（`-`）、点（`.`）、冒号（`:`）和下划线（`_`）。它们转成 JavaScript 对应的`dataset`属性名，规则如下。
+
+- 开头的`data-`会省略。
+- 如果连词线后面跟了一个英文字母，那么连词线会取消，该字母变成大写。
+- 其他字符不变。
+
+因此，`data-abc-def`对应`dataset.abcDef`，`data-abc-1`对应`dataset["abc-1"]`。
+
+除了使用`dataset`读写`data-`属性，也可以使用`Element.getAttribute()`和`Element.setAttribute()`，通过完整的属性名读写这些属性。
+
+```
+var mydiv = document.getElementById('mydiv');
+
+mydiv.dataset.foo = 'bar';
+mydiv.getAttribute('data-foo') // "bar"
+```
