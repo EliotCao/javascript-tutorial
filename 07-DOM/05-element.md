@@ -43,3 +43,7 @@ var span = document.getElementById('myspan');
 span.id // "myspan"
 span.tagName // "SPAN"
 ```
+
+**（3）Element.dir**
+
+`Element.dir`属性用于读写当前元素的文字方向，可能是从左到右（`"ltr"`），也可能是从右到左（`"rtl"`）。
