@@ -31,3 +31,15 @@ p.id // "foo"
 ```
 
 注意，`id`属性的值是大小写敏感，即浏览器能正确识别`<p id="foo">`和`<p id="FOO">`这两个元素的`id`属性，但是最好不要这样命名。
+
+**（2）Element.tagName**
+
+`Element.tagName`属性返回指定元素的大写标签名，与`nodeName`属性的值相等。
+
+```
+// HTML代码为
+// <span id="myspan">Hello</span>
+var span = document.getElementById('myspan');
+span.id // "myspan"
+span.tagName // "SPAN"
+```
