@@ -389,3 +389,33 @@ document.documentElement.scrollTop
 ```
 
 这两个属性都可读写，设置该属性的值，会导致浏览器将当前元素自动滚动到相应的位置。
+
+### Element.offsetParent
+
+`Element.offsetParent`属性返回最靠近当前元素的、并且 CSS 的`position`属性不等于`static`的上层元素。
+
+```
+<div style="position: absolute;">
+  <p>
+    <span>Hello</span>
+  </p>
+</div>
+```
+
+上面代码中，`span`元素的`offsetParent`属性就是`div`元素。
+
+该属性主要用于确定子元素位置偏移的计算基准，`Element.offsetTop`和`Element.offsetLeft`就是`offsetParent`元素计算的。
+
+如果该元素是不可见的（`display`属性为`none`），或者位置是固定的（`position`属性为`fixed`），则`offsetParent`属性返回`null`。
+
+```
+<div style="position: absolute;">
+  <p>
+    <span style="display: none;">Hello</span>
+  </p>
+</div>
+```
+
+上面代码中，`span`元素的`offsetParent`属性是`null`。
+
+如果某个元素的所有上层节点的`position`属性都是`static`，则`Element.offsetParent`属性指向`<body>`元素。
