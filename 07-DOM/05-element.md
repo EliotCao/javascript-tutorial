@@ -376,3 +376,16 @@ document.getElementById('myDiv').scrollHeight // 356
 ```
 
 上面代码中，即使`myDiv`元素的 CSS 高度只有200像素，且溢出部分不可见，但是`scrollHeight`仍然会返回该元素的原始高度。
+
+### Element.scrollLeft，Element.scrollTop
+
+`Element.scrollLeft`属性表示当前元素的水平滚动条向右侧滚动的像素数量，`Element.scrollTop`属性表示当前元素的垂直滚动条向下滚动的像素数量。对于那些没有滚动条的网页元素，这两个属性总是等于0。
+
+如果要查看整张网页的水平的和垂直的滚动距离，要从`document.documentElement`元素上读取。
+
+```
+document.documentElement.scrollLeft
+document.documentElement.scrollTop
+```
+
+这两个属性都可读写，设置该属性的值，会导致浏览器将当前元素自动滚动到相应的位置。
