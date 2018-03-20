@@ -427,3 +427,22 @@ document.documentElement.scrollTop
 `Element.offsetWidth`属性表示元素的 CSS 水平宽度（单位像素），其他都与`Element.offsetHeight`一致。
 
 这两个属性都是只读属性，只比`Element.clientHeight`和`Element.clientWidth`多了边框的高度或宽度。如果元素的 CSS 设为不可见（比如`display: none;`），则返回`0`。
+
+### Element.offsetLeft，Element.offsetTop
+
+`Element.offsetLeft`返回当前元素左上角相对于`Element.offsetParent`节点的水平位移，`Element.offsetTop`返回垂直位移，单位为像素。通常，这两个值是指相对于父节点的位移。
+
+下面的代码可以算出元素左上角相对于整张网页的坐标。
+
+```
+function getElementPosition(e) {
+  var x = 0;
+  var y = 0;
+  while (e !== null)  {
+    x += e.offsetLeft;
+    y += e.offsetTop;
+    e = e.offsetParent;
+  }
+  return {x: x, y: y};
+}
+```
