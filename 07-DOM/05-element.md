@@ -446,3 +446,7 @@ function getElementPosition(e) {
   return {x: x, y: y};
 }
 ```
+
+### Element.style
+
+每个元素节点都有`style`用来读写该元素的行内样式信息，具体介绍参见《CSS 操作》一章。
