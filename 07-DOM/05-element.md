@@ -475,3 +475,18 @@ if (para.children.length) {
 `Element.firstElementChild`属性返回当前元素的第一个元素子节点，`Element.lastElementChild`返回最后一个元素子节点。
 
 如果没有元素子节点，这两个属性返回`null`。
+
+### Element.nextElementSibling，Element.previousElementSibling
+
+`Element.nextElementSibling`属性返回当前元素节点的后一个同级元素节点，如果没有则返回`null`。
+
+```
+// HTML 代码如下
+// <div id="div-01">Here is div-01</div>
+// <div id="div-02">Here is div-02</div>
+var el = document.getElementById('div-01');
+el.nextElementSibling
+// <div id="div-02">Here is div-02</div>
+```
+
+`Element.previousElementSibling`属性返回当前元素节点的前一个同级元素节点，如果没有则返回`null`。
