@@ -450,3 +450,22 @@ function getElementPosition(e) {
 ### Element.style
 
 每个元素节点都有`style`用来读写该元素的行内样式信息，具体介绍参见《CSS 操作》一章。
+
+### Element.children，Element.childElementCount
+
+`Element.children`属性返回一个类似数组的对象（`HTMLCollection`实例），包括当前元素节点的所有子元素。如果当前元素没有子元素，则返回的对象包含零个成员。
+
+```
+if (para.children.length) {
+  var children = para.children;
+    for (var i = 0; i < children.length; i++) {
+      // ...
+    }
+}
+```
+
+上面代码遍历了`para`元素的所有子元素。
+
+这个属性与`Node.childNodes`属性的区别是，它只包括元素类型的子节点，不包括其他类型的子节点。
+
+`Element.childElementCount`属性返回当前元素节点包含的子元素节点的个数，与`Element.children.length`的值相同。
