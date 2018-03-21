@@ -469,3 +469,9 @@ if (para.children.length) {
 这个属性与`Node.childNodes`属性的区别是，它只包括元素类型的子节点，不包括其他类型的子节点。
 
 `Element.childElementCount`属性返回当前元素节点包含的子元素节点的个数，与`Element.children.length`的值相同。
+
+### Element.firstElementChild，Element.lastElementChild
+
+`Element.firstElementChild`属性返回当前元素的第一个元素子节点，`Element.lastElementChild`返回最后一个元素子节点。
+
+如果没有元素子节点，这两个属性返回`null`。
