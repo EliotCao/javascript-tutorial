@@ -505,3 +505,30 @@ el.nextElementSibling
 - `removeAttribute()`：删除属性
 
 这些方法的介绍请看《属性的操作》一章。
+
+### Element.querySelector()
+
+`Element.querySelector`方法接受 CSS 选择器作为参数，返回父元素的第一个匹配的子元素。如果没有找到匹配的子元素，就返回`null`。
+
+```
+var content = document.getElementById('content');
+var el = content.querySelector('p');
+```
+
+上面代码返回`content`节点的第一个`p`元素。
+
+`Element.querySelector`方法可以接受任何复杂的 CSS 选择器。
+
+```
+document.body.querySelector("style[type='text/css'], style:not([type])");
+```
+
+注意，这个方法无法选中伪元素。
+
+它可以接受多个选择器，它们之间使用逗号分隔。
+
+```
+element.querySelector('div, p')
+```
+
+上面代码返回`element`的第一个`div`或`p`子元素。
