@@ -490,3 +490,18 @@ el.nextElementSibling
 ```
 
 `Element.previousElementSibling`属性返回当前元素节点的前一个同级元素节点，如果没有则返回`null`。
+
+## 实例方法
+
+### 属性相关方法
+
+元素节点提供六个方法，用来操作属性。
+
+- `getAttribute()`：读取某个属性的值
+- `getAttributeNames()`：返回当前元素的所有属性名
+- `setAttribute()`：写入属性值
+- `hasAttribute()`：某个属性是否存在
+- `hasAttributes()`：当前元素是否有属性
+- `removeAttribute()`：删除属性
+
+这些方法的介绍请看《属性的操作》一章。
