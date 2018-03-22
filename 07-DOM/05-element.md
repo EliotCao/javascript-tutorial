@@ -532,3 +532,24 @@ element.querySelector('div, p')
 ```
 
 上面代码返回`element`的第一个`div`或`p`子元素。
+
+需要注意的是，浏览器执行`querySelector`方法时，是先在全局范围内搜索给定的 CSS 选择器，然后过滤出哪些属于当前元素的子元素。因此，会有一些违反直觉的结果，下面是一段 HTML 代码。
+
+```
+<div>
+<blockquote id="outer">
+  <p>Hello</p>
+  <div id="inner">
+    <p>World</p>
+  </div>
+</blockquote>
+</div>
+```
+
+那么，像下面这样查询的话，实际上返回的是第一个`p`元素，而不是第二个。
+
+```
+var outer = document.getElementById('outer');
+outer.querySelector('div p')
+// <p>Hello</p>
+```
