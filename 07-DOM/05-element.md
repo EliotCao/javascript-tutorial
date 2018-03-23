@@ -553,3 +553,16 @@ var outer = document.getElementById('outer');
 outer.querySelector('div p')
 // <p>Hello</p>
 ```
+
+### Element.querySelectorAll()
+
+`Element.querySelectorAll`方法接受 CSS 选择器作为参数，返回一个`NodeList`实例，包含所有匹配的子元素。
+
+```
+var el = document.querySelector('#test');
+var matches = el.querySelectorAll('div.highlighted > p');
+```
+
+该方法的执行机制与`querySelector`方法相同，也是先在全局范围内查找，再过滤出当前元素的子元素。因此，选择器实际上针对整个文档的。
+
+它也可以接受多个 CSS 选择器，它们之间使用逗号分隔。如果选择器里面有伪元素的选择器，则总是返回一个空的`NodeList`实例。
