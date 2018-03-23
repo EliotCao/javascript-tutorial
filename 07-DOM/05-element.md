@@ -566,3 +566,37 @@ var matches = el.querySelectorAll('div.highlighted > p');
 该方法的执行机制与`querySelector`方法相同，也是先在全局范围内查找，再过滤出当前元素的子元素。因此，选择器实际上针对整个文档的。
 
 它也可以接受多个 CSS 选择器，它们之间使用逗号分隔。如果选择器里面有伪元素的选择器，则总是返回一个空的`NodeList`实例。
+
+### Element.getElementsByClassName()
+
+`Element.getElementsByClassName`方法返回一个`HTMLCollection`实例，成员是当前元素节点的所有具有指定 class 的子元素节点。该方法与`document.getElementsByClassName`方法的用法类似，只是搜索范围不是整个文档，而是当前元素节点。
+
+```
+element.getElementsByClassName('red test');
+```
+
+注意，该方法的参数大小写敏感。
+
+由于`HTMLCollection`实例是一个活的集合，`document`对象的任何变化会立刻反应到实例，下面的代码不会生效。
+
+```
+// HTML 代码如下
+// <div id="example">
+//   <p class="foo"></p>
+//   <p class="foo"></p>
+// </div>
+var element = document.getElementById('example');
+var matches = element.getElementsByClassName('foo');
+
+for (var i = 0; i< matches.length; i++) {
+  matches[i].classList.remove('foo');
+  matches.item(i).classList.add('bar');
+}
+// 执行后，HTML 代码如下
+// <div id="example">
+//   <p></p>
+//   <p class="foo bar"></p>
+// </div>
+```
+
+上面代码中，`matches`集合的第一个成员，一旦被拿掉 class 里面的`foo`，就会立刻从`matches`里面消失，导致出现上面的结果。
