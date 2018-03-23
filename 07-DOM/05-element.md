@@ -646,3 +646,19 @@ if (el.matches('.someClass')) {
   console.log('Match!');
 }
 ```
+
+### 事件相关方法
+
+以下三个方法与`Element`节点的事件相关。这些方法都继承自`EventTarget`接口，详见相关章节。
+
+- `Element.addEventListener()`：添加事件的回调函数
+- `Element.removeEventListener()`：移除事件监听函数
+- `Element.dispatchEvent()`：触发事件
+
+```
+element.addEventListener('click', listener, false);
+element.removeEventListener('click', listener, false);
+
+var event = new Event('click');
+element.dispatchEvent(event);
+```
