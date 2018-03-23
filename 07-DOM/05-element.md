@@ -636,3 +636,13 @@ div03.closest(":not(div)") // article
 ```
 
 上面代码中，由于`closest`方法将当前节点也考虑在内，所以第二个`closest`方法返回`div-03`。
+
+### Element.matches()
+
+`Element.matches`方法返回一个布尔值，表示当前元素是否匹配给定的 CSS 选择器。
+
+```
+if (el.matches('.someClass')) {
+  console.log('Match!');
+}
+```
