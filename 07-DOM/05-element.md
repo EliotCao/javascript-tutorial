@@ -768,3 +768,30 @@ p1.insertAdjacentElement('afterend', p2) // null
 上面代码中，`p1`没有父节点，所以插入`p2`到它后面就失败了。
 
 如果插入的节点是一个文档里现有的节点，它会从原有位置删除，放置到新的位置。
+
+### Element.insertAdjacentHTML()，Element.insertAdjacentText()
+
+`Element.insertAdjacentHTML`方法用于将一个 HTML 字符串，解析生成 DOM 结构，插入相对于当前节点的指定位置。
+
+```
+element.insertAdjacentHTML(position, text);
+```
+
+该方法接受两个参数，第一个是一个表示指定位置的字符串，第二个是待解析的 HTML 字符串。第一个参数只能设置下面四个值之一。
+
+- `beforebegin`：当前元素之前
+- `afterbegin`：当前元素内部的第一个子节点前面
+- `beforeend`：当前元素内部的最后一个子节点后面
+- `afterend`：当前元素之后
+
+```
+// HTML 代码：<div id="one">one</div>
+var d1 = document.getElementById('one');
+d1.insertAdjacentHTML('afterend', '<div id="two">two</div>');
+// 执行后的 HTML 代码：
+// <div id="one">one</div><div id="two">two</div>
+```
+
+该方法只是在现有的 DOM 结构里面插入节点，这使得它的执行速度比`innerHTML`方法快得多。
+
+注意，该方法不会转义 HTML 字符串，这导致它不能用来插入用户输入的内容，否则会有安全风险。
