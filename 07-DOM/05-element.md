@@ -705,3 +705,39 @@ Object.keys(rect) // []
 ```
 
 上面代码中，`rect`对象没有自身属性，而`Object.keys`方法只返回对象自身的属性，所以返回了一个空数组。
+
+### Element.getClientRects()
+
+`Element.getClientRects`方法返回一个类似数组的对象，里面是当前元素在页面上形成的所有矩形（所以方法名中的`Rect`用的是复数）。每个矩形都有`bottom`、`height`、`left`、`right`、`top`和`width`六个属性，表示它们相对于视口的四个坐标，以及本身的高度和宽度。
+
+对于盒状元素（比如`<div>`和`<p>`），该方法返回的对象中只有该元素一个成员。对于行内元素（比如`<span>`、`<a>`、`<em>`），该方法返回的对象有多少个成员，取决于该元素在页面上占据多少行。这是它和`Element.getBoundingClientRect()`方法的主要区别，后者对于行内元素总是返回一个矩形。
+
+```
+<span id="inline">Hello World Hello World Hello World</span>
+```
+
+上面代码是一个行内元素`<span>`，如果它在页面上占据三行，`getClientRects`方法返回的对象就有三个成员，如果它在页面上占据一行，`getClientRects`方法返回的对象就只有一个成员。
+
+```
+var el = document.getElementById('inline');
+el.getClientRects().length // 3
+el.getClientRects()[0].left // 8
+el.getClientRects()[0].right // 113.908203125
+el.getClientRects()[0].bottom // 31.200000762939453
+el.getClientRects()[0].height // 23.200000762939453
+el.getClientRects()[0].width // 105.908203125
+```
+
+这个方法主要用于判断行内元素是否换行，以及行内元素的每一行的位置偏移。
+
+注意，如果行内元素包括换行符，那么该方法会把换行符考虑在内。
+
+```
+<span id="inline">
+  Hello World
+  Hello World
+  Hello World
+</span>
+```
+
+上面代码中，`<span>`节点内部有三个换行符，即使 HTML 语言忽略换行符，将它们显示为一行，`getClientRects()`方法依然会返回三个成员。如果行宽设置得特别窄，上面的`<span>`元素显示为6行，那么就会返回六个成员。
