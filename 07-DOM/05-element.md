@@ -741,3 +741,18 @@ el.getClientRects()[0].width // 105.908203125
 ```
 
 上面代码中，`<span>`节点内部有三个换行符，即使 HTML 语言忽略换行符，将它们显示为一行，`getClientRects()`方法依然会返回三个成员。如果行宽设置得特别窄，上面的`<span>`元素显示为6行，那么就会返回六个成员。
+
+### Element.insertAdjacentElement()
+
+`Element.insertAdjacentElement`方法在相对于当前元素的指定位置，插入一个新的节点。该方法返回被插入的节点，如果插入失败，返回`null`。
+
+```
+element.insertAdjacentElement(position, element);
+```
+
+`Element.insertAdjacentElement`方法一共可以接受两个参数，第一个参数是一个字符串，表示插入的位置，第二个参数是将要插入的节点。第一个参数只可以取如下的值。
+
+- `beforebegin`：当前元素之前
+- `afterbegin`：当前元素内部的第一个子节点前面
+- `beforeend`：当前元素内部的最后一个子节点后面
+- `afterend`：当前元素之后
