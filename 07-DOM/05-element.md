@@ -816,3 +816,25 @@ el.remove();
 ```
 
 上面代码将`el`节点从 DOM 树里面移除。
+
+### Element.focus()，Element.blur()
+
+`Element.focus`方法用于将当前页面的焦点，转移到指定元素上。
+
+```
+document.getElementById('my-span').focus();
+```
+
+该方法可以接受一个对象作为参数。参数对象的`preventScroll`属性是一个布尔值，指定是否将当前元素停留在原始位置，而不是滚动到可见区域。
+
+```
+function getFocus() {
+  document.getElementById('btn').focus({preventScroll:false});
+}
+```
+
+上面代码会让`btn`元素获得焦点，并滚动到可见区域。
+
+最后，从`document.activeElement`属性可以得到当前获得焦点的元素。
+
+`Element.blur`方法用于将焦点从当前元素移除。
