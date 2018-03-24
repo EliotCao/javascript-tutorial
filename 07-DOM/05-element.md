@@ -805,3 +805,14 @@ d1.insertAdjacentText('afterend', 'two');
 // 执行后的 HTML 代码：
 // <div id="one">one</div>two
 ```
+
+### Element.remove()
+
+`Element.remove`方法继承自 ChildNode 接口，用于将当前元素节点从它的父节点移除。
+
+```
+var el = document.getElementById('mydiv');
+el.remove();
+```
+
+上面代码将`el`节点从 DOM 树里面移除。
