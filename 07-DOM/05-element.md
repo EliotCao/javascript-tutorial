@@ -756,3 +756,15 @@ element.insertAdjacentElement(position, element);
 - `afterbegin`：当前元素内部的第一个子节点前面
 - `beforeend`：当前元素内部的最后一个子节点后面
 - `afterend`：当前元素之后
+
+注意，`beforebegin`和`afterend`这两个值，只在当前节点有父节点时才会生效。如果当前节点是由脚本创建的，没有父节点，那么插入会失败。
+
+```
+var p1 = document.createElement('p')
+var p2 = document.createElement('p')
+p1.insertAdjacentElement('afterend', p2) // null
+```
+
+上面代码中，`p1`没有父节点，所以插入`p2`到它后面就失败了。
+
+如果插入的节点是一个文档里现有的节点，它会从原有位置删除，放置到新的位置。
