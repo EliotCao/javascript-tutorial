@@ -838,3 +838,11 @@ function getFocus() {
 最后，从`document.activeElement`属性可以得到当前获得焦点的元素。
 
 `Element.blur`方法用于将焦点从当前元素移除。
+
+### Element.click()
+
+`Element.click`方法用于在当前元素上模拟一次鼠标点击，相当于触发了`click`事件。
+
+## 参考链接
+
+- Craig Buckler，[How to Translate from DOM to SVG Coordinates and Back Again](https://www.sitepoint.com/how-to-translate-from-dom-to-svg-coordinates-and-back-again/)
