@@ -191,3 +191,15 @@ if (d.hasAttribute('align')) {
 ```
 
 上面代码检查`div`节点是否含有`align`属性。如果有，则设置为居中对齐。
+
+### Element.removeAttribute()
+
+`Element.removeAttribute`方法移除指定属性。该方法没有返回值。
+
+```
+// HTML 代码为
+// <div id="div1" align="left" width="200px">
+document.getElementById('div1').removeAttribute('align');
+// 现在的HTML代码为
+// <div id="div1" width="200px">
+```
