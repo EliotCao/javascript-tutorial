@@ -135,3 +135,14 @@ image.setAttribute('class', 'myImage');
 ```
 
 上面代码中，`setAttribute`方法直接使用`class`作为属性名，不用写成`className`。
+
+### Element.getAttribute()
+
+`Element.getAttribute`方法返回当前元素节点的指定属性。如果指定属性不存在，则返回`null`。
+
+```
+// HTML 代码为
+// <div id="div1" align="left">
+var div = document.getElementById('div1');
+div.getAttribute('align') // "left"
+```
