@@ -101,3 +101,37 @@ HTML 元素的属性名是大小写不敏感的，但是 JavaScript 对象的属
 - `class`属性改为`className`
 
 另外，HTML 属性值一般都是字符串，但是 JavaScript 属性会自动转换类型。比如，将字符串`true`转为布尔值，将`onClick`的值转为一个函数，将`style`属性的值转为一个`CSSStyleDeclaration`对象。因此，可以对这些属性赋予各种类型的值。
+
+## 属性操作的标准方法
+
+### 概述
+
+元素节点提供六个方法，用来操作属性。
+
+- `getAttribute()`
+- `getAttributeNames()`
+- `setAttribute()`
+- `hasAttribute()`
+- `hasAttributes()`
+- `removeAttribute()`
+
+这有几点注意。
+
+（1）适用性
+
+这六个方法对所有属性（包括用户自定义的属性）都适用。
+
+（2）返回值
+
+`getAttribute()`只返回字符串，不会返回其他类型的值。
+
+（3）属性名
+
+这些方法只接受属性的标准名称，不用改写保留字，比如`for`和`class`都可以直接使用。另外，这些方法对于属性名是大小写不敏感的。
+
+```
+var image = document.images[0];
+image.setAttribute('class', 'myImage');
+```
+
+上面代码中，`setAttribute`方法直接使用`class`作为属性名，不用写成`className`。
