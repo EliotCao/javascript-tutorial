@@ -146,3 +146,18 @@ image.setAttribute('class', 'myImage');
 var div = document.getElementById('div1');
 div.getAttribute('align') // "left"
 ```
+
+### Element.getAttributeNames()
+
+`Element.getAttributeNames()`返回一个数组，成员是当前元素的所有属性的名字。如果当前元素没有任何属性，则返回一个空数组。使用`Element.attributes`属性，也可以拿到同样的结果，唯一的区别是它返回的是类似数组的对象。
+
+```
+var mydiv = document.getElementById('mydiv');
+
+mydiv.getAttributeNames().forEach(function (key) {
+  var value = mydiv.getAttribute(key);
+  console.log(key, value);
+})
+```
+
+上面代码用于遍历某个节点的所有属性。
