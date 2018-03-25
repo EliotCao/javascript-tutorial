@@ -41,3 +41,21 @@ n.attributes[0].nodeName // "id"
 n.attributes[0].value // "mydiv"
 n.attributes[0].nodeValue // "mydiv"
 ```
+
+下面代码可以遍历一个元素节点的所有属性。
+
+```
+var para = document.getElementsByTagName('p')[0];
+var result = document.getElementById('result');
+
+if (para.hasAttributes()) {
+  var attrs = para.attributes;
+  var output = '';
+  for(var i = attrs.length - 1; i >= 0; i--) {
+    output += attrs[i].name + '->' + attrs[i].value;
+  }
+  result.textContent = output;
+} else {
+  result.textContent = 'No attributes to show';
+}
+```
