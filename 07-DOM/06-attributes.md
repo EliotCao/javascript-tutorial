@@ -203,3 +203,37 @@ document.getElementById('div1').removeAttribute('align');
 // 现在的HTML代码为
 // <div id="div1" width="200px">
 ```
+
+## dataset 属性
+
+有时，需要在HTML元素上附加数据，供 JavaScript 脚本使用。一种解决方法是自定义属性。
+
+```
+<div id="mydiv" foo="bar">
+```
+
+上面代码为`div`元素自定义了`foo`属性，然后可以用`getAttribute()`和`setAttribute()`读写这个属性。
+
+```
+var n = document.getElementById('mydiv');
+n.getAttribute('foo') // bar
+n.setAttribute('foo', 'baz')
+```
+
+这种方法虽然可以达到目的，但是会使得 HTML 元素的属性不符合标准，导致网页代码通不过校验。
+
+更好的解决方法是，使用标准提供的`data-*`属性。
+
+```
+<div id="mydiv" data-foo="bar">
+```
+
+然后，使用元素节点对象的`dataset`属性，它指向一个对象，可以用来操作 HTML 元素标签的`data-*`属性。
+
+```
+var n = document.getElementById('mydiv');
+n.dataset.foo // bar
+n.dataset.foo = 'baz'
+```
+
+上面代码中，通过`dataset.foo`读写`data-foo`属性。
