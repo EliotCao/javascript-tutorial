@@ -161,3 +161,19 @@ mydiv.getAttributeNames().forEach(function (key) {
 ```
 
 上面代码用于遍历某个节点的所有属性。
+
+### Element.setAttribute()
+
+`Element.setAttribute`方法用于为当前元素节点新增属性。如果同名属性已存在，则相当于编辑已存在的属性。该方法没有返回值。
+
+```
+// HTML 代码为
+// <button>Hello World</button>
+var b = document.querySelector('button');
+b.setAttribute('name', 'myButton');
+b.setAttribute('disabled', true);
+```
+
+上面代码中，`button`元素的`name`属性被设成`myButton`，`disabled`属性被设成`true`。
+
+这里有两个地方需要注意，首先，属性值总是字符串，其他类型的值会自动转成字符串，比如布尔值`true`就会变成字符串`true`；其次，上例的`disable`属性是一个布尔属性，对于`<button>`元素来说，这个属性不需要属性值，只要设置了就总是会生效，因此`setAttribute`方法里面可以将`disabled`属性设成任意值。
