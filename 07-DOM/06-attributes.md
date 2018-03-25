@@ -177,3 +177,17 @@ b.setAttribute('disabled', true);
 上面代码中，`button`元素的`name`属性被设成`myButton`，`disabled`属性被设成`true`。
 
 这里有两个地方需要注意，首先，属性值总是字符串，其他类型的值会自动转成字符串，比如布尔值`true`就会变成字符串`true`；其次，上例的`disable`属性是一个布尔属性，对于`<button>`元素来说，这个属性不需要属性值，只要设置了就总是会生效，因此`setAttribute`方法里面可以将`disabled`属性设成任意值。
+
+### Element.hasAttribute()
+
+`Element.hasAttribute`方法返回一个布尔值，表示当前元素节点是否包含指定属性。
+
+```
+var d = document.getElementById('div1');
+
+if (d.hasAttribute('align')) {
+  d.setAttribute('align', 'center');
+}
+```
+
+上面代码检查`div`节点是否含有`align`属性。如果有，则设置为居中对齐。
