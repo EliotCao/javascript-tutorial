@@ -44,3 +44,29 @@ document.querySelector('p').firstChild.nodeValue
 // 设置文本内容
 document.querySelector('p').firstChild.data = 'Hello World';
 ```
+
+### wholeText
+
+`wholeText`属性将当前文本节点与毗邻的文本节点，作为一个整体返回。大多数情况下，`wholeText`属性的返回值，与`data`属性和`textContent`属性相同。但是，某些特殊情况会有差异。
+
+举例来说，HTML 代码如下。
+
+```
+<p id="para">A <em>B</em> C</p>
+```
+
+这时，文本节点的`wholeText`属性和`data`属性，返回值相同。
+
+```
+var el = document.getElementById('para');
+el.firstChild.wholeText // "A "
+el.firstChild.data // "A "
+```
+
+但是，一旦移除`<em>`节点，`wholeText`属性与`data`属性就会有差异，因为这时其实`<p>`节点下面包含了两个毗邻的文本节点。
+
+```
+el.removeChild(para.childNodes[1]);
+el.firstChild.wholeText // "A C"
+el.firstChild.data // "A "
+```
