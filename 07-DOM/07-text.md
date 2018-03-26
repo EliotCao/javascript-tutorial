@@ -28,3 +28,19 @@ var text2 = new Text('This is a text node');
 注意，由于空格也是一个字符，所以哪怕只有一个空格，也会形成文本节点。比如，`<p> </p>`包含一个空格，它的子节点就是一个文本节点。
 
 文本节点除了继承`Node`接口，还继承了`CharacterData`接口。`Node`接口的属性和方法请参考《Node 接口》一章，这里不再重复介绍了，以下的属性和方法大部分来自`CharacterData`接口。
+
+## Text 节点的属性
+
+### data
+
+`data`属性等同于`nodeValue`属性，用来设置或读取文本节点的内容。
+
+```
+// 读取文本内容
+document.querySelector('p').firstChild.data
+// 等同于
+document.querySelector('p').firstChild.nodeValue
+
+// 设置文本内容
+document.querySelector('p').firstChild.data = 'Hello World';
+```
