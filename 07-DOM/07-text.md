@@ -70,3 +70,11 @@ el.removeChild(para.childNodes[1]);
 el.firstChild.wholeText // "A C"
 el.firstChild.data // "A "
 ```
+
+### length
+
+`length`属性返回当前文本节点的文本长度。
+
+```
+(new Text('Hello')).length // 5
+```
