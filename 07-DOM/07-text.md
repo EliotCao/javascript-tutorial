@@ -78,3 +78,17 @@ el.firstChild.data // "A "
 ```
 (new Text('Hello')).length // 5
 ```
+
+### nextElementSibling，previousElementSibling
+
+`nextElementSibling`属性返回紧跟在当前文本节点后面的那个同级元素节点。如果取不到元素节点，则返回`null`。
+
+```
+// HTML 为
+// <div>Hello <em>World</em></div>
+var tn = document.querySelector('div').firstChild;
+tn.nextElementSibling
+// <em>World</em>
+```
+
+`previousElementSibling`属性返回当前文本节点前面最近的同级元素节点。如果取不到元素节点，则返回`null：`。
