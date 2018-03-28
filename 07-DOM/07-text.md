@@ -121,3 +121,15 @@ pElementText.replaceData(7, 5, 'World');
 pElementText.substringData(7, 10);
 // 页面显示不变，返回"World "
 ```
+
+### remove()
+
+`remove`方法用于移除当前`Text`节点。
+
+```
+// HTML 代码为
+// <p>Hello World</p>
+document.querySelector('p').firstChild.remove()
+// 现在 HTML 代码为
+// <p></p>
+```
