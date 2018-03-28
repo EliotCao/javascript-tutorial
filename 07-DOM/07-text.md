@@ -92,3 +92,32 @@ tn.nextElementSibling
 ```
 
 `previousElementSibling`属性返回当前文本节点前面最近的同级元素节点。如果取不到元素节点，则返回`null：`。
+
+## Text 节点的方法
+
+### appendData()，deleteData()，insertData()，replaceData()，subStringData()
+
+以下5个方法都是编辑`Text`节点文本内容的方法。
+
+- `appendData()`：在`Text`节点尾部追加字符串。
+- `deleteData()`：删除`Text`节点内部的子字符串，第一个参数为子字符串开始位置，第二个参数为子字符串长度。
+- `insertData()`：在`Text`节点插入字符串，第一个参数为插入位置，第二个参数为插入的子字符串。
+- `replaceData()`：用于替换文本，第一个参数为替换开始位置，第二个参数为需要被替换掉的长度，第三个参数为新加入的字符串。
+- `subStringData()`：用于获取子字符串，第一个参数为子字符串在`Text`节点中的开始位置，第二个参数为子字符串长度。
+
+```
+// HTML 代码为
+// <p>Hello World</p>
+var pElementText = document.querySelector('p').firstChild;
+
+pElementText.appendData('!');
+// 页面显示 Hello World!
+pElementText.deleteData(7, 5);
+// 页面显示 Hello W
+pElementText.insertData(7, 'Hello ');
+// 页面显示 Hello WHello
+pElementText.replaceData(7, 5, 'World');
+// 页面显示 Hello WWorld
+pElementText.substringData(7, 10);
+// 页面显示不变，返回"World "
+```
