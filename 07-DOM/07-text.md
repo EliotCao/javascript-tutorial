@@ -133,3 +133,31 @@ document.querySelector('p').firstChild.remove()
 // 现在 HTML 代码为
 // <p></p>
 ```
+
+### splitText()
+
+`splitText`方法将`Text`节点一分为二，变成两个毗邻的`Text`节点。它的参数就是分割位置（从零开始），分割到该位置的字符前结束。如果分割位置不存在，将报错。
+
+分割后，该方法返回分割位置后方的字符串，而原`Text`节点变成只包含分割位置前方的字符串。
+
+```
+// html 代码为 <p id="p">foobar</p>
+var p = document.getElementById('p');
+var textnode = p.firstChild;
+
+var newText = textnode.splitText(3);
+newText // "bar"
+textnode // "foo"
+```
+
+父元素节点的`normalize`方法可以将毗邻的两个`Text`节点合并。
+
+接上面的例子，文本节点的`splitText`方法将一个`Text`节点分割成两个，父元素的`normalize`方法可以实现逆操作，将它们合并。
+
+```
+p.childNodes.length // 2
+
+// 将毗邻的两个 Text 节点合并
+p.normalize();
+p.childNodes.length // 1
+```
