@@ -58,3 +58,26 @@ divStyle.width // 100px
 注意，该对象的属性值都是字符串，设置时必须包括单位，但是不含规则结尾的分号。比如，`divStyle.width`不能写为`100`，而要写为`100px`。
 
 另外，`Element.style`返回的只是行内样式，并不是该元素的全部样式。通过样式表设置的样式，或者从父元素继承的样式，无法通过这个属性得到。元素的全部样式要通过`window.getComputedStyle()`得到。
+
+### CSSStyleDeclaration 实例属性
+
+**（1）CSSStyleDeclaration.cssText**
+
+`CSSStyleDeclaration.cssText`属性用来读写当前规则的所有样式声明文本。
+
+```
+var divStyle = document.querySelector('div').style;
+
+divStyle.cssText = 'background-color: red;'
+  + 'border: 1px solid black;'
+  + 'height: 100px;'
+  + 'width: 100px;';
+```
+
+注意，`cssText`的属性值不用改写 CSS 属性名。
+
+删除一个元素的所有行内样式，最简便的方法就是设置`cssText`为空字符串。
+
+```
+divStyle.cssText = '';
+```
