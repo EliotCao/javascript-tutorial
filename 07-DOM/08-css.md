@@ -97,3 +97,15 @@ divStyle.length // 3
 ```
 
 上面代码中，`myDiv`元素的行内样式共包含3条样式规则。
+
+**（3）CSSStyleDeclaration.parentRule**
+
+`CSSStyleDeclaration.parentRule`属性返回当前规则所属的那个样式块（CSSRule 实例）。如果不存在所属的样式块，该属性返回`null`。
+
+该属性只读，且只在使用 CSSRule 接口时有意义。
+
+```
+var declaration = document.styleSheets[0].rules[0].style;
+declaration.parentRule === document.styleSheets[0].rules[0]
+// true
+```
