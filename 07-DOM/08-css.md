@@ -192,3 +192,23 @@ style.setProperty('border', '1px solid blue');
 ```
 
 上面代码执行后，`myDiv`元素就会出现蓝色的边框。
+
+## CSS 模块的侦测
+
+CSS 的规格发展太快，新的模块层出不穷。不同浏览器的不同版本，对 CSS 模块的支持情况都不一样。有时候，需要知道当前浏览器是否支持某个模块，这就叫做“CSS模块的侦测”。
+
+一个比较普遍适用的方法是，判断元素的`style`对象的某个属性值是否为字符串。
+
+```
+typeof element.style.animationName === 'string';
+typeof element.style.transform === 'string';
+```
+
+如果该 CSS 属性确实存在，会返回一个字符串。即使该属性实际上并未设置，也会返回一个空字符串。如果该属性不存在，则会返回`undefined`。
+
+```
+document.body.style['maxWidth'] // ""
+document.body.style['maximumWidth'] // undefined
+```
+
+上面代码说明，这个浏览器支持`max-width`属性，但是不支持`maximum-width`属性。
