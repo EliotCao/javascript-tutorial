@@ -138,3 +138,19 @@ var style = document.getElementById('myDiv').style;
 style.margin // "10px"
 style.getPropertyValue("margin") // "10px"
 ```
+
+**（3）CSSStyleDeclaration.item()**
+
+`CSSStyleDeclaration.item`方法接受一个整数值作为参数，返回该位置的 CSS 属性名。
+
+```
+// HTML 代码为
+// <div id="myDiv" style="color: red; background-color: white;"/>
+var style = document.getElementById('myDiv').style;
+style.item(0) // "color"
+style.item(1) // "background-color"
+```
+
+上面代码中，`0`号位置的 CSS 属性名是`color`，`1`号位置的 CSS 属性名是`background-color`。
+
+如果没有提供参数，这个方法会报错。如果参数值超过实际的属性数目，这个方法返回一个空字符值。
