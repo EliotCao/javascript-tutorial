@@ -109,3 +109,20 @@ var declaration = document.styleSheets[0].rules[0].style;
 declaration.parentRule === document.styleSheets[0].rules[0]
 // true
 ```
+
+### CSSStyleDeclaration 实例方法
+
+**（1）CSSStyleDeclaration.getPropertyPriority()**
+
+`CSSStyleDeclaration.getPropertyPriority`方法接受 CSS 样式的属性名作为参数，返回一个字符串，表示有没有设置`important`优先级。如果有就返回`important`，否则返回空字符串。
+
+```
+// HTML 代码为
+// <div id="myDiv" style="margin: 10px!important; color: red;"/>
+var style = document.getElementById('myDiv').style;
+style.margin // "10px"
+style.getPropertyPriority('margin') // "important"
+style.getPropertyPriority('color') // ""
+```
+
+上面代码中，`margin`属性有`important`优先级，`color`属性没有。
