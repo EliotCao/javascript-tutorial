@@ -390,3 +390,13 @@ myStyleSheet instanceof StyleSheet // true
 ```
 
 严格地说，`StyleSheet`接口不仅包括网页样式表，还包括 XML 文档的样式表。所以，它有一个子类`CSSStyleSheet`表示网页的 CSS 样式表。我们在网页里面拿到的样式表实例，实际上是`CSSStyleSheet`的实例。这个子接口继承了`StyleSheet`的所有属性和方法，并且定义了几个自己的属性，下面把这两个接口放在一起介绍。
+
+### 实例属性
+
+`StyleSheet`实例有以下属性。
+
+**（1）StyleSheet.disabled**
+
+`StyleSheet.disabled`返回一个布尔值，表示该样式表是否处于禁用状态。手动设置`disabled`属性为`true`，等同于在`<link>`元素里面，将这张样式表设为`alternate stylesheet`，即该样式表将不会生效。
+
+注意，`disabled`属性只能在 JavaScript 脚本中设置，不能在 HTML 语句中设置。
