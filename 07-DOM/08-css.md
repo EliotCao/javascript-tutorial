@@ -126,3 +126,15 @@ style.getPropertyPriority('color') // ""
 ```
 
 上面代码中，`margin`属性有`important`优先级，`color`属性没有。
+
+**（2）CSSStyleDeclaration.getPropertyValue()**
+
+`CSSStyleDeclaration.getPropertyValue`方法接受 CSS 样式属性名作为参数，返回一个字符串，表示该属性的属性值。
+
+```
+// HTML 代码为
+// <div id="myDiv" style="margin: 10px!important; color: red;"/>
+var style = document.getElementById('myDiv').style;
+style.margin // "10px"
+style.getPropertyValue("margin") // "10px"
+```
