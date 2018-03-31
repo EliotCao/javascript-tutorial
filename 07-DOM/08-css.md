@@ -81,3 +81,19 @@ divStyle.cssText = 'background-color: red;'
 ```
 divStyle.cssText = '';
 ```
+
+**（2）CSSStyleDeclaration.length**
+
+`CSSStyleDeclaration.length`属性返回一个整数值，表示当前规则包含多少条样式声明。
+
+```
+// HTML 代码如下
+// <div id="myDiv"
+//   style="height: 1px;width: 100%;background-color: #CA1;"
+// ></div>
+var myDiv = document.getElementById('myDiv');
+var divStyle = myDiv.style;
+divStyle.length // 3
+```
+
+上面代码中，`myDiv`元素的行内样式共包含3条样式规则。
