@@ -287,3 +287,25 @@ CSS.supports('display: table-cell') // true
 ```
 CSS.supports('display: table-cell;') // false
 ```
+
+## window.getComputedStyle()
+
+行内样式（inline style）具有最高的优先级，改变行内样式，通常会立即反映出来。但是，网页元素最终的样式是综合各种规则计算出来的。因此，如果想得到元素实际的样式，只读取行内样式是不够的，需要得到浏览器最终计算出来的样式规则。
+
+`window.getComputedStyle`方法，就用来返回浏览器计算后得到的最终规则。它接受一个节点对象作为参数，返回一个 CSSStyleDeclaration 实例，包含了指定节点的最终样式信息。所谓“最终样式信息”，指的是各种 CSS 规则叠加后的结果。
+
+```
+var div = document.querySelector('div');
+var styleObj = window.getComputedStyle(div);
+styleObj.backgroundColor
+```
+
+上面代码中，得到的背景色就是`div`元素真正的背景色。
+
+注意，CSSStyleDeclaration 实例是一个活的对象，任何对于样式的修改，会实时反映到这个实例上面。另外，这个实例是只读的。
+
+`getComputedStyle`方法还可以接受第二个参数，表示当前元素的伪元素（比如`:before`、`:after`、`:first-line`、`:first-letter`等）。
+
+```
+var result = window.getComputedStyle(div, ':before');
+```
