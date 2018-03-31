@@ -245,3 +245,25 @@ function isPropertySupported(property) {
 isPropertySupported('background-clip')
 // true
 ```
+
+## CSS 对象
+
+浏览器原生提供 CSS 对象，为 JavaScript 操作 CSS 提供一些工具方法。
+
+这个对象目前有两个静态方法。
+
+### CSS.escape()
+
+`CSS.escape`方法用于转义 CSS 选择器里面的特殊字符。
+
+```
+<div id="foo#bar">
+```
+
+上面代码中，该元素的`id`属性包含一个`#`号，该字符在 CSS 选择器里面有特殊含义。不能直接写成`document.querySelector('#foo#bar')`，只能写成`document.querySelector('#foo\\#bar')`。这里必须使用双斜杠的原因是，单引号字符串本身会转义一次斜杠。
+
+`CSS.escape`方法就用来转义那些特殊字符。
+
+```
+document.querySelector('#' + CSS.escape('foo#bar'))
+```
