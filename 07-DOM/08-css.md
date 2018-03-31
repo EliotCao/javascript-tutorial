@@ -154,3 +154,20 @@ style.item(1) // "background-color"
 上面代码中，`0`号位置的 CSS 属性名是`color`，`1`号位置的 CSS 属性名是`background-color`。
 
 如果没有提供参数，这个方法会报错。如果参数值超过实际的属性数目，这个方法返回一个空字符值。
+
+**（4）CSSStyleDeclaration.removeProperty()**
+
+`CSSStyleDeclaration.removeProperty`方法接受一个属性名作为参数，在 CSS 规则里面移除这个属性，返回这个属性原来的值。
+
+```
+// HTML 代码为
+// <div id="myDiv" style="color: red; background-color: white;">
+//   111
+// </div>
+var style = document.getElementById('myDiv').style;
+style.removeProperty('color') // 'red'
+// HTML 代码变为
+// <div id="myDiv" style="background-color: white;">
+```
+
+上面代码中，删除`color`属性以后，字体颜色从红色变成默认颜色。
