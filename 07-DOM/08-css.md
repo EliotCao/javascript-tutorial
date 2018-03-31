@@ -171,3 +171,24 @@ style.removeProperty('color') // 'red'
 ```
 
 上面代码中，删除`color`属性以后，字体颜色从红色变成默认颜色。
+
+**（5）CSSStyleDeclaration.setProperty()**
+
+`CSSStyleDeclaration.setProperty`方法用来设置新的 CSS 属性。该方法没有返回值。
+
+该方法可以接受三个参数。
+
+- 第一个参数：属性名，该参数是必需的。
+- 第二个参数：属性值，该参数可选。如果省略，则参数值默认为空字符串。
+- 第三个参数：优先级，该参数可选。如果设置，唯一的合法值是`important`，表示 CSS 规则里面的`!important`。
+
+```
+// HTML 代码为
+// <div id="myDiv" style="color: red; background-color: white;">
+//   111
+// </div>
+var style = document.getElementById('myDiv').style;
+style.setProperty('border', '1px solid blue');
+```
+
+上面代码执行后，`myDiv`元素就会出现蓝色的边框。
