@@ -329,3 +329,40 @@ var height = styleObj.getPropertyValue('height');
 - CSS 规则的简写形式无效。比如，想读取`margin`属性的值，不能直接读，只能读`marginLeft`、`marginTop`等属性；再比如，`font`属性也是不能直接读的，只能读`font-size`等单个属性。
 - 如果读取 CSS 原始的属性名，要用方括号运算符，比如`styleObj['z-index']`；如果读取骆驼拼写法的 CSS 属性名，可以直接读取`styleObj.zIndex`。
 - 该方法返回的 CSSStyleDeclaration 实例的`cssText`属性无效，返回`undefined`。
+
+## CSS 伪元素
+
+CSS 伪元素是通过 CSS 向 DOM 添加的元素，主要是通过`:before`和`:after`选择器生成，然后用`content`属性指定伪元素的内容。
+
+下面是一段 HTML 代码。
+
+```
+<div id="test">Test content</div>
+```
+
+CSS 添加伪元素`:before`的写法如下。
+
+```
+#test:before {
+  content: 'Before ';
+  color: #FF0;
+}
+```
+
+节点元素的`style`对象无法读写伪元素的样式，这时就要用到`window.getComputedStyle()`。JavaScript 获取伪元素，可以使用下面的方法。
+
+```
+var test = document.querySelector('#test');
+
+var result = window.getComputedStyle(test, ':before').content;
+var color = window.getComputedStyle(test, ':before').color;
+```
+
+此外，也可以使用 CSSStyleDeclaration 实例的`getPropertyValue`方法，获取伪元素的属性。
+
+```
+var result = window.getComputedStyle(test, ':before')
+  .getPropertyValue('content');
+var color = window.getComputedStyle(test, ':before')
+  .getPropertyValue('color');
+```
