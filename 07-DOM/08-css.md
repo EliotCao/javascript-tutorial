@@ -267,3 +267,23 @@ isPropertySupported('background-clip')
 ```
 document.querySelector('#' + CSS.escape('foo#bar'))
 ```
+
+### CSS.supports()
+
+`CSS.supports`方法返回一个布尔值，表示当前环境是否支持某一句 CSS 规则。
+
+它的参数有两种写法，一种是第一个参数是属性名，第二个参数是属性值；另一种是整个参数就是一行完整的 CSS 语句。
+
+```
+// 第一种写法
+CSS.supports('transform-origin', '5px') // true
+
+// 第二种写法
+CSS.supports('display: table-cell') // true
+```
+
+注意，第二种写法的参数结尾不能带有分号，否则结果不准确。
+
+```
+CSS.supports('display: table-cell;') // false
+```
