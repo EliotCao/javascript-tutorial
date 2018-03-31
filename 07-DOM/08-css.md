@@ -212,3 +212,36 @@ document.body.style['maximumWidth'] // undefined
 ```
 
 上面代码说明，这个浏览器支持`max-width`属性，但是不支持`maximum-width`属性。
+
+注意，不管 CSS 属性名的写法带不带连词线，`style`属性上都能反映出该属性是否存在。
+
+```
+document.body.style['backgroundColor'] // ""
+document.body.style['background-color'] // ""
+```
+
+另外，使用的时候，需要把不同浏览器的 CSS 前缀也考虑进去。
+
+```
+var content = document.getElementById('content');
+typeof content.style['webkitAnimation'] === 'string'
+```
+
+这种侦测方法可以写成一个函数。
+
+```
+function isPropertySupported(property) {
+  if (property in document.body.style) return true;
+  var prefixes = ['Moz', 'Webkit', 'O', 'ms', 'Khtml'];
+  var prefProperty = property.charAt(0).toUpperCase() + property.substr(1);
+
+  for(var i = 0; i < prefixes.length; i++){
+    if((prefixes[i] + prefProperty) in document.body.style) return true;
+  }
+
+  return false;
+}
+
+isPropertySupported('background-clip')
+// true
+```
