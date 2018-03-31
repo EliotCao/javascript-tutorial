@@ -366,3 +366,27 @@ var result = window.getComputedStyle(test, ':before')
 var color = window.getComputedStyle(test, ':before')
   .getPropertyValue('color');
 ```
+
+## StyleSheet 接口
+
+### 概述
+
+`StyleSheet`接口代表网页的一张样式表，包括`<link>`元素加载的样式表和`<style>`元素内嵌的样式表。
+
+`document`对象的`styleSheets`属性，可以返回当前页面的所有`StyleSheet`实例（即所有样式表）。它是一个类似数组的对象。
+
+```
+var sheets = document.styleSheets;
+var sheet = document.styleSheets[0];
+sheet instanceof StyleSheet // true
+```
+
+如果是`<style>`元素嵌入的样式表，还有另一种获取`StyleSheet`实例的方法，就是这个节点元素的`sheet`属性。
+
+```
+// HTML 代码为 <style id="myStyle"></style>
+var myStyleSheet = document.getElementById('myStyle').sheet;
+myStyleSheet instanceof StyleSheet // true
+```
+
+严格地说，`StyleSheet`接口不仅包括网页样式表，还包括 XML 文档的样式表。所以，它有一个子类`CSSStyleSheet`表示网页的 CSS 样式表。我们在网页里面拿到的样式表实例，实际上是`CSSStyleSheet`的实例。这个子接口继承了`StyleSheet`的所有属性和方法，并且定义了几个自己的属性，下面把这两个接口放在一起介绍。
