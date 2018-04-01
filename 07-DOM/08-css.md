@@ -408,3 +408,19 @@ myStyleSheet instanceof StyleSheet // true
 ```
 document.styleSheets[0].href
 ```
+
+**（3）StyleSheet.media**
+
+`StyleSheet.media`属性返回一个类似数组的对象（`MediaList`实例），成员是表示适用媒介的字符串。表示当前样式表是用于屏幕（screen），还是用于打印（print）或手持设备（handheld），或各种媒介都适用（all）。该属性只读，默认值是`screen`。
+
+```
+document.styleSheets[0].media.mediaText
+// "all"
+```
+
+`MediaList`实例的`appendMedium`方法，用于增加媒介；`deleteMedium`方法用于删除媒介。
+
+```
+document.styleSheets[0].media.appendMedium('handheld');
+document.styleSheets[0].media.deleteMedium('print');
+```
