@@ -479,3 +479,7 @@ sheet.cssRules[1].cssText
 cssStyleSheet.cssRules[0].style.color = 'red';
 cssStyleSheet.cssRules[1].style.color = 'purple';
 ```
+
+**（9）CSSStyleSheet.ownerRule**
+
+有些样式表是通过`@import`规则输入的，它的`ownerRule`属性会返回一个`CSSRule`实例，代表那行`@import`规则。如果当前样式表不是通过`@import`引入的，`ownerRule`属性返回`null`。
