@@ -448,3 +448,13 @@ if (stylesheet.parentStyleSheet) {
   sheet = stylesheet;
 }
 ```
+
+**（7）StyleSheet.ownerNode**
+
+`StyleSheet.ownerNode`属性返回`StyleSheet`对象所在的 DOM 节点，通常是`<link>`或`<style>`。对于那些由其他样式表引用的样式表，该属性为`null`。
+
+```
+// HTML代码为
+// <link rel="StyleSheet" href="example.css" type="text/css" />
+document.styleSheets[0].ownerNode // [object HTMLLinkElement]
+```
