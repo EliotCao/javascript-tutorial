@@ -436,3 +436,15 @@ document.styleSheets[0].media.deleteMedium('print');
 ```
 document.styleSheets[0].type  // "text/css"
 ```
+
+**（6）StyleSheet.parentStyleSheet**
+
+CSS 的`@import`命令允许在样式表中加载其他样式表。`StyleSheet.parentStyleSheet`属性返回包含了当前样式表的那张样式表。如果当前样式表是顶层样式表，则该属性返回`null`。
+
+```
+if (stylesheet.parentStyleSheet) {
+  sheet = stylesheet.parentStyleSheet;
+} else {
+  sheet = stylesheet;
+}
+```
