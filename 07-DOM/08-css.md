@@ -458,3 +458,24 @@ if (stylesheet.parentStyleSheet) {
 // <link rel="StyleSheet" href="example.css" type="text/css" />
 document.styleSheets[0].ownerNode // [object HTMLLinkElement]
 ```
+
+**（8）CSSStyleSheet.cssRules**
+
+`CSSStyleSheet.cssRules`属性指向一个类似数组的对象（`CSSRuleList`实例），里面每一个成员就是当前样式表的一条 CSS 规则。使用该规则的`cssText`属性，可以得到 CSS 规则对应的字符串。
+
+```
+var sheet = document.querySelector('#styleElement').sheet;
+
+sheet.cssRules[0].cssText
+// "body { background-color: red; margin: 20px; }"
+
+sheet.cssRules[1].cssText
+// "p { line-height: 1.4em; color: blue; }"
+```
+
+每条 CSS 规则还有一个`style`属性，指向一个对象，用来读写具体的 CSS 命令。
+
+```
+cssStyleSheet.cssRules[0].style.color = 'red';
+cssStyleSheet.cssRules[1].style.color = 'purple';
+```
