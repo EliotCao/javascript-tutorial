@@ -424,3 +424,15 @@ document.styleSheets[0].media.mediaText
 document.styleSheets[0].media.appendMedium('handheld');
 document.styleSheets[0].media.deleteMedium('print');
 ```
+
+**（4）StyleSheet.title**
+
+`StyleSheet.title`属性返回样式表的`title`属性。
+
+**（5）StyleSheet.type**
+
+`StyleSheet.type`属性返回样式表的`type`属性，通常是`text/css`。
+
+```
+document.styleSheets[0].type  // "text/css"
+```
