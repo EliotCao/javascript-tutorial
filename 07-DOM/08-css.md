@@ -501,3 +501,11 @@ sheet.insertRule('p { color: red }', 1);
 该方法的返回值是新插入规则的位置序号。
 
 注意，浏览器对脚本在样式表里面插入规则有很多[限制](https://drafts.csswg.org/cssom/#insert-a-css-rule)。所以，这个方法最好放在`try...catch`里使用。
+
+**（2）CSSStyleSheet.deleteRule()**
+
+`CSSStyleSheet.deleteRule`方法用来在样式表里面移除一条规则，它的参数是该条规则在`cssRules`对象中的位置。该方法没有返回值。
+
+```
+document.styleSheets[0].deleteRule(1);
+```
