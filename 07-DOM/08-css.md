@@ -540,3 +540,29 @@ linkElm.setAttribute('href', 'reset-min.css');
 
 document.head.appendChild(linkElm);
 ```
+
+## CSSRuleList 接口
+
+CSSRuleList 接口是一个类似数组的对象，表示一组 CSS 规则，成员都是 CSSRule 实例。
+
+获取 CSSRuleList 实例，一般是通过`StyleSheet.cssRules`属性。
+
+```
+// HTML 代码如下
+// <style id="myStyle">
+//   h1 { color: red; }
+//   p { color: blue; }
+// </style>
+var myStyleSheet = document.getElementById('myStyle').sheet;
+var crl = myStyleSheet.cssRules;
+crl instanceof CSSRuleList // true
+```
+
+CSSRuleList 实例里面，每一条规则（CSSRule 实例）可以通过`rules.item(index)`或者`rules[index]`拿到。CSS 规则的条数通过`rules.length`拿到。还是用上面的例子。
+
+```
+crl[0] instanceof CSSRule // true
+crl.length // 2
+```
+
+注意，添加规则和删除规则不能在 CSSRuleList 实例操作，而要在它的父元素 StyleSheet 实例上，通过`StyleSheet.insertRule()`和`StyleSheet.deleteRule()`操作。
