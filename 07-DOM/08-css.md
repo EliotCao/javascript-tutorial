@@ -529,3 +529,14 @@ var style = (function () {
 })();
 style.sheet.insertRule('.foo{color:red;}', 0);
 ```
+
+另一种是添加外部样式表，即在文档中添加一个`<link>`节点，然后将`href`属性指向外部样式表的 URL。
+
+```
+var linkElm = document.createElement('link');
+linkElm.setAttribute('rel', 'stylesheet');
+linkElm.setAttribute('type', 'text/css');
+linkElm.setAttribute('href', 'reset-min.css');
+
+document.head.appendChild(linkElm);
+```
