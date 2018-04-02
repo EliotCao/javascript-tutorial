@@ -509,3 +509,23 @@ sheet.insertRule('p { color: red }', 1);
 ```
 document.styleSheets[0].deleteRule(1);
 ```
+
+## 实例：添加样式表
+
+网页添加样式表有两种方式。一种是添加一张内置样式表，即在文档中添加一个`<style>`节点。
+
+```
+// 写法一
+var style = document.createElement('style');
+style.setAttribute('media', 'screen');
+style.innerHTML = 'body{color:red}';
+document.head.appendChild(style);
+
+// 写法二
+var style = (function () {
+  var style = document.createElement('style');
+  document.head.appendChild(style);
+  return style;
+})();
+style.sheet.insertRule('.foo{color:red;}', 0);
+```
