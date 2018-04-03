@@ -566,3 +566,32 @@ crl.length // 2
 ```
 
 注意，添加规则和删除规则不能在 CSSRuleList 实例操作，而要在它的父元素 StyleSheet 实例上，通过`StyleSheet.insertRule()`和`StyleSheet.deleteRule()`操作。
+
+## CSSRule 接口
+
+### 概述
+
+一条 CSS 规则包括两个部分：CSS 选择器和样式声明。下面就是一条典型的 CSS 规则。
+
+```
+.myClass {
+  color: red;
+  background-color: yellow;
+}
+```
+
+JavaScript 通过 CSSRule 接口操作 CSS 规则。一般通过 CSSRuleList 接口（`StyleSheet.cssRules`）获取 CSSRule 实例。
+
+```
+// HTML 代码如下
+// <style id="myStyle">
+//   .myClass {
+//     color: red;
+//     background-color: yellow;
+//   }
+// </style>
+var myStyleSheet = document.getElementById('myStyle').sheet;
+var ruleList = myStyleSheet.cssRules;
+var rule = ruleList[0];
+rule instanceof CSSRule // true
+```
