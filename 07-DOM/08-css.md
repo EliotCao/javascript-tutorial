@@ -595,3 +595,16 @@ var ruleList = myStyleSheet.cssRules;
 var rule = ruleList[0];
 rule instanceof CSSRule // true
 ```
+
+### CSSRule 实例的属性
+
+**（1）CSSRule.cssText**
+
+`CSSRule.cssText`属性返回当前规则的文本，还是使用上面的例子。
+
+```
+rule.cssText
+// ".myClass { color: red; background-color: yellow; }"
+```
+
+如果规则是加载（`@import`）其他样式表，`cssText`属性返回`@import 'url'`。
