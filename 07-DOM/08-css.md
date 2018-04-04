@@ -608,3 +608,11 @@ rule.cssText
 ```
 
 如果规则是加载（`@import`）其他样式表，`cssText`属性返回`@import 'url'`。
+
+**（2）CSSRule.parentStyleSheet**
+
+`CSSRule.parentStyleSheet`属性返回当前规则所在的样式表对象（StyleSheet 实例），还是使用上面的例子。
+
+```
+rule.parentStyleSheet === myStyleSheet // true
+```
