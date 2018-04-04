@@ -616,3 +616,49 @@ rule.cssText
 ```
 rule.parentStyleSheet === myStyleSheet // true
 ```
+
+**（3）CSSRule.parentRule**
+
+`CSSRule.parentRule`属性返回包含当前规则的父规则，如果不存在父规则（即当前规则是顶层规则），则返回`null`。
+
+父规则最常见的情况是，当前规则包含在`@media`规则代码块之中。
+
+```
+// HTML 代码如下
+// <style id="myStyle">
+//   @supports (display: flex) {
+//     @media screen and (min-width: 900px) {
+//       article {
+//         display: flex;
+//       }
+//     }
+//  }
+// </style>
+var myStyleSheet = document.getElementById('myStyle').sheet;
+var ruleList = myStyleSheet.cssRules;
+
+var rule0 = ruleList[0];
+rule0.cssText
+// "@supports (display: flex) {
+//    @media screen and (min-width: 900px) {
+//      article { display: flex; }
+//    }
+// }"
+
+// 由于这条规则内嵌其他规则，
+// 所以它有 cssRules 属性，且该属性是 CSSRuleList 实例
+rule0.cssRules instanceof CSSRuleList // true
+
+var rule1 = rule0.cssRules[0];
+rule1.cssText
+// "@media screen and (min-width: 900px) {
+//   article { display: flex; }
+// }"
+
+var rule2 = rule1.cssRules[0];
+rule2.cssText
+// "article { display: flex; }"
+
+rule1.parentRule === rule0 // true
+rule2.parentRule === rule1 // true
+```
