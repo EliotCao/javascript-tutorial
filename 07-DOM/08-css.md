@@ -662,3 +662,14 @@ rule2.cssText
 rule1.parentRule === rule0 // true
 rule2.parentRule === rule1 // true
 ```
+
+**（4）CSSRule.type**
+
+`CSSRule.type`属性返回一个整数值，表示当前规则的类型。
+
+最常见的类型有以下几种。
+
+- 1：普通样式规则（CSSStyleRule 实例）
+- 3：`@import`规则
+- 4：`@media`规则（CSSMediaRule 实例）
+- 5：`@font-face`规则
