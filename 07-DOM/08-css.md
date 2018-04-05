@@ -713,3 +713,34 @@ styleSheet.cssRules[0].style.cssText
 styleSheet.cssRules[0].selectorText
 // "p"
 ```
+
+### CSSMediaRule 接口
+
+如果一条 CSS 规则是`@media`代码块，那么它除了 CSSRule 接口，还部署了 CSSMediaRule 接口。
+
+该接口主要提供`media`属性和`conditionText`属性。前者返回代表`@media`规则的一个对象（MediaList 实例），后者返回`@media`规则的生效条件。
+
+```
+// HTML 代码如下
+// <style id="myStyle">
+//   @media screen and (min-width: 900px) {
+//     article { display: flex; }
+//   }
+// </style>
+var styleSheet = document.getElementById('myStyle').sheet;
+styleSheet.cssRules[0] instanceof CSSMediaRule
+// true
+
+styleSheet.cssRules[0].media
+//  {
+//    0: "screen and (min-width: 900px)",
+//    appendMedium: function,
+//    deleteMedium: function,
+//    item: function,
+//    length: 1,
+//    mediaText: "screen and (min-width: 900px)"
+// }
+
+styleSheet.cssRules[0].conditionText
+// "screen and (min-width: 900px)"
+```
