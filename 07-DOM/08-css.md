@@ -690,3 +690,26 @@ stylesheet.cssRules[0].selectorText // ".myClass"
 ```
 
 注意，这个属性是可写的。
+
+**（2）CSSStyleRule.style**
+
+`CSSStyleRule.style`属性返回一个对象（CSSStyleDeclaration 实例），代表当前规则的样式声明，也就是选择器后面的大括号里面的部分。
+
+```
+// HTML 代码为
+// <style id="myStyle">
+//   p { color: red; }
+// </style>
+var styleSheet = document.getElementById('myStyle').sheet;
+styleSheet.cssRules[0].style instanceof CSSStyleDeclaration
+// true
+```
+
+CSSStyleDeclaration 实例的`cssText`属性，可以返回所有样式声明，格式为字符串。
+
+```
+styleSheet.cssRules[0].style.cssText
+// "color: red;"
+styleSheet.cssRules[0].selectorText
+// "p"
+```
