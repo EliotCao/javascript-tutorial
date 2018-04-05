@@ -61,3 +61,22 @@ observer.observe(article, options);
 - **characterData**：节点内容或节点文本的变动。
 
 想要观察哪一种变动类型，就在`option`对象中指定它的值为`true`。需要注意的是，至少必须同时指定这三种观察的一种，若均未指定将报错。
+
+除了变动类型，`options`对象还可以设定以下属性：
+
+- `subtree`：布尔值，表示是否将该观察器应用于该节点的所有后代节点。
+- `attributeOldValue`：布尔值，表示观察`attributes`变动时，是否需要记录变动前的属性值。
+- `characterDataOldValue`：布尔值，表示观察`characterData`变动时，是否需要记录变动前的值。
+- `attributeFilter`：数组，表示需要观察的特定属性（比如`['class','src']`）。
+
+```
+// 开始监听文档根节点（即<html>标签）的变动
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+  characterDataOldValue: true
+});
+```
