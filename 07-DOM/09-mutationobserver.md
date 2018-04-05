@@ -97,3 +97,17 @@ var observer = new MutationObserver(function(mutations) {
 });
 observer.observe(document, { childList: true, subtree: true });
 ```
+
+### disconnect()，takeRecords（）
+
+`disconnect()`方法用来停止观察。调用该方法后，DOM 再发生变动，也不会触发观察器。
+
+```
+observer.disconnect();
+```
+
+`takeRecords()`方法用来清除变动记录，即不再处理未处理的变动。该方法返回变动记录的数组。
+
+```
+observer.takeRecords();
+```
