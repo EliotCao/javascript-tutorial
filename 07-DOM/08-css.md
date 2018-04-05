@@ -763,3 +763,16 @@ mdl instanceof MediaQueryList // true
 ```
 window.matchMedia('bad string') instanceof MediaQueryList // true
 ```
+
+### MediaQueryList 接口的实例属性
+
+MediaQueryList 实例有三个属性。
+
+**（1）MediaQueryList.media**
+
+`MediaQueryList.media`属性返回一个字符串，表示对应的 MediaQuery 条件语句。
+
+```
+var mql = window.matchMedia('(min-width: 400px)');
+mql.media // "(min-width: 400px)"
+```
