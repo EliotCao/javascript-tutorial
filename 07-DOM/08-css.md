@@ -776,3 +776,30 @@ MediaQueryList 实例有三个属性。
 var mql = window.matchMedia('(min-width: 400px)');
 mql.media // "(min-width: 400px)"
 ```
+
+**（2）MediaQueryList.matches**
+
+`MediaQueryList.matches`属性返回一个布尔值，表示当前页面是否符合指定的 MediaQuery 条件语句。
+
+```
+if (window.matchMedia('(min-width: 400px)').matches) {
+  /* 当前视口不小于 400 像素 */
+} else {
+  /* 当前视口小于 400 像素 */
+}
+```
+
+下面的例子根据`mediaQuery`是否匹配当前环境，加载相应的 CSS 样式表。
+
+```
+var result = window.matchMedia("(max-width: 700px)");
+
+if (result.matches){
+  var linkElm = document.createElement('link');
+  linkElm.setAttribute('rel', 'stylesheet');
+  linkElm.setAttribute('type', 'text/css');
+  linkElm.setAttribute('href', 'small.css');
+
+  document.head.appendChild(linkElm);
+}
+```
