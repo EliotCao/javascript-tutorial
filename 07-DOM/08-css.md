@@ -673,3 +673,20 @@ rule2.parentRule === rule1 // true
 - 3：`@import`规则
 - 4：`@media`规则（CSSMediaRule 实例）
 - 5：`@font-face`规则
+
+### CSSStyleRule 接口
+
+如果一条 CSS 规则是普通的样式规则（不含特殊的 CSS 命令），那么除了 CSSRule 接口，它还部署了 CSSStyleRule 接口。
+
+CSSStyleRule 接口有以下两个属性。
+
+**（1）CSSStyleRule.selectorText**
+
+`CSSStyleRule.selectorText`属性返回当前规则的选择器。
+
+```
+var stylesheet = document.styleSheets[0];
+stylesheet.cssRules[0].selectorText // ".myClass"
+```
+
+注意，这个属性是可写的。
