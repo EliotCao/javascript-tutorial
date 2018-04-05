@@ -803,3 +803,21 @@ if (result.matches){
   document.head.appendChild(linkElm);
 }
 ```
+
+**（3）MediaQueryList.onchange**
+
+如果 MediaQuery 条件语句的适配环境发生变化，会触发`change`事件。`MediaQueryList.onchange`属性用来指定`change`事件的监听函数。该函数的参数是`change`事件对象（MediaQueryListEvent 实例），该对象与 MediaQueryList 实例类似，也有`media`和`matches`属性。
+
+```
+var mql = window.matchMedia('(max-width: 600px)');
+
+mql.onchange = function(e) {
+  if (e.matches) {
+    /* 视口不超过 600 像素 */
+  } else {
+    /* 视口超过 600 像素 */
+  }
+}
+```
+
+上面代码中，`change`事件发生后，存在两种可能。一种是显示宽度从600像素以上变为以下，另一种是从600像素以下变为以上，所以在监听函数内部要判断一下当前是哪一种情况。
