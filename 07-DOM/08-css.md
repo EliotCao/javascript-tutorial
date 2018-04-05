@@ -744,3 +744,22 @@ styleSheet.cssRules[0].media
 styleSheet.cssRules[0].conditionText
 // "screen and (min-width: 900px)"
 ```
+
+## window.matchMedia()
+
+### 基本用法
+
+`window.matchMedia`方法用来将 CSS 的[`MediaQuery`](https://developer.mozilla.org/en-US/docs/DOM/Using_media_queries_from_code)条件语句，转换成一个 MediaQueryList 实例。
+
+```
+var mdl = window.matchMedia('(min-width: 400px)');
+mdl instanceof MediaQueryList // true
+```
+
+上面代码中，变量`mdl`就是 mediaQueryList 的实例。
+
+注意，如果参数不是有效的`MediaQuery`条件语句，`window.matchMedia`不会报错，依然返回一个 MediaQueryList 实例。
+
+```
+window.matchMedia('bad string') instanceof MediaQueryList // true
+```
