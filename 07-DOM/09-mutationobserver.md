@@ -111,3 +111,13 @@ observer.disconnect();
 ```
 observer.takeRecords();
 ```
+
+下面是一个例子。
+
+```
+// 保存所有没有被观察器处理的变动
+var changes = mutationObserver.takeRecords();
+
+// 停止观察
+mutationObserver.disconnect();
+```
