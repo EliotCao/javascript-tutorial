@@ -121,3 +121,18 @@ var changes = mutationObserver.takeRecords();
 // 停止观察
 mutationObserver.disconnect();
 ```
+
+## MutationRecord 对象
+
+DOM 每次发生变化，就会生成一条变动记录（MutationRecord 实例）。该实例包含了与变动相关的所有信息。Mutation Observer 处理的就是一个个`MutationRecord`实例所组成的数组。
+
+`MutationRecord`对象包含了DOM的相关信息，有如下属性：
+
+- `type`：观察的变动类型（`attributes`、`characterData`或者`childList`）。
+- `target`：发生变动的DOM节点。
+- `addedNodes`：新增的DOM节点。
+- `removedNodes`：删除的DOM节点。
+- `previousSibling`：前一个同级节点，如果没有则返回`null`。
+- `nextSibling`：下一个同级节点，如果没有则返回`null`。
+- `attributeName`：发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性。
+- `oldValue`：变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null`。
