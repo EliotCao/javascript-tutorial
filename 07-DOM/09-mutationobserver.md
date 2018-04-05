@@ -31,3 +31,12 @@ var observer = new MutationObserver(function (mutations, observer) {
   });
 });
 ```
+
+## MutationObserver 的实例方法
+
+### observe()
+
+`observe()`方法用来启动监听，它接受两个参数。
+
+- 第一个参数：所要观察的 DOM 节点
+- 第二个参数：一个配置对象，指定所要观察的特定变动
