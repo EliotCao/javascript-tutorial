@@ -13,3 +13,21 @@ Mutation Observer 有以下特点。
 - 它等待所有脚本任务完成后，才会运行（即异步触发方式）。
 - 它把 DOM 变动记录封装成一个数组进行处理，而不是一条条个别处理 DOM 变动。
 - 它既可以观察 DOM 的所有类型变动，也可以指定只观察某一类变动。
+
+## MutationObserver 构造函数
+
+使用时，首先使用`MutationObserver`构造函数，新建一个观察器实例，同时指定这个实例的回调函数。
+
+```
+var observer = new MutationObserver(callback);
+```
+
+上面代码中的回调函数，会在每次 DOM 变动后调用。该回调函数接受两个参数，第一个是变动数组，第二个是观察器实例，下面是一个例子。
+
+```
+var observer = new MutationObserver(function (mutations, observer) {
+  mutations.forEach(function(mutation) {
+    console.log(mutation);
+  });
+});
+```
