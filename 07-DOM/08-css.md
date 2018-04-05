@@ -843,3 +843,5 @@ function mqCallback(e) {
   }
 }
 ```
+
+注意，`MediaQueryList.removeListener()`方法不能撤销`MediaQueryList.onchange`属性指定的监听函数。
