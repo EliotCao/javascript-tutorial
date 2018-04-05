@@ -40,3 +40,16 @@ var observer = new MutationObserver(function (mutations, observer) {
 
 - 第一个参数：所要观察的 DOM 节点
 - 第二个参数：一个配置对象，指定所要观察的特定变动
+
+```
+var article = document.querySelector('article');
+
+var  options = {
+  'childList': true,
+  'attributes':true
+} ;
+
+observer.observe(article, options);
+```
+
+上面代码中，`observe()`方法接受两个参数，第一个是所要观察的DOM元素是`article`，第二个是所要观察的变动类型（子节点变动和属性变动）。
