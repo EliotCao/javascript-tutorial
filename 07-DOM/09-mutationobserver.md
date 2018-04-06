@@ -187,3 +187,17 @@ mo.observe(element, options);
 ```
 
 上面代码先设定追踪属性变动（`'attributes': true`），然后设定记录变动前的值。实际发生变动时，会将变动前的值显示在控制台。
+
+### 取代 DOMContentLoaded 事件
+
+网页加载的时候，DOM 节点的生成会产生变动记录，因此只要观察 DOM 的变动，就能在第一时间触发相关事件，也就没有必要使用`DOMContentLoaded`事件。
+
+```
+var observer = new MutationObserver(callback);
+observer.observe(document.documentElement, {
+  childList: true,
+  subtree: true
+});
+```
+
+上面代码中，监听`document.documentElement`（即网页的`<html>`HTML 节点）的子节点的变动，`subtree`属性指定监听还包括后代节点。因此，任意一个网页元素一旦生成，就能立刻被监听到。
