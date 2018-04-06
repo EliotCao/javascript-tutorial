@@ -162,3 +162,28 @@ mo.observe(document.body, option);
 ```
 
 上面代码的观察器，观察`<body>`的所有下级节点（`childList`表示观察子节点，`subtree`表示观察后代节点）的变动。回调函数会在控制台显示所有变动的类型和目标节点。
+
+### 属性的变动
+
+下面的例子说明如何追踪属性的变动。
+
+```
+var callback = function (records) {
+  records.map(function (record) {
+    console.log('Previous attribute value: ' + record.oldValue);
+  });
+};
+
+var mo = new MutationObserver(callback);
+
+var element = document.getElementById('#my_element');
+
+var options = {
+  'attributes': true,
+  'attributeOldValue': true
+}
+
+mo.observe(element, options);
+```
+
+上面代码先设定追踪属性变动（`'attributes': true`），然后设定记录变动前的值。实际发生变动时，会将变动前的值显示在控制台。
