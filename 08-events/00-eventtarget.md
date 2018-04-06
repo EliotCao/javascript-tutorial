@@ -25,3 +25,16 @@ target.addEventListener(type, listener[, useCapture]);
 - `type`：事件名称，大小写敏感。
 - `listener`：监听函数。事件发生时，会调用该监听函数。
 - `useCapture`：布尔值，表示监听函数是否在捕获阶段（capture）触发（参见后文《事件的传播》部分），默认为`false`（监听函数只在冒泡阶段被触发）。该参数可选。
+
+下面是一个例子。
+
+```
+function hello() {
+  console.log('Hello world');
+}
+
+var button = document.getElementById('btn');
+button.addEventListener('click', hello, false);
+```
+
+上面代码中，`button`节点的`addEventListener`方法绑定`click`事件的监听函数`hello`，该函数只在冒泡阶段触发。
