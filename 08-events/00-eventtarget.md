@@ -52,3 +52,9 @@ buttonElement.addEventListener('click', {
 ```
 
 上面代码中，`addEventListener`方法的第二个参数，就是一个具有`handleEvent`方法的对象。
+
+其次，第三个参数除了布尔值`useCapture`，还可以是一个属性配置对象。该对象有以下属性。
+
+> - `capture`：布尔值，表示该事件是否在`捕获阶段`触发监听函数。
+> - `once`：布尔值，表示监听函数是否只触发一次，然后就自动移除。
+> - `passive`：布尔值，表示监听函数不会调用事件的`preventDefault`方法。如果监听函数调用了，浏览器将忽略这个要求，并在监控台输出一行警告。
