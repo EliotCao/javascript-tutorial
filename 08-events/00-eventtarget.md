@@ -66,3 +66,16 @@ element.addEventListener('click', function (event) {
   // 只执行一次的代码
 }, {once: true});
 ```
+
+`addEventListener`方法可以为针对当前对象的同一个事件，添加多个不同的监听函数。这些函数按照添加顺序触发，即先添加先触发。如果为同一个事件多次添加同一个监听函数，该函数只会执行一次，多余的添加将自动被去除（不必使用`removeEventListener`方法手动去除）。
+
+```
+function hello() {
+  console.log('Hello world');
+}
+
+document.addEventListener('click', hello, false);
+document.addEventListener('click', hello, false);
+```
+
+执行上面代码，点击文档只会输出一行`Hello world`。
