@@ -11,3 +11,17 @@ DOM 的事件操作（监听和触发），都定义在`EventTarget`接口。所
 - `addEventListener`：绑定事件的监听函数
 - `removeEventListener`：移除事件的监听函数
 - `dispatchEvent`：触发事件
+
+## EventTarget.addEventListener()
+
+`EventTarget.addEventListener()`用于在当前节点或对象上，定义一个特定事件的监听函数。一旦这个事件发生，就会执行监听函数。该方法没有返回值。
+
+```
+target.addEventListener(type, listener[, useCapture]);
+```
+
+该方法接受三个参数。
+
+- `type`：事件名称，大小写敏感。
+- `listener`：监听函数。事件发生时，会调用该监听函数。
+- `useCapture`：布尔值，表示监听函数是否在捕获阶段（capture）触发（参见后文《事件的传播》部分），默认为`false`（监听函数只在冒泡阶段被触发）。该参数可选。
