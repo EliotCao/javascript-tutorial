@@ -136,3 +136,29 @@ DOM 每次发生变化，就会生成一条变动记录（MutationRecord 实例�
 - `nextSibling`：下一个同级节点，如果没有则返回`null`。
 - `attributeName`：发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性。
 - `oldValue`：变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null`。
+
+## 应用示例
+
+### 子元素的变动
+
+下面的例子说明如何读取变动记录。
+
+```
+var callback = function (records){
+  records.map(function(record){
+    console.log('Mutation type: ' + record.type);
+    console.log('Mutation target: ' + record.target);
+  });
+};
+
+var mo = new MutationObserver(callback);
+
+var option = {
+  'childList': true,
+  'subtree': true
+};
+
+mo.observe(document.body, option);
+```
+
+上面代码的观察器，观察`<body>`的所有下级节点（`childList`表示观察子节点，`subtree`表示观察后代节点）的变动。回调函数会在控制台显示所有变动的类型和目标节点。
