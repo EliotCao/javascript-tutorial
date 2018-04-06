@@ -105,3 +105,16 @@ para.addEventListener('click', function (e) {
 ```
 
 上面代码中，监听函数内部的`this`指向事件所在的对象`para`。
+
+## EventTarget.removeEventListener()
+
+`EventTarget.removeEventListener`方法用来移除`addEventListener`方法添加的事件监听函数。该方法没有返回值。
+
+```
+div.addEventListener('click', listener, false);
+div.removeEventListener('click', listener, false);
+```
+
+`removeEventListener`方法的参数，与`addEventListener`方法完全一致。它的第一个参数“事件类型”，大小写敏感。
+
+注意，`removeEventListener`方法移除的监听函数，必须是`addEventListener`方法添加的那个监听函数，而且必须在同一个元素节点，否则无效。
