@@ -38,3 +38,17 @@ button.addEventListener('click', hello, false);
 ```
 
 上面代码中，`button`节点的`addEventListener`方法绑定`click`事件的监听函数`hello`，该函数只在冒泡阶段触发。
+
+关于参数，有两个地方需要注意。
+
+首先，第二个参数除了监听函数，还可以是一个具有`handleEvent`方法的对象。
+
+```
+buttonElement.addEventListener('click', {
+  handleEvent: function (event) {
+    console.log('click');
+  }
+});
+```
+
+上面代码中，`addEventListener`方法的第二个参数，就是一个具有`handleEvent`方法的对象。
