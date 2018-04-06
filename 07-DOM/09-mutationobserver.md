@@ -201,3 +201,61 @@ observer.observe(document.documentElement, {
 ```
 
 上面代码中，监听`document.documentElement`（即网页的`<html>`HTML 节点）的子节点的变动，`subtree`属性指定监听还包括后代节点。因此，任意一个网页元素一旦生成，就能立刻被监听到。
+
+下面的代码，使用`MutationObserver`对象封装一个监听 DOM 生成的函数。
+
+```
+(function(win){
+  'use strict';
+
+  var listeners = [];
+  var doc = win.document;
+  var MutationObserver = win.MutationObserver || win.WebKitMutationObserver;
+  var observer;
+
+  function ready(selector, fn){
+    // 储存选择器和回调函数
+    listeners.push({
+      selector: selector,
+      fn: fn
+    });
+    if(!observer){
+      // 监听document变化
+      observer = new MutationObserver(check);
+      observer.observe(doc.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    }
+    // 检查该节点是否已经在DOM中
+    check();
+  }
+
+  function check(){
+  // 检查是否匹配已储存的节点
+    for(var i = 0; i < listeners.length; i++){
+      var listener = listeners[i];
+      // 检查指定节点是否有匹配
+      var elements = doc.querySelectorAll(listener.selector);
+      for(var j = 0; j < elements.length; j++){
+        var element = elements[j];
+        // 确保回调函数只会对该元素调用一次
+        if(!element.ready){
+          element.ready = true;
+          // 对该节点调用回调函数
+          listener.fn.call(element, element);
+        }
+      }
+    }
+  }
+
+  // 对外暴露ready
+  win.ready = ready;
+
+})(this);
+
+// 使用方法
+ready('.foo', function(element){
+  // ...
+});
+```
