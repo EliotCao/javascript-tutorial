@@ -92,3 +92,16 @@ el.addEventListener('click', function () { print('Hello'); }, false);
 ```
 
 上面代码通过匿名函数，向监听函数`print`传递了一个参数。
+
+监听函数内部的`this`，指向当前事件所在的那个对象。
+
+```
+// HTML 代码如下
+// <p id="para">Hello</p>
+var para = document.getElementById('para');
+para.addEventListener('click', function (e) {
+  console.log(this.nodeName); // "P"
+}, false);
+```
+
+上面代码中，监听函数内部的`this`指向事件所在的对象`para`。
