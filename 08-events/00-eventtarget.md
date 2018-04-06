@@ -79,3 +79,16 @@ document.addEventListener('click', hello, false);
 ```
 
 执行上面代码，点击文档只会输出一行`Hello world`。
+
+如果希望向监听函数传递参数，可以用匿名函数包装一下监听函数。
+
+```
+function print(x) {
+  console.log(x);
+}
+
+var el = document.getElementById('div1');
+el.addEventListener('click', function () { print('Hello'); }, false);
+```
+
+上面代码通过匿名函数，向监听函数`print`传递了一个参数。
