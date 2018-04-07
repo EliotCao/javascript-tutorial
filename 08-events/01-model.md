@@ -74,3 +74,15 @@ window.addEventListener('load', doSomething, false);
 ```
 
 `addEventListener`方法的详细介绍，参见`EventTarget`章节。
+
+### 小结
+
+上面三种方法，第一种“HTML 的 on- 属性”，违反了 HTML 与 JavaScript 代码相分离的原则，将两者写在一起，不利于代码分工，因此不推荐使用。
+
+第二种“元素节点的事件属性”的缺点在于，同一个事件只能定义一个监听函数，也就是说，如果定义两次`onclick`属性，后一次定义会覆盖前一次。因此，也不推荐使用。
+
+第三种`EventTarget.addEventListener`是推荐的指定监听函数的方法。它有如下优点：
+
+- 同一个事件可以添加多个监听函数。
+- 能够指定在哪个阶段（捕获阶段还是冒泡阶段）触发监听函数。
+- 除了 DOM 节点，其他对象（比如`window`、`XMLHttpRequest`等）也有这个接口，它等于是整个 JavaScript 统一的监听函数接口。
