@@ -40,3 +40,11 @@ HTML 语言允许在元素的属性中，直接定义某些事件的监听代码
 ```
 
 上面代码中，`<button>`是`<div>`的子元素。`<button>`的`click`事件，也会触发`<div>`的`click`事件。由于`on-`属性的监听代码，只在冒泡阶段触发，所以点击结果是先输出`1`，再输出`2`，即事件从子元素开始冒泡到父元素。
+
+直接设置`on-`属性，与通过元素节点的`setAttribute`方法设置`on-`属性，效果是一样的。
+
+```
+el.setAttribute('onclick', 'doSomething()');
+// 等同于
+// <Element onclick="doSomething()">
+```
