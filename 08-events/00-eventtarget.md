@@ -148,3 +148,18 @@ para.addEventListener('click', hello, false);
 var event = new Event('click');
 para.dispatchEvent(event);
 ```
+
+上面代码在当前节点触发了`click`事件。
+
+如果`dispatchEvent`方法的参数为空，或者不是一个有效的事件对象，将报错。
+
+下面代码根据`dispatchEvent`方法的返回值，判断事件是否被取消了。
+
+```
+var canceled = !cb.dispatchEvent(event);
+if (canceled) {
+  console.log('事件取消');
+} else {
+  console.log('事件未取消');
+}
+```
