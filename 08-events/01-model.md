@@ -48,3 +48,19 @@ el.setAttribute('onclick', 'doSomething()');
 // 等同于
 // <Element onclick="doSomething()">
 ```
+
+### 元素节点的事件属性
+
+元素节点对象的事件属性，同样可以指定监听函数。
+
+```
+window.onload = doSomething;
+
+div.onclick = function (event) {
+  console.log('触发事件');
+};
+```
+
+使用这个方法指定的监听函数，也是只会在冒泡阶段触发。
+
+注意，这种方法与 HTML 的`on-`属性的差异是，它的值是函数名（`doSomething`），而不像后者，必须给出完整的监听代码（`doSomething()`）。
