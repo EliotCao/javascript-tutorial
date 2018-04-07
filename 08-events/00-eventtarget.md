@@ -140,3 +140,11 @@ element.removeEventListener("mousedown", handleMouseDown, false);
 ```
 target.dispatchEvent(event)
 ```
+
+`dispatchEvent`方法的参数是一个`Event`对象的实例（详见《Event 对象》章节）。
+
+```
+para.addEventListener('click', hello, false);
+var event = new Event('click');
+para.dispatchEvent(event);
+```
