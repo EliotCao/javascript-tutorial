@@ -132,3 +132,11 @@ element.removeEventListener("mousedown", handleMouseDown, false);
 ```
 
 上面代码中，`removeEventListener`方法也是无效的，因为第三个参数不一样。
+
+## EventTarget.dispatchEvent()
+
+`EventTarget.dispatchEvent`方法在当前节点上触发指定事件，从而触发监听函数的执行。该方法返回一个布尔值，只要有一个监听函数调用了`Event.preventDefault()`，则返回值为`false`，否则为`true`。
+
+```
+target.dispatchEvent(event)
+```
