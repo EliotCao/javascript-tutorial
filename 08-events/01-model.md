@@ -64,3 +64,13 @@ div.onclick = function (event) {
 使用这个方法指定的监听函数，也是只会在冒泡阶段触发。
 
 注意，这种方法与 HTML 的`on-`属性的差异是，它的值是函数名（`doSomething`），而不像后者，必须给出完整的监听代码（`doSomething()`）。
+
+### EventTarget.addEventListener()
+
+所有 DOM 节点实例都有`addEventListener`方法，用来为该节点定义事件的监听函数。
+
+```
+window.addEventListener('load', doSomething, false);
+```
+
+`addEventListener`方法的详细介绍，参见`EventTarget`章节。
