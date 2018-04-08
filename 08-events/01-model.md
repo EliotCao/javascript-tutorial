@@ -86,3 +86,37 @@ window.addEventListener('load', doSomething, false);
 - 同一个事件可以添加多个监听函数。
 - 能够指定在哪个阶段（捕获阶段还是冒泡阶段）触发监听函数。
 - 除了 DOM 节点，其他对象（比如`window`、`XMLHttpRequest`等）也有这个接口，它等于是整个 JavaScript 统一的监听函数接口。
+
+## this 的指向
+
+监听函数内部的`this`指向触发事件的那个元素节点。
+
+```
+<button id="btn" onclick="console.log(this.id)">点击</button>
+```
+
+执行上面代码，点击后会输出`btn`。
+
+其他两种监听函数的写法，`this`的指向也是如此。
+
+```
+// HTML 代码如下
+// <button id="btn">点击</button>
+var btn = document.getElementById('btn');
+
+// 写法一
+btn.onclick = function () {
+  console.log(this.id);
+};
+
+// 写法二
+btn.addEventListener(
+  'click',
+  function (e) {
+    console.log(this.id);
+  },
+  false
+);
+```
+
+上面两种写法，点击按钮以后也是输出`btn`。
