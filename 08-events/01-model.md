@@ -212,3 +212,35 @@ p.addEventListener('click', function (event) {
 ```
 
 上面代码中，`stopPropagation`方法分别在捕获阶段和冒泡阶段，阻止了事件的传播。
+
+但是，`stopPropagation`方法只会阻止事件的传播，不会阻止该事件触发`<p>`节点的其他`click`事件的监听函数。也就是说，不是彻底取消`click`事件。
+
+```
+p.addEventListener('click', function (event) {
+  event.stopPropagation();
+  console.log(1);
+});
+
+p.addEventListener('click', function(event) {
+  // 会触发
+  console.log(2);
+});
+```
+
+上面代码中，`p`元素绑定了两个`click`事件的监听函数。`stopPropagation`方法只能阻止这个事件的传播，不能取消这个事件，因此，第二个监听函数会触发。输出结果会先是1，然后是2。
+
+如果想要彻底取消该事件，不再触发后面所有`click`的监听函数，可以使用`stopImmediatePropagation`方法。
+
+```
+p.addEventListener('click', function (event) {
+  event.stopImmediatePropagation();
+  console.log(1);
+});
+
+p.addEventListener('click', function(event) {
+  // 不会被触发
+  console.log(2);
+});
+```
+
+上面代码中，`stopImmediatePropagation`方法可以彻底取消这个事件，使得后面绑定的所有`click`监听函数都不再触发。所以，只会输出1，不会输出2。
