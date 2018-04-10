@@ -138,3 +138,45 @@ btn.addEventListener(
 ```
 
 上面代码中，`<div>`节点之中有一个`<p>`节点。
+
+如果对这两个节点，都设置`click`事件的监听函数（每个节点的捕获阶段和冒泡阶段，各设置一个监听函数），共计设置四个监听函数。然后，对`<p>`点击，`click`事件会触发四次。
+
+```
+var phases = {
+  1: 'capture',
+  2: 'target',
+  3: 'bubble'
+};
+
+var div = document.querySelector('div');
+var p = document.querySelector('p');
+
+div.addEventListener('click', callback, true);
+p.addEventListener('click', callback, true);
+div.addEventListener('click', callback, false);
+p.addEventListener('click', callback, false);
+
+function callback(event) {
+  var tag = event.currentTarget.tagName;
+  var phase = phases[event.eventPhase];
+  console.log("Tag: '" + tag + "'. EventPhase: '" + phase + "'");
+}
+
+// 点击以后的结果
+// Tag: 'DIV'. EventPhase: 'capture'
+// Tag: 'P'. EventPhase: 'target'
+// Tag: 'P'. EventPhase: 'target'
+// Tag: 'DIV'. EventPhase: 'bubble'
+```
+
+上面代码表示，`click`事件被触发了四次：`<div>`节点的捕获阶段和冒泡阶段各1次，`<p>`节点的目标阶段触发了2次。
+
+1. 捕获阶段：事件从`<div>`向`<p>`传播时，触发`<div>`的`click`事件；
+2. 目标阶段：事件从`<div>`到达`<p>`时，触发`<p>`的`click`事件；
+3. 冒泡阶段：事件从`<p>`传回`<div>`时，再次触发`<div>`的`click`事件。
+
+其中，`<p>`节点有两个监听函数（`addEventListener`方法第三个参数的不同，会导致绑定两个监听函数），因此它们都会因为`click`事件触发一次。所以，`<p>`会在`target`阶段有两次输出。
+
+注意，浏览器总是假定`click`事件的目标节点，就是点击位置嵌套最深的那个节点（本例是`<div>`节点里面的`<p>`节点）。所以，`<p>`节点的捕获阶段和冒泡阶段，都会显示为`target`阶段。
+
+事件传播的最上层对象是`window`，接着依次是`document`，`html`（`document.documentElement`）和`body`（`document.body`）。也就是说，上例的事件传播顺序，在捕获阶段依次为`window`、`document`、`html`、`body`、`div`、`p`，在冒泡阶段依次为`p`、`div`、`body`、`html`、`document`、`window`。
