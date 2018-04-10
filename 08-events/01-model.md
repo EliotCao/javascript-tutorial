@@ -180,3 +180,35 @@ function callback(event) {
 注意，浏览器总是假定`click`事件的目标节点，就是点击位置嵌套最深的那个节点（本例是`<div>`节点里面的`<p>`节点）。所以，`<p>`节点的捕获阶段和冒泡阶段，都会显示为`target`阶段。
 
 事件传播的最上层对象是`window`，接着依次是`document`，`html`（`document.documentElement`）和`body`（`document.body`）。也就是说，上例的事件传播顺序，在捕获阶段依次为`window`、`document`、`html`、`body`、`div`、`p`，在冒泡阶段依次为`p`、`div`、`body`、`html`、`document`、`window`。
+
+## 事件的代理
+
+由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件。这种方法叫做事件的代理（delegation）。
+
+```
+var ul = document.querySelector('ul');
+
+ul.addEventListener('click', function (event) {
+  if (event.target.tagName.toLowerCase() === 'li') {
+    // some code
+  }
+});
+```
+
+上面代码中，`click`事件的监听函数定义在`<ul>`节点，但是实际上，它处理的是子节点`<li>`的`click`事件。这样做的好处是，只要定义一个监听函数，就能处理多个子节点的事件，而不用在每个`<li>`节点上定义监听函数。而且以后再添加子节点，监听函数依然有效。
+
+如果希望事件到某个节点为止，不再传播，可以使用事件对象的`stopPropagation`方法。
+
+```
+// 事件传播到 p 元素后，就不再向下传播了
+p.addEventListener('click', function (event) {
+  event.stopPropagation();
+}, true);
+
+// 事件冒泡到 p 元素后，就不再向上冒泡了
+p.addEventListener('click', function (event) {
+  event.stopPropagation();
+}, false);
+```
+
+上面代码中，`stopPropagation`方法分别在捕获阶段和冒泡阶段，阻止了事件的传播。
