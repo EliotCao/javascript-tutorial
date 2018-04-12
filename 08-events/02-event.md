@@ -75,3 +75,39 @@ var phase = event.eventPhase;
 - 1，事件目前处于捕获阶段，即处于从祖先节点向目标节点的传播过程中。
 - 2，事件到达目标节点，即`Event.target`属性指向的那个节点。
 - 3，事件处于冒泡阶段，即处于从目标节点向祖先节点的反向传播过程中。
+
+### Event.cancelable，Event.cancelBubble，event.defaultPrevented
+
+`Event.cancelable`属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性，一般用来了解 Event 实例的特性。
+
+大多数浏览器的原生事件是可以取消的。比如，取消`click`事件，点击链接将无效。但是除非显式声明，`Event`构造函数生成的事件，默认是不可以取消的。
+
+```
+var evt = new Event('foo');
+evt.cancelable  // false
+```
+
+当`Event.cancelable`属性为`true`时，调用`Event.preventDefault()`就可以取消这个事件，阻止浏览器对该事件的默认行为。
+
+如果事件不能取消，调用`Event.preventDefault()`会没有任何效果。所以使用这个方法之前，最好用`Event.cancelable`属性判断一下是否可以取消。
+
+```
+function preventEvent(event) {
+  if (event.cancelable) {
+    event.preventDefault();
+  } else {
+    console.warn('This event couldn\'t be canceled.');
+    console.dir(event);
+  }
+}
+```
+
+`Event.cancelBubble`属性是一个布尔值，如果设为`true`，相当于执行`Event.stopPropagation()`，可以阻止事件的传播。
+
+`Event.defaultPrevented`属性返回一个布尔值，表示该事件是否调用过`Event.preventDefault`方法。该属性只读。
+
+```
+if (event.defaultPrevented) {
+  console.log('该事件已经取消了');
+}
+```
