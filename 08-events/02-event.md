@@ -210,3 +210,25 @@ function giveDetails(e) {
 
 document.querySelector('p').onclick = giveDetails;
 ```
+
+## 实例方法
+
+### Event.preventDefault()
+
+`Event.preventDefault`方法取消浏览器对当前事件的默认行为。比如点击链接后，浏览器默认会跳转到另一个页面，使用这个方法以后，就不会跳转了；再比如，按一下空格键，页面向下滚动一段距离，使用这个方法以后也不会滚动了。该方法生效的前提是，事件对象的`cancelable`属性为`true`，如果为`false`，调用该方法没有任何效果。
+
+注意，该方法只是取消事件对当前元素的默认影响，不会阻止事件的传播。如果要阻止传播，可以使用`stopPropagation()`或`stopImmediatePropagation()`方法。
+
+```
+// HTML 代码为
+// <input type="checkbox" id="my-checkbox" />
+var cb = document.getElementById('my-checkbox');
+
+cb.addEventListener(
+  'click',
+  function (e){ e.preventDefault(); },
+  false
+);
+```
+
+上面代码中，浏览器的默认行为是单击会选中单选框，取消这个行为，就导致无法选中单选框。
