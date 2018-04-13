@@ -147,3 +147,14 @@ document.getElementById('para').addEventListener('click', hide, false);
 var evt = new Event('foo');
 evt.type // "foo"
 ```
+
+### Event.timeStamp
+
+`Event.timeStamp`属性返回一个毫秒时间戳，表示事件发生的时间。它是相对于网页加载成功开始计算的。
+
+```
+var evt = new Event('foo');
+evt.timeStamp // 3683.6999999995896
+```
+
+它的返回值有可能是整数，也有可能是小数（高精度时间戳），取决于浏览器的设置。
