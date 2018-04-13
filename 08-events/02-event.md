@@ -158,3 +158,30 @@ evt.timeStamp // 3683.6999999995896
 ```
 
 它的返回值有可能是整数，也有可能是小数（高精度时间戳），取决于浏览器的设置。
+
+下面是一个计算鼠标移动速度的例子，显示每秒移动的像素数量。
+
+```
+var previousX;
+var previousY;
+var previousT;
+
+window.addEventListener('mousemove', function(event) {
+  if (
+    previousX !== undefined &&
+    previousY !== undefined &&
+    previousT !== undefined
+  ) {
+    var deltaX = event.screenX - previousX;
+    var deltaY = event.screenY - previousY;
+    var deltaD = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+    var deltaT = event.timeStamp - previousT;
+    console.log(deltaD / deltaT * 1000);
+  }
+
+  previousX = event.screenX;
+  previousY = event.screenY;
+  previousT = event.timeStamp;
+});
+```
