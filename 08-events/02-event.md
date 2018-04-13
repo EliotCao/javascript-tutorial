@@ -249,3 +249,17 @@ function checkName(e) {
 ```
 
 上面代码为文本框的`keypress`事件设定监听函数后，将只能输入小写字母，否则输入事件的默认行为（写入文本框）将被取消，导致不能向文本框输入内容。
+
+### Event.stopPropagation()
+
+`stopPropagation`方法阻止事件在 DOM 中继续传播，防止再触发定义在别的节点上的监听函数，但是不包括在当前节点上其他的事件监听函数。
+
+```
+function stopEvent(e) {
+  e.stopPropagation();
+}
+
+el.addEventListener('click', stopEvent, false);
+```
+
+上面代码中，`click`事件将不会进一步冒泡到`el`节点的父节点。
