@@ -284,3 +284,23 @@ el.addEventListener('click', l2, false);
 ```
 
 上面代码在`el`节点上，为`click`事件添加了两个监听函数`l1`和`l2`。由于`l1`调用了`event.stopImmediatePropagation`方法，所以`l2`不会被调用。
+
+### Event.composedPath()
+
+`Event.composedPath()`返回一个数组，成员是事件的最底层节点和依次冒泡经过的所有上层节点。
+
+```
+// HTML 代码如下
+// <div>
+//   <p>Hello</p>
+// </div>
+var div = document.querySelector('div');
+var p = document.querySelector('p');
+
+div.addEventListener('click', function (e) {
+  console.log(e.composedPath());
+}, false);
+// [p, div, body, html, document, Window]
+```
+
+上面代码中，`click`事件的最底层节点是`p`，向上依次是`div`、`body`、`html`、`document`、`Window`。
