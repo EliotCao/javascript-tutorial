@@ -185,3 +185,14 @@ window.addEventListener('mousemove', function(event) {
   previousT = event.timeStamp;
 });
 ```
+
+### Event.isTrusted
+
+`Event.isTrusted`属性返回一个布尔值，表示该事件是否由真实的用户行为产生。比如，用户点击链接会产生一个`click`事件，该事件是用户产生的；`Event`构造函数生成的事件，则是脚本产生的。
+
+```
+var evt = new Event('foo');
+evt.isTrusted // false
+```
+
+上面代码中，`evt`对象是脚本产生的，所以`isTrusted`属性返回`false`。
