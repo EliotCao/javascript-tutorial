@@ -232,3 +232,20 @@ cb.addEventListener(
 ```
 
 上面代码中，浏览器的默认行为是单击会选中单选框，取消这个行为，就导致无法选中单选框。
+
+利用这个方法，可以为文本输入框设置校验条件。如果用户的输入不符合条件，就无法将字符输入文本框。
+
+```
+// HTML 代码为
+// <input type="text" id="my-input" />
+var input = document.getElementById('my-input');
+input.addEventListener('keypress', checkName, false);
+
+function checkName(e) {
+  if (e.charCode < 97 || e.charCode > 122) {
+    e.preventDefault();
+  }
+}
+```
+
+上面代码为文本框的`keypress`事件设定监听函数后，将只能输入小写字母，否则输入事件的默认行为（写入文本框）将被取消，导致不能向文本框输入内容。
