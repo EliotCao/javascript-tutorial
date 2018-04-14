@@ -154,3 +154,31 @@ function showKey(e) {
 ```
 
 上面代码中，点击网页会输出是否同时按下对应的键。
+
+### MouseEvent.button，MouseEvent.buttons
+
+`MouseEvent.button`属性返回一个数值，表示事件发生时按下了鼠标的哪个键。该属性只读。
+
+- 0：按下主键（通常是左键），或者该事件没有初始化这个属性（比如`mousemove`事件）。
+- 1：按下辅助键（通常是中键或者滚轮键）。
+- 2：按下次键（通常是右键）。
+
+```
+// HTML 代码为
+// <button onmouseup="whichButton(event)">点击</button>
+var whichButton = function (e) {
+  switch (e.button) {
+    case 0:
+      console.log('Left button clicked.');
+      break;
+    case 1:
+      console.log('Middle button clicked.');
+      break;
+    case 2:
+      console.log('Right button clicked.');
+      break;
+    default:
+      console.log('Unexpected code: ' + e.button);
+  }
+}
+```
