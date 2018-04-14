@@ -130,3 +130,27 @@ function simulateClick() {
 ```
 
 上面代码生成一个鼠标点击事件，并触发该事件。
+
+## MouseEvent 接口的实例属性
+
+### MouseEvent.altKey，MouseEvent.ctrlKey，MouseEvent.metaKey，MouseEvent.shiftKey
+
+`MouseEvent.altKey`、`MouseEvent.ctrlKey`、`MouseEvent.metaKey`、`MouseEvent.shiftKey`这四个属性都返回一个布尔值，表示事件发生时，是否按下对应的键。它们都是只读属性。
+
+- `altKey`属性：Alt 键
+- `ctrlKey`属性：Ctrl 键
+- `metaKey`属性：Meta 键（Mac 键盘是一个四瓣的小花，Windows 键盘是 Windows 键）
+- `shiftKey`属性：Shift 键
+
+```
+// HTML 代码如下
+// <body onclick="showKey(event)">
+function showKey(e) {
+  console.log('ALT key pressed: ' + e.altKey);
+  console.log('CTRL key pressed: ' + e.ctrlKey);
+  console.log('META key pressed: ' + e.metaKey);
+  console.log('SHIFT key pressed: ' + e.shiftKey);
+}
+```
+
+上面代码中，点击网页会输出是否同时按下对应的键。
