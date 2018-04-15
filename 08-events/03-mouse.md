@@ -190,3 +190,20 @@ var whichButton = function (e) {
 - 4：二进制为`100`（十进制的4），表示按下中键或滚轮键。
 
 同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）。
+
+### MouseEvent.clientX，MouseEvent.clientY
+
+`MouseEvent.clientX`属性返回鼠标位置相对于浏览器窗口左上角的水平坐标（单位像素），`MouseEvent.clientY`属性返回垂直坐标。这两个属性都是只读属性。
+
+```
+// HTML 代码为
+// <body onmousedown="showCoords(event)">
+function showCoords(evt){
+  console.log(
+    'clientX value: ' + evt.clientX + '\n' +
+    'clientY value: ' + evt.clientY + '\n'
+  );
+}
+```
+
+这两个属性还分别有一个别名`MouseEvent.x`和`MouseEvent.y`。
