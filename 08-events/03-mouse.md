@@ -238,3 +238,31 @@ function showCoords(evt) {
   );
 }
 ```
+
+### MouseEvent.offsetX，MouseEvent.offsetY
+
+`MouseEvent.offsetX`属性返回鼠标位置与目标节点左侧的`padding`边缘的水平距离（单位像素），`MouseEvent.offsetY`属性返回与目标节点上方的`padding`边缘的垂直距离。这两个属性都是只读属性。
+
+```
+/* HTML 代码如下
+  <style>
+    p {
+      width: 100px;
+      height: 100px;
+      padding: 100px;
+    }
+  </style>
+  <p>Hello</p>
+*/
+var p = document.querySelector('p');
+p.addEventListener(
+  'click',
+  function (e) {
+    console.log(e.offsetX);
+    console.log(e.offsetY);
+  },
+  false
+);
+```
+
+上面代码中，鼠标如果在`p`元素的中心位置点击，会返回`150 150`。因此中心位置距离左侧和上方的`padding`边缘，等于`padding`的宽度（100像素）加上元素内容区域一半的宽度（50像素）。
