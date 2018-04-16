@@ -207,3 +207,34 @@ function showCoords(evt){
 ```
 
 这两个属性还分别有一个别名`MouseEvent.x`和`MouseEvent.y`。
+
+### MouseEvent.movementX，MouseEvent.movementY
+
+`MouseEvent.movementX`属性返回当前位置与上一个`mousemove`事件之间的水平距离（单位像素）。数值上，它等于下面的计算公式。
+
+```
+currentEvent.movementX = currentEvent.screenX - previousEvent.screenX
+```
+
+`MouseEvent.movementY`属性返回当前位置与上一个`mousemove`事件之间的垂直距离（单位像素）。数值上，它等于下面的计算公式。
+
+```
+currentEvent.movementY = currentEvent.screenY - previousEvent.screenY。
+```
+
+这两个属性都是只读属性。
+
+### MouseEvent.screenX，MouseEvent.screenY
+
+`MouseEvent.screenX`属性返回鼠标位置相对于屏幕左上角的水平坐标（单位像素），`MouseEvent.screenY`属性返回垂直坐标。这两个属性都是只读属性。
+
+```
+// HTML 代码如下
+// <body onmousedown="showCoords(event)">
+function showCoords(evt) {
+  console.log(
+    'screenX value: ' + evt.screenX + '\n',
+    'screenY value: ' + evt.screenY + '\n'
+  );
+}
+```
