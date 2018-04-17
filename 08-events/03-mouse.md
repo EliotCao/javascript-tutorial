@@ -266,3 +266,27 @@ p.addEventListener(
 ```
 
 上面代码中，鼠标如果在`p`元素的中心位置点击，会返回`150 150`。因此中心位置距离左侧和上方的`padding`边缘，等于`padding`的宽度（100像素）加上元素内容区域一半的宽度（50像素）。
+
+### MouseEvent.pageX，MouseEvent.pageY
+
+`MouseEvent.pageX`属性返回鼠标位置与文档左侧边缘的距离（单位像素），`MouseEvent.pageY`属性返回与文档上侧边缘的距离（单位像素）。它们的返回值都包括文档不可见的部分。这两个属性都是只读。
+
+```
+/* HTML 代码如下
+  <style>
+    body {
+      height: 2000px;
+    }
+  </style>
+*/
+document.body.addEventListener(
+  'click',
+  function (e) {
+    console.log(e.pageX);
+    console.log(e.pageY);
+  },
+  false
+);
+```
+
+上面代码中，页面高度为2000像素，会产生垂直滚动条。滚动到页面底部，点击鼠标输出的`pageY`值会接近2000。
