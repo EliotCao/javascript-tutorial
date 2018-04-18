@@ -290,3 +290,20 @@ document.body.addEventListener(
 ```
 
 上面代码中，页面高度为2000像素，会产生垂直滚动条。滚动到页面底部，点击鼠标输出的`pageY`值会接近2000。
+
+### MouseEvent.relatedTarget
+
+`MouseEvent.relatedTarget`属性返回事件的相关节点。对于那些没有相关节点的事件，该属性返回`null`。该属性只读。
+
+下表列出不同事件的`target`属性值和`relatedTarget`属性值义。
+
+| 事件名称   | target 属性    | relatedTarget 属性 |
+| ---------- | -------------- | ------------------ |
+| focusin    | 接受焦点的节点 | 丧失焦点的节点     |
+| focusout   | 丧失焦点的节点 | 接受焦点的节点     |
+| mouseenter | 将要进入的节点 | 将要离开的节点     |
+| mouseleave | 将要离开的节点 | 将要进入的节点     |
+| mouseout   | 将要离开的节点 | 将要进入的节点     |
+| mouseover  | 将要进入的节点 | 将要离开的节点     |
+| dragenter  | 将要进入的节点 | 将要离开的节点     |
+| dragexit   | 将要离开的节点 | 将要进入的节点     |
