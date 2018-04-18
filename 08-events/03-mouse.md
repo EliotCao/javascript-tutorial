@@ -307,3 +307,36 @@ document.body.addEventListener(
 | mouseover  | 将要进入的节点 | 将要离开的节点     |
 | dragenter  | 将要进入的节点 | 将要离开的节点     |
 | dragexit   | 将要离开的节点 | 将要进入的节点     |
+
+下面是一个例子。
+
+```
+/*
+  HTML 代码如下
+  <div id="outer" style="height:50px;width:50px;border-width:1px solid black;">
+    <div id="inner" style="height:25px;width:25px;border:1px solid black;"></div>
+  </div>
+*/
+
+var inner = document.getElementById('inner');
+inner.addEventListener('mouseover', function (event) {
+  console.log('进入' + event.target.id + ' 离开' + event.relatedTarget.id);
+}, false);
+inner.addEventListener('mouseenter', function (event) {
+  console.log('进入' + event.target.id + ' 离开' + event.relatedTarget.id);
+});
+inner.addEventListener('mouseout', function () {
+  console.log('离开' + event.target.id + ' 进入' + event.relatedTarget.id);
+});
+inner.addEventListener("mouseleave", function (){
+  console.log('离开' + event.target.id + ' 进入' + event.relatedTarget.id);
+});
+
+// 鼠标从 outer 进入inner，输出
+// 进入inner 离开outer
+// 进入inner 离开outer
+
+// 鼠标从 inner进入 outer，输出
+// 离开inner 进入outer
+// 离开inner 进入outer
+```
