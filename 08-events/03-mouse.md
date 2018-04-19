@@ -340,3 +340,17 @@ inner.addEventListener("mouseleave", function (){
 // 离开inner 进入outer
 // 离开inner 进入outer
 ```
+
+## MouseEvent 接口的实例方法
+
+### MouseEvent.getModifierState()
+
+`MouseEvent.getModifierState`方法返回一个布尔值，表示有没有按下特定的功能键。它的参数是一个表示[功能键](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState#Modifier_keys_on_Gecko)的字符串。
+
+```
+document.addEventListener('click', function (e) {
+  console.log(e.getModifierState('CapsLock'));
+}, false);
+```
+
+上面的代码可以了解用户是否按下了大写键。
