@@ -49,3 +49,15 @@ new KeyboardEvent(type, options)
 - `KeyboardEvent.metaKey`：是否按下 meta 键（Mac 系统是一个四瓣的小花，Windows 系统是 windows 键）
 - `KeyboardEvent.shiftKey`：是否按下 Shift 键
 
+下面是一个示例。
+
+```
+function showChar(e) {
+  console.log('ALT: ' + e.altKey);
+  console.log('CTRL: ' + e.ctrlKey);
+  console.log('Meta: ' + e.metaKey);
+  console.log('Shift: ' + e.shiftKey);
+}
+
+document.body.addEventListener('keydown', showChar, false);
+```
