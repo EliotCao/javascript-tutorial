@@ -75,3 +75,15 @@ document.body.addEventListener('keydown', showChar, false);
 - Alt 键：返回`AltLeft`或`AltRight`
 - Shift 键：返回`ShiftLeft`或`ShiftRight`
 - Ctrl 键：返回`ControlLeft`或`ControlRight`
+
+### KeyboardEvent.key
+
+`KeyboardEvent.key`属性返回一个字符串，表示按下的键名。该属性只读。
+
+如果按下的键代表可打印字符，则返回这个字符，比如数字、字母。
+
+如果按下的键代表不可打印的特殊字符，则返回预定义的键值，比如 Backspace，Tab，Enter，Shift，Control，Alt，CapsLock，Esc，Spacebar，PageUp，PageDown，End，Home，Left，Right，Up，Down，PrintScreen，Insert，Del，Win，F1～F12，NumLock，Scroll 等。
+
+如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下 Ctrl + a，则返回`a`；按下 Shift + a，则返回大写的`A`。
+
+如果无法识别键名，返回字符串`Unidentified`。
