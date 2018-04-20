@@ -16,3 +16,24 @@
 4. keypress
 5. ...（重复以上过程）
 6. keyup
+
+## KeyboardEvent 接口概述
+
+`KeyboardEvent`接口用来描述用户与键盘的互动。这个接口继承了`Event`接口，并且定义了自己的实例属性和实例方法。
+
+浏览器原生提供`KeyboardEvent`构造函数，用来新建键盘事件的实例。
+
+```
+new KeyboardEvent(type, options)
+```
+
+`KeyboardEvent`构造函数接受两个参数。第一个参数是字符串，表示事件类型；第二个参数是一个事件配置对象，该参数可选。除了`Event`接口提供的属性，还可以配置以下字段，它们都是可选。
+
+- `key`：字符串，当前按下的键，默认为空字符串。
+- `code`：字符串，表示当前按下的键的字符串形式，默认为空字符串。
+- `location`：整数，当前按下的键的位置，默认为`0`。
+- `ctrlKey`：布尔值，是否按下 Ctrl 键，默认为`false`。
+- `shiftKey`：布尔值，是否按下 Shift 键，默认为`false`。
+- `altKey`：布尔值，是否按下 Alt 键，默认为`false`。
+- `metaKey`：布尔值，是否按下 Meta 键，默认为`false`。
+- `repeat`：布尔值，是否重复按键，默认为`false`。
