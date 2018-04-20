@@ -100,3 +100,28 @@ document.body.addEventListener('keydown', showChar, false);
 ### KeyboardEvent.repeat
 
 `KeyboardEvent.repeat`返回一个布尔值，代表该键是否被按着不放，以便判断是否重复这个键，即浏览器会持续触发`keydown`和`keypress`事件，直到用户松开手为止。
+
+## KeyboardEvent 的实例方法
+
+### KeyboardEvent.getModifierState()
+
+`KeyboardEvent.getModifierState()`方法返回一个布尔值，表示是否按下或激活指定的功能键。它的常用参数如下。
+
+- `Alt`：Alt 键
+- `CapsLock`：大写锁定键
+- `Control`：Ctrl 键
+- `Meta`：Meta 键
+- `NumLock`：数字键盘开关键
+- `Shift`：Shift 键
+
+```
+if (
+  event.getModifierState('Control') +
+  event.getModifierState('Alt') +
+  event.getModifierState('Meta') > 1
+) {
+  return;
+}
+```
+
+上面代码表示，只要`Control`、`Alt`、`Meta`里面，同时按下任意两个或两个以上的键就返回。
