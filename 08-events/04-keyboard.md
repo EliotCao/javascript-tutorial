@@ -87,3 +87,12 @@ document.body.addEventListener('keydown', showChar, false);
 如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下 Ctrl + a，则返回`a`；按下 Shift + a，则返回大写的`A`。
 
 如果无法识别键名，返回字符串`Unidentified`。
+
+### KeyboardEvent.location
+
+`KeyboardEvent.location`属性返回一个整数，表示按下的键处在键盘的哪一个区域。它可能取以下值。
+
+- 0：处在键盘的主区域，或者无法判断处于哪一个区域。
+- 1：处在键盘的左侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。
+- 2：处在键盘的右侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。
+- 3：处在数字小键盘。
