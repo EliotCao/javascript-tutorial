@@ -37,3 +37,15 @@ new KeyboardEvent(type, options)
 - `altKey`：布尔值，是否按下 Alt 键，默认为`false`。
 - `metaKey`：布尔值，是否按下 Meta 键，默认为`false`。
 - `repeat`：布尔值，是否重复按键，默认为`false`。
+
+## KeyboardEvent 的实例属性
+
+### KeyboardEvent.altKey，KeyboardEvent.ctrlKey，KeyboardEvent.metaKey，KeyboardEvent.shiftKey
+
+以下属性都是只读属性，返回一个布尔值，表示是否按下对应的键。
+
+- `KeyboardEvent.altKey`：是否按下 Alt 键
+- `KeyboardEvent.ctrlKey`：是否按下 Ctrl 键
+- `KeyboardEvent.metaKey`：是否按下 meta 键（Mac 系统是一个四瓣的小花，Windows 系统是 windows 键）
+- `KeyboardEvent.shiftKey`：是否按下 Shift 键
+
