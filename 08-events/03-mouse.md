@@ -373,3 +373,14 @@ var wheelEvent = new WheelEvent(type, options);
 - `deltaY`：数值，表示滚轮的垂直滚动量，默认值是 0.0。
 - `deltaZ`：数值，表示滚轮的 Z 轴滚动量，默认值是 0.0。
 - `deltaMode`：数值，表示相关的滚动事件的单位，适用于上面三个属性。`0`表示滚动单位为像素，`1`表示单位为行，`2`表示单位为页，默认为`0`。
+
+### 实例属性
+
+`WheelEvent`事件实例除了具有`Event`和`MouseEvent`的实例属性和实例方法，还有一些自己的实例属性，但是没有自己的实例方法。
+
+下面的属性都是只读属性。
+
+- `WheelEvent.deltaX`：数值，表示滚轮的水平滚动量。
+- `WheelEvent.deltaY`：数值，表示滚轮的垂直滚动量。
+- `WheelEvent.deltaZ`：数值，表示滚轮的 Z 轴滚动量。
+- `WheelEvent.deltaMode`：数值，表示上面三个属性的单位，`0`是像素，`1`是行，`2`是页。
