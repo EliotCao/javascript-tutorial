@@ -96,3 +96,7 @@ document.body.addEventListener('keydown', showChar, false);
 - 1：处在键盘的左侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。
 - 2：处在键盘的右侧，只适用那些有两个位置的键（比如 Ctrl 和 Shift 键）。
 - 3：处在数字小键盘。
+
+### KeyboardEvent.repeat
+
+`KeyboardEvent.repeat`返回一个布尔值，代表该键是否被按着不放，以便判断是否重复这个键，即浏览器会持续触发`keydown`和`keypress`事件，直到用户松开手为止。
