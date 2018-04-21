@@ -104,3 +104,38 @@ document.body.dispatchEvent(p);
 ```
 
 上面代码先构造一个`load`事件，抛出后被监听函数捕捉到。
+
+下面是一个实际的例子。
+
+```
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener('progress', updateProgress, false);
+xhr.addEventListener('load', transferComplete, false);
+xhr.addEventListener('error', transferFailed, false);
+xhr.addEventListener('abort', transferCanceled, false);
+
+xhr.open();
+
+function updateProgress(e) {
+  if (e.lengthComputable) {
+    var percentComplete = e.loaded / e.total;
+  } else {
+    console.log('不能计算进度');
+  }
+}
+
+function transferComplete(e) {
+  console.log('传输结束');
+}
+
+function transferFailed(evt) {
+  console.log('传输过程中发生错误');
+}
+
+function transferCanceled(evt) {
+  console.log('用户取消了传输');
+}
+```
+
+上面是下载过程的进度事件，还存在上传过程的进度事件。这时所有监听函数都要放在`XMLHttpRequest.upload`对象上面。
