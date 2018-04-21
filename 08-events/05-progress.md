@@ -85,3 +85,22 @@ new ProgressEvent(type, options)
 - `ProgressEvent.total`
 
 如果`ProgressEvent.lengthComputable`为`false`，`ProgressEvent.total`实际上是没有意义的。
+
+下面是一个例子。
+
+```
+var p = new ProgressEvent('load', {
+  lengthComputable: true,
+  loaded: 30,
+  total: 100,
+});
+
+document.body.addEventListener('load', function (e) {
+  console.log('已经加载：' + (e.loaded / e.total) * 100 + '%');
+});
+
+document.body.dispatchEvent(p);
+// 已经加载：30%
+```
+
+上面代码先构造一个`load`事件，抛出后被监听函数捕捉到。
