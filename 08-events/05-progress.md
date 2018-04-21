@@ -139,3 +139,14 @@ function transferCanceled(evt) {
 ```
 
 上面是下载过程的进度事件，还存在上传过程的进度事件。这时所有监听函数都要放在`XMLHttpRequest.upload`对象上面。
+
+```
+var xhr = new XMLHttpRequest();
+
+xhr.upload.addEventListener('progress', updateProgress, false);
+xhr.upload.addEventListener('load', transferComplete, false);
+xhr.upload.addEventListener('error', transferFailed, false);
+xhr.upload.addEventListener('abort', transferCanceled, false);
+
+xhr.open();
+```
