@@ -47,3 +47,17 @@ if (image.complete) {
 ```
 <img src="/wrong/url" onerror="this.style.display='none';" />
 ```
+
+`loadend`事件的监听函数，可以用来取代`abort`事件、`load`事件、`error`事件的监听函数，因为它总是在这些事件之后发生。
+
+```
+req.addEventListener('loadend', loadEnd, false);
+
+function loadEnd(e) {
+  console.log('传输结束，成功失败未知');
+}
+```
+
+`loadend`事件本身不提供关于进度结束的原因，但可以用它来做所有加载结束场景都需要做的一些操作。
+
+另外，`error`事件有一个特殊的性质，就是不会冒泡。所以，子元素的`error`事件，不会触发父元素的`error`事件监听函数。
