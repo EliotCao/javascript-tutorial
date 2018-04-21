@@ -77,3 +77,11 @@ new ProgressEvent(type, options)
 - `lengthComputable`：布尔值，表示加载的总量是否可以计算，默认是`false`。
 - `loaded`：整数，表示已经加载的量，默认是`0`。
 - `total`：整数，表示需要加载的总量，默认是`0`。
+
+`ProgressEvent`具有对应的实例属性。
+
+- `ProgressEvent.lengthComputable`
+- `ProgressEvent.loaded`
+- `ProgressEvent.total`
+
+如果`ProgressEvent.lengthComputable`为`false`，`ProgressEvent.total`实际上是没有意义的。
