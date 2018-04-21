@@ -13,3 +13,17 @@
 - `timeout`：加载超时时触发。
 
 注意，除了资源下载，文件上传也存在这些事件。
+
+下面是一个例子。
+
+```
+image.addEventListener('load', function (event) {
+  image.classList.add('finished');
+});
+
+image.addEventListener('error', function (event) {
+  image.style.display = 'none';
+});
+```
+
+上面代码在图片元素加载完成后，为图片元素添加一个`finished`的 Class。如果加载失败，就把图片元素的样式设置为不显示。
