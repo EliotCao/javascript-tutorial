@@ -27,3 +27,23 @@ image.addEventListener('error', function (event) {
 ```
 
 上面代码在图片元素加载完成后，为图片元素添加一个`finished`的 Class。如果加载失败，就把图片元素的样式设置为不显示。
+
+有时候，图片加载会在脚本运行之前就完成，尤其是当脚本放置在网页底部的时候，因此有可能`load`和`error`事件的监听函数根本不会执行。所以，比较可靠的方式，是用`complete`属性先判断一下是否加载完成。
+
+```
+function loaded() {
+  // ...
+}
+
+if (image.complete) {
+  loaded();
+} else {
+  image.addEventListener('load', loaded);
+}
+```
+
+由于 DOM 的元素节点没有提供是否加载错误的属性，所以`error`事件的监听函数最好放在`<img>`元素的 HTML 代码中，这样才能保证发生加载错误时百分之百会执行。
+
+```
+<img src="/wrong/url" onerror="this.style.display='none';" />
+```
