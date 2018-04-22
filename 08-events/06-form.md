@@ -32,3 +32,19 @@ mySelect.addEventListener('input', inputHandler);
 ```
 
 上面代码中，改变下拉框选项时，会触发`input`事件，从而执行回调函数`inputHandler`。
+
+### select 事件
+
+`select`事件当在`<input>`、`<textarea>`里面选中文本时触发。
+
+```
+// HTML 代码如下
+// <input id="test" type="text" value="Select me!" />
+
+var elem = document.getElementById('test');
+elem.addEventListener('select', function (e) {
+  console.log(e.type); // "select"
+}, false);
+```
+
+选中的文本可以通过`event.target`元素的`selectionDirection`、`selectionEnd`、`selectionStart`和`value`属性拿到。
