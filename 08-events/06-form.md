@@ -48,3 +48,28 @@ elem.addEventListener('select', function (e) {
 ```
 
 选中的文本可以通过`event.target`元素的`selectionDirection`、`selectionEnd`、`selectionStart`和`value`属性拿到。
+
+### change 事件
+
+`change`事件当`<input>`、`<select>`、`<textarea>`的值发生变化时触发。它与`input`事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，另一方面`input`事件必然伴随`change`事件。具体来说，分成以下几种情况。
+
+- 激活单选框（radio）或复选框（checkbox）时触发。
+- 用户提交时触发。比如，从下列列表（select）完成选择，在日期或文件输入框完成选择。
+- 当文本框或`<textarea>`元素的值发生改变，并且丧失焦点时触发。
+
+下面是一个例子。
+
+```
+// HTML 代码如下
+// <select size="1" onchange="changeEventHandler(event);">
+//   <option>chocolate</option>
+//   <option>strawberry</option>
+//   <option>vanilla</option>
+// </select>
+
+function changeEventHandler(event) {
+  console.log(event.target.value);
+}
+```
+
+如果比较一下上面`input`事件的例子，你会发现对于`<select>`元素来说，`input`和`change`事件基本是等价的。
