@@ -11,3 +11,24 @@
 `input`事件对象继承了`InputEvent`接口。
 
 该事件跟`change`事件很像，不同之处在于`input`事件在元素的值发生变化后立即发生，而`change`在元素失去焦点时发生，而内容此时可能已经变化多次。也就是说，如果有连续变化，`input`事件会触发多次，而`change`事件只在失去焦点时触发一次。
+
+下面是`<select>`元素的例子。
+
+```
+/* HTML 代码如下
+<select id="mySelect">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+*/
+
+function inputHandler(e) {
+  console.log(e.target.value)
+}
+
+var mySelect = document.querySelector('#mySelect');
+mySelect.addEventListener('input', inputHandler);
+```
+
+上面代码中，改变下拉框选项时，会触发`input`事件，从而执行回调函数`inputHandler`。
