@@ -73,3 +73,16 @@ function changeEventHandler(event) {
 ```
 
 如果比较一下上面`input`事件的例子，你会发现对于`<select>`元素来说，`input`和`change`事件基本是等价的。
+
+### invalid 事件
+
+用户提交表单时，如果表单元素的值不满足校验条件，就会触发`invalid`事件。
+
+```
+<form>
+  <input type="text" required oninvalid="console.log('invalid input')" />
+  <button type="submit">提交</button>
+</form>
+```
+
+上面代码中，输入框是必填的。如果不填，用户点击按钮提交时，就会触发输入框的`invalid`事件，导致提交被取消。
