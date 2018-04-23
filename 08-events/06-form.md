@@ -140,3 +140,7 @@ function myFunction(e) {
 - 粘贴插入文本：`insertFromPaste`
 - 向后删除：`deleteContentBackward`
 - 向前删除：`deleteContentForward`
+
+**（3）InputEvent.dataTransfer**
+
+`InputEvent.dataTransfer`属性返回一个 DataTransfer 实例。该属性只在文本框接受粘贴内容（insertFromPaste）或拖拽内容（`insertFromDrop`）时才有效。
