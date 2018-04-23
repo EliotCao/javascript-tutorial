@@ -129,3 +129,14 @@ function myFunction(e) {
 ```
 
 上面代码中，如果手动在输入框里面输入`abc`，控制台会先输出`a`，再在下一行输出`b`，再在下一行输出`c`。然后选中`abc`，一次性将它们删除，控制台会输出`null`或一个空字符串。
+
+**（2）InputEvent.inputType**
+
+`InputEvent.inputType`属性返回一个字符串，表示字符串发生变更的类型。
+
+对于常见情况，Chrome 浏览器的返回值如下。完整列表可以参考[文档](https://w3c.github.io/input-events/index.html#dom-inputevent-inputtype)。
+
+- 手动插入文本：`insertText`
+- 粘贴插入文本：`insertFromPaste`
+- 向后删除：`deleteContentBackward`
+- 向前删除：`deleteContentForward`
