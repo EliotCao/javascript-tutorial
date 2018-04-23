@@ -112,3 +112,20 @@ new InputEvent(type, options)
 - `dataTransfer`：返回一个 DataTransfer 对象实例，该属性通常只在输入框接受富文本输入时有效。
 
 `InputEvent`的实例属性主要就是上面三个属性，这三个实例属性都是只读的。
+
+**（1）InputEvent.data**
+
+`InputEvent.data`属性返回一个字符串，表示变动的内容。
+
+```
+// HTML 代码如下
+// <input type="text" id="myInput">
+var input = document.getElementById('myInput');
+input.addEventListener('input', myFunction, false);
+
+function myFunction(e) {
+  console.log(e.data);
+}
+```
+
+上面代码中，如果手动在输入框里面输入`abc`，控制台会先输出`a`，再在下一行输出`b`，再在下一行输出`c`。然后选中`abc`，一次性将它们删除，控制台会输出`null`或一个空字符串。
