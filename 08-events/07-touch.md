@@ -38,3 +38,17 @@ var touch = new Touch(touchOptions);
 - `radiusY`：可选：类型为数值，表示触摸点周围受到影响的椭圆范围的 Y 轴半径，默认为0。
 - `rotationAngle`：可选，类型为数值，表示触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间，默认值为0。
 - `force`：可选，类型为数值，范围在`0`到`1`之间，表示触摸压力。`0`代表没有压力，`1`代表硬件所能识别的最大压力，默认为`0`。
+
+### Touch 接口的实例属性
+
+**（1）Touch.identifier**
+
+`Touch.identifier`属性返回一个整数，表示触摸点的唯一 ID。这个值在整个触摸过程保持不变，直到触摸事件结束。
+
+```
+someElement.addEventListener('touchmove', function (e) {
+  for (var i = 0; i < e.changedTouches.length; i++) {
+    console.log(e.changedTouches[i].identifier);
+  }
+}, false);
+```
