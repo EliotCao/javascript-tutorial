@@ -68,3 +68,24 @@ someElement.addEventListener('touchmove', function (e) {
 `Touch.rotationAngle`属性表示触摸区域的椭圆的旋转角度，单位为度数，在`0`到`90`度之间。
 
 上面这三个属性共同定义了用户与屏幕接触的区域，对于描述手指这一类非精确的触摸，很有帮助。指尖接触屏幕，触摸范围会形成一个椭圆，这三个属性就用来描述这个椭圆区域。
+
+下面是一个示例。
+
+```
+div.addEventListener('touchstart', rotate);
+div.addEventListener('touchmove', rotate);
+div.addEventListener('touchend', rotate);
+
+function rotate(e) {
+  var touch = e.changedTouches.item(0);
+  e.preventDefault();
+
+  src.style.width = touch.radiusX * 2 + 'px';
+  src.style.height = touch.radiusY * 2 + 'px';
+  src.style.transform = 'rotate(' + touch.rotationAngle + 'deg)';
+};
+```
+
+**（4）Touch.force**
+
+`Touch.force`属性返回一个`0`到`1`之间的数值，表示触摸压力。`0`代表没有压力，`1`代表硬件所能识别的最大压力。
