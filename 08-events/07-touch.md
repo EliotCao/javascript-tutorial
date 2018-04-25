@@ -52,3 +52,11 @@ someElement.addEventListener('touchmove', function (e) {
   }
 }, false);
 ```
+
+**（2）Touch.screenX，Touch.screenY，Touch.clientX，Touch.clientY，pageX，pageY**
+
+`Touch.screenX`属性和`Touch.screenY`属性，分别表示触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关。
+
+`Touch.clientX`属性和`Touch.clientY`属性，分别表示触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关。
+
+`Touch.pageX`属性和`Touch.pageY`属性，分别表示触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移。
