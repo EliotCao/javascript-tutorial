@@ -93,3 +93,14 @@ function rotate(e) {
 **（5）Touch.target**
 
 `Touch.target`属性返回一个元素节点，代表触摸发生时所在的那个元素节点。即使触摸点已经离开了这个节点，该属性依然不变。
+
+## TouchList 接口
+
+`TouchList`接口表示一组触摸点的集合。它的实例是一个类似数组的对象，成员是`Touch`的实例对象，表示所有触摸点。用户用三根手指触摸，产生的`TouchList`实例就会包含三个成员，每根手指的触摸点对应一个`Touch`实例对象。
+
+它的实例主要通过触摸事件的`TouchEvent.touches`、`TouchEvent.changedTouches`、`TouchEvent.targetTouches`这几个属性获取。
+
+它的实例属性和实例方法只有两个。
+
+- `TouchList.length`：数值，表示成员数量（即触摸点的数量）。
+- `TouchList.item()`：返回指定位置的成员，它的参数是该成员的位置编号（从零开始）。
