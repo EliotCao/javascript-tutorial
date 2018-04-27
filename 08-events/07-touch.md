@@ -189,3 +189,15 @@ someElement.addEventListener('touchstart', function (e) {
   }
 }, false);
 ```
+
+**（4）TouchEvent.targetTouches**
+
+`TouchEvent.targetTouches`属性返回一个`TouchList`实例，成员是触摸事件的目标元素节点内部、所有仍然处于活动状态（即触摸中）的触摸点。
+
+```
+function touches_in_target(ev) {
+  return (ev.touches.length === ev.targetTouches.length ? true : false);
+}
+```
+
+上面代码用来判断，是否所有触摸点都在目标元素内。
