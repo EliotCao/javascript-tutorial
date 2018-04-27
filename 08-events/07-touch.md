@@ -126,3 +126,14 @@ new TouchEvent(type, options)
 - `shiftKey`：布尔值，表示 Shift 键是否同时按下，默认值为`false`。
 - `altKey`：布尔值，表示 Alt 键是否同时按下，默认值为`false`。
 - `metaKey`：布尔值，表示 Meta 键（或 Windows 键）是否同时按下，默认值为`false`。
+
+### 实例属性
+
+TouchEvent 接口的实例具有`Event`实例的所有属性和方法，此外还有一些它自己的实例属性，这些属性全部都是只读。
+
+**（1）TouchEvent.altKey，TouchEvent.ctrlKey，TouchEvent.shiftKey，TouchEvent.metaKey**
+
+- `TouchEvent.altKey`：布尔值，表示触摸时是否按下了 Alt 键。
+- `TouchEvent.ctrlKey`：布尔值，表示触摸时是否按下了 Ctrl 键。
+- `TouchEvent.shiftKey`：布尔值：表示触摸时是否按下了 Shift 键。
+- `TouchEvent.metaKey`：布尔值，表示触摸时是否按下了 Meta 键（或 Windows 键）。
