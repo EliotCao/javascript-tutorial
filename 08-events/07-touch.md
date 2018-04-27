@@ -137,3 +137,14 @@ TouchEvent 接口的实例具有`Event`实例的所有属性和方法，此外�
 - `TouchEvent.ctrlKey`：布尔值，表示触摸时是否按下了 Ctrl 键。
 - `TouchEvent.shiftKey`：布尔值：表示触摸时是否按下了 Shift 键。
 - `TouchEvent.metaKey`：布尔值，表示触摸时是否按下了 Meta 键（或 Windows 键）。
+
+下面是一个示例。
+
+```
+someElement.addEventListener('touchstart', function (e) {
+  console.log('altKey = ' + e.altKey);
+  console.log('ctrlKey = ' + e.ctrlKey);
+  console.log('metaKey = ' + e.metaKey);
+  console.log('shiftKey = ' + e.shiftKey);
+}, false);
+```
