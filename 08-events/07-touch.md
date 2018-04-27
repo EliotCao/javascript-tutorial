@@ -148,3 +148,23 @@ someElement.addEventListener('touchstart', function (e) {
   console.log('shiftKey = ' + e.shiftKey);
 }, false);
 ```
+
+**（2）TouchEvent.changedTouches**
+
+`TouchEvent.changedTouches`属性返回一个`TouchList`实例，成员是一组`Touch`实例对象，表示本次触摸事件的相关触摸点。
+
+对于不同的时间，该属性的含义有所不同。
+
+- `touchstart`事件：被激活的触摸点
+- `touchmove`事件：发生变化的触摸点
+- `touchend`事件：消失的触摸点（即不再被触碰的点）
+
+下面是一个示例。
+
+```
+someElement.addEventListener('touchmove', function (e) {
+  for (var i = 0; i < e.changedTouches.length; i++) {
+    console.log(e.changedTouches[i].identifier);
+  }
+}, false);
+```
