@@ -168,3 +168,24 @@ someElement.addEventListener('touchmove', function (e) {
   }
 }, false);
 ```
+
+**（3）TouchEvent.touches**
+
+`TouchEvent.touches`属性返回一个`TouchList`实例，成员是所有仍然处于活动状态（即触摸中）的触摸点。一般来说，一个手指就是一个触摸点。
+
+下面是一个示例。
+
+```
+someElement.addEventListener('touchstart', function (e) {
+  switch (e.touches.length) {
+    // 一根手指触摸
+    case 1: handle_one_touch(e); break;
+    // 两根手指触摸
+    case 2: handle_two_touches(e); break;
+    // 三根手指触摸
+    case 3: handle_three_touches(e); break;
+    // 其他情况
+    default: console.log('Not supported'); break;
+  }
+}, false);
+```
