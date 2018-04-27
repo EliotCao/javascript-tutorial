@@ -104,3 +104,25 @@ function rotate(e) {
 
 - `TouchList.length`：数值，表示成员数量（即触摸点的数量）。
 - `TouchList.item()`：返回指定位置的成员，它的参数是该成员的位置编号（从零开始）。
+
+## TouchEvent 接口
+
+### 概述
+
+TouchEvent 接口继承了 Event 接口，表示由触摸引发的事件实例，通常来自触摸屏或轨迹板。除了被继承的属性以外，它还有一些自己的属性。
+
+浏览器原生提供`TouchEvent()`构造函数，用来生成触摸事件的实例。
+
+```
+new TouchEvent(type, options)
+```
+
+`TouchEvent()`构造函数可以接受两个参数，第一个参数是字符串，表示事件类型；第二个参数是事件的配置对象，该参数是可选的，对象的所有属性也是可选的。除了`Event`接口的配置属性，该接口还有一些自己的配置属性。
+
+- `touches`：`TouchList`实例，代表所有的当前处于活跃状态的触摸点，默认值是一个空数组`[]`。
+- `targetTouches`：`TouchList`实例，代表所有处在触摸的目标元素节点内部、且仍然处于活动状态的触摸点，默认值是一个空数组`[]`。
+- `changedTouches`：`TouchList`实例，代表本次触摸事件的相关触摸点，默认值是一个空数组`[]`。
+- `ctrlKey`：布尔值，表示 Ctrl 键是否同时按下，默认值为`false`。
+- `shiftKey`：布尔值，表示 Shift 键是否同时按下，默认值为`false`。
+- `altKey`：布尔值，表示 Alt 键是否同时按下，默认值为`false`。
+- `metaKey`：布尔值，表示 Meta 键（或 Windows 键）是否同时按下，默认值为`false`。
