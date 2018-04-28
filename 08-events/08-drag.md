@@ -148,3 +148,14 @@ var dataTrans = new DataTransfer();
 拖拉事件开始时，开发者可以提供数据类型和数据值。拖拉过程中，开发者通过`dragenter`和`dragover`事件的监听函数，检查数据类型，以确定是否允许放下（drop）被拖拉的对象。比如，在只允许放下链接的区域，检查拖拉的数据类型是否为`text/uri-list`。
 
 发生`drop`事件时，监听函数取出拖拉的数据，对其进行处理。
+
+## DataTransfer 的实例属性
+
+### DataTransfer.dropEffect
+
+`DataTransfer.dropEffect`属性用来设置放下（drop）被拖拉节点时的效果，会影响到拖拉经过相关区域时鼠标的形状。它可能取下面的值。
+
+- copy：复制被拖拉的节点
+- move：移动被拖拉的节点
+- link：创建指向被拖拉的节点的链接
+- none：无法放下被拖拉的节点
