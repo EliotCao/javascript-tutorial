@@ -242,3 +242,23 @@ div.addEventListener("drop", function( event ) {
 ```
 
 上面代码中，通过`dataTransfer.files`属性读取被拖拉的文件的信息。如果想要读取文件内容，就要使用`FileReader`对象。
+
+```
+div.addEventListener('drop', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  var fileList = e.dataTransfer.files;
+  if (fileList.length > 0) {
+    var file = fileList[0];
+    var reader = new FileReader();
+    reader.onloadend = function(e) {
+      if (e.target.readyState === FileReader.DONE) {
+        var content = reader.result;
+        div.innerHTML = 'File: ' + file.name + '\n\n' + content;
+      }
+    }
+    reader.readAsBinaryString(file);
+  }
+});
+```
