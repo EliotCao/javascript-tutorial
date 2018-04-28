@@ -189,3 +189,19 @@ target.addEventListener('dragover', function (e) {
 - uninitialized：默认值，等同于`all`
 
 如果某种效果是不允许的，用户就无法在目标节点中达成这种效果。
+
+这个属性与`dropEffect`属性是同一件事的两个方面。前者设置被拖拉的节点允许的效果，后者设置接受拖拉的区域的效果，它们往往配合使用。
+
+`dragstart`事件的监听函数，可以用来设置这个属性。其他事件的监听函数里面设置这个属性是无效的。
+
+```
+source.addEventListener('dragstart', function (e) {
+  e.dataTransfer.effectAllowed = 'move';
+});
+
+target.addEventListener('dragover', function (e) {
+  ev.dataTransfer.dropEffect = 'move';
+});
+```
+
+只要`dropEffect`属性和`effectAllowed`属性之中，有一个为`none`，就无法在目标节点上完成`drop`操作。
