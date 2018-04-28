@@ -103,3 +103,16 @@ document.addEventListener('drop', function( event ) {
   }
 }, false);
 ```
+
+关于拖拉事件，有以下几个注意点。
+
+- 拖拉过程只触发以上这些拖拉事件，尽管鼠标在移动，但是鼠标事件不会触发。
+- 将文件从操作系统拖拉进浏览器，不会触发`dragstart`和`dragend`事件。
+- `dragenter`和`dragover`事件的监听函数，用来取出拖拉的数据（即允许放下被拖拉的元素）。由于网页的大部分区域不适合作为放下拖拉元素的目标节点，所以这两个事件的默认设置为当前节点不允许接受被拖拉的元素。如果想要在目标节点上放下的数据，首先必须阻止这两个事件的默认行为。
+
+```
+<div ondragover="return false">
+<div ondragover="event.preventDefault()">
+```
+
+上面代码中，如果不取消拖拉事件或者阻止默认行为，就不能在`div`节点上放下被拖拉的节点。
