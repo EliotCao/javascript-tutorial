@@ -116,3 +116,17 @@ document.addEventListener('drop', function( event ) {
 ```
 
 上面代码中，如果不取消拖拉事件或者阻止默认行为，就不能在`div`节点上放下被拖拉的节点。
+
+## DragEvent 接口
+
+拖拉事件都继承了`DragEvent`接口，这个接口又继承了`MouseEvent`接口和`Event`接口。
+
+浏览器原生提供一个`DragEvent()`构造函数，用来生成拖拉事件的实例对象。
+
+```
+new DragEvent(type, options)
+```
+
+`DragEvent()`构造函数接受两个参数，第一个参数是字符串，表示事件的类型，该参数必须；第二个参数是事件的配置对象，用来设置事件的属性，该参数可选。配置对象除了接受`MouseEvent`接口和`Event`接口的配置属性，还可以设置`dataTransfer`属性要么是`null`，要么是一个`DataTransfer`接口的实例。
+
+`DataTransfer`的实例对象用来读写拖拉事件中传输的数据，详见下文《DataTransfer 接口》的部分。
