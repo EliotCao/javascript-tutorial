@@ -284,3 +284,15 @@ function doDragOver(event) {
 ```
 
 上面代码中，只有当被拖拉的节点是一个链接时，才允许在当前节点放下。
+
+### DataTransfer.items
+
+`DataTransfer.items`属性返回一个类似数组的只读对象（DataTransferItemList 实例），每个成员就是本次拖拉的一个对象（DataTransferItem 实例）。如果本次拖拉不包含对象，则返回一个空对象。
+
+DataTransferItemList 实例具有以下的属性和方法。
+
+- `length`：返回成员的数量
+- `add(data, type)`：增加一个指定内容和类型（比如`text/html`和`text/plain`）的字符串作为成员
+- `add(file)`：`add`方法的另一种用法，增加一个文件作为成员
+- `remove(index)`：移除指定位置的成员
+- `clear()`：移除所有的成员
