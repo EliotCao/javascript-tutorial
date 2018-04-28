@@ -262,3 +262,25 @@ div.addEventListener('drop', function(e) {
   }
 });
 ```
+
+### DataTransfer.types
+
+`DataTransfer.types`属性是一个只读的数组，每个成员是一个字符串，里面是拖拉的数据格式（通常是 MIME 值）。比如，如果拖拉的是文字，对应的成员就是`text/plain`。
+
+下面是一个例子，通过检查`dataTransfer`属性的类型，决定是否允许在当前节点执行`drop`操作。
+
+```
+function contains(list, value){
+  for (var i = 0; i < list.length; ++i) {
+    if(list[i] === value) return true;
+  }
+  return false;
+}
+
+function doDragOver(event) {
+  var isLink = contains(event.dataTransfer.types, 'text/uri-list');
+  if (isLink) event.preventDefault();
+}
+```
+
+上面代码中，只有当被拖拉的节点是一个链接时，才允许在当前节点放下。
