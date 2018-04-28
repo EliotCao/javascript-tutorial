@@ -159,3 +159,17 @@ var dataTrans = new DataTransfer();
 - move：移动被拖拉的节点
 - link：创建指向被拖拉的节点的链接
 - none：无法放下被拖拉的节点
+
+除了上面这些值，设置其他的值都是无效的。
+
+```
+target.addEventListener('dragover', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = 'copy';
+});
+```
+
+上面代码中，被拖拉元素一旦`drop`，接受的区域会复制该节点。
+
+`dropEffect`属性一般在`dragenter`和`dragover`事件的监听函数中设置，对于`dragstart`、`drag`、`dragleave`这三个事件，该属性不起作用。因为该属性只对接受被拖拉的节点的区域有效，对被拖拉的节点本身是无效的。进入目标区域后，拖拉行为会初始化成设定的效果。
