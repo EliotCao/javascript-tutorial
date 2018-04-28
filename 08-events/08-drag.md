@@ -173,3 +173,19 @@ target.addEventListener('dragover', function (e) {
 上面代码中，被拖拉元素一旦`drop`，接受的区域会复制该节点。
 
 `dropEffect`属性一般在`dragenter`和`dragover`事件的监听函数中设置，对于`dragstart`、`drag`、`dragleave`这三个事件，该属性不起作用。因为该属性只对接受被拖拉的节点的区域有效，对被拖拉的节点本身是无效的。进入目标区域后，拖拉行为会初始化成设定的效果。
+
+### DataTransfer.effectAllowed
+
+`DataTransfer.effectAllowed`属性设置本次拖拉中允许的效果。它可能取下面的值。
+
+- copy：复制被拖拉的节点
+- move：移动被拖拉的节点
+- link：创建指向被拖拉节点的链接
+- copyLink：允许`copy`或`link`
+- copyMove：允许`copy`或`move`
+- linkMove：允许`link`或`move`
+- all：允许所有效果
+- none：无法放下被拖拉的节点
+- uninitialized：默认值，等同于`all`
+
+如果某种效果是不允许的，用户就无法在目标节点中达成这种效果。
