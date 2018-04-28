@@ -27,3 +27,17 @@
 - `dragover`：拖拉到当前节点上方时，在当前节点上持续触发（相隔几百毫秒），该事件的`target`属性是当前节点。该事件与`dragenter`事件的区别是，`dragenter`事件在进入该节点时触发，然后只要没有离开这个节点，`dragover`事件会持续触发。
 - `dragleave`：拖拉操作离开当前节点范围时，在当前节点上触发，该事件的`target`属性是当前节点。如果要在视觉上显示拖拉离开操作当前节点，就在这个事件的监听函数中设置。
 - `drop`：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许`drop`，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下 ESC 键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理。
+
+下面的例子展示，如何动态改变被拖动节点的背景色。
+
+```
+div.addEventListener('dragstart', function (e) {
+  this.style.backgroundColor = 'red';
+}, false);
+
+div.addEventListener('dragend', function (e) {
+  this.style.backgroundColor = 'green';
+}, false);
+```
+
+上面代码中，`div`节点被拖动时，背景色会变为红色，拖动结束，又变回绿色。
