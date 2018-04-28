@@ -205,3 +205,7 @@ target.addEventListener('dragover', function (e) {
 ```
 
 只要`dropEffect`属性和`effectAllowed`属性之中，有一个为`none`，就无法在目标节点上完成`drop`操作。
+
+### DataTransfer.files
+
+`DataTransfer.files`属性是一个 FileList 对象，包含一组本地文件，可以用来在拖拉操作中传送。如果本次拖拉不涉及文件，则该属性为空的 FileList 对象。
