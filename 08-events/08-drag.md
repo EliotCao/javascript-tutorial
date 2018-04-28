@@ -296,3 +296,23 @@ DataTransferItemList 实例具有以下的属性和方法。
 - `add(file)`：`add`方法的另一种用法，增加一个文件作为成员
 - `remove(index)`：移除指定位置的成员
 - `clear()`：移除所有的成员
+
+DataTransferItem 实例具有以下的属性和方法。
+
+- `kind`：返回成员的种类（`string`还是`file`）。
+- `type`：返回成员的类型（通常是 MIME 值）。
+- `getAsFile()`：如果被拖拉是文件，返回该文件，否则返回`null`。
+- `getAsString(callback)`：如果被拖拉的是字符串，将该字符传入指定的回调函数处理。该方法是异步的，所以需要传入回调函数。
+
+下面是一个例子。
+
+```
+div.addEventListener('drop', function (e) {
+  e.preventDefault();
+  if (e.dataTransfer.items != null) {
+    for (var i = 0; i < e.dataTransfer.items.length; i++) {
+      console.log(e.dataTransfer.items[i].kind + ': ' + e.dataTransfer.items[i].type);
+    }
+  }
+});
+```
