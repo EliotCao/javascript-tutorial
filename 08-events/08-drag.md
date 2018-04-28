@@ -209,3 +209,36 @@ target.addEventListener('dragover', function (e) {
 ### DataTransfer.files
 
 `DataTransfer.files`属性是一个 FileList 对象，包含一组本地文件，可以用来在拖拉操作中传送。如果本次拖拉不涉及文件，则该属性为空的 FileList 对象。
+
+下面就是一个接收拖拉文件的例子。
+
+```
+// HTML 代码如下
+// <div id="output" style="min-height: 200px;border: 1px solid black;">
+//   文件拖拉到这里
+// </div>
+
+var div = document.getElementById('output');
+
+div.addEventListener("dragenter", function( event ) {
+  div.textContent = '';
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("dragover", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("drop", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+  var files = event.dataTransfer.files;
+  for (var i = 0; i < files.length; i++) {
+    div.textContent += files[i].name + ' ' + files[i].size + '字节\n';
+  }
+}, false);
+```
+
+上面代码中，通过`dataTransfer.files`属性读取被拖拉的文件的信息。如果想要读取文件内容，就要使用`FileReader`对象。
