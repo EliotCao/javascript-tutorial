@@ -395,3 +395,19 @@ dt.setData('text/plain', 'http://www.example.com');
 ```
 
 上面代码中，通过在同一个事件上面，存放三种类型的数据，使得拖拉事件可以在不同的对象上面，`drop`不同的值。注意，第一种格式是一个自定义格式，浏览器默认无法读取，这意味着，只有某个部署了特定代码的节点，才可能`drop`（读取到）这个数据。
+
+### DataTransfer.getData()
+
+`DataTransfer.getData()`方法接受一个字符串（表示数据类型）作为参数，返回事件所带的指定类型的数据（通常是用`setData`方法添加的数据）。如果指定类型的数据不存在，则返回空字符串。通常只有`drop`事件触发后，才能取出数据。
+
+下面是一个`drop`事件的监听函数，用来取出指定类型的数据。
+
+```
+function onDrop(event) {
+  var data = event.dataTransfer.getData('text/plain');
+  event.target.textContent = data;
+  event.preventDefault();
+}
+```
+
+上面代码取出拖拉事件的文本数据，将其替换成当前节点的文本内容。注意，这时还必须取消浏览器的默认行为，因为假如用户拖拉的是一个链接，浏览器默认会在当前窗口打开这个链接。
