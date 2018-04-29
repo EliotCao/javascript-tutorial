@@ -353,3 +353,16 @@ event.dataTransfer.setData('text/plain', 'Text to drag');
 ```
 
 上面代码中，拖拉数据实际上是`bbb`，而不是`aaa`。
+
+使用`setData`方法，可以替换到原有数据。
+
+```
+<div
+  draggable="true"
+  ondragstart="event.dataTransfer.setData('text/plain', 'bbb')"
+>
+  aaa
+</div>
+```
+
+上面代码中，拖拉数据实际上是`bbb`，而不是`aaa`。
