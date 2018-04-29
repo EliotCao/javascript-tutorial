@@ -448,3 +448,17 @@ function doDrop(event) {
   event.preventDefault();
 }
 ```
+
+### DataTransfer.clearData()
+
+`DataTransfer.clearData()`方法接受一个字符串（表示数据类型）作为参数，删除事件所带的指定类型的数据。如果没有指定类型，则删除所有数据。如果指定类型不存在，则调用该方法不会产生任何效果。
+
+```
+event.dataTransfer.clearData('text/uri-list');
+```
+
+上面代码清除事件所带的`text/uri-list`类型的数据。
+
+该方法不会移除拖拉的文件，因此调用该方法后，`DataTransfer.types`属性可能依然会返回`Files`类型（前提是存在文件拖拉）。
+
+注意，该方法只能在`dragstart`事件的监听函数之中使用，因为这是拖拉操作的数据唯一可写的时机。
