@@ -411,3 +411,20 @@ function onDrop(event) {
 ```
 
 上面代码取出拖拉事件的文本数据，将其替换成当前节点的文本内容。注意，这时还必须取消浏览器的默认行为，因为假如用户拖拉的是一个链接，浏览器默认会在当前窗口打开这个链接。
+
+`getData`方法返回的是一个字符串，如果其中包含多项数据，就必须手动解析。
+
+```
+function doDrop(event) {
+  var lines = event.dataTransfer.getData('text/uri-list').split('\n');
+  for (let line of lines) {
+    let link = document.createElement('a');
+    link.href = line;
+    link.textContent = line;
+    event.target.appendChild(link);
+  }
+  event.preventDefault();
+}
+```
+
+上面代码中，`getData`方法返回的是一组链接，就必须自行解析。
