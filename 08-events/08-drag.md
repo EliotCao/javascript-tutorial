@@ -428,3 +428,23 @@ function doDrop(event) {
 ```
 
 上面代码中，`getData`方法返回的是一组链接，就必须自行解析。
+
+类型值指定为`URL`，可以取出第一个有效链接。
+
+```
+var link = event.dataTransfer.getData('URL');
+```
+
+下面的例子是从多种类型的数据里面取出数据。
+
+```
+function doDrop(event) {
+  var types = event.dataTransfer.types;
+  var supportedTypes = ['text/uri-list', 'text/plain'];
+  types = supportedTypes.filter(function (value) { types.includes(value) });
+  if (types.length) {
+    var data = event.dataTransfer.getData(types[0]);
+  }
+  event.preventDefault();
+}
+```
