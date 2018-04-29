@@ -330,3 +330,26 @@ event.dataTransfer.setData('text/plain', 'Text to drag');
 上面代码为当前的拖拉事件加入纯文本数据。
 
 该方法接受两个参数，都是字符串。第一个参数表示数据类型（比如`text/plain`），第二个参数是具体数据。如果指定类型的数据在`dataTransfer`属性不存在，那么这些数据将被加入，否则原有的数据将被新数据替换。
+
+如果是拖拉文本框或者拖拉选中的文本，会默认将对应的文本数据，添加到`dataTransfer`属性，不用手动指定。
+
+```
+<div draggable="true">
+  aaa
+</div>
+```
+
+上面代码中，拖拉这个`<div>`元素会自动带上文本数据`aaa`。
+
+使用`setData`方法，可以替换到原有数据。
+
+```
+<div
+  draggable="true"
+  ondragstart="event.dataTransfer.setData('text/plain', 'bbb')"
+>
+  aaa
+</div>
+```
+
+上面代码中，拖拉数据实际上是`bbb`，而不是`aaa`。
