@@ -366,3 +366,32 @@ event.dataTransfer.setData('text/plain', 'Text to drag');
 ```
 
 上面代码中，拖拉数据实际上是`bbb`，而不是`aaa`。
+
+下面是添加其他类型的数据。由于`text/plain`是最普遍支持的格式，为了保证兼容性，建议最后总是保存一份纯文本格式的数据。
+
+```
+var dt = event.dataTransfer;
+
+// 添加链接
+dt.setData('text/uri-list', 'http://www.example.com');
+dt.setData('text/plain', 'http://www.example.com');
+
+// 添加 HTML 代码
+dt.setData('text/html', 'Hello there, <strong>stranger</strong>');
+dt.setData('text/plain', 'Hello there, <strong>stranger</strong>');
+
+// 添加图像的 URL
+dt.setData('text/uri-list', imageurl);
+dt.setData('text/plain', imageurl);
+```
+
+可以一次提供多种格式的数据。
+
+```
+var dt = event.dataTransfer;
+dt.setData('application/x-bookmark', bookmarkString);
+dt.setData('text/uri-list', 'http://www.example.com');
+dt.setData('text/plain', 'http://www.example.com');
+```
+
+上面代码中，通过在同一个事件上面，存放三种类型的数据，使得拖拉事件可以在不同的对象上面，`drop`不同的值。注意，第一种格式是一个自定义格式，浏览器默认无法读取，这意味着，只有某个部署了特定代码的节点，才可能`drop`（读取到）这个数据。
