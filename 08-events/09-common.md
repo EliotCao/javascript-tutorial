@@ -46,3 +46,19 @@ window.addEventListener('unload', function(event) {
 手机上，浏览器或系统可能会直接丢弃网页，这时该事件根本不会发生。而且跟`beforeunload`事件一样，一旦使用了`unload`事件，浏览器就不会缓存当前网页，理由同上。因此，任何情况下都不应该依赖这个事件，指定网页卸载时要执行的代码，可以考虑完全不使用这个事件。
 
 该事件可以用`pagehide`代替。
+
+### load 事件，error 事件
+
+`load`事件在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发`load`事件。
+
+```
+window.addEventListener('load', function(event) {
+  console.log('所有资源都加载完成');
+});
+```
+
+`error`事件是在页面或资源加载失败时触发。`abort`事件在用户取消加载时触发。
+
+这三个事件实际上属于进度事件，不仅发生在`document`对象，还发生在各种外部资源上面。浏览网页就是一个加载各种资源的过程，图像（image）、样式表（style sheet）、脚本（script）、视频（video）、音频（audio）、Ajax请求（XMLHttpRequest）等等。这些资源和`document`对象、`window`对象、XMLHttpRequestUpload 对象，都会触发`load`事件和`error`事件。
+
+最后，页面的`load`事件也可以用`pageshow`事件代替。
