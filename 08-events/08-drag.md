@@ -316,3 +316,17 @@ div.addEventListener('drop', function (e) {
   }
 });
 ```
+
+## DataTransfer 的实例方法
+
+### DataTransfer.setData()
+
+`DataTransfer.setData()`方法用来设置拖拉事件所带有的数据。该方法没有返回值。
+
+```
+event.dataTransfer.setData('text/plain', 'Text to drag');
+```
+
+上面代码为当前的拖拉事件加入纯文本数据。
+
+该方法接受两个参数，都是字符串。第一个参数表示数据类型（比如`text/plain`），第二个参数是具体数据。如果指定类型的数据在`dataTransfer`属性不存在，那么这些数据将被加入，否则原有的数据将被新数据替换。
