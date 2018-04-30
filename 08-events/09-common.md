@@ -138,3 +138,28 @@ location.hash = 'part2';
 // http://www.example.com/
 // http://www.example.com/#part2
 ```
+
+## 网页状态事件
+
+### DOMContentLoaded 事件
+
+网页下载并解析完成以后，浏览器就会在`document`对象上触发 DOMContentLoaded 事件。这时，仅仅完成了网页的解析（整张页面的 DOM 生成了），所有外部资源（样式表、脚本、iframe 等等）可能还没有下载结束。也就是说，这个事件比`load`事件，发生时间早得多。
+
+```
+document.addEventListener('DOMContentLoaded', function (event) {
+  console.log('DOM生成');
+});
+```
+
+注意，网页的 JavaScript 脚本是同步执行的，脚本一旦发生堵塞，将推迟触发`DOMContentLoaded`事件。
+
+```
+document.addEventListener('DOMContentLoaded', function (event) {
+  console.log('DOM 生成');
+});
+
+// 这段代码会推迟触发 DOMContentLoaded 事件
+for(var i = 0; i < 1000000000; i++) {
+  // ...
+}
+```
