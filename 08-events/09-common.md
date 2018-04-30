@@ -118,3 +118,23 @@ history.go(2);  // state: {"page":3}
 上面代码中，`pushState`方法向`history`添加了两条记录，然后`replaceState`方法替换掉当前记录。因此，连续两次`back`方法，会让当前条目退回到原始网址，它没有附带`state`对象，所以事件的`state`属性为`null`，然后前进两条记录，又回到`replaceState`方法添加的记录。
 
 浏览器对于页面首次加载，是否触发`popstate`事件，处理不一样，Firefox 不触发该事件。
+
+### hashchange 事件
+
+`hashchange`事件在 URL 的 hash 部分（即`#`号后面的部分，包括`#`号）发生变化时触发。该事件一般在`window`对象上监听。
+
+`hashchange`的事件实例具有两个特有属性：`oldURL`属性和`newURL`属性，分别表示变化前后的完整 URL。
+
+```
+// URL 是 http://www.example.com/
+window.addEventListener('hashchange', myFunction);
+
+function myFunction(e) {
+  console.log(e.oldURL);
+  console.log(e.newURL);
+}
+
+location.hash = 'part2';
+// http://www.example.com/
+// http://www.example.com/#part2
+```
