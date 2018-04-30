@@ -96,3 +96,25 @@ window.addEventListener('pageshow', function(event){
 如果页面包含`<frame>`或`<iframe>`元素，则`<frame>`页面的`pageshow`事件和`pagehide`事件，都会在主页面之前触发。
 
 注意，这两个事件只在浏览器的`history`对象发生变化时触发，跟网页是否可见没有关系。
+
+### popstate 事件
+
+`popstate`事件在浏览器的`history`对象的当前记录发生显式切换时触发。注意，调用`history.pushState()`或`history.replaceState()`，并不会触发`popstate`事件。该事件只在用户在`history`记录之间显式切换时触发，比如鼠标点击“后退/前进”按钮，或者在脚本中调用`history.back()`、`history.forward()`、`history.go()`时触发。
+
+该事件对象有一个`state`属性，保存`history.pushState`方法和`history.replaceState`方法为当前记录添加的`state`对象。
+
+```
+window.onpopstate = function (event) {
+  console.log('state: ' + event.state);
+};
+history.pushState({page: 1}, 'title 1', '?page=1');
+history.pushState({page: 2}, 'title 2', '?page=2');
+history.replaceState({page: 3}, 'title 3', '?page=3');
+history.back(); // state: {"page":1}
+history.back(); // state: null
+history.go(2);  // state: {"page":3}
+```
+
+上面代码中，`pushState`方法向`history`添加了两条记录，然后`replaceState`方法替换掉当前记录。因此，连续两次`back`方法，会让当前条目退回到原始网址，它没有附带`state`对象，所以事件的`state`属性为`null`，然后前进两条记录，又回到`replaceState`方法添加的记录。
+
+浏览器对于页面首次加载，是否触发`popstate`事件，处理不一样，Firefox 不触发该事件。
