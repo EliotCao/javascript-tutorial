@@ -78,3 +78,21 @@ window.addEventListener('pageshow', function(event) {
   console.log('pageshow: ', event);
 });
 ```
+
+`pageshow`事件有一个`persisted`属性，返回一个布尔值。页面第一次加载时，这个属性是`false`；当页面从缓存加载时，这个属性是`true`。
+
+```
+window.addEventListener('pageshow', function(event){
+  if (event.persisted) {
+    // ...
+  }
+});
+```
+
+`pagehide`事件与`pageshow`事件类似，当用户通过“前进/后退”按钮，离开当前页面时触发。它与 unload 事件的区别在于，如果在 window 对象上定义`unload`事件的监听函数之后，页面不会保存在缓存中，而使用`pagehide`事件，页面会保存在缓存中。
+
+`pagehide`事件实例也有一个`persisted`属性，将这个属性设为`true`，就表示页面要保存在缓存中；设为`false`，表示网页不保存在缓存中，这时如果设置了unload 事件的监听函数，该函数将在 pagehide 事件后立即运行。
+
+如果页面包含`<frame>`或`<iframe>`元素，则`<frame>`页面的`pageshow`事件和`pagehide`事件，都会在主页面之前触发。
+
+注意，这两个事件只在浏览器的`history`对象发生变化时触发，跟网页是否可见没有关系。
