@@ -163,3 +163,17 @@ for(var i = 0; i < 1000000000; i++) {
   // ...
 }
 ```
+
+### readystatechange 事件
+
+`readystatechange`事件当 Document 对象和 XMLHttpRequest 对象的`readyState`属性发生变化时触发。`document.readyState`有三个可能的值：`loading`（网页正在加载）、`interactive`（网页已经解析完成，但是外部资源仍然处在加载状态）和`complete`（网页和所有外部资源已经结束加载，`load`事件即将触发）。
+
+```
+document.onreadystatechange = function () {
+  if (document.readyState === 'interactive') {
+    // ...
+  }
+}
+```
+
+这个事件可以看作`DOMContentLoaded`事件的另一种实现方法。
