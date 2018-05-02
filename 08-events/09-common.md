@@ -216,3 +216,27 @@ window.addEventListener('optimizedScroll', function() {
 ```
 
 上面代码中，`throttle`函数用于控制事件触发频率，`requestAnimationFrame`方法保证每次页面重绘（每秒60次），只会触发一次`scroll`事件的监听函数。也就是说，上面方法将`scroll`事件的触发频率，限制在每秒60次。具体来说，就是`scroll`事件只要频率低于每秒60次，就会触发`optimizedScroll`事件，从而执行`optimizedScroll`事件的监听函数。
+
+改用`setTimeout`方法，可以放置更大的时间间隔。
+
+```
+(function() {
+  window.addEventListener('scroll', scrollThrottler, false);
+
+  var scrollTimeout;
+  function scrollThrottler() {
+    if (!scrollTimeout) {
+      scrollTimeout = setTimeout(function () {
+        scrollTimeout = null;
+        actualScrollHandler();
+      }, 66);
+    }
+  }
+
+  function actualScrollHandler() {
+    // ...
+  }
+}());
+```
+
+上面代码中，每次`scroll`事件都会执行`scrollThrottler`函数。该函数里面有一个定时器`setTimeout`，每66毫秒触发一次（每秒15次）真正执行的任务`actualScrollHandler`。
