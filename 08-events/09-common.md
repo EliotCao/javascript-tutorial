@@ -240,3 +240,29 @@ window.addEventListener('optimizedScroll', function() {
 ```
 
 上面代码中，每次`scroll`事件都会执行`scrollThrottler`函数。该函数里面有一个定时器`setTimeout`，每66毫秒触发一次（每秒15次）真正执行的任务`actualScrollHandler`。
+
+下面是一个更一般的`throttle`函数的写法。
+
+```
+function throttle(fn, wait) {
+  var time = Date.now();
+  return function() {
+    if ((time + wait - Date.now()) < 0) {
+      fn();
+      time = Date.now();
+    }
+  }
+}
+
+window.addEventListener('scroll', throttle(callback, 1000));
+```
+
+上面的代码将`scroll`事件的触发频率，限制在一秒一次。
+
+`lodash`函数库提供了现成的`throttle`函数，可以直接使用。
+
+```
+window.addEventListener('scroll', _.throttle(callback, 1000));
+```
+
+本书前面介绍过`debounce`的概念，`throttle`与它区别在于，`throttle`是“节流”，确保一段时间内只执行一次，而`debounce`是“防抖”，要连续操作结束后再执行。以网页滚动为例，`debounce`要等到用户停止滚动后才执行，`throttle`则是如果用户一直在滚动网页，那么在滚动过程中还是会执行。
