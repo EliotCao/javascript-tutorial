@@ -177,3 +177,42 @@ document.onreadystatechange = function () {
 ```
 
 这个事件可以看作`DOMContentLoaded`事件的另一种实现方法。
+
+## 窗口事件
+
+### scroll 事件
+
+`scroll`事件在文档或文档元素滚动时触发，主要出现在用户拖动滚动条。
+
+```
+window.addEventListener('scroll', callback);
+```
+
+该事件会连续地大量触发，所以它的监听函数之中不应该有非常耗费计算的操作。推荐的做法是使用`requestAnimationFrame`或`setTimeout`控制该事件的触发频率，然后可以结合`customEvent`抛出一个新事件。
+
+```
+(function () {
+  var throttle = function (type, name, obj) {
+    var obj = obj || window;
+    var running = false;
+    var func = function () {
+      if (running) { return; }
+      running = true;
+      requestAnimationFrame(function() {
+        obj.dispatchEvent(new CustomEvent(name));
+        running = false;
+      });
+    };
+    obj.addEventListener(type, func);
+  };
+
+  // 将 scroll 事件重定义为 optimizedScroll 事件
+  throttle('scroll', 'optimizedScroll');
+})();
+
+window.addEventListener('optimizedScroll', function() {
+  console.log('Resource conscious scroll callback!');
+});
+```
+
+上面代码中，`throttle`函数用于控制事件触发频率，`requestAnimationFrame`方法保证每次页面重绘（每秒60次），只会触发一次`scroll`事件的监听函数。也就是说，上面方法将`scroll`事件的触发频率，限制在每秒60次。具体来说，就是`scroll`事件只要频率低于每秒60次，就会触发`optimizedScroll`事件，从而执行`optimizedScroll`事件的监听函数。
