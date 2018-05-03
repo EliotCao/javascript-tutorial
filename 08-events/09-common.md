@@ -295,4 +295,22 @@ document.addEventListener('fullscreenchange', function (event) {
 
 `fullscreenerror`事件在浏览器无法切换到全屏状态时触发。
 
-## 
+## 剪贴板事件
+
+以下三个事件属于剪贴板操作的相关事件。
+
+- `cut`：将选中的内容从文档中移除，加入剪贴板时触发。
+- `copy`：进行复制动作时触发。
+- `paste`：剪贴板内容粘贴到文档后触发。
+
+这三个事件都是`ClipboardEvent`接口的实例。`ClipboardEvent`有一个实例属性`clipboardData`，是一个 DataTransfer 对象，存放剪贴的数据。具体的 API 接口和操作方法，请参见《拖拉事件》的 DataTransfer 对象部分。
+
+```
+document.addEventListener('copy', function (e) {
+  e.clipboardData.setData('text/plain', 'Hello, world!');
+  e.clipboardData.setData('text/html', '<b>Hello, world!</b>');
+  e.preventDefault();
+});
+```
+
+上面的代码使得复制进入剪贴板的，都是开发者指定的数据，而不是用户想要拷贝的数据。
