@@ -282,3 +282,17 @@ window.addEventListener('resize', resizeMethod, true);
 ```
 
 该事件也会连续地大量触发，所以最好像上面的`scroll`事件一样，通过`throttle`函数控制事件触发频率。
+
+### fullscreenchange 事件，fullscreenerror 事件
+
+`fullscreenchange`事件在进入或退出全屏状态时触发，该事件发生在`document`对象上面。
+
+```
+document.addEventListener('fullscreenchange', function (event) {
+  console.log(document.fullscreenElement);
+});
+```
+
+`fullscreenerror`事件在浏览器无法切换到全屏状态时触发。
+
+## 
