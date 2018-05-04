@@ -356,3 +356,23 @@ new CustomEvent(type, options)
 `CustomEvent()`构造函数接受两个参数。第一个参数是字符串，表示事件的名字，这是必须的。第二个参数是事件的配置对象，这个参数是可选的。`CustomEvent`的配置对象除了接受 Event 事件的配置属性，只有一个自己的属性。
 
 - `detail`：表示事件的附带数据，默认为`null`。
+
+下面是另一个例子。
+
+```
+var myEvent = new CustomEvent('myevent', {
+  detail: {
+    foo: 'bar'
+  },
+  bubbles: true,
+  cancelable: false
+});
+
+el.addEventListener('myevent', function (event) {
+  console.log('Hello ' + event.detail.foo);
+});
+
+el.dispatchEvent(myEvent);
+```
+
+上面代码也说明，CustomEvent 的事件实例，除了具有 Event 接口的实例属性，还具有`detail`属性。
