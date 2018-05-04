@@ -342,3 +342,17 @@ form.addEventListener('blur', function (event) {
 ```
 
 上面代码针对表单的文本输入框，接受焦点时设置背景色，失去焦点时去除背景色。
+
+## CustomEvent 接口
+
+CustomEvent 接口用于生成自定义的事件实例。那些浏览器预定义的事件，虽然可以手动生成，但是往往不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，就可以使用 CustomEvent 接口生成的自定义事件对象。
+
+浏览器原生提供`CustomEvent()`构造函数，用来生成 CustomEvent 事件实例。
+
+```
+new CustomEvent(type, options)
+```
+
+`CustomEvent()`构造函数接受两个参数。第一个参数是字符串，表示事件的名字，这是必须的。第二个参数是事件的配置对象，这个参数是可选的。`CustomEvent`的配置对象除了接受 Event 事件的配置属性，只有一个自己的属性。
+
+- `detail`：表示事件的附带数据，默认为`null`。
