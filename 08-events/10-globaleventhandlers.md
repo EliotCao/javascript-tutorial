@@ -87,3 +87,17 @@ element.onblur = function () {
 ## GlobalEventHandlers.onscroll
 
 页面或元素滚动时，会触发`scroll`事件，导致执行`onscroll()`。
+
+## GlobalEventHandlers.oncontextmenu，GlobalEventHandlers.onshow
+
+用户在页面上按下鼠标的右键，会触发`contextmenu`事件，导致执行`oncontextmenu()`。如果该属性执行后返回`false`，就等于禁止了右键菜单。`document.oncontextmenu`与`window.oncontextmenu`效果一样。
+
+```
+document.oncontextmenu = function () {
+  return false;
+};
+```
+
+上面代码中，`oncontextmenu`属性执行后返回`false`，右键菜单就不会出现。
+
+元素的右键菜单显示时，会触发该元素的`onshow`监听函数。
