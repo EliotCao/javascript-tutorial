@@ -83,3 +83,7 @@ element.onblur = function () {
 ```
 
 注意，如果不是可以接受用户输入的元素，要触发`onfocus`，该元素必须有`tabindex`属性。
+
+## GlobalEventHandlers.onscroll
+
+页面或元素滚动时，会触发`scroll`事件，导致执行`onscroll()`。
