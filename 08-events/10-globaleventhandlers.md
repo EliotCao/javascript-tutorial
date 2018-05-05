@@ -52,3 +52,13 @@ window.onerror = function (message, source, lineno, colno, error) {
 - lineno：报错的行号，是一个整数
 - colno：报错的列号，是一个整数
 - error： 错误对象
+
+另一种是资源加载错误，比如`<img>`或`<script>`加载的资源出现加载错误。这时，Error 对象会传到对应的元素，导致该元素的`onerror`属性开始执行。
+
+```
+element.onerror = function (event) {
+  // ...
+}
+```
+
+注意，一般来说，资源的加载错误不会触发`window.onerror`。
