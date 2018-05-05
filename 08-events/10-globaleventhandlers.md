@@ -30,3 +30,25 @@ img.onabort = function () {
   console.log('image load aborted.');
 }
 ```
+
+## GlobalEventHandlers.onerror
+
+`error`事件发生时，就会调用`onerror`属性指定的回调函数。
+
+`error`事件分成两种。
+
+一种是 JavaScript 的运行时错误，这会传到`window`对象，导致`window.onerror()`。
+
+```
+window.onerror = function (message, source, lineno, colno, error) {
+  // ...
+}
+```
+
+`window.onerror`的处理函数共接受五个参数，含义如下。
+
+- message：错误信息字符串
+- source：报错脚本的 URL
+- lineno：报错的行号，是一个整数
+- colno：报错的列号，是一个整数
+- error： 错误对象
