@@ -62,3 +62,9 @@ element.onerror = function (event) {
 ```
 
 注意，一般来说，资源的加载错误不会触发`window.onerror`。
+
+## GlobalEventHandlers.onload、GlobalEventHandlers.onloadstart
+
+元素完成加载时，会触发`load`事件，执行`onload()`。它的典型使用场景是`window`对象和`<img>`元素。对于`window`对象来说，只有页面的所有资源加载完成（包括图片、脚本、样式表、字体等所有外部资源），才会触发`load`事件。
+
+对于`<img>`和`<video>`等元素，加载开始时还会触发`loadstart`事件，导致执行`onloadstart`。
