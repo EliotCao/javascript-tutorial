@@ -68,3 +68,18 @@ element.onerror = function (event) {
 元素完成加载时，会触发`load`事件，执行`onload()`。它的典型使用场景是`window`对象和`<img>`元素。对于`window`对象来说，只有页面的所有资源加载完成（包括图片、脚本、样式表、字体等所有外部资源），才会触发`load`事件。
 
 对于`<img>`和`<video>`等元素，加载开始时还会触发`loadstart`事件，导致执行`onloadstart`。
+
+## GlobalEventHandlers.onfocus，GlobalEventHandlers.onblur
+
+当前元素获得焦点时，会触发`element.onfocus`；失去焦点时，会触发`element.onblur`。
+
+```
+element.onfocus = function () {
+  console.log("onfocus event detected!");
+};
+element.onblur = function () {
+  console.log("onblur event detected!");
+};
+```
+
+注意，如果不是可以接受用户输入的元素，要触发`onfocus`，该元素必须有`tabindex`属性。
