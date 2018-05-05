@@ -101,3 +101,45 @@ document.oncontextmenu = function () {
 上面代码中，`oncontextmenu`属性执行后返回`false`，右键菜单就不会出现。
 
 元素的右键菜单显示时，会触发该元素的`onshow`监听函数。
+
+## 其他的事件属性
+
+鼠标的事件属性。
+
+- onclick
+- ondblclick
+- onmousedown
+- onmouseenter
+- onmouseleave
+- onmousemove
+- onmouseout
+- onmouseover
+- onmouseup
+- onwheel
+
+键盘的事件属性。
+
+- onkeydown
+- onkeypress
+- onkeyup
+
+焦点的事件属性。
+
+- onblur
+- onfocus
+
+表单的事件属性。
+
+- oninput
+- onchange
+- onsubmit
+- onreset
+- oninvalid
+- onselect
+
+触摸的事件属性。
+
+- ontouchcancel
+- ontouchend
+- ontouchmove
+- ontouchstart
