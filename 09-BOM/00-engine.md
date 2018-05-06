@@ -85,3 +85,13 @@ document.getElementById('mydata').text
 ```
 
 上面代码中，`script`标签有一个`integrity`属性，指定了外部脚本`/assets/application.js`的 SHA256 签名。一旦有人改了这个脚本，导致 SHA256 签名不匹配，浏览器就会拒绝加载。
+
+### 事件属性
+
+网页元素的事件属性（比如`onclick`和`onmouseover`），可以写入 JavaScript 代码。当指定事件发生时，就会调用这些代码。
+
+```
+<button id="myBtn" onclick="console.log(this.id)">点击</button>
+```
+
+上面的事件属性代码只有一个语句。如果有多个语句，使用分号分隔即可。
