@@ -51,3 +51,37 @@ JavaScript 是浏览器的内置脚本语言。也就是说，浏览器内置了
 document.getElementById('mydata').text
 //   console.log('Hello World');
 ```
+
+### script 元素加载外部脚本
+
+<script>标签也可以指定加载外部的脚本文件。
+
+```
+<script src="https://www.example.com/script.js"></script>
+```
+
+如果脚本文件使用了非英语字符，还应该注明字符的编码。
+
+```
+<script charset="utf-8" src="https://www.example.com/script.js"></script>
+```
+
+所加载的脚本必须是纯的 JavaScript 代码，不能有`HTML`代码和`<script>`标签。
+
+加载外部脚本和直接添加代码块，这两种方法不能混用。下面代码的`console.log`语句直接被忽略。
+
+```
+<script charset="utf-8" src="example.js">
+  console.log('Hello World!');
+</script>
+```
+
+为了防止攻击者篡改外部脚本，`script`标签允许设置一个`integrity`属性，写入该外部脚本的 Hash 签名，用来验证脚本的一致性。
+
+```
+<script src="/assets/application.js"
+  integrity="sha256-TvVUHzSfftWg1rcfL6TIJ0XKEGrgLyEq6lEpcmrG9qs=">
+</script>
+```
+
+上面代码中，`script`标签有一个`integrity`属性，指定了外部脚本`/assets/application.js`的 SHA256 签名。一旦有人改了这个脚本，导致 SHA256 签名不匹配，浏览器就会拒绝加载。
