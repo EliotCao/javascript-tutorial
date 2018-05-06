@@ -95,3 +95,38 @@ document.getElementById('mydata').text
 ```
 
 上面的事件属性代码只有一个语句。如果有多个语句，使用分号分隔即可。
+
+### URL 协议
+
+URL 支持`javascript:`协议，即在 URL 的位置写入代码，使用这个 URL 的时候就会执行 JavaScript 代码。
+
+```
+<a href="javascript:console.log('Hello')">点击</a>
+```
+
+浏览器的地址栏也可以执行`javascript:`协议。将`javascript:console.log('Hello')`放入地址栏，按回车键也会执行这段代码。
+
+如果 JavaScript 代码返回一个字符串，浏览器就会新建一个文档，展示这个字符串的内容，原有文档的内容都会消失。
+
+```
+<a href="javascript: new Date().toLocaleTimeString();">点击</a>
+```
+
+上面代码中，用户点击链接以后，会打开一个新文档，里面有当前时间。
+
+如果返回的不是字符串，那么浏览器不会新建文档，也不会跳转。
+
+```
+<a href="javascript: console.log(new Date().toLocaleTimeString())">点击</a>
+```
+
+上面代码中，用户点击链接后，网页不会跳转，只会在控制台显示当前时间。
+
+`javascript:`协议的常见用途是书签脚本 Bookmarklet。由于浏览器的书签保存的是一个网址，所以`javascript:`网址也可以保存在里面，用户选择这个书签的时候，就会在当前页面执行这个脚本。为了防止书签替换掉当前文档，可以在脚本前加上`void`，或者在脚本最后加上`void 0`。
+
+```
+<a href="javascript: void new Date().toLocaleTimeString();">点击</a>
+<a href="javascript: new Date().toLocaleTimeString();void 0;">点击</a>
+```
+
+上面这两种写法，点击链接后，执行代码都不会网页跳转。
