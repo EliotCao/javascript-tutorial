@@ -178,3 +178,21 @@ URL 支持`javascript:`协议，即在 URL 的位置写入代码，使用这个 
 ```
 
 上面代码中，指定`DOMContentLoaded`事件发生后，才开始执行相关代码。`DOMContentLoaded`事件只有在 DOM 结构生成之后才会触发。
+
+另一种解决方法是，使用`<script>`标签的`onload`属性。当`<script>`标签指定的外部脚本文件下载和解析完成，会触发一个`load`事件，可以把所需执行的代码，放在这个事件的回调函数里面。
+
+```
+<script src="jquery.min.js" onload="console.log(document.body.innerHTML)">
+</script>
+```
+
+但是，如果将脚本放在页面底部，就可以完全按照正常的方式写，上面两种方式都不需要。
+
+```
+<body>
+  <!-- 其他代码  -->
+  <script>
+    console.log(document.body.innerHTML);
+  </script>
+</body>
+```
