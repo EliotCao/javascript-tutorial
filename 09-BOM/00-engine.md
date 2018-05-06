@@ -161,3 +161,20 @@ URL 支持`javascript:`协议，即在 URL 的位置写入代码，使用这个 
 ```
 
 上面代码执行时会报错，因为此时`document.body`元素还未生成。
+
+一种解决方法是设定`DOMContentLoaded`事件的回调函数。
+
+```
+<head>
+  <script>
+    document.addEventListener(
+      'DOMContentLoaded',
+      function (event) {
+        console.log(document.body.innerHTML);
+      }
+    );
+  </script>
+</head>
+```
+
+上面代码中，指定`DOMContentLoaded`事件发生后，才开始执行相关代码。`DOMContentLoaded`事件只有在 DOM 结构生成之后才会触发。
