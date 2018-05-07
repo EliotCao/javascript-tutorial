@@ -297,3 +297,23 @@ function loadScript(src, done) {
   document.head.appendChild(js);
 }
 ```
+
+### 加载使用的协议
+
+如果不指定协议，浏览器默认采用 HTTP 协议下载。
+
+```
+<script src="example.js"></script>
+```
+
+上面的`example.js`默认就是采用 HTTP 协议下载，如果要采用 HTTPS 协议下载，必需写明。
+
+```
+<script src="https://example.js"></script>
+```
+
+但是有时我们会希望，根据页面本身的协议来决定加载协议，这时可以采用下面的写法。
+
+```
+<script src="//example.js"></script>
+```
