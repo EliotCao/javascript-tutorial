@@ -254,3 +254,46 @@ URL 支持`javascript:`协议，即在 URL 的位置写入代码，使用这个 
 `defer`属性和`async`属性到底应该使用哪一个？
 
 一般来说，如果脚本之间没有依赖关系，就使用`async`属性，如果脚本之间有依赖关系，就使用`defer`属性。如果同时使用`async`和`defer`属性，后者不起作用，浏览器行为由`async`属性决定。
+
+### 脚本的动态加载
+
+<script>元素还可以动态生成，生成后再插入页面，从而实现脚本的动态加载。
+
+```
+['a.js', 'b.js'].forEach(function(src) {
+  var script = document.createElement('script');
+  script.src = src;
+  document.head.appendChild(script);
+});
+```
+
+这种方法的好处是，动态生成的`script`标签不会阻塞页面渲染，也就不会造成浏览器假死。但是问题在于，这种方法无法保证脚本的执行顺序，哪个脚本文件先下载完成，就先执行哪个。
+
+如果想避免这个问题，可以设置async属性为`false`。
+
+```
+['a.js', 'b.js'].forEach(function(src) {
+  var script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  document.head.appendChild(script);
+});
+```
+
+上面的代码不会阻塞页面渲染，而且可以保证`b.js`在`a.js`后面执行。不过需要注意的是，在这段代码后面加载的脚本文件，会因此都等待`b.js`执行完成后再执行。
+
+如果想为动态加载的脚本指定回调函数，可以使用下面的写法。
+
+```
+function loadScript(src, done) {
+  var js = document.createElement('script');
+  js.src = src;
+  js.onload = function() {
+    done();
+  };
+  js.onerror = function() {
+    done(new Error('Failed to load script ' + src));
+  };
+  document.head.appendChild(js);
+}
+```
