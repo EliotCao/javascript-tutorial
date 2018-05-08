@@ -374,3 +374,28 @@ foo.style.marginTop = '30px';
 - 只在必要时才显示隐藏元素。
 - 使用`window.requestAnimationFrame()`，因为它可以把代码推迟到下一次重绘之前执行，而不是立即要求页面重绘。
 - 使用虚拟 DOM（virtual DOM）库。
+
+下面是一个`window.requestAnimationFrame()`对比效果的例子。
+
+```
+// 重流代价高
+function doubleHeight(element) {
+  var currentHeight = element.clientHeight;
+  element.style.height = (currentHeight * 2) + 'px';
+}
+
+all_my_elements.forEach(doubleHeight);
+
+// 重绘代价低
+function doubleHeight(element) {
+  var currentHeight = element.clientHeight;
+
+  window.requestAnimationFrame(function () {
+    element.style.height = (currentHeight * 2) + 'px';
+  });
+}
+
+all_my_elements.forEach(doubleHeight);
+```
+
+上面的第一段代码，每读一次 DOM，就写入新的值，会造成不停的重排和重流。第二段代码把所有的写操作，都累积在一起，从而 DOM 代码变动的代价就最小化了。
