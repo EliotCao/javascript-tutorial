@@ -363,3 +363,14 @@ foo.style.marginTop = '30px';
 ```
 
 上面的代码只会导致一次重绘，因为浏览器会累积 DOM 变动，然后一次性执行。
+
+下面是一些优化技巧。
+
+- 读取 DOM 或者写入 DOM，尽量写在一起，不要混杂。不要读取一个 DOM 节点，然后立刻写入，接着再读取一个 DOM 节点。
+- 缓存 DOM 信息。
+- 不要一项一项地改变样式，而是使用 CSS class 一次性改变样式。
+- 使用`documentFragment`操作 DOM
+- 动画使用`absolute`定位或`fixed`定位，这样可以减少对其他元素的影响。
+- 只在必要时才显示隐藏元素。
+- 使用`window.requestAnimationFrame()`，因为它可以把代码推迟到下一次重绘之前执行，而不是立即要求页面重绘。
+- 使用虚拟 DOM（virtual DOM）库。
