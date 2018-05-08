@@ -317,3 +317,28 @@ function loadScript(src, done) {
 ```
 <script src="//example.js"></script>
 ```
+
+## 浏览器的组成
+
+浏览器的核心是两部分：渲染引擎和 JavaScript 解释器（又称 JavaScript 引擎）。
+
+### 渲染引擎
+
+渲染引擎的主要作用是，将网页代码渲染为用户视觉可以感知的平面文档。
+
+不同的浏览器有不同的渲染引擎。
+
+- Firefox：Gecko 引擎
+- Safari：WebKit 引擎
+- Chrome：Blink 引擎
+- IE: Trident 引擎
+- Edge: EdgeHTML 引擎
+
+渲染引擎处理网页，通常分成四个阶段。
+
+1. 解析代码：HTML 代码解析为 DOM，CSS 代码解析为 CSSOM（CSS Object Model）。
+2. 对象合成：将 DOM 和 CSSOM 合成一棵渲染树（render tree）。
+3. 布局：计算出渲染树的布局（layout）。
+4. 绘制：将渲染树绘制到屏幕。
+
+以上四步并非严格按顺序执行，往往第一步还没完成，第二步和第三步就已经开始了。所以，会看到这种情况：网页的 HTML 代码还没下载完，但浏览器已经显示出内容了。
