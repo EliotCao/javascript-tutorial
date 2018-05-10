@@ -54,3 +54,20 @@ window.open().opener === window // true
 ```
 
 上面表达式会打开一个新窗口，然后返回`true`。
+
+如果两个窗口之间不需要通信，建议将子窗口的`opener`属性显式设为`null`，这样可以减少一些安全隐患。
+
+```
+var newWin = window.open('example.html', 'newWindow', 'height=400,width=400');
+newWin.opener = null;
+```
+
+上面代码中，子窗口的`opener`属性设为`null`，两个窗口之间就没办法再联系了。
+
+通过`opener`属性，可以获得父窗口的全局属性和方法，但只限于两个窗口同源的情况（参见《同源限制》一章），且其中一个窗口由另一个打开。`<a>`元素添加`rel="noopener"`属性，可以防止新打开的窗口获取父窗口，减轻被恶意网站修改父窗口 URL 的风险。
+
+```
+<a href="https://an.evil.site" target="_blank" rel="noopener">
+恶意网站
+</a>
+```
