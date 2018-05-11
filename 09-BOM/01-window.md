@@ -119,3 +119,17 @@ if (frameEl) {
 ```
 
 上面代码中，`frameEl`变量就是`<iframe>`元素。
+
+### window.top，window.parent
+
+`window.top`属性指向最顶层窗口，主要用于在框架窗口（frame）里面获取顶层窗口。
+
+`window.parent`属性指向父窗口。如果当前窗口没有父窗口，`window.parent`指向自身。
+
+```
+if (window.parent !== window.top) {
+  // 表明当前窗口嵌入不止一层
+}
+```
+
+对于不包含框架的网页，这两个属性等同于`window`对象。
