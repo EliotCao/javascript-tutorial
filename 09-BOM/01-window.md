@@ -133,3 +133,7 @@ if (window.parent !== window.top) {
 ```
 
 对于不包含框架的网页，这两个属性等同于`window`对象。
+
+### window.status
+
+`window.status`属性用于读写浏览器状态栏的文本。但是，现在很多浏览器都不允许改写状态栏文本，所以使用这个方法不一定有效。
