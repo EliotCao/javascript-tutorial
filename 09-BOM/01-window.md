@@ -161,3 +161,19 @@ if (window.parent !== window.top) {
 **（3）window.outerHeight，window.outerWidth**
 
 `window.outerHeight`和`window.outerWidth`属性返回浏览器窗口的高度和宽度，包括浏览器菜单和边框（单位像素）。这两个属性只读。
+
+**（4）window.scrollX，window.scrollY**
+
+`window.scrollX`属性返回页面的水平滚动距离，`window.scrollY`属性返回页面的垂直滚动距离，单位都为像素。这两个属性只读。
+
+注意，这两个属性的返回值不是整数，而是双精度浮点数。如果页面没有滚动，它们的值就是`0`。
+
+举例来说，如果用户向下拉动了垂直滚动条75像素，那么`window.scrollY`就是75左右。用户水平向右拉动水平滚动条200像素，`window.scrollX`就是200左右。
+
+```
+if (window.scrollY < 75) {
+  window.scroll(0, 75);
+}
+```
+
+上面代码中，如果页面向下滚动的距离小于75像素，那么页面向下滚动75像素。
