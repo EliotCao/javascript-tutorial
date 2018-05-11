@@ -102,3 +102,20 @@ window.frames.length === window.length // true
 ```
 
 上面代码表示，`window.frames.length`与`window.length`应该是相等的。
+
+### window.frameElement
+
+`window.frameElement`属性主要用于当前窗口嵌在另一个网页的情况（嵌入`<object>`、`<iframe>`或`<embed>`元素），返回当前窗口所在的那个元素节点。如果当前窗口是顶层窗口，或者所嵌入的那个网页不是同源的，该属性返回`null`。
+
+```
+// HTML 代码如下
+// <iframe src="about.html"></iframe>
+
+// 下面的脚本在 about.html 里面
+var frameEl = window.frameElement;
+if (frameEl) {
+  frameEl.src = 'other.html';
+}
+```
+
+上面代码中，`frameEl`变量就是`<iframe>`元素。
