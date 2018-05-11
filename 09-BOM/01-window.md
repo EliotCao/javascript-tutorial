@@ -137,3 +137,15 @@ if (window.parent !== window.top) {
 ### window.status
 
 `window.status`属性用于读写浏览器状态栏的文本。但是，现在很多浏览器都不允许改写状态栏文本，所以使用这个方法不一定有效。
+
+### window.devicePixelRatio
+
+`window.devicePixelRatio`属性返回一个数值，表示一个 CSS 像素的大小与一个物理像素的大小之间的比率。也就是说，它表示一个 CSS 像素由多少个物理像素组成。它可以用于判断用户的显示环境，如果这个比率较大，就表示用户正在使用高清屏幕，因此可以显示较大像素的图片。
+
+### 位置大小属性
+
+以下属性返回`window`对象的位置信息和大小信息。
+
+**（1）window.screenX，window.screenY**
+
+`window.screenX`和`window.screenY`属性，返回浏览器窗口左上角相对于当前屏幕左上角的水平距离和垂直距离（单位像素）。这两个属性只读。
