@@ -177,3 +177,7 @@ if (window.scrollY < 75) {
 ```
 
 上面代码中，如果页面向下滚动的距离小于75像素，那么页面向下滚动75像素。
+
+**（5）window.pageXOffset，window.pageYOffset**
+
+`window.pageXOffset`属性和`window.pageYOffset`属性，是`window.scrollX`和`window.scrollY`别名。
