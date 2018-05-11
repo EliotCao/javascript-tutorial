@@ -71,3 +71,12 @@ newWin.opener = null;
 恶意网站
 </a>
 ```
+
+### window.self，window.window
+
+`window.self`和`window.window`属性都指向窗口本身。这两个属性只读。
+
+```
+window.self === window // true
+window.window === window // true
+```
