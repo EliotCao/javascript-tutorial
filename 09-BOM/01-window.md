@@ -425,3 +425,28 @@ window.moveBy(25, 50)
 上面代码将窗口向右移动25像素、向下移动50像素。
 
 为了防止有人滥用这两个方法，随意移动用户的窗口，目前只有一种情况，浏览器允许用脚本移动窗口：该窗口是用`window.open()`方法新建的，并且窗口里只有它一个 Tab 页。除此以外的情况，使用上面两个方法都是无效的。
+
+### window.resizeTo()，window.resizeBy()
+
+`window.resizeTo()`方法用于缩放窗口到指定大小。
+
+它接受两个参数，第一个是缩放后的窗口宽度（`outerWidth`属性，包含滚动条、标题栏等等），第二个是缩放后的窗口高度（`outerHeight`属性）。
+
+```
+window.resizeTo(
+  window.screen.availWidth / 2,
+  window.screen.availHeight / 2
+)
+```
+
+上面代码将当前窗口缩放到，屏幕可用区域的一半宽度和高度。
+
+`window.resizeBy()`方法用于缩放窗口。它与`window.resizeTo()`的区别是，它按照相对的量缩放，`window.resizeTo()`需要给出缩放后的绝对大小。
+
+它接受两个参数，第一个是水平缩放的量，第二个是垂直缩放的量，单位都是像素。
+
+```
+window.resizeBy(-200, -200)
+```
+
+上面的代码将当前窗口的宽度和高度，都缩小200像素。
