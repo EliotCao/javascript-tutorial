@@ -493,3 +493,23 @@ window.scrollBy(0, window.innerHeight)
 - Element.scrollTop
 - Element.scrollLeft
 - Element.scrollIntoView()
+
+### window.print()
+
+`window.print`方法会跳出打印对话框，与用户点击菜单里面的“打印”命令效果相同。
+
+常见的打印按钮代码如下。
+
+```
+document.getElementById('printLink').onclick = function () {
+  window.print();
+}
+```
+
+非桌面设备（比如手机）可能没有打印功能，这时可以这样判断。
+
+```
+if (typeof window.print === 'function') {
+  // 支持打印功能
+}
+```
