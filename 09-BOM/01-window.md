@@ -450,3 +450,40 @@ window.resizeBy(-200, -200)
 ```
 
 上面的代码将当前窗口的宽度和高度，都缩小200像素。
+
+### window.scrollTo()，window.scroll()，window.scrollBy()
+
+`window.scrollTo`方法用于将文档滚动到指定位置。它接受两个参数，表示滚动后位于窗口左上角的页面坐标。
+
+```
+window.scrollTo(x-coord, y-coord)
+```
+
+它也可以接受一个配置对象作为参数。
+
+```
+window.scrollTo(options)
+```
+
+配置对象`options`有三个属性。
+
+- `top`：滚动后页面左上角的垂直坐标，即 y 坐标。
+- `left`：滚动后页面左上角的水平坐标，即 x 坐标。
+- `behavior`：字符串，表示滚动的方式，有三个可能值（`smooth`、`instant`、`auto`），默认值为`auto`。
+
+```
+window.scrollTo({
+  top: 1000,
+  behavior: 'smooth'
+});
+```
+
+`window.scroll()`方法是`window.scrollTo()`方法的别名。
+
+`window.scrollBy()`方法用于将网页滚动指定距离（单位像素）。它接受两个参数：水平向右滚动的像素，垂直向下滚动的像素。
+
+```
+window.scrollBy(0, window.innerHeight)
+```
+
+上面代码用于将网页向下滚动一屏。
