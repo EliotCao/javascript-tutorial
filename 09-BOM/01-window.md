@@ -531,3 +531,17 @@ if ((popup !== null) && !popup.closed) {
 `window.blur()`方法将焦点从窗口移除。
 
 当前窗口获得焦点时，会触发`focus`事件；当前窗口失去焦点时，会触发`blur`事件。
+
+### window.getSelection()
+
+`window.getSelection`方法返回一个`Selection`对象，表示用户现在选中的文本。
+
+```
+var selObj = window.getSelection();
+```
+
+使用`Selection`对象的`toString`方法可以得到选中的文本。
+
+```
+var selectedText = selObj.toString();
+```
