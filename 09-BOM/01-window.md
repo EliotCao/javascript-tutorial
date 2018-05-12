@@ -513,3 +513,21 @@ if (typeof window.print === 'function') {
   // 支持打印功能
 }
 ```
+
+### window.focus()，window.blur()
+
+`window.focus()`方法会激活窗口，使其获得焦点，出现在其他窗口的前面。
+
+```
+var popup = window.open('popup.html', 'Popup Window');
+
+if ((popup !== null) && !popup.closed) {
+  popup.focus();
+}
+```
+
+上面代码先检查`popup`窗口是否依然存在，确认后激活该窗口。
+
+`window.blur()`方法将焦点从窗口移除。
+
+当前窗口获得焦点时，会触发`focus`事件；当前窗口失去焦点时，会触发`blur`事件。
