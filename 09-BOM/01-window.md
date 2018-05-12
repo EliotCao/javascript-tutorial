@@ -487,3 +487,9 @@ window.scrollBy(0, window.innerHeight)
 ```
 
 上面代码用于将网页向下滚动一屏。
+
+如果不是要滚动整个文档，而是要滚动某个元素，可以使用下面三个属性和方法。
+
+- Element.scrollTop
+- Element.scrollLeft
+- Element.scrollIntoView()
