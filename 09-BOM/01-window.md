@@ -216,3 +216,7 @@ window.personalbar.visible
 - `window.sessionStorage`：指向本地储存的 sessionStorage 数据，详见《Storage 接口》一章。
 - `window.console`：指向`console`对象，用于操作控制台，详见《console 对象》一章。
 - `window.screen`：指向`Screen`对象，表示屏幕信息，详见《Screen 对象》一章。
+
+### window.isSecureContext
+
+`window.isSecureContext`属性返回一个布尔值，表示当前窗口是否处在加密环境。如果是 HTTPS 协议，就是`true`，否则就是`false`。
