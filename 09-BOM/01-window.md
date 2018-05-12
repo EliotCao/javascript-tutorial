@@ -220,3 +220,25 @@ window.personalbar.visible
 ### window.isSecureContext
 
 `window.isSecureContext`属性返回一个布尔值，表示当前窗口是否处在加密环境。如果是 HTTPS 协议，就是`true`，否则就是`false`。
+
+## window 对象的方法
+
+### window.alert()，window.prompt()，window.confirm()
+
+`window.alert()`、`window.prompt()`、`window.confirm()`都是浏览器与用户互动的全局方法。它们会弹出不同的对话框，要求用户做出回应。注意，这三个方法弹出的对话框，都是浏览器统一规定的式样，无法定制。
+
+**（1）window.alert()**
+
+`window.alert()`方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息。
+
+```
+window.alert('Hello World');
+```
+
+用户只有点击“确定”按钮，对话框才会消失。对话框弹出期间，浏览器窗口处于冻结状态，如果不点“确定”按钮，用户什么也干不了。
+
+`window.alert()`方法的参数只能是字符串，没法使用 CSS 样式，但是可以用`\n`指定换行。
+
+```
+alert('本条提示\n分成两行');
+```
