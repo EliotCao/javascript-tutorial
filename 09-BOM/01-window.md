@@ -349,3 +349,11 @@ var popup = window.open(
 - alwaysRaised：是否显示在所有窗口的顶部。
 - alwaysLowered：是否显示在父窗口的底下。
 - close：新窗口是否显示关闭按钮。
+
+对于那些可以打开和关闭的属性，设为`yes`或`1`或不设任何值就表示打开，比如`status=yes`、`status=1`、`status`都会得到同样的结果。如果想设为关闭，不用写`no`，而是直接省略这个属性即可。也就是说，如果在第三个参数中设置了一部分属性，其他没有被设置的`yes/no`属性都会被设成`no`，只有`titlebar`和关闭按钮除外（它们的值默认为`yes`）。
+
+上面这些属性，属性名与属性值之间用等号连接，属性与属性之间用逗号分隔。
+
+```
+'height=200,width=200,location=no,status=yes,resizable=yes,scrollbars=yes'
+```
