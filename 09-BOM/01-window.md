@@ -313,3 +313,15 @@ window.open(url, windowName, [windowFeatures])
 - `url`：字符串，表示新窗口的网址。如果省略，默认网址就是`about:blank`。
 - `windowName`：字符串，表示新窗口的名字。如果该名字的窗口已经存在，则占用该窗口，不再新建窗口。如果省略，就默认使用`_blank`，表示新建一个没有名字的窗口。另外还有几个预设值，`_self`表示当前窗口，`_top`表示顶层窗口，`_parent`表示上一层窗口。
 - `windowFeatures`：字符串，内容为逗号分隔的键值对（详见下文），表示新窗口的参数，比如有没有提示栏、工具条等等。如果省略，则默认打开一个完整 UI 的新窗口。如果新建的是一个已经存在的窗口，则该参数不起作用，浏览器沿用以前窗口的参数。
+
+下面是一个例子。
+
+```
+var popup = window.open(
+  'somepage.html',
+  'DefinitionsWindows',
+  'height=200,width=200,location=no,status=yes,resizable=yes,scrollbars=yes'
+);
+```
+
+上面代码表示，打开的新窗口高度和宽度都为200像素，没有地址栏，但有状态栏和滚动条，允许用户调整大小。
