@@ -357,3 +357,14 @@ var popup = window.open(
 ```
 'height=200,width=200,location=no,status=yes,resizable=yes,scrollbars=yes'
 ```
+
+另外，`open()`方法的第二个参数虽然可以指定已经存在的窗口，但是不等于可以任意控制其他窗口。为了防止被不相干的窗口控制，浏览器只有在两个窗口同源，或者目标窗口被当前网页打开的情况下，才允许`open`方法指向该窗口。
+
+`window.open`方法返回新窗口的引用。
+
+```
+var windowB = window.open('windowB.html', 'WindowB');
+windowB.window.name // "WindowB"
+```
+
+注意，如果新窗口和父窗口不是同源的（即不在同一个域），它们彼此不能获取对方窗口对象的内部属性。
