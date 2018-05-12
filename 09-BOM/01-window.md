@@ -387,3 +387,13 @@ if (popup === null) {
   // 新建窗口失败
 }
 ```
+
+**（2）window.close()**
+
+`window.close`方法用于关闭当前窗口，一般只用来关闭`window.open`方法新建的窗口。
+
+```
+popup.close()
+```
+
+该方法只对顶层窗口有效，`iframe`框架之中的窗口使用该方法无效。
