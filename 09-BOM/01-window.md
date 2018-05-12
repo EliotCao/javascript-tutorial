@@ -545,3 +545,9 @@ var selObj = window.getSelection();
 ```
 var selectedText = selObj.toString();
 ```
+
+### window.getComputedStyle()，window.matchMedia()
+
+`window.getComputedStyle()`方法接受一个元素节点作为参数，返回一个包含该元素的最终样式信息的对象，详见《CSS 操作》一章。
+
+`window.matchMedia()`方法用来检查 CSS 的`mediaQuery`语句，详见《CSS 操作》一章。
