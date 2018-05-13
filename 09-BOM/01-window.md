@@ -565,3 +565,30 @@ window.requestAnimationFrame(callback)
 ```
 
 上面代码中，`callback`是一个回调函数。`callback`执行时，它的参数就是系统传入的一个高精度时间戳（`performance.now()`的返回值），单位是毫秒，表示距离网页加载的时间。
+
+`window.requestAnimationFrame()`的返回值是一个整数，这个整数可以传入`window.cancelAnimationFrame()`，用来取消回调函数的执行。
+
+下面是一个`window.requestAnimationFrame()`执行网页动画的例子。
+
+```
+var element = document.getElementById('animate');
+element.style.position = 'absolute';
+
+var start = null;
+
+function step(timestamp) {
+  if (!start) start = timestamp;
+  var progress = timestamp - start;
+  // 元素不断向左移，最大不超过200像素
+  element.style.left = Math.min(progress / 10, 200) + 'px';
+  // 如果距离第一次执行不超过 2000 毫秒，
+  // 就继续执行动画
+  if (progress < 2000) {
+    window.requestAnimationFrame(step);
+  }
+}
+
+window.requestAnimationFrame(step);
+```
+
+上面代码定义了一个网页动画，持续时间是2秒，会让元素向右移动。
