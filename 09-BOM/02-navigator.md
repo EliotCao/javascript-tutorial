@@ -113,3 +113,13 @@ navigator.cookieEnabled // true
 ```
 
 注意，这个属性反映的是浏览器总的特性，与是否储存某个具体的网站的 Cookie 无关。用户可以设置某个网站不得储存 Cookie，这时`cookieEnabled`返回的还是`true`。
+
+## Navigator 对象的方法
+
+### Navigator.javaEnabled()
+
+`Navigator.javaEnabled()`方法返回一个布尔值，表示浏览器是否能运行 Java Applet 小程序。
+
+```
+navigator.javaEnabled() // false
+```
