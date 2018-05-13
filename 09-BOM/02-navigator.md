@@ -58,3 +58,20 @@ for (var i = 0; i < pluginsLength; i++) {
 navigator.platform
 // "Linux x86_64"
 ```
+
+### Navigator.onLine
+
+`navigator.onLine`属性返回一个布尔值，表示用户当前在线还是离线（浏览器断线）。
+
+```
+navigator.onLine // true
+```
+
+有时，浏览器可以连接局域网，但是局域网不能连通外网。这时，有的浏览器的`onLine`属性会返回`true`，所以不能假定只要是`true`，用户就一定能访问互联网。不过，如果是`false`，可以断定用户一定离线。
+
+用户变成在线会触发`online`事件，变成离线会触发`offline`事件，可以通过`window.ononline`和`window.onoffline`指定这两个事件的回调函数。
+
+```
+window.addEventListener('offline', function(e) { console.log('offline'); });
+window.addEventListener('online', function(e) { console.log('online'); });
+```
