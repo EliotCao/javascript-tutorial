@@ -624,3 +624,15 @@ function myNonEssentialWork(deadline) {
 ```
 
 上面代码中，`requestIdleCallback()`用来执行非关键任务`myNonEssentialWork`。该任务先确认本次空闲时段有剩余时间，然后才真正开始执行任务。
+
+下面是指定`timeout`的例子。
+
+```
+requestIdleCallback(processPendingAnalyticsEvents, { timeout: 2000 });
+```
+
+上面代码指定，`processPendingAnalyticsEvents`必须在未来2秒之内执行。
+
+如果由于超时导致回调函数执行，则`deadline.timeRemaining()`返回`0`，`deadline.didTimeout`返回`true`。
+
+如果多次执行`window.requestIdleCallback()`，指定多个回调函数，那么这些回调函数将排成一个队列，按照先进先出的顺序执行。
