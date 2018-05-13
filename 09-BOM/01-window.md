@@ -782,7 +782,9 @@ var frameWindow = frame.contentWindow;
 frameWindow.title
 ```
 
+```
 <iframe>元素的contentDocument属性，可以拿到子窗口的document对象。
+```
 
 ```
 var frame = document.getElementById('theFrame');
@@ -792,4 +794,29 @@ var frameDoc = frame.contentDocument;
 var frameDoc = frame.contentWindow.document;
 ```
 
+```
 <iframe>元素遵守同源政策，只有当父窗口与子窗口在同一个域时，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。
+```
+
+```
+<iframe>窗口内部，使用window.parent引用父窗口。如果当前页面没有父窗口，则window.parent属性返回自身。因此，可以通过window.parent是否等于window.self，判断当前窗口是否为iframe窗口。
+```
+
+```
+if (window.parent !== window.self) {
+  // 当前窗口是子窗口
+}
+```
+
+```
+<iframe>窗口的window对象，有一个frameElement属性，返回<iframe>在父窗口中的 DOM 节点。对于非嵌入的窗口，该属性等于null。
+```
+
+```
+var f1Element = document.getElementById('f1');
+var f1Window = f1Element.contentWindow;
+
+f1Window.frameElement === f1Element // true
+window.frameElement === null // true
+```
+
