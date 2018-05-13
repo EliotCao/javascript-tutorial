@@ -705,3 +705,23 @@ Access-Control-Allow-Origin: *
 ```
 
 上面代码的`crossorigin="anonymous"`表示，读取文件不需要身份信息，即不需要 cookie 和 HTTP 认证信息。如果设为`crossorigin="use-credentials"`，就表示浏览器会上传 cookie 和 HTTP 认证信息，同时还需要服务器端打开 HTTP 头信息`Access-Control-Allow-Credentials`。
+
+### window 对象的事件监听属性
+
+除了具备元素节点都有的 GlobalEventHandlers 接口，`window`对象还具有以下的事件监听函数属性。
+
+- `window.onafterprint`：`afterprint`事件的监听函数。
+- `window.onbeforeprint`：`beforeprint`事件的监听函数。
+- `window.onbeforeunload`：`beforeunload`事件的监听函数。
+- `window.onhashchange`：`hashchange`事件的监听函数。
+- `window.onlanguagechange`: `languagechange`的监听函数。
+- `window.onmessage`：`message`事件的监听函数。
+- `window.onmessageerror`：`MessageError`事件的监听函数。
+- `window.onoffline`：`offline`事件的监听函数。
+- `window.ononline`：`online`事件的监听函数。
+- `window.onpagehide`：`pagehide`事件的监听函数。
+- `window.onpageshow`：`pageshow`事件的监听函数。
+- `window.onpopstate`：`popstate`事件的监听函数。
+- `window.onstorage`：`storage`事件的监听函数。
+- `window.onunhandledrejection`：未处理的 Promise 对象的`reject`事件的监听函数。
+- `window.onunload`：`unload`事件的监听函数。
