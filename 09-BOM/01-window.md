@@ -656,3 +656,25 @@ window.onload = function() {
 ```
 
 上面代码在网页加载完毕后，获取指定元素并进行处理。
+
+### error 事件和 onerror 属性
+
+浏览器脚本发生错误时，会触发`window`对象的`error`事件。我们可以通过`window.onerror`属性对该事件指定回调函数。
+
+```
+window.onerror = function (message, filename, lineno, colno, error) {
+  console.log("出错了！--> %s", error.stack);
+};
+```
+
+由于历史原因，`window`的`error`事件的回调函数不接受错误对象作为参数，而是一共可以接受五个参数，它们的含义依次如下。
+
+- 出错信息
+- 出错脚本的网址
+- 行号
+- 列号
+- 错误对象
+
+老式浏览器只支持前三个参数。
+
+并不是所有的错误，都会触发 JavaScript 的`error`事件（即让 JavaScript 报错）。一般来说，只有 JavaScript 脚本的错误，才会触发这个事件，而像资源文件不存在之类的错误，都不会触发。
