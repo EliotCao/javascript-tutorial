@@ -765,3 +765,31 @@ window.parent.history.back();
 ```
 <a href="somepage.html" target="_top">Link</a>
 ```
+
+### iframe 元素
+
+对于`iframe`嵌入的窗口，`document.getElementById`方法可以拿到该窗口的 DOM 节点，然后使用`contentWindow`属性获得`iframe`节点包含的`window`对象。
+
+```
+var frame = document.getElementById('theFrame');
+var frameWindow = frame.contentWindow;
+```
+
+上面代码中，`frame.contentWindow`可以拿到子窗口的`window`对象。然后，在满足同源限制的情况下，可以读取子窗口内部的属性。
+
+```
+// 获取子窗口的标题
+frameWindow.title
+```
+
+<iframe>元素的contentDocument属性，可以拿到子窗口的document对象。
+
+```
+var frame = document.getElementById('theFrame');
+var frameDoc = frame.contentDocument;
+
+// 等同于
+var frameDoc = frame.contentWindow.document;
+```
+
+<iframe>元素遵守同源政策，只有当父窗口与子窗口在同一个域时，两者之间才可以用脚本通信，否则只有使用window.postMessage方法。
