@@ -103,3 +103,13 @@ Geolocation 对象提供下面三个方法。
 - Geolocation.clearWatch()：取消`watchPosition()`方法指定的监听函数
 
 注意，调用这三个方法时，浏览器会跳出一个对话框，要求用户给予授权。
+
+### Navigator.cookieEnabled
+
+`Navigator.cookieEnabled`属性返回一个布尔值，表示浏览器的 Cookie 功能是否打开。
+
+```
+navigator.cookieEnabled // true
+```
+
+注意，这个属性反映的是浏览器总的特性，与是否储存某个具体的网站的 Cookie 无关。用户可以设置某个网站不得储存 Cookie，这时`cookieEnabled`返回的还是`true`。
