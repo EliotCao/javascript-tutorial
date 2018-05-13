@@ -610,3 +610,17 @@ window.requestIdleCallback(callback[, options])
 `options`参数是一个配置对象，目前只有`timeout`一个属性，用来指定回调函数推迟执行的最大毫秒数。该参数可选。
 
 `window.requestIdleCallback()`方法返回一个整数。该整数可以传入`window.cancelIdleCallback()`取消回调函数。
+
+下面是一个例子。
+
+```
+requestIdleCallback(myNonEssentialWork);
+
+function myNonEssentialWork(deadline) {
+  while (deadline.timeRemaining() > 0) {
+    doWorkIfNeeded();
+  }
+}
+```
+
+上面代码中，`requestIdleCallback()`用来执行非关键任务`myNonEssentialWork`。该任务先确认本次空闲时段有剩余时间，然后才真正开始执行任务。
