@@ -725,3 +725,43 @@ Access-Control-Allow-Origin: *
 - `window.onstorage`：`storage`事件的监听函数。
 - `window.onunhandledrejection`：未处理的 Promise 对象的`reject`事件的监听函数。
 - `window.onunload`：`unload`事件的监听函数。
+
+## 多窗口操作
+
+由于网页可以使用`iframe`元素，嵌入其他网页，因此一个网页之中会形成多个窗口。如果子窗口之中又嵌入别的网页，就会形成多级窗口。
+
+### 窗口的引用
+
+各个窗口之中的脚本，可以引用其他窗口。浏览器提供了一些特殊变量，用来返回其他窗口。
+
+- `top`：顶层窗口，即最上层的那个窗口
+- `parent`：父窗口
+- `self`：当前窗口，即自身
+
+下面代码可以判断，当前窗口是否为顶层窗口。
+
+```
+if (window.top === window.self) {
+  // 当前窗口是顶层窗口
+} else {
+  // 当前窗口是子窗口
+}
+```
+
+下面的代码让父窗口的访问历史后退一次。
+
+```
+window.parent.history.back();
+```
+
+与这些变量对应，浏览器还提供一些特殊的窗口名，供`window.open()`方法、`<a>`标签、`<form>`标签等引用。
+
+- `_top`：顶层窗口
+- `_parent`：父窗口
+- `_blank`：新窗口
+
+下面代码就表示在顶层窗口打开链接。
+
+```
+<a href="somepage.html" target="_top">Link</a>
+```
