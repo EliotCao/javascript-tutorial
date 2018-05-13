@@ -91,3 +91,15 @@ navigator.languages  // ["en-US", "en", "zh-CN", "zh", "zh-TW"]
 ```
 
 如果这个属性发生变化，就会在`window`对象上触发`languagechange`事件。
+
+### Navigator.geolocation
+
+`Navigator.geolocation`属性返回一个 Geolocation 对象，包含用户地理位置的信息。注意，该 API 只有在 HTTPS 协议下可用，否则调用下面方法时会报错。
+
+Geolocation 对象提供下面三个方法。
+
+- Geolocation.getCurrentPosition()：得到用户的当前位置
+- Geolocation.watchPosition()：监听用户位置变化
+- Geolocation.clearWatch()：取消`watchPosition()`方法指定的监听函数
+
+注意，调用这三个方法时，浏览器会跳出一个对话框，要求用户给予授权。
