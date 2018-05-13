@@ -678,3 +678,30 @@ window.onerror = function (message, filename, lineno, colno, error) {
 老式浏览器只支持前三个参数。
 
 并不是所有的错误，都会触发 JavaScript 的`error`事件（即让 JavaScript 报错）。一般来说，只有 JavaScript 脚本的错误，才会触发这个事件，而像资源文件不存在之类的错误，都不会触发。
+
+下面是一个例子，如果整个页面未捕获错误超过3个，就显示警告。
+
+```
+window.onerror = function(msg, url, line) {
+  if (onerror.num++ > onerror.max) {
+    alert('ERROR: ' + msg + '\n' + url + ':' + line);
+    return true;
+  }
+}
+onerror.max = 3;
+onerror.num = 0;
+```
+
+需要注意的是，如果脚本网址与网页网址不在同一个域（比如使用了 CDN），浏览器根本不会提供详细的出错信息，只会提示出错，错误类型是“Script error.”，行号为0，其他信息都没有。这是浏览器防止向外部脚本泄漏信息。一个解决方法是在脚本所在的服务器，设置`Access-Control-Allow-Origin`的 HTTP 头信息。
+
+```
+Access-Control-Allow-Origin: *
+```
+
+然后，在网页的`<script>`标签中设置`crossorigin`属性。
+
+```
+<script crossorigin="anonymous" src="//example.com/file.js"></script>
+```
+
+上面代码的`crossorigin="anonymous"`表示，读取文件不需要身份信息，即不需要 cookie 和 HTTP 认证信息。如果设为`crossorigin="use-credentials"`，就表示浏览器会上传 cookie 和 HTTP 认证信息，同时还需要服务器端打开 HTTP 头信息`Access-Control-Allow-Credentials`。
