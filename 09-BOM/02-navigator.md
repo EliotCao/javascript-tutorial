@@ -123,3 +123,7 @@ navigator.cookieEnabled // true
 ```
 navigator.javaEnabled() // false
 ```
+
+### Navigator.sendBeacon()
+
+`Navigator.sendBeacon()`方法用于向服务器异步发送数据，详见《XMLHttpRequest 对象》一章。
