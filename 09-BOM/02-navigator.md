@@ -49,3 +49,12 @@ for (var i = 0; i < pluginsLength; i++) {
   console.log(navigator.plugins[i].version);
 }
 ```
+
+### Navigator.platform
+
+`Navigator.platform`属性返回用户的操作系统信息，比如`MacIntel`、`Win32`、`Linux x86_64`等 。
+
+```
+navigator.platform
+// "Linux x86_64"
+```
