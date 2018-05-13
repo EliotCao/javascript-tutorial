@@ -75,3 +75,19 @@ navigator.onLine // true
 window.addEventListener('offline', function(e) { console.log('offline'); });
 window.addEventListener('online', function(e) { console.log('online'); });
 ```
+
+### Navigator.language，Navigator.languages
+
+`Navigator.language`属性返回一个字符串，表示浏览器的首选语言。该属性只读。
+
+```
+navigator.language // "en"
+```
+
+`Navigator.languages`属性返回一个数组，表示用户可以接受的语言。`Navigator.language`总是这个数组的第一个成员。HTTP 请求头信息的`Accept-Language`字段，就来自这个数组。
+
+```
+navigator.languages  // ["en-US", "en", "zh-CN", "zh", "zh-TW"]
+```
+
+如果这个属性发生变化，就会在`window`对象上触发`languagechange`事件。
