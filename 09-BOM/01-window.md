@@ -636,3 +636,23 @@ requestIdleCallback(processPendingAnalyticsEvents, { timeout: 2000 });
 如果由于超时导致回调函数执行，则`deadline.timeRemaining()`返回`0`，`deadline.didTimeout`返回`true`。
 
 如果多次执行`window.requestIdleCallback()`，指定多个回调函数，那么这些回调函数将排成一个队列，按照先进先出的顺序执行。
+
+## 事件
+
+`window`对象可以接收以下事件。
+
+### load 事件和 onload 属性
+
+`load`事件发生在文档在浏览器窗口加载完毕时。`window.onload`属性可以指定这个事件的回调函数。
+
+```
+window.onload = function() {
+  var elements = document.getElementsByClassName('example');
+  for (var i = 0; i < elements.length; i++) {
+    var elt = elements[i];
+    // ...
+  }
+};
+```
+
+上面代码在网页加载完毕后，获取指定元素并进行处理。
