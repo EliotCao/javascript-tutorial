@@ -34,3 +34,18 @@ if (/mobi/i.test(ua)) {
 ```
 /mobi|android|touch|mini/i.test(ua)
 ```
+
+### Navigator.plugins
+
+`Navigator.plugins`属性返回一个类似数组的对象，成员是 Plugin 实例对象，表示浏览器安装的插件，比如 Flash、ActiveX 等。
+
+```
+var pluginsLength = navigator.plugins.length;
+
+for (var i = 0; i < pluginsLength; i++) {
+  console.log(navigator.plugins[i].name);
+  console.log(navigator.plugins[i].filename);
+  console.log(navigator.plugins[i].description);
+  console.log(navigator.plugins[i].version);
+}
+```
