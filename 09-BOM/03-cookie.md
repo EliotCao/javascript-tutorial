@@ -37,3 +37,28 @@ document.cookie // "id=foo;key=bar"
 不同浏览器对 Cookie 数量和大小的限制，是不一样的。一般来说，单个域名设置的 Cookie 不应超过30个，每个 Cookie 的大小不能超过4KB。超过限制以后，Cookie 将被忽略，不会被设置。
 
 浏览器的同源政策规定，两个网址只要域名相同，就可以共享 Cookie（参见《同源政策》一章）。注意，这里不要求协议相同。也就是说，`http://example.com`设置的 Cookie，可以被`https://example.com`读取。
+
+## Cookie 与 HTTP 协议
+
+Cookie 由 HTTP 协议生成，也主要是供 HTTP 协议使用。
+
+### HTTP 回应：Cookie 的生成
+
+服务器如果希望在浏览器保存 Cookie，就要在 HTTP 回应的头信息里面，放置一个`Set-Cookie`字段。
+
+```
+Set-Cookie:foo=bar
+```
+
+上面代码会在浏览器保存一个名为`foo`的 Cookie，它的值为`bar`。
+
+HTTP 回应可以包含多个`Set-Cookie`字段，即在浏览器生成多个 Cookie。下面是一个例子。
+
+```
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+
+[page content]
+```
