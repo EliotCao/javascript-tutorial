@@ -62,3 +62,22 @@ Set-Cookie: tasty_cookie=strawberry
 
 [page content]
 ```
+
+除了 Cookie 的值，`Set-Cookie`字段还可以附加 Cookie 的属性。
+
+```
+Set-Cookie: <cookie-name>=<cookie-value>; Expires=<date>
+Set-Cookie: <cookie-name>=<cookie-value>; Max-Age=<non-zero-digit>
+Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>
+Set-Cookie: <cookie-name>=<cookie-value>; Path=<path-value>
+Set-Cookie: <cookie-name>=<cookie-value>; Secure
+Set-Cookie: <cookie-name>=<cookie-value>; HttpOnly
+```
+
+上面的几个属性的含义，将在后文解释。
+
+一个`Set-Cookie`字段里面，可以同时包括多个属性，没有次序的要求。
+
+```
+Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
+```
