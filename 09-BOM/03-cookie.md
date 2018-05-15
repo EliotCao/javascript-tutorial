@@ -113,3 +113,32 @@ Cookie: key1=value1; key1=value2
 ```
 
 上面代码的两个 Cookie 是同名的，匹配越精确的 Cookie 排在越前面。
+
+### HTTP 请求：Cookie 的发送
+
+浏览器向服务器发送 HTTP 请求时，每个请求都会带上相应的 Cookie。也就是说，把服务器早前保存在浏览器的这段信息，再发回服务器。这时要使用 HTTP 头信息的`Cookie`字段。
+
+```
+Cookie: foo=bar
+```
+
+上面代码会向服务器发送名为`foo`的 Cookie，值为`bar`。
+
+`Cookie`字段可以包含多个 Cookie，使用分号（`;`）分隔。
+
+```
+Cookie: name=value; name2=value2; name3=value3
+```
+
+下面是一个例子。
+
+```
+GET /sample_page.html HTTP/1.1
+Host: www.example.org
+Cookie: yummy_cookie=choco; tasty_cookie=strawberry
+```
+
+服务器收到浏览器发来的 Cookie 时，有两点是无法知道的。
+
+- Cookie 的各种属性，比如何时过期。
+- 哪个域名设置的 Cookie，到底是一级域名设的，还是某一个二级域名设的。
