@@ -81,3 +81,35 @@ Set-Cookie: <cookie-name>=<cookie-value>; HttpOnly
 ```
 Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
 ```
+
+下面是一个例子。
+
+```
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
+```
+
+如果服务器想改变一个早先设置的 Cookie，必须同时满足四个条件：Cookie 的`key`、`domain`、`path`和`secure`都匹配。举例来说，如果原始的 Cookie 是用如下的`Set-Cookie`设置的。
+
+```
+Set-Cookie: key1=value1; domain=example.com; path=/blog
+```
+
+改变上面这个 Cookie 的值，就必须使用同样的`Set-Cookie`。
+
+```
+Set-Cookie: key1=value2; domain=example.com; path=/blog
+```
+
+只要有一个属性不同，就会生成一个全新的 Cookie，而不是替换掉原来那个 Cookie。
+
+```
+Set-Cookie: key1=value2; domain=example.com; path=/
+```
+
+上面的命令设置了一个全新的同名 Cookie，但是`path`属性不一样。下一次访问`example.com/blog`的时候，浏览器将向服务器发送两个同名的 Cookie。
+
+```
+Cookie: key1=value1; key1=value2
+```
+
+上面代码的两个 Cookie 是同名的，匹配越精确的 Cookie 排在越前面。
