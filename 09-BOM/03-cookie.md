@@ -251,3 +251,19 @@ Set-Cookie: CookieName=CookieValue; SameSite=Lax;
 | Image     | `<img src="...">`                    | 发送 Cookie | 不发送      |
 
 设置了`Strict`或`Lax`以后，基本就杜绝了 CSRF 攻击。当然，前提是用户浏览器支持 SameSite 属性。
+
+**（3）None**
+
+Chrome 计划将`Lax`变为默认设置。这时，网站可以选择显式关闭`SameSite`属性，将其设为`None`。不过，前提是必须同时设置`Secure`属性（Cookie 只能通过 HTTPS 协议发送），否则无效。
+
+下面的设置无效。
+
+```
+Set-Cookie: widget_session=abc123; SameSite=None
+```
+
+下面的设置有效。
+
+```
+Set-Cookie: widget_session=abc123; SameSite=None; Secure
+```
