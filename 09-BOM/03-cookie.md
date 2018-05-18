@@ -213,3 +213,19 @@ Set-Cookie:id=a3fWa;
 ```
 
 浏览器加载上面代码时，就会向 Facebook 发出带有 Cookie 的请求，从而 Facebook 就会知道你是谁，访问了什么网站。
+
+Cookie 的`SameSite`属性用来限制第三方 Cookie，从而减少安全风险。它可以设置三个值。
+
+> - Strict
+> - Lax
+> - None
+
+**（1）Strict**
+
+`Strict`最为严格，完全禁止第三方 Cookie，跨站点时，任何情况下都不会发送 Cookie。换言之，只有当前网页的 URL 与请求目标一致，才会带上 Cookie。
+
+```
+Set-Cookie: CookieName=CookieValue; SameSite=Strict;
+```
+
+这个规则过于严格，可能造成非常不好的用户体验。比如，当前网页有一个 GitHub 链接，用户点击跳转就不会带有 GitHub 的 Cookie，跳转过去总是未登陆状态。
