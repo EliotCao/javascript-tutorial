@@ -110,3 +110,17 @@ if (xhr.readyState === 4) {
 `XMLHttpRequest.onreadystatechange`属性指向一个监听函数。`readystatechange`事件发生时（实例的`readyState`属性变化），就会执行这个属性。
 
 另外，如果使用实例的`abort()`方法，终止 XMLHttpRequest 请求，也会造成`readyState`属性变化，导致调用`XMLHttpRequest.onreadystatechange`属性。
+
+下面是一个例子。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open( 'GET', 'http://example.com' , true );
+xhr.onreadystatechange = function () {
+  if (xhr.readyState !== 4 || xhr.status !== 200) {
+    return;
+  }
+  console.log(xhr.responseText);
+};
+xhr.send();
+```
