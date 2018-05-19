@@ -321,3 +321,30 @@ XMLHttpRequest 对象可以对以下事件指定监听函数。
 - XMLHttpRequest.onload：load 事件（请求成功完成）的监听函数
 - XMLHttpRequest.ontimeout：timeout 事件（用户指定的时限超过了，请求还未完成）的监听函数
 - XMLHttpRequest.onloadend：loadend 事件（请求完成，不管成功或失败）的监听函数
+
+下面是一个例子。
+
+```
+xhr.onload = function() {
+ var responseText = xhr.responseText;
+ console.log(responseText);
+ // process the response.
+};
+
+xhr.onabort = function () {
+  console.log('The request was aborted');
+};
+
+xhr.onprogress = function (event) {
+  console.log(event.loaded);
+  console.log(event.total);
+};
+
+xhr.onerror = function() {
+  console.log('There was an error!');
+};
+```
+
+`progress`事件的监听函数有一个事件对象参数，该对象有三个属性：`loaded`属性返回已经传输的数据量，`total`属性返回总的数据量，`lengthComputable`属性返回一个布尔值，表示加载的进度是否可以计算。所有这些监听函数里面，只有`progress`事件的监听函数有参数，其他函数都没有参数。
+
+注意，如果发生网络错误（比如服务器无法连通），`onerror`事件无法获取报错信息。也就是说，可能没有错误对象，所以这样只能显示报错的提示。
