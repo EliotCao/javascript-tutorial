@@ -232,3 +232,19 @@ xhr.onload = function () {
 
 xhr.send(null);
 ```
+
+### XMLHttpRequest.responseURL
+
+`XMLHttpRequest.responseURL`属性是字符串，表示发送数据的服务器的网址。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://example.com/test', true);
+xhr.onload = function () {
+  // 返回 http://example.com/test
+  console.log(xhr.responseURL);
+};
+xhr.send(null);
+```
+
+注意，这个属性的值与`open()`方法指定的请求网址不一定相同。如果服务器端发生跳转，这个属性返回最后实际返回数据的网址。另外，如果原始 URL 包括锚点（fragment），该属性会把锚点剥离。
