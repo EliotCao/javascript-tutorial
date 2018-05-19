@@ -190,3 +190,21 @@ xhr.send();
 ```
 
 如果将这个属性设为`json`，浏览器就会自动对返回数据调用`JSON.parse()`方法。也就是说，从`xhr.response`属性（注意，不是`xhr.responseText`属性）得到的不是文本，而是一个 JSON 对象。
+
+### XMLHttpRequest.responseText
+
+`XMLHttpRequest.responseText`属性返回从服务器接收到的字符串，该属性为只读。只有 HTTP 请求完成接收以后，该属性才会包含完整的数据。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/server', true);
+
+xhr.responseType = 'text';
+xhr.onload = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseText);
+  }
+};
+
+xhr.send(null);
+```
