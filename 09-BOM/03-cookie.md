@@ -334,3 +334,19 @@ document.cookie = 'fontSize=14; '
 ```
 
 Cookie 的属性一旦设置完成，就没有办法读取这些属性的值。
+
+删除一个现存 Cookie 的唯一方法，是设置它的`expires`属性为一个过去的日期。
+
+```
+document.cookie = 'fontSize=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+```
+
+上面代码中，名为`fontSize`的 Cookie 的值为空，过期时间设为1970年1月1月零点，就等同于删除了这个 Cookie。
+
+## 参考链接
+
+- [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies), by MDN
+- [Using the Same-Site Cookie Attribute to Prevent CSRF Attacks](https://www.netsparker.com/blog/web-security/same-site-cookie-attribute-prevent-cross-site-request-forgery/)
+- [SameSite cookies explained](https://web.dev/samesite-cookies-explained)
+- [Tough Cookies](https://scotthelme.co.uk/tough-cookies/), Scott Helme
+- [Cross-Site Request Forgery is dead!](https://scotthelme.co.uk/csrf-is-dead/), Scott Helme
