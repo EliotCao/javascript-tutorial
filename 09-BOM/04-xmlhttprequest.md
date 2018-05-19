@@ -309,3 +309,15 @@ xhr.open('GET', url, true);
 xhr.timeout = 10 * 1000;
 xhr.send(null);
 ```
+
+### 事件监听属性
+
+XMLHttpRequest 对象可以对以下事件指定监听函数。
+
+- XMLHttpRequest.onloadstart：loadstart 事件（HTTP 请求发出）的监听函数
+- XMLHttpRequest.onprogress：progress事件（正在发送和加载数据）的监听函数
+- XMLHttpRequest.onabort：abort 事件（请求中止，比如用户调用了`abort()`方法）的监听函数
+- XMLHttpRequest.onerror：error 事件（请求失败）的监听函数
+- XMLHttpRequest.onload：load 事件（请求成功完成）的监听函数
+- XMLHttpRequest.ontimeout：timeout 事件（用户指定的时限超过了，请求还未完成）的监听函数
+- XMLHttpRequest.onloadend：loadend 事件（请求完成，不管成功或失败）的监听函数
