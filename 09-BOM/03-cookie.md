@@ -323,3 +323,14 @@ document.cookie = "foo=bar; expires=Fri, 31 Dec 2020 23:59:59 GMT";
 - `domain`属性值必须是当前发送 Cookie 的域名的一部分。比如，当前域名是`example.com`，就不能将其设为`foo.com`。该属性默认为当前的一级域名（不含二级域名）。
 - `max-age`属性的值为秒数。
 - `expires`属性的值为 UTC 格式，可以使用`Date.prototype.toUTCString()`进行日期格式转换。
+
+`document.cookie`写入 Cookie 的例子如下。
+
+```
+document.cookie = 'fontSize=14; '
+  + 'expires=' + someDate.toGMTString() + '; '
+  + 'path=/subdirectory; '
+  + 'domain=*.example.com';
+```
+
+Cookie 的属性一旦设置完成，就没有办法读取这些属性的值。
