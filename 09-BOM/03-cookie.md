@@ -267,3 +267,59 @@ Set-Cookie: widget_session=abc123; SameSite=None
 ```
 Set-Cookie: widget_session=abc123; SameSite=None; Secure
 ```
+
+## document.cookie
+
+`document.cookie`属性用于读写当前网页的 Cookie。
+
+读取的时候，它会返回当前网页的所有 Cookie，前提是该 Cookie 不能有`HTTPOnly`属性。
+
+```
+document.cookie // "foo=bar;baz=bar"
+```
+
+上面代码从`document.cookie`一次性读出两个 Cookie，它们之间使用分号分隔。必须手动还原，才能取出每一个 Cookie 的值。
+
+```
+var cookies = document.cookie.split(';');
+
+for (var i = 0; i < cookies.length; i++) {
+  console.log(cookies[i]);
+}
+// foo=bar
+// baz=bar
+```
+
+`document.cookie`属性是可写的，可以通过它为当前网站添加 Cookie。
+
+```
+document.cookie = 'fontSize=14';
+```
+
+写入的时候，Cookie 的值必须写成`key=value`的形式。注意，等号两边不能有空格。另外，写入 Cookie 的时候，必须对分号、逗号和空格进行转义（它们都不允许作为 Cookie 的值），这可以用`encodeURIComponent`方法达到。
+
+但是，`document.cookie`一次只能写入一个 Cookie，而且写入并不是覆盖，而是添加。
+
+```
+document.cookie = 'test1=hello';
+document.cookie = 'test2=world';
+document.cookie
+// test1=hello;test2=world
+```
+
+`document.cookie`读写行为的差异（一次可以读出全部 Cookie，但是只能写入一个 Cookie），与 HTTP 协议的 Cookie 通信格式有关。浏览器向服务器发送 Cookie 的时候，`Cookie`字段是使用一行将所有 Cookie 全部发送；服务器向浏览器设置 Cookie 的时候，`Set-Cookie`字段是一行设置一个 Cookie。
+
+写入 Cookie 的时候，可以一起写入 Cookie 的属性。
+
+```
+document.cookie = "foo=bar; expires=Fri, 31 Dec 2020 23:59:59 GMT";
+```
+
+上面代码中，写入 Cookie 的时候，同时设置了`expires`属性。属性值的等号两边，也是不能有空格的。
+
+各个属性的写入注意点如下。
+
+- `path`属性必须为绝对路径，默认为当前路径。
+- `domain`属性值必须是当前发送 Cookie 的域名的一部分。比如，当前域名是`example.com`，就不能将其设为`foo.com`。该属性默认为当前的一级域名（不含二级域名）。
+- `max-age`属性的值为秒数。
+- `expires`属性的值为 UTC 格式，可以使用`Date.prototype.toUTCString()`进行日期格式转换。
