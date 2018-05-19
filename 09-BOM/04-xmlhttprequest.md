@@ -171,3 +171,22 @@ xhr.onload = function(e) {
 
 xhr.send();
 ```
+
+如果将这个属性设为`ArrayBuffer`，就可以按照数组的方式处理二进制数据。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);
+xhr.responseType = 'arraybuffer';
+
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response);
+  for (var i = 0, len = uInt8Array.length; i < len; ++i) {
+    // var byte = uInt8Array[i];
+  }
+};
+
+xhr.send();
+```
+
+如果将这个属性设为`json`，浏览器就会自动对返回数据调用`JSON.parse()`方法。也就是说，从`xhr.response`属性（注意，不是`xhr.responseText`属性）得到的不是文本，而是一个 JSON 对象。
