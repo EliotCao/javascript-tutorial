@@ -208,3 +208,27 @@ xhr.onload = function () {
 
 xhr.send(null);
 ```
+
+### XMLHttpRequest.responseXML
+
+`XMLHttpRequest.responseXML`属性返回从服务器接收到的 HTML 或 XML 文档对象，该属性为只读。如果本次请求没有成功，或者收到的数据不能被解析为 XML 或 HTML，该属性等于`null`。
+
+该属性生效的前提是 HTTP 回应的`Content-Type`头信息等于`text/xml`或`application/xml`。这要求在发送请求前，`XMLHttpRequest.responseType`属性要设为`document`。如果 HTTP 回应的`Content-Type`头信息不等于`text/xml`和`application/xml`，但是想从`responseXML`拿到数据（即把数据按照 DOM 格式解析），那么需要手动调用`XMLHttpRequest.overrideMimeType()`方法，强制进行 XML 解析。
+
+该属性得到的数据，是直接解析后的文档 DOM 树。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/server', true);
+
+xhr.responseType = 'document';
+xhr.overrideMimeType('text/xml');
+
+xhr.onload = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    console.log(xhr.responseXML);
+  }
+};
+
+xhr.send(null);
+```
