@@ -140,3 +140,34 @@ xhr.onreadystatechange = function () {
   }
 }
 ```
+
+### XMLHttpRequest.responseType
+
+`XMLHttpRequest.responseType`属性是一个字符串，表示服务器返回数据的类型。这个属性是可写的，可以在调用`open()`方法之后、调用`send()`方法之前，设置这个属性的值，告诉服务器返回指定类型的数据。如果`responseType`设为空字符串，就等同于默认值`text`。
+
+`XMLHttpRequest.responseType`属性可以等于以下值。
+
+- ""（空字符串）：等同于`text`，表示服务器返回文本数据。
+- "arraybuffer"：ArrayBuffer 对象，表示服务器返回二进制数组。
+- "blob"：Blob 对象，表示服务器返回二进制对象。
+- "document"：Document 对象，表示服务器返回一个文档对象。
+- "json"：JSON 对象。
+- "text"：字符串。
+
+上面几种类型之中，`text`类型适合大多数情况，而且直接处理文本也比较方便。`document`类型适合返回 HTML / XML 文档的情况，这意味着，对于那些打开 CORS 的网站，可以直接用 Ajax 抓取网页，然后不用解析 HTML 字符串，直接对抓取回来的数据进行 DOM 操作。`blob`类型适合读取二进制数据，比如图片文件。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png', true);
+xhr.responseType = 'blob';
+
+xhr.onload = function(e) {
+  if (this.status === 200) {
+    var blob = new Blob([xhr.response], {type: 'image/png'});
+    // 或者
+    var blob = xhr.response;
+  }
+};
+
+xhr.send();
+```
