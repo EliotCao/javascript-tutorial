@@ -371,3 +371,36 @@ Access-Control-Allow-Credentials: true
 `withCredentials`属性打开的话，跨域请求不仅会发送 Cookie，还会设置远程主机指定的 Cookie。反之也成立，如果`withCredentials`属性没有打开，那么跨域的 AJAX 请求即使明确要求浏览器设置 Cookie，浏览器也会忽略。
 
 注意，脚本总是遵守同源政策，无法从`document.cookie`或者 HTTP 回应的头信息之中，读取跨域的 Cookie，`withCredentials`属性不影响这一点。
+
+### XMLHttpRequest.upload
+
+XMLHttpRequest 不仅可以发送请求，还可以发送文件，这就是 AJAX 文件上传。发送文件以后，通过`XMLHttpRequest.upload`属性可以得到一个对象，通过观察这个对象，可以得知上传的进展。主要方法就是监听这个对象的各种事件：loadstart、loadend、load、abort、error、progress、timeout。
+
+假定网页上有一个`<progress>`元素。
+
+```
+<progress min="0" max="100" value="0">0% complete</progress>
+```
+
+文件上传时，对`upload`属性指定`progress`事件的监听函数，即可获得上传的进度。
+
+```
+function upload(blobOrFile) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/server', true);
+  xhr.onload = function (e) {};
+
+  var progressBar = document.querySelector('progress');
+  xhr.upload.onprogress = function (e) {
+    if (e.lengthComputable) {
+      progressBar.value = (e.loaded / e.total) * 100;
+      // 兼容不支持 <progress> 元素的老式浏览器
+      progressBar.textContent = progressBar.value;
+    }
+  };
+
+  xhr.send(blobOrFile);
+}
+
+upload(new Blob(['hello world'], {type: 'text/plain'}));
+```
