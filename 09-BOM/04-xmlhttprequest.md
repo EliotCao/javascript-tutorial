@@ -52,3 +52,29 @@ xhr.send(null);
 上面代码中，`send()`的参数为`null`，表示发送请求的时候，不带有数据体。如果发送的是 POST 请求，这里就需要指定数据体。
 
 一旦拿到服务器返回的数据，AJAX 不会刷新整个网页，而是只更新网页里面的相关部分，从而不打断用户正在做的事情。
+
+注意，AJAX 只能向同源网址（协议、域名、端口都相同）发出 HTTP 请求，如果发出跨域请求，就会报错（详见《同源政策》和《CORS 通信》两章）。
+
+下面是`XMLHttpRequest`对象简单用法的完整例子。
+
+```
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function(){
+  // 通信成功时，状态值为4
+  if (xhr.readyState === 4){
+    if (xhr.status === 200){
+      console.log(xhr.responseText);
+    } else {
+      console.error(xhr.statusText);
+    }
+  }
+};
+
+xhr.onerror = function (e) {
+  console.error(xhr.statusText);
+};
+
+xhr.open('GET', '/endpoint', true);
+xhr.send(null);
+```
