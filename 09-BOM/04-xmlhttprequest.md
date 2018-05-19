@@ -248,3 +248,32 @@ xhr.send(null);
 ```
 
 注意，这个属性的值与`open()`方法指定的请求网址不一定相同。如果服务器端发生跳转，这个属性返回最后实际返回数据的网址。另外，如果原始 URL 包括锚点（fragment），该属性会把锚点剥离。
+
+### XMLHttpRequest.status，XMLHttpRequest.statusText
+
+`XMLHttpRequest.status`属性返回一个整数，表示服务器回应的 HTTP 状态码。一般来说，如果通信成功的话，这个状态码是200；如果服务器没有返回状态码，那么这个属性默认是200。请求发出之前，该属性为`0`。该属性只读。
+
+- 200, OK，访问正常
+- 301, Moved Permanently，永久移动
+- 302, Moved temporarily，暂时移动
+- 304, Not Modified，未修改
+- 307, Temporary Redirect，暂时重定向
+- 401, Unauthorized，未授权
+- 403, Forbidden，禁止访问
+- 404, Not Found，未发现指定网址
+- 500, Internal Server Error，服务器发生错误
+
+基本上，只有2xx和304的状态码，表示服务器返回是正常状态。
+
+```
+if (xhr.readyState === 4) {
+  if ( (xhr.status >= 200 && xhr.status < 300)
+    || (xhr.status === 304) ) {
+    // 处理服务器的返回数据
+  } else {
+    // 出错
+  }
+}
+```
+
+`XMLHttpRequest.statusText`属性返回一个字符串，表示服务器发送的状态提示。不同于`status`属性，该属性包含整个状态信息，比如“OK”和“Not Found”。在请求发送之前（即调用`open()`方法之前），该属性的值是空字符串；如果服务器没有返回状态提示，该属性的值默认为“OK”。该属性为只读属性。
