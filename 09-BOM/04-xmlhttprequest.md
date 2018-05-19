@@ -404,3 +404,34 @@ function upload(blobOrFile) {
 
 upload(new Blob(['hello world'], {type: 'text/plain'}));
 ```
+
+## XMLHttpRequest 的实例方法
+
+### XMLHttpRequest.open()
+
+`XMLHttpRequest.open()`方法用于指定 HTTP 请求的参数，或者说初始化 XMLHttpRequest 实例对象。它一共可以接受五个参数。
+
+```
+void open(
+   string method,
+   string url,
+   optional boolean async,
+   optional string user,
+   optional string password
+);
+```
+
+- `method`：表示 HTTP 动词方法，比如`GET`、`POST`、`PUT`、`DELETE`、`HEAD`等。
+- `url`: 表示请求发送目标 URL。
+- `async`: 布尔值，表示请求是否为异步，默认为`true`。如果设为`false`，则`send()`方法只有等到收到服务器返回了结果，才会进行下一步操作。该参数可选。由于同步 AJAX 请求会造成浏览器失去响应，许多浏览器已经禁止在主线程使用，只允许 Worker 里面使用。所以，这个参数轻易不应该设为`false`。
+- `user`：表示用于认证的用户名，默认为空字符串。该参数可选。
+- `password`：表示用于认证的密码，默认为空字符串。该参数可选。
+
+注意，如果对使用过`open()`方法的 AJAX 请求，再次使用这个方法，等同于调用`abort()`，即终止请求。
+
+下面发送 POST 请求的例子。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('POST', encodeURI('someURL'));
+```
