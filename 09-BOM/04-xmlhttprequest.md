@@ -124,3 +124,19 @@ xhr.onreadystatechange = function () {
 };
 xhr.send();
 ```
+
+### XMLHttpRequest.response
+
+`XMLHttpRequest.response`属性表示服务器返回的数据体（即 HTTP 回应的 body 部分）。它可能是任何数据类型，比如字符串、对象、二进制对象等等，具体的类型由`XMLHttpRequest.responseType`属性决定。该属性只读。
+
+如果本次请求没有成功或者数据不完整，该属性等于`null`。但是，如果`responseType`属性等于`text`或空字符串，在请求没有结束之前（`readyState`等于3的阶段），`response`属性包含服务器已经返回的部分数据。
+
+```
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    handler(xhr.response);
+  }
+}
+```
