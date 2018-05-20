@@ -452,3 +452,19 @@ xhr.send(null);
 ```
 
 上面代码中，`GET`请求的参数，作为查询字符串附加在 URL 后面。
+
+下面是发送 POST 请求的例子。
+
+```
+var xhr = new XMLHttpRequest();
+var data = 'email='
+  + encodeURIComponent(email)
+  + '&password='
+  + encodeURIComponent(password);
+
+xhr.open('POST', 'http://www.example.com', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.send(data);
+```
+
+注意，所有 XMLHttpRequest 的监听事件，都必须在`send()`方法调用之前设定。
