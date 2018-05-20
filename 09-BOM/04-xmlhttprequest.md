@@ -468,3 +468,16 @@ xhr.send(data);
 ```
 
 注意，所有 XMLHttpRequest 的监听事件，都必须在`send()`方法调用之前设定。
+
+`send`方法的参数就是发送的数据。多种格式的数据，都可以作为它的参数。
+
+```
+void send();
+void send(ArrayBufferView data);
+void send(Blob data);
+void send(Document data);
+void send(String data);
+void send(FormData data);
+```
+
+如果`send()`发送 DOM 对象，在发送之前，数据会先被串行化。如果发送二进制数据，最好是发送`ArrayBufferView`或`Blob`对象，这使得通过 Ajax 上传文件成为可能。
