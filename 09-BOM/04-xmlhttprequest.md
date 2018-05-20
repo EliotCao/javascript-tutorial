@@ -435,3 +435,20 @@ void open(
 var xhr = new XMLHttpRequest();
 xhr.open('POST', encodeURI('someURL'));
 ```
+
+### XMLHttpRequest.send()
+
+`XMLHttpRequest.send()`方法用于实际发出 HTTP 请求。它的参数是可选的，如果不带参数，就表示 HTTP 请求只有一个 URL，没有数据体，典型例子就是 GET 请求；如果带有参数，就表示除了头信息，还带有包含具体数据的信息体，典型例子就是 POST 请求。
+
+下面是 GET 请求的例子。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET',
+  'http://www.example.com/?id=' + encodeURIComponent(id),
+  true
+);
+xhr.send(null);
+```
+
+上面代码中，`GET`请求的参数，作为查询字符串附加在 URL 后面。
