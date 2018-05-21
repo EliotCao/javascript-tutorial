@@ -564,3 +564,20 @@ xhr.open('GET', url);
 xhr.responseType = 'arraybuffer';
 xhr.send();
 ```
+
+### XMLHttpRequest.getResponseHeader()
+
+`XMLHttpRequest.getResponseHeader()`方法返回 HTTP 头信息指定字段的值，如果还没有收到服务器回应或者指定字段不存在，返回`null`。该方法的参数不区分大小写。
+
+```
+function getHeaderTime() {
+  console.log(this.getResponseHeader("Last-Modified"));
+}
+
+var xhr = new XMLHttpRequest();
+xhr.open('HEAD', 'yourpage.html');
+xhr.onload = getHeaderTime;
+xhr.send();
+```
+
+如果有多个字段同名，它们的值会被连接为一个字符串，每个字段之间使用“逗号+空格”分隔。
