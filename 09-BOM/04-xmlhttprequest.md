@@ -481,3 +481,28 @@ void send(FormData data);
 ```
 
 如果`send()`发送 DOM 对象，在发送之前，数据会先被串行化。如果发送二进制数据，最好是发送`ArrayBufferView`或`Blob`对象，这使得通过 Ajax 上传文件成为可能。
+
+下面是发送表单数据的例子。`FormData`对象可以用于构造表单数据。
+
+```
+var formData = new FormData();
+
+formData.append('username', '张三');
+formData.append('email', 'zhangsan@example.com');
+formData.append('birthDate', 1940);
+
+var xhr = new XMLHttpRequest();
+xhr.open('POST', '/register');
+xhr.send(formData);
+```
+
+上面代码中，`FormData`对象构造了表单数据，然后使用`send()`方法发送。它的效果与发送下面的表单数据是一样的。
+
+```
+<form id='registration' name='registration' action='/register'>
+  <input type='text' name='username' value='张三'>
+  <input type='email' name='email' value='zhangsan@example.com'>
+  <input type='number' name='birthDate' value='1940'>
+  <input type='submit' onclick='return sendForm(this.form);'>
+</form>
+```
