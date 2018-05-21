@@ -527,3 +527,17 @@ function sendForm(form) {
 var form = document.querySelector('#registration');
 sendForm(form);
 ```
+
+### XMLHttpRequest.setRequestHeader()
+
+`XMLHttpRequest.setRequestHeader()`方法用于设置浏览器发送的 HTTP 请求的头信息。该方法必须在`open()`之后、`send()`之前调用。如果该方法多次调用，设定同一个字段，则每一次调用的值会被合并成一个单一的值发送。
+
+该方法接受两个参数。第一个参数是字符串，表示头信息的字段名，第二个参数是字段值。
+
+```
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.setRequestHeader('Content-Length', JSON.stringify(data).length);
+xhr.send(JSON.stringify(data));
+```
+
+上面代码首先设置头信息`Content-Type`，表示发送 JSON 格式的数据；然后设置`Content-Length`，表示数据长度；最后发送 JSON 数据。
