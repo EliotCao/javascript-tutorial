@@ -541,3 +541,26 @@ xhr.send(JSON.stringify(data));
 ```
 
 上面代码首先设置头信息`Content-Type`，表示发送 JSON 格式的数据；然后设置`Content-Length`，表示数据长度；最后发送 JSON 数据。
+
+### XMLHttpRequest.overrideMimeType()
+
+`XMLHttpRequest.overrideMimeType()`方法用来指定 MIME 类型，覆盖服务器返回的真正的 MIME 类型，从而让浏览器进行不一样的处理。举例来说，服务器返回的数据类型是`text/xml`，由于种种原因浏览器解析不成功报错，这时就拿不到数据了。为了拿到原始数据，我们可以把 MIME 类型改成`text/plain`，这样浏览器就不会去自动解析，从而我们就可以拿到原始文本了。
+
+```
+xhr.overrideMimeType('text/plain')
+```
+
+注意，该方法必须在`send()`方法之前调用。
+
+修改服务器返回的数据类型，不是正常情况下应该采取的方法。如果希望服务器返回指定的数据类型，可以用`responseType`属性告诉服务器，就像下面的例子。只有在服务器无法返回某种数据类型时，才使用`overrideMimeType()`方法。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.onload = function(e) {
+  var arraybuffer = xhr.response;
+  // ...
+}
+xhr.open('GET', url);
+xhr.responseType = 'arraybuffer';
+xhr.send();
+```
