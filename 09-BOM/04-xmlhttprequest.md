@@ -506,3 +506,24 @@ xhr.send(formData);
   <input type='submit' onclick='return sendForm(this.form);'>
 </form>
 ```
+
+下面的例子是使用`FormData`对象加工表单数据，然后再发送。
+
+```
+function sendForm(form) {
+  var formData = new FormData(form);
+  formData.append('csrf', 'e69a18d7db1286040586e6da1950128c');
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', form.action, true);
+  xhr.onload = function() {
+    // ...
+  };
+  xhr.send(formData);
+
+  return false;
+}
+
+var form = document.querySelector('#registration');
+sendForm(form);
+```
