@@ -629,3 +629,20 @@ arr.forEach(function (line) {
 
 headerMap['content-length'] // "6502"
 ```
+
+### XMLHttpRequest.abort()
+
+`XMLHttpRequest.abort()`方法用来终止已经发出的 HTTP 请求。调用这个方法以后，`readyState`属性变为`4`，`status`属性变为`0`。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://www.example.com/page.php', true);
+setTimeout(function () {
+  if (xhr) {
+    xhr.abort();
+    xhr = null;
+  }
+}, 5000);
+```
+
+上面代码在发出5秒之后，终止一个 AJAX 请求。
