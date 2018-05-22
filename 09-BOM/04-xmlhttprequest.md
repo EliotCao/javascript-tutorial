@@ -581,3 +581,51 @@ xhr.send();
 ```
 
 如果有多个字段同名，它们的值会被连接为一个字符串，每个字段之间使用“逗号+空格”分隔。
+
+### XMLHttpRequest.getAllResponseHeaders()
+
+`XMLHttpRequest.getAllResponseHeaders()`方法返回一个字符串，表示服务器发来的所有 HTTP 头信息。格式为字符串，每个头信息之间使用`CRLF`分隔（回车+换行），如果没有收到服务器回应，该属性为`null`。如果发生网络错误，该属性为空字符串。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'foo.txt', true);
+xhr.send();
+
+xhr.onreadystatechange = function () {
+  if (this.readyState === 4) {
+    var headers = xhr.getAllResponseHeaders();
+  }
+}
+```
+
+上面代码用于获取服务器返回的所有头信息。它可能是下面这样的字符串。
+
+```
+date: Fri, 08 Dec 2017 21:04:30 GMT\r\n
+content-encoding: gzip\r\n
+x-content-type-options: nosniff\r\n
+server: meinheld/0.6.1\r\n
+x-frame-options: DENY\r\n
+content-type: text/html; charset=utf-8\r\n
+connection: keep-alive\r\n
+strict-transport-security: max-age=63072000\r\n
+vary: Cookie, Accept-Encoding\r\n
+content-length: 6502\r\n
+x-xss-protection: 1; mode=block\r\n
+```
+
+然后，对这个字符串进行处理。
+
+```
+var arr = headers.trim().split(/[\r\n]+/);
+var headerMap = {};
+
+arr.forEach(function (line) {
+  var parts = line.split(': ');
+  var header = parts.shift();
+  var value = parts.join(': ');
+  headerMap[header] = value;
+});
+
+headerMap['content-length'] // "6502"
+```
