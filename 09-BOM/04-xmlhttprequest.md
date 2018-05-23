@@ -654,3 +654,23 @@ setTimeout(function () {
 `readyState`属性的值发生改变，就会触发 readyStateChange 事件。
 
 我们可以通过`onReadyStateChange`属性，指定这个事件的监听函数，对不同状态进行不同处理。尤其是当状态变为`4`的时候，表示通信成功，这时回调函数就可以处理服务器传送回来的数据。
+
+### progress 事件
+
+上传文件时，XMLHttpRequest 实例对象本身和实例的`upload`属性，都有一个`progress`事件，会不断返回上传的进度。
+
+```
+var xhr = new XMLHttpRequest();
+
+function updateProgress (oEvent) {
+  if (oEvent.lengthComputable) {
+    var percentComplete = oEvent.loaded / oEvent.total;
+  } else {
+    console.log('无法计算进展');
+  }
+}
+
+xhr.addEventListener('progress', updateProgress);
+
+xhr.open();
+```
