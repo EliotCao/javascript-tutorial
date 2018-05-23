@@ -646,3 +646,11 @@ setTimeout(function () {
 ```
 
 上面代码在发出5秒之后，终止一个 AJAX 请求。
+
+## XMLHttpRequest 实例的事件
+
+### readyStateChange 事件
+
+`readyState`属性的值发生改变，就会触发 readyStateChange 事件。
+
+我们可以通过`onReadyStateChange`属性，指定这个事件的监听函数，对不同状态进行不同处理。尤其是当状态变为`4`的时候，表示通信成功，这时回调函数就可以处理服务器传送回来的数据。
