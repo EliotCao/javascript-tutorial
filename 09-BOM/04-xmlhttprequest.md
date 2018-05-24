@@ -700,3 +700,15 @@ function transferCanceled() {
   console.log('用户取消接收');
 }
 ```
+
+### loadend 事件
+
+`abort`、`load`和`error`这三个事件，会伴随一个`loadend`事件，表示请求结束，但不知道其是否成功。
+
+```
+xhr.addEventListener('loadend', loadEnd);
+
+function loadEnd(e) {
+  console.log('请求结束，状态未知');
+}
+```
