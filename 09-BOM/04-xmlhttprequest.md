@@ -674,3 +674,29 @@ xhr.addEventListener('progress', updateProgress);
 
 xhr.open();
 ```
+
+### load 事件、error 事件、abort 事件
+
+load 事件表示服务器传来的数据接收完毕，error 事件表示请求出错，abort 事件表示请求被中断（比如用户取消请求）。
+
+```
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener('load', transferComplete);
+xhr.addEventListener('error', transferFailed);
+xhr.addEventListener('abort', transferCanceled);
+
+xhr.open();
+
+function transferComplete() {
+  console.log('数据接收完毕');
+}
+
+function transferFailed() {
+  console.log('数据接收出错');
+}
+
+function transferCanceled() {
+  console.log('用户取消接收');
+}
+```
