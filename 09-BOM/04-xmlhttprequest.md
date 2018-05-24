@@ -712,3 +712,7 @@ function loadEnd(e) {
   console.log('请求结束，状态未知');
 }
 ```
+
+### timeout 事件
+
+服务器超过指定时间还没有返回结果，就会触发 timeout 事件，具体的例子参见`timeout`属性一节。
