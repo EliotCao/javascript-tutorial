@@ -716,3 +716,29 @@ function loadEnd(e) {
 ### timeout 事件
 
 服务器超过指定时间还没有返回结果，就会触发 timeout 事件，具体的例子参见`timeout`属性一节。
+
+## Navigator.sendBeacon()
+
+用户卸载网页的时候，有时需要向服务器发一些数据。很自然的做法是在`unload`事件或`beforeunload`事件的监听函数里面，使用`XMLHttpRequest`对象发送数据。但是，这样做不是很可靠，因为`XMLHttpRequest`对象是异步发送，很可能在它即将发送的时候，页面已经卸载了，从而导致发送取消或者发送失败。
+
+解决方法就是`unload`事件里面，加一些很耗时的同步操作。这样就能留出足够的时间，保证异步 AJAX 能够发送成功。
+
+```
+function log() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('post', '/log', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send('foo=bar');
+}
+
+window.addEventListener('unload', function(event) {
+  log();
+
+  // a time-consuming operation
+  for (let i = 1; i < 10000; i++) {
+    for (let m = 1; m < 10000; m++) { continue; }
+  }
+});
+```
+
+上面代码中，强制执行了一次双重循环，拖长了`unload`事件的执行时间，导致异步 AJAX 能够发送成功。
