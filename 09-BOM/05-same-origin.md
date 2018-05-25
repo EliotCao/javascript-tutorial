@@ -96,3 +96,35 @@ Set-Cookie: key=value; domain=.example.com; path=/
 ```
 
 这样的话，二级域名和三级域名不用做任何设置，都可以读取这个 Cookie。
+
+## iframe 和多窗口通信
+
+`iframe`元素可以在当前网页之中，嵌入其他网页。每个`iframe`元素形成自己的窗口，即有自己的`window`对象。`iframe`窗口之中的脚本，可以获得父窗口和子窗口。但是，只有在同源的情况下，父窗口和子窗口才能通信；如果跨域，就无法拿到对方的 DOM。
+
+比如，父窗口运行下面的命令，如果`iframe`窗口不是同源，就会报错。
+
+```
+document
+.getElementById("myIFrame")
+.contentWindow
+.document
+// Uncaught DOMException: Blocked a frame from accessing a cross-origin frame.
+```
+
+上面命令中，父窗口想获取子窗口的 DOM，因为跨域导致报错。
+
+反之亦然，子窗口获取主窗口的 DOM 也会报错。
+
+```
+window.parent.document.body
+// 报错
+```
+
+这种情况不仅适用于`iframe`窗口，还适用于`window.open`方法打开的窗口，只要跨域，父窗口与子窗口之间就无法通信。
+
+如果两个窗口一级域名相同，只是二级域名不同，那么设置上一节介绍的`document.domain`属性，就可以规避同源政策，拿到 DOM。
+
+对于完全不同源的网站，目前有两种方法，可以解决跨域窗口的通信问题。
+
+> - 片段识别符（fragment identifier）
+> - 跨文档通信API（Cross-document messaging）
