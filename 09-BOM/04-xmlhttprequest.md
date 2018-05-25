@@ -771,3 +771,23 @@ theLink.addEventListener('click', function (event) {
 上面代码使用`setTimeout`，拖延了350毫秒，才让页面跳转，因此使得异步 AJAX 有时间发出。
 
 这些做法的共同问题是，卸载的时间被硬生生拖长了，后面页面的加载被推迟了，用户体验不好。
+
+为了解决这个问题，浏览器引入了`Navigator.sendBeacon()`方法。这个方法还是异步发出请求，但是请求与当前页面线程脱钩，作为浏览器进程的任务，因此可以保证会把数据发出去，不拖延卸载流程。
+
+```
+window.addEventListener('unload', logData, false);
+
+function logData() {
+  navigator.sendBeacon('/log', analyticsData);
+}
+```
+
+`Navigator.sendBeacon`方法接受两个参数，第一个参数是目标服务器的 URL，第二个参数是所要发送的数据（可选），可以是任意类型（字符串、表单对象、二进制对象等等）。
+
+```
+navigator.sendBeacon(url, data)
+```
+
+这个方法的返回值是一个布尔值，成功发送数据为`true`，否则为`false`。
+
+该方法发送数据的 HTTP 方法是 POST，可以跨域，类似于表单提交数据。它不能指定回调函数。
