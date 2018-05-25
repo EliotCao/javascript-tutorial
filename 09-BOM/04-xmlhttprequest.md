@@ -742,3 +742,32 @@ window.addEventListener('unload', function(event) {
 ```
 
 上面代码中，强制执行了一次双重循环，拖长了`unload`事件的执行时间，导致异步 AJAX 能够发送成功。
+
+类似的还可以使用`setTimeout`。下面是追踪用户点击的例子。
+
+```
+// HTML 代码如下
+// <a id="target" href="https://baidu.com">click</a>
+const clickTime = 350;
+const theLink = document.getElementById('target');
+
+function log() {
+  let xhr = new XMLHttpRequest();
+  xhr.open('post', '/log', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send('foo=bar');
+}
+
+theLink.addEventListener('click', function (event) {
+  event.preventDefault();
+  log();
+
+  setTimeout(function () {
+    window.location.href = theLink.getAttribute('href');
+  }, clickTime);
+});
+```
+
+上面代码使用`setTimeout`，拖延了350毫秒，才让页面跳转，因此使得异步 AJAX 有时间发出。
+
+这些做法的共同问题是，卸载的时间被硬生生拖长了，后面页面的加载被推迟了，用户体验不好。
