@@ -158,3 +158,41 @@ function checkMessage() {
 ```
 parent.location.href = target + '#' + hash;
 ```
+
+### window.postMessage()
+
+上面的这种方法属于破解，HTML5 为了解决这个问题，引入了一个全新的API：跨文档通信 API（Cross-document messaging）。
+
+这个 API 为`window`对象新增了一个`window.postMessage`方法，允许跨窗口通信，不论这两个窗口是否同源。举例来说，父窗口`aaa.com`向子窗口`bbb.com`发消息，调用`postMessage`方法就可以了。
+
+```
+// 父窗口打开一个子窗口
+var popup = window.open('http://bbb.com', 'title');
+// 父窗口向子窗口发消息
+popup.postMessage('Hello World!', 'http://bbb.com');
+```
+
+`postMessage`方法的第一个参数是具体的信息内容，第二个参数是接收消息的窗口的源（origin），即“协议 + 域名 + 端口”。也可以设为`*`，表示不限制域名，向所有窗口发送。
+
+子窗口向父窗口发送消息的写法类似。
+
+```
+// 子窗口向父窗口发消息
+window.opener.postMessage('Nice to see you', 'http://aaa.com');
+```
+
+父窗口和子窗口都可以通过`message`事件，监听对方的消息。
+
+```
+// 父窗口和子窗口都可以用下面的代码，
+// 监听 message 消息
+window.addEventListener('message', function (e) {
+  console.log(e.data);
+},false);
+```
+
+`message`事件的参数是事件对象`event`，提供以下三个属性。
+
+> - `event.source`：发送消息的窗口
+> - `event.origin`: 消息发向的网址
+> - `event.data`: 消息内容
