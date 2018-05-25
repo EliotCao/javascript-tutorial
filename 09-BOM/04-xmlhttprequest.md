@@ -791,3 +791,18 @@ navigator.sendBeacon(url, data)
 这个方法的返回值是一个布尔值，成功发送数据为`true`，否则为`false`。
 
 该方法发送数据的 HTTP 方法是 POST，可以跨域，类似于表单提交数据。它不能指定回调函数。
+
+下面是一个例子。
+
+```
+// HTML 代码如下
+// <body onload="analytics('start')" onunload="analytics('end')">
+
+function analytics(state) {
+  if (!navigator.sendBeacon) return;
+
+  var URL = 'http://example.com/analytics';
+  var data = 'state=' + state + '&location=' + window.location;
+  navigator.sendBeacon(URL, data);
+}
+```
