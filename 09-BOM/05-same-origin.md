@@ -31,3 +31,33 @@
 设想这样一种情况：A 网站是一家银行，用户登录以后，A 网站在用户的机器上设置了一个 Cookie，包含了一些隐私信息。用户离开 A 网站以后，又去访问 B 网站，如果没有同源限制，B 网站可以读取 A 网站的 Cookie，那么隐私就泄漏了。更可怕的是，Cookie 往往用来保存用户的登录状态，如果用户没有退出登录，其他网站就可以冒充用户，为所欲为。因为浏览器同时还规定，提交表单不受同源政策的限制。
 
 由此可见，同源政策是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。
+
+### 限制范围
+
+随着互联网的发展，同源政策越来越严格。目前，如果非同源，共有三种行为受到限制。
+
+> （1） 无法读取非同源网页的 Cookie、LocalStorage 和 IndexedDB。
+>
+> （2） 无法接触非同源网页的 DOM。
+>
+> （3） 无法向非同源地址发送 AJAX 请求（可以发送，但浏览器会拒绝接受响应）。
+
+另外，通过 JavaScript 脚本可以拿到其他窗口的`window`对象。如果是非同源的网页，目前允许一个窗口可以接触其他网页的`window`对象的九个属性和四个方法。
+
+- window.closed
+- window.frames
+- window.length
+- window.location
+- window.opener
+- window.parent
+- window.self
+- window.top
+- window.window
+- window.blur()
+- window.close()
+- window.focus()
+- window.postMessage()
+
+上面的九个属性之中，只有`window.location`是可读写的，其他八个全部都是只读。而且，即使是`location`对象，非同源的情况下，也只允许调用`location.replace()`方法和写入`location.href`属性。
+
+虽然这些限制是必要的，但是有时很不方便，合理的用途也受到影响。下面介绍如何规避上面的限制。
