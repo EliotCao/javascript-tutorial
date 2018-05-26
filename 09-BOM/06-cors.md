@@ -63,3 +63,15 @@ Content-Type: text/html; charset=utf-8
 ```
 
 上面的头信息之中，有三个与 CORS 请求相关的字段，都以`Access-Control-`开头。
+
+**（1）`Access-Control-Allow-Origin`**
+
+该字段是必须的。它的值要么是请求时`Origin`字段的值，要么是一个`*`，表示接受任意域名的请求。
+
+**（2）`Access-Control-Allow-Credentials`**
+
+该字段可选。它的值是一个布尔值，表示是否允许发送 Cookie。默认情况下，Cookie 不包括在 CORS 请求之中。设为`true`，即表示服务器明确许可，浏览器可以把 Cookie 包含在请求中，一起发给服务器。这个值也只能设为`true`，如果服务器不要浏览器发送 Cookie，不发送该字段即可。
+
+**（3）`Access-Control-Expose-Headers`**
+
+该字段可选。CORS 请求时，`XMLHttpRequest`对象的`getResponseHeader()`方法只能拿到6个服务器返回的基本字段：`Cache-Control`、`Content-Language`、`Content-Type`、`Expires`、`Last-Modified`、`Pragma`。如果想拿到其他字段，就必须在`Access-Control-Expose-Headers`里面指定。上面的例子指定，`getResponseHeader('FooBar')`可以返回`FooBar`字段的值。
