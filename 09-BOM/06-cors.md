@@ -240,3 +240,14 @@ Content-Type: text/html; charset=utf-8
 ```
 
 上面头信息中，`Access-Control-Allow-Origin`字段是每次回应都必定包含的。
+
+## 与 JSONP 的比较
+
+CORS 与 JSONP 的使用目的相同，但是比 JSONP 更强大。JSONP 只支持`GET`请求，CORS 支持所有类型的 HTTP 请求。JSONP 的优势在于支持老式浏览器，以及可以向不支持 CORS 的网站请求数据。
+
+## 参考链接
+
+- [Using CORS](http://www.html5rocks.com/en/tutorials/cors/), Monsur Hossain
+- [HTTP access control (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS), MDN
+- [CORS](https://frontendian.co/cors), Ryan Miller
+- [Do You Really Know CORS?](http://performantcode.com/web/do-you-really-know-cors), Grzegorz Mirek
