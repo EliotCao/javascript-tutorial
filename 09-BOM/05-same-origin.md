@@ -293,3 +293,13 @@ window.onmessage = function(e) {
   console.log(JSON.parse(e.data).name);
 };
 ```
+
+## AJAX
+
+同源政策规定，AJAX 请求只能发给同源的网址，否则就报错。
+
+除了架设服务器代理（浏览器请求同源服务器，再由后者请求外部服务），有三种方法规避这个限制。
+
+> - JSONP
+> - WebSocket
+> - CORS
