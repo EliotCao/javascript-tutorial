@@ -9,3 +9,19 @@ Storage 接口用于脚本在浏览器保存数据。两个对象部署了这个
 保存的数据都以“键值对”的形式存在。也就是说，每一项数据都有一个键名和对应的值。所有的数据都是以文本格式保存。
 
 这个接口很像 Cookie 的强化版，能够使用大得多的存储空间。目前，每个域名的存储上限视浏览器而定，Chrome 是 2.5MB，Firefox 和 Opera 是 5MB，IE 是 10MB。其中，Firefox 的存储空间由一级域名决定，而其他浏览器没有这个限制。也就是说，Firefox 中，`a.example.com`和`b.example.com`共享 5MB 的存储空间。另外，与 Cookie 一样，它们也受同域限制。某个网页存入的数据，只有同域下的网页才能读取，如果跨域操作会报错。
+
+## 属性和方法
+
+Storage 接口只有一个属性。
+
+- `Storage.length`：返回保存的数据项个数。
+
+```
+window.localStorage.setItem('foo', 'a');
+window.localStorage.setItem('bar', 'b');
+window.localStorage.setItem('baz', 'c');
+
+window.localStorage.length // 3
+```
+
+该接口提供5个方法。
