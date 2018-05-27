@@ -25,3 +25,23 @@ window.localStorage.length // 3
 ```
 
 该接口提供5个方法。
+
+### Storage.setItem()
+
+`Storage.setItem()`方法用于存入数据。它接受两个参数，第一个是键名，第二个是保存的数据。如果键名已经存在，该方法会更新已有的键值。该方法没有返回值。
+
+```
+window.sessionStorage.setItem('key', 'value');
+window.localStorage.setItem('key', 'value');
+```
+
+注意，`Storage.setItem()`两个参数都是字符串。如果不是字符串，会自动转成字符串，再存入浏览器。
+
+```
+window.sessionStorage.setItem(3, { foo: 1 });
+window.sessionStorage.getItem('3') // "[object Object]"
+```
+
+上面代码中，`setItem`方法的两个参数都不是字符串，但是存入的值都是字符串。
+
+如果储存空间已满，该方法会抛错。
