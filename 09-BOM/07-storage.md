@@ -91,3 +91,19 @@ for (var i = 0; i < window.localStorage.length; i++) {
   console.log(localStorage.key(i));
 }
 ```
+
+## storage 事件
+
+Storage 接口储存的数据发生变化时，会触发 storage 事件，可以指定这个事件的监听函数。
+
+```
+window.addEventListener('storage', onStorageChange);
+```
+
+监听函数接受一个`event`实例对象作为参数。这个实例对象继承了 StorageEvent 接口，有几个特有的属性，都是只读属性。
+
+- `StorageEvent.key`：字符串，表示发生变动的键名。如果 storage 事件是由`clear()`方法引起，该属性返回`null`。
+- `StorageEvent.newValue`：字符串，表示新的键值。如果 storage 事件是由`clear()`方法或删除该键值对引发的，该属性返回`null`。
+- `StorageEvent.oldValue`：字符串，表示旧的键值。如果该键值对是新增的，该属性返回`null`。
+- `StorageEvent.storageArea`：对象，返回键值对所在的整个对象。也说是说，可以从这个属性上面拿到当前域名储存的所有键值对。
+- `StorageEvent.url`：字符串，表示原始触发 storage 事件的那个网页的网址。
