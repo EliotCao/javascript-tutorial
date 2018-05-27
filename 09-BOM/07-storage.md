@@ -74,3 +74,20 @@ localStorage.removeItem('key');
 window.sessionStorage.clear()
 window.localStorage.clear()
 ```
+
+### Storage.key()
+
+`Storage.key()`接受一个整数作为参数（从零开始），返回该位置对应的键值。
+
+```
+window.sessionStorage.setItem('key', 'value');
+window.sessionStorage.key(0) // "key"
+```
+
+结合使用`Storage.length`属性和`Storage.key()`方法，可以遍历所有的键。
+
+```
+for (var i = 0; i < window.localStorage.length; i++) {
+  console.log(localStorage.key(i));
+}
+```
