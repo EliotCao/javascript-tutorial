@@ -65,3 +65,12 @@ window.localStorage.getItem('key')
 sessionStorage.removeItem('key');
 localStorage.removeItem('key');
 ```
+
+### Storage.clear()
+
+`Storage.clear()`方法用于清除所有保存的数据。该方法的返回值是`undefined`。
+
+```
+window.sessionStorage.clear()
+window.localStorage.clear()
+```
