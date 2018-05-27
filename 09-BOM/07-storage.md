@@ -56,3 +56,12 @@ window.localStorage.getItem('key')
 ```
 
 键名应该是一个字符串，否则会被自动转为字符串。
+
+### Storage.removeItem()
+
+`Storage.removeItem()`方法用于清除某个键名对应的键值。它接受键名作为参数，如果键名不存在，该方法不会做任何事情。
+
+```
+sessionStorage.removeItem('key');
+localStorage.removeItem('key');
+```
