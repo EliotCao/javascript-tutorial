@@ -45,3 +45,14 @@ window.sessionStorage.getItem('3') // "[object Object]"
 上面代码中，`setItem`方法的两个参数都不是字符串，但是存入的值都是字符串。
 
 如果储存空间已满，该方法会抛错。
+
+### Storage.getItem()
+
+`Storage.getItem()`方法用于读取数据。它只有一个参数，就是键名。如果键名不存在，该方法返回`null`。
+
+```
+window.sessionStorage.getItem('key')
+window.localStorage.getItem('key')
+```
+
+键名应该是一个字符串，否则会被自动转为字符串。
