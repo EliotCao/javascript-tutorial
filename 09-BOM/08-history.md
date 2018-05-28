@@ -106,3 +106,29 @@ history.pushState(null, '', 'https://twitter.com/hello');
 ```
 
 上面代码中，`pushState`想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上，因为这个方法不会导致页面跳转。
+
+### History.replaceState()
+
+`History.replaceState()`方法用来修改 History 对象的当前记录，其他都与`pushState()`方法一模一样。
+
+假定当前网页是`example.com/example.html`。
+
+```
+history.pushState({page: 1}, 'title 1', '?page=1')
+// URL 显示为 http://example.com/example.html?page=1
+
+history.pushState({page: 2}, 'title 2', '?page=2');
+// URL 显示为 http://example.com/example.html?page=2
+
+history.replaceState({page: 3}, 'title 3', '?page=3');
+// URL 显示为 http://example.com/example.html?page=3
+
+history.back()
+// URL 显示为 http://example.com/example.html?page=1
+
+history.back()
+// URL 显示为 http://example.com/example.html
+
+history.go(2)
+// URL 显示为 http://example.com/example.html?page=3
+```
