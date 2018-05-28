@@ -75,3 +75,14 @@ window.history.pushState(state, title, url)
 - `state`：一个与添加的记录相关联的状态对象，主要用于`popstate`事件。该事件触发时，该对象会传入回调函数。也就是说，浏览器会将这个对象序列化以后保留在本地，重新载入这个页面的时候，可以拿到这个对象。如果不需要这个对象，此处可以填`null`。
 - `title`：新页面的标题。但是，现在所有浏览器都忽视这个参数，所以这里可以填空字符串。
 - `url`：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
+
+假定当前网址是`example.com/1.html`，使用`pushState()`方法在浏览记录（History 对象）中添加一个新记录。
+
+```
+var stateObj = { foo: 'bar' };
+history.pushState(stateObj, 'page 2', '2.html');
+```
+
+添加新记录后，浏览器地址栏立刻显示`example.com/2.html`，但并不会跳转到`2.html`，甚至也不会检查`2.html`是否存在，它只是成为浏览历史中的最新记录。这时，在地址栏输入一个新的地址(比如访问`google.com`)，然后点击了倒退按钮，页面的 URL 将显示`2.html`；你再点击一次倒退按钮，URL 将显示`1.html`。
+
+总之，`pushState()`方法不会触发页面刷新，只是导致 History 对象发生变化，地址栏会有反应。
