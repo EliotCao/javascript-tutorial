@@ -86,3 +86,23 @@ history.pushState(stateObj, 'page 2', '2.html');
 添加新记录后，浏览器地址栏立刻显示`example.com/2.html`，但并不会跳转到`2.html`，甚至也不会检查`2.html`是否存在，它只是成为浏览历史中的最新记录。这时，在地址栏输入一个新的地址(比如访问`google.com`)，然后点击了倒退按钮，页面的 URL 将显示`2.html`；你再点击一次倒退按钮，URL 将显示`1.html`。
 
 总之，`pushState()`方法不会触发页面刷新，只是导致 History 对象发生变化，地址栏会有反应。
+
+使用该方法之后，就可以用`History.state`属性读出状态对象。
+
+```
+var stateObj = { foo: 'bar' };
+history.pushState(stateObj, 'page 2', '2.html');
+history.state // {foo: "bar"}
+```
+
+如果`pushState`的 URL 参数设置了一个新的锚点值（即`hash`），并不会触发`hashchange`事件。反过来，如果 URL 的锚点值变了，则会在 History 对象创建一条浏览记录。
+
+如果`pushState()`方法设置了一个跨域网址，则会报错。
+
+```
+// 报错
+// 当前网址为 http://example.com
+history.pushState(null, '', 'https://twitter.com/hello');
+```
+
+上面代码中，`pushState`想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上，因为这个方法不会导致页面跳转。
