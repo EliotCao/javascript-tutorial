@@ -21,3 +21,19 @@ history.go(-1)
 ```
 
 浏览器工具栏的“前进”和“后退”按钮，其实就是对 History 对象进行操作。
+
+## 属性
+
+History 对象主要有两个属性。
+
+- `History.length`：当前窗口访问过的网址数量（包括当前网页）
+- `History.state`：History 堆栈最上层的状态值（详见下文）
+
+```
+// 当前窗口访问过多少个网页
+window.history.length // 1
+
+// History 对象的当前状态
+// 通常是 undefined，即未设置
+window.history.state // undefined
+```
