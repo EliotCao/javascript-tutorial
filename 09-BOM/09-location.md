@@ -50,3 +50,28 @@ document.location.origin
 ```
 
 这些属性里面，只有`origin`属性是只读的，其他属性都可写。
+
+注意，如果对`Location.href`写入新的 URL 地址，浏览器会立刻跳转到这个新地址。
+
+```
+// 跳转到新网址
+document.location.href = 'http://www.example.com';
+```
+
+这个特性常常用于让网页自动滚动到新的锚点。
+
+```
+document.location.href = '#top';
+// 等同于
+document.location.hash = '#top';
+```
+
+直接改写`location`，相当于写入`href`属性。
+
+```
+document.location = 'http://www.example.com';
+// 等同于
+document.location.href = 'http://www.example.com';
+```
+
+另外，`Location.href`属性是浏览器唯一允许跨域写入的属性，即非同源的窗口可以改写另一个窗口（比如子窗口与父窗口）的`Location.href`属性，导致后者的网址跳转。`Location`的其他属性都不允许跨域写入。
