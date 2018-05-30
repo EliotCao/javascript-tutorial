@@ -152,3 +152,21 @@ encodeURIComponent('http://www.example.com/q=春节')
 ```
 
 上面代码中，`encodeURIComponent()`会连 URL 元字符一起转义，所以如果转码整个 URL 就会出错。
+
+### decodeURI()
+
+`decodeURI()`方法用于整个 URL 的解码。它是`encodeURI()`方法的逆运算。它接受一个参数，就是转码后的 URL。
+
+```
+decodeURI('http://www.example.com/q=%E6%98%A5%E8%8A%82')
+// "http://www.example.com/q=春节"
+```
+
+### decodeURIComponent()
+
+`decodeURIComponent()`用于URL 片段的解码。它是`encodeURIComponent()`方法的逆运算。它接受一个参数，就是转码后的 URL 片段。
+
+```
+decodeURIComponent('%E6%98%A5%E8%8A%82')
+// "春节"
+```
