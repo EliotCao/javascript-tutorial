@@ -123,3 +123,19 @@ window.location.reload(true);
 除了以上字符，其他字符出现在 URL 之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（`%`）加上两个大写的十六进制字母。
 
 比如，UTF-8 的操作系统上，`http://www.example.com/q=春节`这个 URL 之中，汉字“春节”不是 URL 的合法字符，所以被浏览器自动转成`http://www.example.com/q=%E6%98%A5%E8%8A%82`。其中，“春”转成了`%E6%98%A5`，“节”转成了`%E8%8A%82`。这是因为“春”和“节”的 UTF-8 编码分别是`E6 98 A5`和`E8 8A 82`，将每个字节前面加上百分号，就构成了 URL 编码。
+
+JavaScript 提供四个 URL 的编码/解码方法。
+
+- `encodeURI()`
+- `encodeURIComponent()`
+- `decodeURI()`
+- `decodeURIComponent()`
+
+### encodeURI()
+
+`encodeURI()`方法用于转码整个 URL。它的参数是一个字符串，代表整个 URL。它会将元字符和语义字符之外的字符，都进行转义。
+
+```
+encodeURI('http://www.example.com/q=春节')
+// "http://www.example.com/q=%E6%98%A5%E8%8A%82"
+```
