@@ -301,3 +301,26 @@ blob:http://localhost/c745ef73-ece9-46da-8f66-ebes574789b1
 ```
 
 注意，每次使用`URL.createObjectURL()`方法，都会在内存里面生成一个 URL 实例。如果不再需要该方法生成的 URL 字符串，为了节省内存，可以使用`URL.revokeObjectURL()`方法释放这个实例。
+
+**（2）URL.revokeObjectURL()**
+
+`URL.revokeObjectURL()`方法用来释放`URL.createObjectURL()`方法生成的 URL 实例。它的参数就是`URL.createObjectURL()`方法返回的 URL 字符串。
+
+下面为上一段的示例加上`URL.revokeObjectURL()`。
+
+```
+var div = document.getElementById('display');
+
+function handleFiles(files) {
+  for (var i = 0; i < files.length; i++) {
+    var img = document.createElement('img');
+    img.src = window.URL.createObjectURL(files[i]);
+    div.appendChild(img);
+    img.onload = function() {
+      window.URL.revokeObjectURL(this.src);
+    }
+  }
+}
+```
+
+上面代码中，一旦图片加载成功以后，为本地文件生成的 URL 字符串就没用了，于是可以在`img.onload`回调函数里面，通过`URL.revokeObjectURL()`方法卸载这个 URL 实例。
