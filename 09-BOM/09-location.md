@@ -264,3 +264,40 @@ url.href // "http://example.com/index2.html#part2"
 ```
 
 上面代码中，改变 URL 实例的`pathname`属性和`hash`属性，都会实时反映在 URL 实例当中。
+
+### 静态方法
+
+**（1）URL.createObjectURL()**
+
+`URL.createObjectURL()`方法用来为上传/下载的文件、流媒体文件生成一个 URL 字符串。这个字符串代表了`File`对象或`Blob`对象的 URL。
+
+```
+// HTML 代码如下
+// <div id="display"/>
+// <input
+//   type="file"
+//   id="fileElem"
+//   multiple
+//   accept="image/*"
+//   onchange="handleFiles(this.files)"
+//  >
+var div = document.getElementById('display');
+
+function handleFiles(files) {
+  for (var i = 0; i < files.length; i++) {
+    var img = document.createElement('img');
+    img.src = window.URL.createObjectURL(files[i]);
+    div.appendChild(img);
+  }
+}
+```
+
+上面代码中，`URL.createObjectURL()`方法用来为上传的文件生成一个 URL 字符串，作为`<img>`元素的图片来源。
+
+该方法生成的 URL 就像下面的样子。
+
+```
+blob:http://localhost/c745ef73-ece9-46da-8f66-ebes574789b1
+```
+
+注意，每次使用`URL.createObjectURL()`方法，都会在内存里面生成一个 URL 实例。如果不再需要该方法生成的 URL 字符串，为了节省内存，可以使用`URL.revokeObjectURL()`方法释放这个实例。
