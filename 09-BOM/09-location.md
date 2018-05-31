@@ -170,3 +170,37 @@ decodeURI('http://www.example.com/q=%E6%98%A5%E8%8A%82')
 decodeURIComponent('%E6%98%A5%E8%8A%82')
 // "春节"
 ```
+
+## URL 接口
+
+`URL`接口是一个构造函数，浏览器原生提供，可以用来构造、解析和编码 URL。一般情况下，通过`window.URL`可以拿到这个构造函数。
+
+### 构造函数
+
+`URL`作为构造函数，可以生成 URL 实例。它接受一个表示 URL 的字符串作为参数。如果参数不是合法的 URL，会报错。
+
+```
+var url = new URL('http://www.example.com/index.html');
+url.href
+// "http://www.example.com/index.html"
+```
+
+如果参数是另一个 URL 实例，构造函数会自动读取该实例的`href`属性，作为实际参数。
+
+如果 URL 字符串是一个相对路径，那么需要表示绝对路径的第二个参数，作为计算基准。
+
+```
+var url1 = new URL('index.html', 'http://example.com');
+url1.href
+// "http://example.com/index.html"
+
+var url2 = new URL('page2.html', 'http://example.com/page1.html');
+url2.href
+// "http://example.com/page2.html"
+
+var url3 = new URL('..', 'http://example.com/a/b.html')
+url3.href
+// "http://example.com/"
+```
+
+上面代码中，返回的 URL 实例的路径都是在第二个参数的基础上，切换到第一个参数得到的。最后一个例子里面，第一个参数是`..`，表示上层路径。
