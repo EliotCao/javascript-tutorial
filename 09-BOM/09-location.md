@@ -514,3 +514,17 @@ params.getAll('foo') // ["1", "2"]
 ```
 
 上面代码中，查询字符串有两个`foo`键，`getAll`返回的数组就有两个成员。
+
+### URLSearchParams.sort()
+
+`sort()`方法对查询字符串里面的键进行排序，规则是按照 Unicode 码点从小到大排列。
+
+该方法没有返回值，或者说返回值是`undefined`。
+
+```
+var params = new URLSearchParams('c=4&a=2&b=3&a=1');
+params.sort();
+params.toString() // "a=2&a=1&b=3&c=4"
+```
+
+上面代码中，如果有两个同名的键`a`，它们之间不会排序，而是保留原始的顺序。
