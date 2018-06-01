@@ -449,3 +449,38 @@ var params = new URLSearchParams({'foo': 1 , 'bar': 2});
 params.has('bar') // true
 params.has('baz') // false
 ```
+
+### URLSearchParams.set()
+
+`set()`方法用来设置查询字符串的键值。
+
+它接受两个参数，第一个是键名，第二个是键值。如果是已经存在的键，键值会被改写，否则会被追加。
+
+```
+var params = new URLSearchParams('?foo=1');
+params.set('foo', 2);
+params.toString() // "foo=2"
+params.set('bar', 3);
+params.toString() // "foo=2&bar=3"
+```
+
+上面代码中，`foo`是已经存在的键，`bar`是还不存在的键。
+
+如果有多个的同名键，`set`会移除现存所有的键。
+
+```
+var params = new URLSearchParams('?foo=1&foo=2');
+params.set('foo', 3);
+params.toString() // "foo=3"
+```
+
+下面是一个替换当前 URL 的例子。
+
+```
+// URL: https://example.com?version=1.0
+var params = new URLSearchParams(location.search.slice(1));
+params.set('version', 2.0);
+
+window.history.replaceState({}, '', location.pathname + `?` + params);
+// URL: https://example.com?version=2.0
+```
