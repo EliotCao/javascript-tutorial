@@ -375,3 +375,17 @@ var foo = url.searchParams.get('foo') || 'somedefault';
 ```
 
 上面代码中，URL 实例的`searchParams`属性就是一个`URLSearchParams`实例，所以可以使用`URLSearchParams`接口的`get`方法。
+
+`URLSearchParams`实例有遍历器接口，可以用`for...of`循环遍历（详见《ES6 标准入门》的《Iterator》一章）。
+
+```
+var params = new URLSearchParams({'foo': 1 , 'bar': 2});
+
+for (var p of params) {
+  console.log(p[0] + ': ' + p[1]);
+}
+// foo: 1
+// bar: 2
+```
+
+`URLSearchParams`没有实例属性，只有实例方法。
