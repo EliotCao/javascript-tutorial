@@ -439,3 +439,13 @@ var params = new URLSearchParams({'foo': 1 , 'bar': 2});
 params.delete('bar');
 params.toString() // "foo=1"
 ```
+
+### URLSearchParams.has()
+
+`has()`方法返回一个布尔值，表示查询字符串是否包含指定的键名。
+
+```
+var params = new URLSearchParams({'foo': 1 , 'bar': 2});
+params.has('bar') // true
+params.has('baz') // false
+```
