@@ -409,3 +409,23 @@ window.location.href = location.pathname + '?' + params;
 ```
 
 上面代码中，`location.href`赋值时，可以直接使用`params`对象。这时就会自动调用`toString`方法。
+
+### URLSearchParams.append()
+
+`append()`方法用来追加一个查询参数。它接受两个参数，第一个为键名，第二个为键值，没有返回值。
+
+```
+var params = new URLSearchParams({'foo': 1 , 'bar': 2});
+params.append('baz', 3);
+params.toString() // "foo=1&bar=2&baz=3"
+```
+
+`append()`方法不会识别是否键名已经存在。
+
+```
+var params = new URLSearchParams({'foo': 1 , 'bar': 2});
+params.append('foo', 3);
+params.toString() // "foo=1&bar=2&foo=3"
+```
+
+上面代码中，查询字符串里面`foo`已经存在了，但是`append`依然会追加一个同名键。
