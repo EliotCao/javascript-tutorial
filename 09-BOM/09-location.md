@@ -528,3 +528,44 @@ params.toString() // "a=2&a=1&b=3&c=4"
 ```
 
 上面代码中，如果有两个同名的键`a`，它们之间不会排序，而是保留原始的顺序。
+
+### URLSearchParams.keys()，URLSearchParams.values()，URLSearchParams.entries()
+
+这三个方法都返回一个遍历器对象，供`for...of`循环遍历。它们的区别在于，`keys`方法返回的是键名的遍历器，`values`方法返回的是键值的遍历器，`entries`返回的是键值对的遍历器。
+
+```
+var params = new URLSearchParams('a=1&b=2');
+
+for(var p of params.keys()) {
+  console.log(p);
+}
+// a
+// b
+
+for(var p of params.values()) {
+  console.log(p);
+}
+// 1
+// 2
+
+for(var p of params.entries()) {
+  console.log(p);
+}
+// ["a", "1"]
+// ["b", "2"]
+```
+
+如果直接对`URLSearchParams`进行遍历，其实内部调用的就是`entries`接口。
+
+```
+for (var p of params) {}
+// 等同于
+for (var p of params.entries()) {}
+```
+
+## 参考链接
+
+- [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location), by MDN
+- [URL](https://developer.mozilla.org/en-US/docs/Web/API/URL), by MDN
+- [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams), by MDN
+- [Easy URL Manipulation with URLSearchParams](https://developers.google.com/web/updates/2016/01/urlsearchparams?hl=en), by Eric Bidelman
