@@ -354,3 +354,24 @@ params.toString() // "foo=%E4%BD%A0%E5%A5%BD"
 ```
 
 上面代码中，`foo`的值是汉字，`URLSearchParams`对其自动进行 URL 编码。
+
+浏览器向服务器发送表单数据时，可以直接使用`URLSearchParams`实例作为表单数据。
+
+```
+const params = new URLSearchParams({foo: 1, bar: 2});
+fetch('https://example.com/api', {
+  method: 'POST',
+  body: params
+}).then(...)
+```
+
+上面代码中，`fetch`命令向服务器发送命令时，可以直接使用`URLSearchParams`实例。
+
+`URLSearchParams`可以与`URL`接口结合使用。
+
+```
+var url = new URL(window.location);
+var foo = url.searchParams.get('foo') || 'somedefault';
+```
+
+上面代码中，URL 实例的`searchParams`属性就是一个`URLSearchParams`实例，所以可以使用`URLSearchParams`接口的`get`方法。
