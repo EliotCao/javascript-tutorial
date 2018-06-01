@@ -389,3 +389,23 @@ for (var p of params) {
 ```
 
 `URLSearchParams`没有实例属性，只有实例方法。
+
+### URLSearchParams.toString()
+
+`toString`方法返回实例的字符串形式。
+
+```
+var url = new URL('https://example.com?foo=1&bar=2');
+var params = new URLSearchParams(url.search);
+
+params.toString() // "foo=1&bar=2'
+```
+
+那么需要字符串的场合，会自动调用`toString`方法。
+
+```
+var params = new URLSearchParams({version: 2.0});
+window.location.href = location.pathname + '?' + params;
+```
+
+上面代码中，`location.href`赋值时，可以直接使用`params`对象。这时就会自动调用`toString`方法。
