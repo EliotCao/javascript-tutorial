@@ -484,3 +484,33 @@ params.set('version', 2.0);
 window.history.replaceState({}, '', location.pathname + `?` + params);
 // URL: https://example.com?version=2.0
 ```
+
+### URLSearchParams.get()，URLSearchParams.getAll()
+
+`get()`方法用来读取查询字符串里面的指定键。它接受键名作为参数。
+
+```
+var params = new URLSearchParams('?foo=1');
+params.get('foo') // "1"
+params.get('bar') // null
+```
+
+两个地方需要注意。第一，它返回的是字符串，如果原始值是数值，需要转一下类型；第二，如果指定的键名不存在，返回值是`null`。
+
+如果有多个的同名键，`get`返回位置最前面的那个键值。
+
+```
+var params = new URLSearchParams('?foo=3&foo=2&foo=1');
+params.get('foo') // "3"
+```
+
+上面代码中，查询字符串有三个`foo`键，`get`方法返回最前面的键值`3`。
+
+`getAll()`方法返回一个数组，成员是指定键的所有键值。它接受键名作为参数。
+
+```
+var params = new URLSearchParams('?foo=1&foo=2');
+params.getAll('foo') // ["1", "2"]
+```
+
+上面代码中，查询字符串有两个`foo`键，`getAll`返回的数组就有两个成员。
