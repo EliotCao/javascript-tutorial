@@ -429,3 +429,13 @@ params.toString() // "foo=1&bar=2&foo=3"
 ```
 
 上面代码中，查询字符串里面`foo`已经存在了，但是`append`依然会追加一个同名键。
+
+### URLSearchParams.delete()
+
+`delete()`方法用来删除指定的查询参数。它接受键名作为参数。
+
+```
+var params = new URLSearchParams({'foo': 1 , 'bar': 2});
+params.delete('bar');
+params.toString() // "foo=1"
+```
