@@ -77,3 +77,28 @@ myBlob.slice(start, end, contentType)
 ```
 
 `slice`方法有三个参数，都是可选的。它们依次是起始的字节位置（默认为0）、结束的字节位置（默认为`size`属性的值，该位置本身将不包含在拷贝的数据之中）、新实例的数据类型（默认为空字符串）。
+
+### 获取文件信息
+
+文件选择器`<input type="file">`用来让用户选取文件。出于安全考虑，浏览器不允许脚本自行设置这个控件的`value`属性，即文件必须是用户手动选取的，不能是脚本指定的。一旦用户选好了文件，脚本就可以读取这个文件。
+
+文件选择器返回一个 FileList 对象，该对象是一个类似数组的成员，每个成员都是一个 File 实例对象。File 实例对象是一个特殊的 Blob 实例，增加了`name`和`lastModifiedDate`属性。
+
+```
+// HTML 代码如下
+// <input type="file" accept="image/*" multiple onchange="fileinfo(this.files)"/>
+
+function fileinfo(files) {
+  for (var i = 0; i < files.length; i++) {
+    var f = files[i];
+    console.log(
+      f.name, // 文件名，不含路径
+      f.size, // 文件大小，Blob 实例属性
+      f.type, // 文件类型，Blob 实例属性
+      f.lastModifiedDate // 文件的最后修改时间
+    );
+  }
+}
+```
+
+除了文件选择器，拖放 API 的`dataTransfer.files`返回的也是一个FileList 对象，它的成员因此也是 File 实例对象。
