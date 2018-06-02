@@ -182,3 +182,31 @@ function readfile(f) {
 ```
 
 上面代码中，通过指定 FileReader 实例对象的`onload`监听函数，在实例的`result`属性上拿到文件内容。
+
+下面是`FileReader.readAsArrayBuffer()`方法的例子，用于读取二进制文件。
+
+```
+// HTML 代码如下
+// <input type="file" onchange="typefile(this.files[0])"></input>
+function typefile(file) {
+  // 文件开头的四个字节，生成一个 Blob 对象
+  var slice = file.slice(0, 4);
+  var reader = new FileReader();
+  // 读取这四个字节
+  reader.readAsArrayBuffer(slice);
+  reader.onload = function (e) {
+    var buffer = reader.result;
+    // 将这四个字节的内容，视作一个32位整数
+    var view = new DataView(buffer);
+    var magic = view.getUint32(0, false);
+    // 根据文件的前四个字节，判断它的类型
+    switch(magic) {
+      case 0x89504E47: file.verified_type = 'image/png'; break;
+      case 0x47494638: file.verified_type = 'image/gif'; break;
+      case 0x25504446: file.verified_type = 'application/pdf'; break;
+      case 0x504b0304: file.verified_type = 'application/zip'; break;
+    }
+    console.log(file.name, file.verified_type);
+  };
+}
+```
