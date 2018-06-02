@@ -57,3 +57,23 @@ var myBlob = new Blob(htmlFragment, {type : 'text/html'});
 var obj = { hello: 'world' };
 var blob = new Blob([ JSON.stringify(obj) ], {type : 'application/json'});
 ```
+
+### 实例属性和实例方法
+
+`Blob`具有两个实例属性`size`和`type`，分别返回数据的大小和类型。
+
+```
+var htmlFragment = ['<a id="a"><b id="b">hey!</b></a>'];
+var myBlob = new Blob(htmlFragment, {type : 'text/html'});
+
+myBlob.size // 32
+myBlob.type // "text/html"
+```
+
+`Blob`具有一个实例方法`slice`，用来拷贝原来的数据，返回的也是一个`Blob`实例。
+
+```
+myBlob.slice(start, end, contentType)
+```
+
+`slice`方法有三个参数，都是可选的。它们依次是起始的字节位置（默认为0）、结束的字节位置（默认为`size`属性的值，该位置本身将不包含在拷贝的数据之中）、新实例的数据类型（默认为空字符串）。
