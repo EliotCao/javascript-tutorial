@@ -50,3 +50,10 @@ var myBlob = new Blob(htmlFragment, {type : 'text/html'});
 ```
 
 上面代码中，实例对象`myBlob`包含的是字符串。生成实例的时候，数据类型指定为`text/html`。
+
+下面是另一个例子，Blob 保存 JSON 数据。
+
+```
+var obj = { hello: 'world' };
+var blob = new Blob([ JSON.stringify(obj) ], {type : 'application/json'});
+```
