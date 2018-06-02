@@ -102,3 +102,21 @@ function fileinfo(files) {
 ```
 
 除了文件选择器，拖放 API 的`dataTransfer.files`返回的也是一个FileList 对象，它的成员因此也是 File 实例对象。
+
+### 下载文件
+
+AJAX 请求时，如果指定`responseType`属性为`blob`，下载下来的就是一个 Blob 对象。
+
+```
+function getBlob(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.onload = function () {
+    callback(xhr.response);
+  }
+  xhr.send(null);
+}
+```
+
+上面代码中，`xhr.response`拿到的就是一个 Blob 对象。
