@@ -13,3 +13,19 @@ var buffer = new ArrayBuffer(8);
 ```
 
 上面代码中，实例对象`buffer`占用8个字节。
+
+ArrayBuffer 对象有实例属性`byteLength`，表示当前实例占用的内存长度（单位字节）。
+
+```
+var buffer = new ArrayBuffer(8);
+buffer.byteLength // 8
+```
+
+ArrayBuffer 对象有实例方法`slice()`，用来复制一部分内存。它接受两个整数参数，分别表示复制的开始位置（从0开始）和结束位置（复制时不包括结束位置），如果省略第二个参数，则表示一直复制到结束。
+
+```
+var buf1 = new ArrayBuffer(8);
+var buf2 = buf1.slice(0);
+```
+
+上面代码表示复制原来的实例。
