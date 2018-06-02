@@ -120,3 +120,31 @@ function getBlob(url, callback) {
 ```
 
 上面代码中，`xhr.response`拿到的就是一个 Blob 对象。
+
+### 生成 URL
+
+浏览器允许使用`URL.createObjectURL()`方法，针对 Blob 对象生成一个临时 URL，以便于某些 API 使用。这个 URL 以`blob://`开头，表明对应一个 Blob 对象，协议头后面是一个识别符，用来唯一对应内存里面的 Blob 对象。这一点与`data://URL`（URL 包含实际数据）和`file://URL`（本地文件系统里面的文件）都不一样。
+
+```
+var droptarget = document.getElementById('droptarget');
+
+droptarget.ondrop = function (e) {
+  var files = e.dataTransfer.files;
+  for (var i = 0; i < files.length; i++) {
+    var type = files[i].type;
+    if (type.substring(0,6) !== 'image/')
+      continue;
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(files[i]);
+    img.onload = function () {
+      this.width = 100;
+      document.body.appendChild(this);
+      URL.revokeObjectURL(this.src);
+    }
+  }
+}
+```
+
+上面代码通过为拖放的图片文件生成一个 URL，产生它们的缩略图，从而使得用户可以预览选择的文件。
+
+浏览器处理 Blob URL 就跟普通的 URL 一样，如果 Blob 对象不存在，返回404状态码；如果跨域请求，返回403状态码。Blob URL 只对 GET 请求有效，如果请求成功，返回200状态码。由于 Blob URL 就是普通 URL，因此可以下载。
