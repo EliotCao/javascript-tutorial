@@ -159,3 +159,26 @@ FileReader 对象提供四个方法，处理 Blob 对象。Blob 对象作为参�
 - `FileReader.readAsArrayBuffer()`：返回 ArrayBuffer 对象。
 - `FileReader.readAsDataURL()`：返回 Data URL。
 - `FileReader.readAsBinaryString()`：返回原始的二进制字符串。
+
+下面是`FileReader.readAsText()`方法的例子，用来读取文本文件。
+
+```
+// HTML 代码如下
+// <input type=’file' onchange='readfile(this.files[0])'></input>
+// <pre id='output'></pre>
+function readfile(f) {
+  var reader = new FileReader();
+  reader.readAsText(f);
+  reader.onload = function () {
+    var text = reader.result;
+    var out = document.getElementById('output');
+    out.innerHTML = '';
+    out.appendChild(document.createTextNode(text));
+  }
+  reader.onerror = function(e) {
+    console.log('Error', e);
+  };
+}
+```
+
+上面代码中，通过指定 FileReader 实例对象的`onload`监听函数，在实例的`result`属性上拿到文件内容。
