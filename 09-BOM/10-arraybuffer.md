@@ -29,3 +29,24 @@ var buf2 = buf1.slice(0);
 ```
 
 上面代码表示复制原来的实例。
+
+## Blob 对象
+
+### 简介
+
+Blob 对象表示一个二进制文件的数据内容，比如一个图片文件的内容就可以通过 Blob 对象读写。它通常用来读写文件，它的名字是 Binary Large Object （二进制大型对象）的缩写。它与 ArrayBuffer 的区别在于，它用于操作二进制文件，而 ArrayBuffer 用于操作内存。
+
+浏览器原生提供`Blob()`构造函数，用来生成实例对象。
+
+```
+new Blob(array [, options])
+```
+
+`Blob`构造函数接受两个参数。第一个参数是数组，成员是字符串或二进制对象，表示新生成的`Blob`实例对象的内容；第二个参数是可选的，是一个配置对象，目前只有一个属性`type`，它的值是一个字符串，表示数据的 MIME 类型，默认是空字符串。
+
+```
+var htmlFragment = ['<a id="a"><b id="b">hey!</b></a>'];
+var myBlob = new Blob(htmlFragment, {type : 'text/html'});
+```
+
+上面代码中，实例对象`myBlob`包含的是字符串。生成实例的时候，数据类型指定为`text/html`。
