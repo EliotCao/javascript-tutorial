@@ -98,3 +98,15 @@ FileReader 对象用于读取 File 对象或 Blob 对象所包含的文件内容
 ```
 var reader = new FileReader();
 ```
+
+FileReader 有以下的实例属性。
+
+- FileReader.error：读取文件时产生的错误对象
+- FileReader.readyState：整数，表示读取文件时的当前状态。一共有三种可能的状态，`0`表示尚未加载任何数据，`1`表示数据正在加载，`2`表示加载完成。
+- FileReader.result：读取完成后的文件内容，有可能是字符串，也可能是一个 ArrayBuffer 实例。
+- FileReader.onabort：`abort`事件（用户终止读取操作）的监听函数。
+- FileReader.onerror：`error`事件（读取错误）的监听函数。
+- FileReader.onload：`load`事件（读取操作完成）的监听函数，通常在这个函数里面使用`result`属性，拿到文件内容。
+- FileReader.onloadstart：`loadstart`事件（读取操作开始）的监听函数。
+- FileReader.onloadend：`loadend`事件（读取操作结束）的监听函数。
+- FileReader.onprogress：`progress`事件（读取操作进行中）的监听函数。
