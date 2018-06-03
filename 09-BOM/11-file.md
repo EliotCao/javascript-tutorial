@@ -33,3 +33,15 @@ new File(array, name [, options])
 
 - type：字符串，表示实例对象的 MIME 类型，默认值为空字符串。
 - lastModified：时间戳，表示上次修改的时间，默认为`Date.now()`。
+
+下面是一个例子。
+
+```
+var file = new File(
+  ['foo'],
+  'foo.txt',
+  {
+    type: 'text/plain',
+  }
+);
+```
