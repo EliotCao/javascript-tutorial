@@ -45,3 +45,26 @@ var file = new File(
   }
 );
 ```
+
+### 实例属性和实例方法
+
+File 对象有以下实例属性。
+
+- File.lastModified：最后修改时间
+- File.name：文件名或文件路径
+- File.size：文件大小（单位字节）
+- File.type：文件的 MIME 类型
+
+```
+var myFile = new File([], 'file.bin', {
+  lastModified: new Date(2018, 1, 1),
+});
+myFile.lastModified // 1517414400000
+myFile.name // "file.bin"
+myFile.size // 0
+myFile.type // ""
+```
+
+上面代码中，由于`myFile`的内容为空，也没有设置 MIME 类型，所以`size`属性等于0，`type`属性等于空字符串。
+
+File 对象没有自己的实例方法，由于继承了 Blob 对象，因此可以使用 Blob 的实例方法`slice()`。
