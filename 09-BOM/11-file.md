@@ -88,3 +88,13 @@ files instanceof FileList // true
 FileList 的实例属性主要是`length`，表示包含多少个文件。
 
 FileList 的实例方法主要是`item()`，用来返回指定位置的实例。它接受一个整数作为参数，表示位置的序号（从零开始）。但是，由于 FileList 的实例是一个类似数组的对象，可以直接用方括号运算符，即`myFileList[0]`等同于`myFileList.item(0)`，所以一般用不到`item()`方法。
+
+## FileReader 对象
+
+FileReader 对象用于读取 File 对象或 Blob 对象所包含的文件内容。
+
+浏览器原生提供一个`FileReader`构造函数，用来生成 FileReader 实例。
+
+```
+var reader = new FileReader();
+```
