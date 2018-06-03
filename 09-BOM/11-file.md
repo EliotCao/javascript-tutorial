@@ -68,3 +68,23 @@ myFile.type // ""
 上面代码中，由于`myFile`的内容为空，也没有设置 MIME 类型，所以`size`属性等于0，`type`属性等于空字符串。
 
 File 对象没有自己的实例方法，由于继承了 Blob 对象，因此可以使用 Blob 的实例方法`slice()`。
+
+## FileList 对象
+
+`FileList`对象是一个类似数组的对象，代表一组选中的文件，每个成员都是一个 File 实例。它主要出现在两个场合。
+
+- 文件控件节点（`<input type="file">`）的`files`属性，返回一个 FileList 实例。
+- 拖拉一组文件时，目标区的`DataTransfer.files`属性，返回一个 FileList 实例。
+
+```
+// HTML 代码如下
+// <input id="fileItem" type="file">
+var files = document.getElementById('fileItem').files;
+files instanceof FileList // true
+```
+
+上面代码中，文件控件的`files`属性是一个 FileList 实例。
+
+FileList 的实例属性主要是`length`，表示包含多少个文件。
+
+FileList 的实例方法主要是`item()`，用来返回指定位置的实例。它接受一个整数作为参数，表示位置的序号（从零开始）。但是，由于 FileList 的实例是一个类似数组的对象，可以直接用方括号运算符，即`myFileList[0]`等同于`myFileList.item(0)`，所以一般用不到`item()`方法。
