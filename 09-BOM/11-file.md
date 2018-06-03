@@ -110,3 +110,22 @@ FileReader 有以下的实例属性。
 - FileReader.onloadstart：`loadstart`事件（读取操作开始）的监听函数。
 - FileReader.onloadend：`loadend`事件（读取操作结束）的监听函数。
 - FileReader.onprogress：`progress`事件（读取操作进行中）的监听函数。
+
+下面是监听`load`事件的一个例子。
+
+```
+// HTML 代码如下
+// <input type="file" onchange="onChange(event)">
+
+function onChange(event) {
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function (event) {
+    console.log(event.target.result)
+  };
+
+  reader.readAsText(file);
+}
+```
+
+上面代码中，每当文件控件发生变化，就尝试读取第一个文件。如果读取成功（`load`事件发生），就打印出文件内容。
