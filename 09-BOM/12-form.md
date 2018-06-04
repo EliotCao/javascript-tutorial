@@ -53,3 +53,25 @@ user_name=张三&user_passwd=123&submit_button=提交
 ```
 
 上面表单就包含一个`submit`控件，点击这个控件，浏览器就会把表单数据向服务器提交。
+
+注意，表单里面的`<button>`元素如果没有用`type`属性指定类型，那么默认就是`submit`控件。
+
+```
+<form>
+  <button>提交</button>
+</form>
+```
+
+上面表单的`<button>`元素，点击以后也会提交表单。
+
+除了点击`submit`控件提交表单，还可以用表单元素的`submit()`方法，通过脚本提交表单。
+
+```
+formElement.submit();
+```
+
+表单元素的`reset()`方法可以重置所有控件的值（重置为默认值）。
+
+```
+formElement.reset()
+```
