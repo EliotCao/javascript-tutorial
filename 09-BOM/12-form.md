@@ -89,3 +89,38 @@ var formdata = new FormData(form);
 ```
 
 `FormData()`构造函数的参数是一个表单元素，这个参数是可选的。如果省略参数，就表示一个空的表单，否则就会处理表单元素里面的键值对。
+
+下面是一个表单。
+
+```
+<form id="myForm" name="myForm">
+  <div>
+    <label for="username">用户名：</label>
+    <input type="text" id="username" name="username">
+  </div>
+  <div>
+    <label for="useracc">账号：</label>
+    <input type="text" id="useracc" name="useracc">
+  </div>
+  <div>
+    <label for="userfile">上传文件：</label>
+    <input type="file" id="userfile" name="userfile">
+  </div>
+<input type="submit" value="Submit!">
+</form>
+```
+
+我们用 FormData 对象处理上面这个表单。
+
+```
+var myForm = document.getElementById('myForm');
+var formData = new FormData(myForm);
+
+// 获取某个控件的值
+formData.get('username') // ""
+
+// 设置某个控件的值
+formData.set('username', '张三');
+
+formData.get('username') // "张三"
+```
