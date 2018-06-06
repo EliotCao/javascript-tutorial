@@ -152,3 +152,36 @@ formData.getAll('username') // ["张三", "李四"]
 formData.append('userpic[]', myFileInput.files[0], 'user1.jpg');
 formData.append('userpic[]', myFileInput.files[1], 'user2.jpg');
 ```
+
+下面是遍历器的例子。
+
+```
+var formData = new FormData();
+formData.append('key1', 'value1');
+formData.append('key2', 'value2');
+
+for (var key of formData.keys()) {
+  console.log(key);
+}
+// "key1"
+// "key2"
+
+for (var value of formData.values()) {
+  console.log(value);
+}
+// "value1"
+// "value2"
+
+for (var pair of formData.entries()) {
+  console.log(pair[0] + ': ' + pair[1]);
+}
+// key1: value1
+// key2: value2
+
+// 等同于遍历 formData.entries()
+for (var pair of formData) {
+  console.log(pair[0] + ': ' + pair[1]);
+}
+// key1: value1
+// key2: value2
+```
