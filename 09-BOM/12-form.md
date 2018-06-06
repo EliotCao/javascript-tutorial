@@ -138,3 +138,17 @@ FormData 提供以下实例方法。
 - `FormData.keys()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键名。
 - `FormData.values()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键值。
 - `FormData.entries()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键值对。如果直接用`for...of`循环遍历 FormData 实例，默认就会调用这个方法。
+
+下面是`get()`、`getAll()`、`set()`、`append()`方法的例子。
+
+```
+var formData = new FormData();
+
+formData.set('username', '张三');
+formData.append('username', '李四');
+formData.get('username') // "张三"
+formData.getAll('username') // ["张三", "李四"]
+
+formData.append('userpic[]', myFileInput.files[0], 'user1.jpg');
+formData.append('userpic[]', myFileInput.files[1], 'user2.jpg');
+```
