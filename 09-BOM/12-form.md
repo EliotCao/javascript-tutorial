@@ -124,3 +124,17 @@ formData.set('username', '张三');
 
 formData.get('username') // "张三"
 ```
+
+### 实例方法
+
+FormData 提供以下实例方法。
+
+- `FormData.get(key)`：获取指定键名对应的键值，参数为键名。如果有多个同名的键值对，则返回第一个键值对的键值。
+- `FormData.getAll(key)`：返回一个数组，表示指定键名对应的所有键值。如果有多个同名的键值对，数组会包含所有的键值。
+- `FormData.set(key, value)`：设置指定键名的键值，参数为键名。如果键名不存在，会添加这个键值对，否则会更新指定键名的键值。如果第二个参数是文件，还可以使用第三个参数，表示文件名。
+- `FormData.delete(key)`：删除一个键值对，参数为键名。
+- `FormData.append(key, value)`：添加一个键值对。如果键名重复，则会生成两个相同键名的键值对。如果第二个参数是文件，还可以使用第三个参数，表示文件名。
+- `FormData.has(key)`：返回一个布尔值，表示是否具有该键名的键值对。
+- `FormData.keys()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键名。
+- `FormData.values()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键值。
+- `FormData.entries()`：返回一个遍历器对象，用于`for...of`循环遍历所有的键值对。如果直接用`for...of`循环遍历 FormData 实例，默认就会调用这个方法。
