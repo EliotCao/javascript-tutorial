@@ -185,3 +185,41 @@ for (var pair of formData) {
 // key1: value1
 // key2: value2
 ```
+
+## 表单的内置验证
+
+### 自动校验
+
+表单提交的时候，浏览器允许开发者指定一些条件，它会自动验证各个表单控件的值是否符合条件。
+
+```
+<!-- 必填 -->
+<input required>
+
+<!-- 必须符合正则表达式 -->
+<input pattern="banana|cherry">
+
+<!-- 字符串长度必须为6个字符 -->
+<input minlength="6" maxlength="6">
+
+<!-- 数值必须在1到10之间 -->
+<input type="number" min="1" max="10">
+
+<!-- 必须填入 Email 地址 -->
+<input type="email">
+
+<!-- 必须填入 URL -->
+<input type="URL">
+```
+
+如果一个控件通过验证，它就会匹配`:valid`的 CSS 伪类，浏览器会继续进行表单提交的流程。如果没有通过验证，该控件就会匹配`:invalid`的 CSS 伪类，浏览器会终止表单提交，并显示一个错误信息。
+
+```
+input:invalid {
+  border-color: red;
+}
+input,
+input:valid {
+  border-color: #ccc;
+}
+```
