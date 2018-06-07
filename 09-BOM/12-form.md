@@ -223,3 +223,27 @@ input:valid {
   border-color: #ccc;
 }
 ```
+
+### checkValidity()
+
+除了提交表单的时候，浏览器自动校验表单，还可以手动触发表单的校验。表单元素和表单控件都有`checkValidity()`方法，用于手动触发校验。
+
+```
+// 触发整个表单的校验
+form.checkValidity()
+
+// 触发单个表单控件的校验
+formControl.checkValidity()
+```
+
+`checkValidity()`方法返回一个布尔值，`true`表示通过校验，`false`表示没有通过校验。因此，提交表单可以封装为下面的函数。
+
+```
+function submitForm(action) {
+  var form = document.getElementById('form');
+  form.action = action;
+  if (form.checkValidity()) {
+    form.submit();
+  }
+}
+```
