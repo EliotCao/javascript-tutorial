@@ -261,3 +261,17 @@ function submitForm(action) {
 var input = document.querySelector('#name');
 input.willValidate // true
 ```
+
+### validationMessage 属性
+
+控件元素的`validationMessage`属性返回一个字符串，表示控件不满足校验条件时，浏览器显示的提示文本。以下两种情况，该属性返回空字符串。
+
+- 该控件不会在提交时自动校验
+- 该控件满足校验条件
+
+```
+// HTML 代码如下
+// <form><input type="text" required></form>
+document.querySelector('form input').validationMessage
+// "请填写此字段。"
+```
