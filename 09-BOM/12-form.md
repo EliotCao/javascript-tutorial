@@ -275,3 +275,12 @@ input.willValidate // true
 document.querySelector('form input').validationMessage
 // "请填写此字段。"
 ```
+
+下面是另一个例子。
+
+```
+var myInput = document.getElementById('myinput');
+if (!myInput.checkValidity()) {
+  document.getElementById('prompt').innerHTML = myInput.validationMessage;
+}
+```
