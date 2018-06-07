@@ -247,3 +247,17 @@ function submitForm(action) {
   }
 }
 ```
+
+### willValidate 属性
+
+控件元素的`willValidate`属性是一个布尔值，表示该控件是否会在提交时进行校验。
+
+```
+// HTML 代码如下
+// <form novalidate>
+//   <input id="name" name="name" required />
+// </form>
+
+var input = document.querySelector('#name');
+input.willValidate // true
+```
