@@ -386,3 +386,26 @@ input.addEventListener('input', function(event){
 ```
 
 上面代码中，一旦发生`invalid`事件（表单验证失败），`event.preventDefault()`用来禁止浏览器弹出默认的验证失败提示，然后设置定制的报错提示框。
+
+### 表单的 novalidate 属性
+
+表单元素的 HTML 属性`novalidate`，可以关闭浏览器的自动校验。
+
+```
+<form novalidate>
+</form>
+```
+
+这个属性也可以在脚本里设置。
+
+```
+form.noValidate = true;
+```
+
+如果表单元素没有设置`novalidate`属性，那么提交按钮（`<button>`或`<input>`元素）的`formnovalidate`属性也有同样的作用。
+
+```
+<form>
+  <input type="submit" value="submit" formnovalidate>
+</form>
+```
