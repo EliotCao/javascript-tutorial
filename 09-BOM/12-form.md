@@ -464,3 +464,27 @@ foo=bar&baz=The+first+line.%0D%0AThe+second+line.%0D%0A
 ```
 
 上面代码中，数据体里面的`%0D%0A`代表换行符（`\r\n`）。
+
+**（3）text/plain**
+
+如果表单使用`POST`方法发送数据，`enctype`属性为`text/plain`，那么数据将以纯文本格式发送。
+
+```
+<form
+  action="register.php"
+  method="post"
+  enctype="text/plain"
+  onsubmit="AJAXSubmit(this); return false;"
+>
+</form>
+```
+
+发送的 HTTP 请求如下。
+
+```
+Content-Type: text/plain
+
+foo=bar
+baz=The first line.
+The second line.
+```
