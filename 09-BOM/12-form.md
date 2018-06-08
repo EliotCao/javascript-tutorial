@@ -409,3 +409,35 @@ form.noValidate = true;
   <input type="submit" value="submit" formnovalidate>
 </form>
 ```
+
+## enctype 属性
+
+表单能够用四种编码，向服务器发送数据。编码格式由表单的`enctype`属性决定。
+
+假定表单有两个字段，分别是`foo`和`baz`，其中`foo`字段的值等于`bar`，`baz`字段的值是一个分为两行的字符串。
+
+```
+The first line.
+The second line.
+```
+
+下面四种格式，都可以将这个表单发送到服务器。
+
+**（1）GET 方法**
+
+如果表单使用`GET`方法发送数据，`enctype`属性无效。
+
+```
+<form
+  action="register.php"
+  method="get"
+  onsubmit="AJAXSubmit(this); return false;"
+>
+</form>
+```
+
+数据将以 URL 的查询字符串发出。
+
+```
+?foo=bar&baz=The%20first%20line.%0AThe%20second%20line.
+```
