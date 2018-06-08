@@ -584,3 +584,18 @@ xhr.onload = function () {
 
 xhr.send(formData);
 ```
+
+除了发送 FormData 实例，也可以直接 AJAX 发送文件。
+
+```
+var file = document.getElementById('test-input').files[0];
+var xhr = new XMLHttpRequest();
+
+xhr.open('POST', 'myserver/uploads');
+xhr.setRequestHeader('Content-Type', file.type);
+xhr.send(file);
+```
+
+## 参考链接
+
+- [HTML5 Form Validation With the “pattern” Attribute](https://webdesign.tutsplus.com/tutorials/html5-form-validation-with-the-pattern-attribute--cms-25145), Thoriq Firdaus
