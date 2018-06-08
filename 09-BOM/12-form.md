@@ -316,3 +316,21 @@ input.oninvalid = function (event) {
 ```
 
 上面代码中，`setCustomValidity()`方法是在`invalid`事件的监听函数里面调用。该方法也可以直接调用，这时如果参数不为空字符串，浏览器就会认为该控件没有通过校验，就会立刻显示该方法设置的报错信息。
+
+### validity 属性
+
+控件元素的属性`validity`属性返回一个`ValidityState`对象，包含当前校验状态的信息。
+
+该对象有以下属性，全部为只读属性。
+
+- `ValidityState.badInput`：布尔值，表示浏览器是否不能将用户的输入转换成正确的类型，比如用户在数值框里面输入字符串。
+- `ValidityState.customError`：布尔值，表示是否已经调用`setCustomValidity()`方法，将校验信息设置为一个非空字符串。
+- `ValidityState.patternMismatch`：布尔值，表示用户输入的值是否不满足模式的要求。
+- `ValidityState.rangeOverflow`：布尔值，表示用户输入的值是否大于最大范围。
+- `ValidityState.rangeUnderflow`：布尔值，表示用户输入的值是否小于最小范围。
+- `ValidityState.stepMismatch`：布尔值，表示用户输入的值不符合步长的设置（即不能被步长值整除）。
+- `ValidityState.tooLong`：布尔值，表示用户输入的字数超出了最长字数。
+- `ValidityState.tooShort`：布尔值，表示用户输入的字符少于最短字数。
+- `ValidityState.typeMismatch`：布尔值，表示用户填入的值不符合类型要求（主要是类型为 Email 或 URL 的情况）。
+- `ValidityState.valid`：布尔值，表示用户是否满足所有校验条件。
+- `ValidityState.valueMissing`：布尔值，表示用户没有填入必填的值。
