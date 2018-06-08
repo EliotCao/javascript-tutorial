@@ -355,3 +355,34 @@ if (document.getElementById('myInput').validity.rangeOverflow) {
 }
 document.getElementById('prompt').innerHTML = txt;
 ```
+
+如果想禁止浏览器弹出表单验证的报错信息，可以监听`invalid`事件。
+
+```
+var input = document.getElementById('username');
+var form  = document.getElementById('form');
+
+var elem = document.createElement('div');
+elem.id  = 'notify';
+elem.style.display = 'none';
+form.appendChild(elem);
+
+input.addEventListener('invalid', function (event) {
+  event.preventDefault();
+  if (!event.target.validity.valid) {
+    elem.textContent   = '用户名必须是小写字母';
+    elem.className     = 'error';
+    elem.style.display = 'block';
+    input.className    = 'invalid animated shake';
+  }
+});
+
+input.addEventListener('input', function(event){
+  if ( 'block' === elem.style.display ) {
+    input.className = '';
+    elem.style.display = 'none';
+  }
+});
+```
+
+上面代码中，一旦发生`invalid`事件（表单验证失败），`event.preventDefault()`用来禁止浏览器弹出默认的验证失败提示，然后设置定制的报错提示框。
