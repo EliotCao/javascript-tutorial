@@ -284,3 +284,24 @@ if (!myInput.checkValidity()) {
   document.getElementById('prompt').innerHTML = myInput.validationMessage;
 }
 ```
+
+### setCustomValidity()
+
+控件元素的`setCustomValidity()`方法用来定制校验失败时的报错信息。它接受一个字符串作为参数，该字符串就是定制的报错信息。如果参数为空字符串，则上次设置的报错信息被清除。
+
+这个方法可以替换浏览器内置的表单验证报错信息，参数就是要显示的报错信息。
+
+```
+<form action="somefile.php">
+  <input
+    type="text"
+    name="username"
+    placeholder="Username"
+    pattern="[a-z]{1,15}"
+    id="username"
+  >
+  <input type="submit">
+</form>
+```
+
+上面的表单输入框，要求只能输入小写字母，且不得超过15个字符。如果输入不符合要求（比如输入“ABC”），提交表单的时候，Chrome 浏览器会弹出报错信息“Please match the requested format.”，禁止表单提交。下面使用`setCustomValidity()`方法替换掉报错信息。
