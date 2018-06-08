@@ -334,3 +334,24 @@ input.oninvalid = function (event) {
 - `ValidityState.typeMismatch`：布尔值，表示用户填入的值不符合类型要求（主要是类型为 Email 或 URL 的情况）。
 - `ValidityState.valid`：布尔值，表示用户是否满足所有校验条件。
 - `ValidityState.valueMissing`：布尔值，表示用户没有填入必填的值。
+
+下面是一个例子。
+
+```
+var input = document.getElementById('myinput');
+if (input.validity.valid) {
+  console.log('通过校验');
+} else {
+  console.log('校验失败');
+}
+```
+
+下面是另外一个例子。
+
+```
+var txt = '';
+if (document.getElementById('myInput').validity.rangeOverflow) {
+  txt = '数值超过上限';
+}
+document.getElementById('prompt').innerHTML = txt;
+```
