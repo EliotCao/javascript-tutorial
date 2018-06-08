@@ -441,3 +441,26 @@ The second line.
 ```
 ?foo=bar&baz=The%20first%20line.%0AThe%20second%20line.
 ```
+
+**（2）application/x-www-form-urlencoded**
+
+如果表单用`POST`方法发送数据，并省略`enctype`属性，那么数据以`application/x-www-form-urlencoded`格式发送（因为这是默认值）。
+
+```
+<form
+  action="register.php"
+  method="post"
+  onsubmit="AJAXSubmit(this); return false;"
+>
+</form>
+```
+
+发送的 HTTP 请求如下。
+
+```
+Content-Type: application/x-www-form-urlencoded
+
+foo=bar&baz=The+first+line.%0D%0AThe+second+line.%0D%0A
+```
+
+上面代码中，数据体里面的`%0D%0A`代表换行符（`\r\n`）。
