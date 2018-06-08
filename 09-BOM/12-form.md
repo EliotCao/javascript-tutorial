@@ -305,3 +305,14 @@ if (!myInput.checkValidity()) {
 ```
 
 上面的表单输入框，要求只能输入小写字母，且不得超过15个字符。如果输入不符合要求（比如输入“ABC”），提交表单的时候，Chrome 浏览器会弹出报错信息“Please match the requested format.”，禁止表单提交。下面使用`setCustomValidity()`方法替换掉报错信息。
+
+```
+var input = document.getElementById('username');
+input.oninvalid = function (event) {
+  event.target.setCustomValidity(
+    '用户名必须是小写字母，不能为空，最长不超过15个字符'
+  );
+}
+```
+
+上面代码中，`setCustomValidity()`方法是在`invalid`事件的监听函数里面调用。该方法也可以直接调用，这时如果参数不为空字符串，浏览器就会认为该控件没有通过校验，就会立刻显示该方法设置的报错信息。
