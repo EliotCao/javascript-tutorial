@@ -488,3 +488,37 @@ foo=bar
 baz=The first line.
 The second line.
 ```
+
+**（4）multipart/form-data**
+
+如果表单使用`POST`方法，`enctype`属性为`multipart/form-data`，那么数据将以混合的格式发送。
+
+```
+<form
+  action="register.php"
+  method="post"
+  enctype="multipart/form-data"
+  onsubmit="AJAXSubmit(this); return false;"
+>
+</form>
+```
+
+发送的 HTTP 请求如下。
+
+```
+Content-Type: multipart/form-data; boundary=---------------------------314911788813839
+
+-----------------------------314911788813839
+Content-Disposition: form-data; name="foo"
+
+bar
+-----------------------------314911788813839
+Content-Disposition: form-data; name="baz"
+
+The first line.
+The second line.
+
+-----------------------------314911788813839--
+```
+
+这种格式也是文件上传的格式。
