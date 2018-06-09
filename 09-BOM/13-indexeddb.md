@@ -199,3 +199,33 @@ add();
 上面代码中，写入数据需要新建一个事务。新建时必须指定表格名称和操作模式（“只读”或“读写”）。新建事务以后，通过`IDBTransaction.objectStore(name)`方法，拿到 IDBObjectStore 对象，再通过表格对象的`add()`方法，向表格写入一条记录。
 
 写入操作是一个异步操作，通过监听连接对象的`success`事件和`error`事件，了解是否写入成功。
+
+### 读取数据
+
+读取数据也是通过事务完成。
+
+```
+function read() {
+   var transaction = db.transaction(['person']);
+   var objectStore = transaction.objectStore('person');
+   var request = objectStore.get(1);
+
+   request.onerror = function(event) {
+     console.log('事务失败');
+   };
+
+   request.onsuccess = function( event) {
+      if (request.result) {
+        console.log('Name: ' + request.result.name);
+        console.log('Age: ' + request.result.age);
+        console.log('Email: ' + request.result.email);
+      } else {
+        console.log('未获得数据记录');
+      }
+   };
+}
+
+read();
+```
+
+上面代码中，`objectStore.get()`方法用于读取数据，参数是主键的值。
