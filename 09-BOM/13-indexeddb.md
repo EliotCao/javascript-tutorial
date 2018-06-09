@@ -281,3 +281,21 @@ update();
 ```
 
 上面代码中，`put()`方法自动更新了主键为`1`的记录。
+
+### 删除数据
+
+`IDBObjectStore.delete()`方法用于删除记录。
+
+```
+function remove() {
+  var request = db.transaction(['person'], 'readwrite')
+    .objectStore('person')
+    .delete(1);
+
+  request.onsuccess = function (event) {
+    console.log('数据删除成功');
+  };
+}
+
+remove();
+```
