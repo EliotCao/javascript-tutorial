@@ -173,3 +173,29 @@ request.onupgradeneeded = function(event) {
 ```
 
 上面代码中，`IDBObject.createIndex()`的三个参数分别为索引名称、索引所在的属性、配置对象（说明该属性是否包含重复的值）。
+
+### 新增数据
+
+新增数据指的是向对象仓库写入数据记录。这需要通过事务完成。
+
+```
+function add() {
+  var request = db.transaction(['person'], 'readwrite')
+    .objectStore('person')
+    .add({ id: 1, name: '张三', age: 24, email: 'zhangsan@example.com' });
+
+  request.onsuccess = function (event) {
+    console.log('数据写入成功');
+  };
+
+  request.onerror = function (event) {
+    console.log('数据写入失败');
+  }
+}
+
+add();
+```
+
+上面代码中，写入数据需要新建一个事务。新建时必须指定表格名称和操作模式（“只读”或“读写”）。新建事务以后，通过`IDBTransaction.objectStore(name)`方法，拿到 IDBObjectStore 对象，再通过表格对象的`add()`方法，向表格写入一条记录。
+
+写入操作是一个异步操作，通过监听连接对象的`success`事件和`error`事件，了解是否写入成功。
