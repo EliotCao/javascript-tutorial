@@ -79,3 +79,15 @@ var request = window.indexedDB.open(databaseName, version);
 ```
 
 这个方法接受两个参数，第一个参数是字符串，表示数据库的名字。如果指定的数据库不存在，就会新建数据库。第二个参数是整数，表示数据库的版本。如果省略，打开已有数据库时，默认为当前版本；新建数据库时，默认为`1`。
+
+`indexedDB.open()`方法返回一个 IDBRequest 对象。这个对象通过三种事件`error`、`success`、`upgradeneeded`，处理打开数据库的操作结果。
+
+**（1）error 事件**
+
+`error`事件表示打开数据库失败。
+
+```
+request.onerror = function (event) {
+  console.log('数据库打开报错');
+};
+```
