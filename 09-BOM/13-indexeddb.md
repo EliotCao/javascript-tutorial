@@ -160,3 +160,16 @@ var objectStore = db.createObjectStore(
 ```
 
 上面代码中，指定主键为一个递增的整数。
+
+新建对象仓库以后，下一步可以新建索引。
+
+```
+request.onupgradeneeded = function(event) {
+  db = event.target.result;
+  var objectStore = db.createObjectStore('person', { keyPath: 'id' });
+  objectStore.createIndex('name', 'name', { unique: false });
+  objectStore.createIndex('email', 'email', { unique: true });
+}
+```
+
+上面代码中，`IDBObject.createIndex()`的三个参数分别为索引名称、索引所在的属性、配置对象（说明该属性是否包含重复的值）。
