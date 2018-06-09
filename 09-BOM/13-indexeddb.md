@@ -91,3 +91,18 @@ request.onerror = function (event) {
   console.log('数据库打开报错');
 };
 ```
+
+**（2）success 事件**
+
+`success`事件表示成功打开数据库。
+
+```
+var db;
+
+request.onsuccess = function (event) {
+  db = request.result;
+  console.log('数据库打开成功');
+};
+```
+
+这时，通过`request`对象的`result`属性拿到数据库对象。
