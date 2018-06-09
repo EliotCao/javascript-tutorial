@@ -135,3 +135,17 @@ request.onupgradeneeded = function(event) {
 ```
 
 上面代码中，数据库新建成功以后，新增一张叫做`person`的表格，主键是`id`。
+
+更好的写法是先判断一下，这张表格是否存在，如果不存在再新建。
+
+```
+request.onupgradeneeded = function (event) {
+  db = event.target.result;
+  var objectStore;
+  if (!db.objectStoreNames.contains('person')) {
+    objectStore = db.createObjectStore('person', { keyPath: 'id' });
+  }
+}
+```
+
+主键（key）是默认建立索引的属性。比如，数据记录是`{ id: 1, name: '张三' }`，那么`id`属性可以作为主键。主键也可以指定为下一层对象的属性，比如`{ foo: { bar: 'baz' } }`的`foo.bar`也可以指定为主键。
