@@ -299,3 +299,31 @@ function remove() {
 
 remove();
 ```
+
+### 使用索引
+
+索引的意义在于，可以让你搜索任意字段，也就是说从任意字段拿到数据记录。如果不建立索引，默认只能搜索主键（即从主键取值）。
+
+假定新建表格的时候，对`name`字段建立了索引。
+
+```
+objectStore.createIndex('name', 'name', { unique: false });
+```
+
+现在，就可以从`name`找到对应的数据记录了。
+
+```
+var transaction = db.transaction(['person'], 'readonly');
+var store = transaction.objectStore('person');
+var index = store.index('name');
+var request = index.get('李四');
+
+request.onsuccess = function (e) {
+  var result = e.target.result;
+  if (result) {
+    // ...
+  } else {
+    // ...
+  }
+}
+```
