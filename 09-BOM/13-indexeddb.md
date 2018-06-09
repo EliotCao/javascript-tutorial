@@ -120,3 +120,18 @@ request.onupgradeneeded = function (event) {
 ```
 
 这时通过事件对象的`target.result`属性，拿到数据库实例。
+
+### 新建数据库
+
+新建数据库与打开数据库是同一个操作。如果指定的数据库不存在，就会新建。不同之处在于，后续的操作主要在`upgradeneeded`事件的监听函数里面完成，因为这时版本从无到有，所以会触发这个事件。
+
+通常，新建数据库以后，第一件事是新建对象仓库（即新建表）。
+
+```
+request.onupgradeneeded = function(event) {
+  db = event.target.result;
+  var objectStore = db.createObjectStore('person', { keyPath: 'id' });
+}
+```
+
+上面代码中，数据库新建成功以后，新增一张叫做`person`的表格，主键是`id`。
