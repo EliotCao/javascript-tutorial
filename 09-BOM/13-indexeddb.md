@@ -149,3 +149,14 @@ request.onupgradeneeded = function (event) {
 ```
 
 主键（key）是默认建立索引的属性。比如，数据记录是`{ id: 1, name: '张三' }`，那么`id`属性可以作为主键。主键也可以指定为下一层对象的属性，比如`{ foo: { bar: 'baz' } }`的`foo.bar`也可以指定为主键。
+
+如果数据记录里面没有合适作为主键的属性，那么可以让 IndexedDB 自动生成主键。
+
+```
+var objectStore = db.createObjectStore(
+  'person',
+  { autoIncrement: true }
+);
+```
+
+上面代码中，指定主键为一个递增的整数。
