@@ -21,3 +21,15 @@ IndexedDB 具有以下特点。
 **（5）储存空间大。** IndexedDB 的储存空间比 LocalStorage 大得多，一般来说不少于 250MB，甚至没有上限。
 
 **（6）支持二进制储存。** IndexedDB 不仅可以储存字符串，还可以储存二进制数据（ArrayBuffer 对象和 Blob 对象）。
+
+## 基本概念
+
+IndexedDB 是一个比较复杂的 API，涉及不少概念。它把不同的实体，抽象成一个个对象接口。学习这个 API，就是学习它的各种对象接口。
+
+- 数据库：IDBDatabase 对象
+- 对象仓库：IDBObjectStore 对象
+- 索引： IDBIndex 对象
+- 事务： IDBTransaction 对象
+- 操作请求：IDBRequest 对象
+- 指针： IDBCursor 对象
+- 主键集合：IDBKeyRange 对象
