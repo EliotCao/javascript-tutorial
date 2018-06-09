@@ -229,3 +229,31 @@ read();
 ```
 
 上面代码中，`objectStore.get()`方法用于读取数据，参数是主键的值。
+
+### 遍历数据
+
+遍历数据表格的所有记录，要使用指针对象 IDBCursor。
+
+```
+function readAll() {
+  var objectStore = db.transaction('person').objectStore('person');
+
+   objectStore.openCursor().onsuccess = function (event) {
+     var cursor = event.target.result;
+
+     if (cursor) {
+       console.log('Id: ' + cursor.key);
+       console.log('Name: ' + cursor.value.name);
+       console.log('Age: ' + cursor.value.age);
+       console.log('Email: ' + cursor.value.email);
+       cursor.continue();
+    } else {
+      console.log('没有更多数据了！');
+    }
+  };
+}
+
+readAll();
+```
+
+上面代码中，新建指针对象的`openCursor()`方法是一个异步操作，所以要监听`success`事件。
