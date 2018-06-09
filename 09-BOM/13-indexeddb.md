@@ -257,3 +257,27 @@ readAll();
 ```
 
 上面代码中，新建指针对象的`openCursor()`方法是一个异步操作，所以要监听`success`事件。
+
+### 更新数据
+
+更新数据要使用`IDBObject.put()`方法。
+
+```
+function update() {
+  var request = db.transaction(['person'], 'readwrite')
+    .objectStore('person')
+    .put({ id: 1, name: '李四', age: 35, email: 'lisi@example.com' });
+
+  request.onsuccess = function (event) {
+    console.log('数据更新成功');
+  };
+
+  request.onerror = function (event) {
+    console.log('数据更新失败');
+  }
+}
+
+update();
+```
+
+上面代码中，`put()`方法自动更新了主键为`1`的记录。
