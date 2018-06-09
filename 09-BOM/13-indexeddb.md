@@ -106,3 +106,17 @@ request.onsuccess = function (event) {
 ```
 
 这时，通过`request`对象的`result`属性拿到数据库对象。
+
+**（3）upgradeneeded 事件**
+
+如果指定的版本号，大于数据库的实际版本号，就会发生数据库升级事件`upgradeneeded`。
+
+```
+var db;
+
+request.onupgradeneeded = function (event) {
+  db = event.target.result;
+}
+```
+
+这时通过事件对象的`target.result`属性，拿到数据库实例。
