@@ -454,3 +454,15 @@ DBOpenRequest.onsuccess = function(event) {
   // ...
 };
 ```
+
+### 属性
+
+IDBDatabase 对象有以下属性。
+
+- `IDBDatabase.name`：字符串，数据库名称。
+- `IDBDatabase.version`：整数，数据库版本。数据库第一次创建时，该属性为空字符串。
+- `IDBDatabase.objectStoreNames`：DOMStringList 对象（字符串的集合），包含当前数据的所有 object store 的名字。
+- `IDBDatabase.onabort`：指定 abort 事件（事务中止）的监听函数。
+- `IDBDatabase.onclose`：指定 close 事件（数据库意外关闭）的监听函数。
+- `IDBDatabase.onerror`：指定 error 事件（访问数据库失败）的监听函数。
+- `IDBDatabase.onversionchange`：数据库版本变化时触发（发生`upgradeneeded`事件，或调用`indexedDB.deleteDatabase()`）。
