@@ -375,3 +375,26 @@ openRequest.onerror = function (e) {
 ```
 
 上面代码有两个地方需要注意。首先，`open()`方法返回的是一个对象（IDBOpenDBRequest），监听函数就定义在这个对象上面。其次，`success`事件发生后，从`openRequest.result`属性可以拿到已经打开的`IndexedDB`数据库对象。
+
+### indexedDB.deleteDatabase()
+
+`indexedDB.deleteDatabase()`方法用于删除一个数据库，参数为数据库的名字。它会立刻返回一个`IDBOpenDBRequest`对象，然后对数据库执行异步删除。删除操作的结果会通过事件通知，`IDBOpenDBRequest`对象可以监听以下事件。
+
+- `success`：删除成功
+- `error`：删除报错
+
+```
+var DBDeleteRequest = window.indexedDB.deleteDatabase('demo');
+
+DBDeleteRequest.onerror = function (event) {
+  console.log('Error');
+};
+
+DBDeleteRequest.onsuccess = function (event) {
+  console.log('success');
+};
+```
+
+调用`deleteDatabase()`方法以后，当前数据库的其他已经打开的连接都会接收到`versionchange`事件。
+
+注意，删除不存在的数据库并不会报错。
