@@ -413,3 +413,11 @@ window.indexedDB.cmp(1, 2) // -1
 window.indexedDB.cmp(1, true) // 报错
 window.indexedDB.cmp({}, {}) // 报错
 ```
+
+## IDBRequest 对象
+
+IDBRequest 对象表示打开的数据库连接，`indexedDB.open()`方法和`indexedDB.deleteDatabase()`方法会返回这个对象。数据库的操作都是通过这个对象完成的。
+
+这个对象的所有操作都是异步操作，要通过`readyState`属性判断是否完成，如果为`pending`就表示操作正在进行，如果为`done`就表示操作完成，可能成功也可能失败。
+
+操作完成以后，触发`success`事件或`error`事件，这时可以通过`result`属性和`error`属性拿到操作结果。如果在`pending`阶段，就去读取这两个属性，是会报错的。
