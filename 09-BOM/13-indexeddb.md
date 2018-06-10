@@ -485,3 +485,23 @@ IDBDatabase 对象有以下方法。
 - `IDBDatabase.createObjectStore()`：创建存放数据的对象仓库，类似于传统关系型数据库的表格，返回一个 IDBObjectStore 对象。该方法只能在`versionchange`事件监听函数中调用。
 - `IDBDatabase.deleteObjectStore()`：删除指定的对象仓库。该方法只能在`versionchange`事件监听函数中调用。
 - `IDBDatabase.transaction()`：返回一个 IDBTransaction 事务对象。
+
+下面是`createObjectStore()`方法的例子。
+
+```
+var request = window.indexedDB.open('demo', 2);
+
+request.onupgradeneeded = function (event) {
+  var db = event.target.result;
+
+  db.onerror = function(event) {
+    console.log('error');
+  };
+
+  var objectStore = db.createObjectStore('items');
+
+  // ...
+};
+```
+
+上面代码创建了一个名为`items`的对象仓库，如果该对象仓库已经存在，就会抛出一个错误。为了避免出错，需要用到下文的`objectStoreNames`属性，检查已有哪些对象仓库。
