@@ -398,3 +398,18 @@ DBDeleteRequest.onsuccess = function (event) {
 调用`deleteDatabase()`方法以后，当前数据库的其他已经打开的连接都会接收到`versionchange`事件。
 
 注意，删除不存在的数据库并不会报错。
+
+### indexedDB.cmp()
+
+`indexedDB.cmp()`方法比较两个值是否为 indexedDB 的相同的主键。它返回一个整数，表示比较的结果：`0`表示相同，`1`表示第一个主键大于第二个主键，`-1`表示第一个主键小于第二个主键。
+
+```
+window.indexedDB.cmp(1, 2) // -1
+```
+
+注意，这个方法不能用来比较任意的 JavaScript 值。如果参数是布尔值或对象，它会报错。
+
+```
+window.indexedDB.cmp(1, true) // 报错
+window.indexedDB.cmp({}, {}) // 报错
+```
