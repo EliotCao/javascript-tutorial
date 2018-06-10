@@ -514,3 +514,25 @@ db.createObjectStore('test2', { autoIncrement: true });
 ```
 
 上面代码中，`keyPath`属性表示主键（由于主键的值不能重复，所以上例存入之前，必须保证数据的`email`属性值都是不一样的），默认值为`null`；`autoIncrement`属性表示，是否使用自动递增的整数作为主键（第一个数据记录为1，第二个数据记录为2，以此类推），默认为`false`。一般来说，`keyPath`和`autoIncrement`属性只要使用一个就够了，如果两个同时使用，表示主键为递增的整数，且对象不得缺少`keyPath`指定的属性。
+
+下面是`deleteObjectStore()`方法的例子。
+
+```
+var dbName = 'sampleDB';
+var dbVersion = 2;
+var request = indexedDB.open(dbName, dbVersion);
+
+request.onupgradeneeded = function(e) {
+  var db = request.result;
+  if (e.oldVersion < 1) {
+    db.createObjectStore('store1');
+  }
+
+  if (e.oldVersion < 2) {
+    db.deleteObjectStore('store1');
+    db.createObjectStore('store2');
+  }
+
+  // ...
+};
+```
