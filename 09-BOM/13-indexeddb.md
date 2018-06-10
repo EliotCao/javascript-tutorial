@@ -327,3 +327,17 @@ request.onsuccess = function (e) {
   }
 }
 ```
+
+## indexedDB 对象
+
+浏览器原生提供`indexedDB`对象，作为开发者的操作接口。
+
+### indexedDB.open()
+
+`indexedDB.open()`方法用于打开数据库。这是一个异步操作，但是会立刻返回一个 IDBOpenDBRequest 对象。
+
+```
+var openRequest = window.indexedDB.open('test', 1);
+```
+
+上面代码表示，打开一个名为`test`、版本为`1`的数据库。如果该数据库不存在，则会新建该数据库。
