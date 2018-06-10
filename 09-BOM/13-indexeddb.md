@@ -436,3 +436,21 @@ IDBOpenDBRequest 对象继承了 IDBRequest 对象，提供了两个额外的事
 
 - `IDBOpenDBRequest.onblocked`：指定`blocked`事件（`upgradeneeded`事件触发时，数据库仍然在使用）的监听函数。
 - `IDBOpenDBRequest.onupgradeneeded`：`upgradeneeded`事件的监听函数。
+
+## IDBDatabase 对象
+
+打开数据成功以后，可以从`IDBOpenDBRequest`对象的`result`属性上面，拿到一个`IDBDatabase`对象，它表示连接的数据库。后面对数据库的操作，都通过这个对象完成。
+
+```
+var db;
+var DBOpenRequest = window.indexedDB.open('demo', 1);
+
+DBOpenRequest.onerror = function (event) {
+  console.log('Error');
+};
+
+DBOpenRequest.onsuccess = function(event) {
+  db = DBOpenRequest.result;
+  // ...
+};
+```
