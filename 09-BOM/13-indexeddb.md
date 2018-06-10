@@ -476,3 +476,12 @@ if (!db.objectStoreNames.contains('firstOS')) {
 ```
 
 上面代码先判断某个对象仓库是否存在，如果不存在就创建该对象仓库。
+
+### 方法
+
+IDBDatabase 对象有以下方法。
+
+- `IDBDatabase.close()`：关闭数据库连接，实际会等所有事务完成后再关闭。
+- `IDBDatabase.createObjectStore()`：创建存放数据的对象仓库，类似于传统关系型数据库的表格，返回一个 IDBObjectStore 对象。该方法只能在`versionchange`事件监听函数中调用。
+- `IDBDatabase.deleteObjectStore()`：删除指定的对象仓库。该方法只能在`versionchange`事件监听函数中调用。
+- `IDBDatabase.transaction()`：返回一个 IDBTransaction 事务对象。
