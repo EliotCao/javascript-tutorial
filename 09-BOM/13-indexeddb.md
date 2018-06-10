@@ -352,3 +352,26 @@ var openRequest = window.indexedDB.open('test', 1);
 - **blocked**：上一次的数据库连接还未关闭。
 
 第一次打开数据库时，会先触发`upgradeneeded`事件，然后触发`success`事件。
+
+根据不同的需要，对上面4种事件监听函数。
+
+```
+var openRequest = indexedDB.open('test', 1);
+var db;
+
+openRequest.onupgradeneeded = function (e) {
+  console.log('Upgrading...');
+}
+
+openRequest.onsuccess = function (e) {
+  console.log('Success!');
+  db = openRequest.result;
+}
+
+openRequest.onerror = function (e) {
+  console.log('Error');
+  console.log(e);
+}
+```
+
+上面代码有两个地方需要注意。首先，`open()`方法返回的是一个对象（IDBOpenDBRequest），监听函数就定义在这个对象上面。其次，`success`事件发生后，从`openRequest.result`属性可以拿到已经打开的`IndexedDB`数据库对象。
