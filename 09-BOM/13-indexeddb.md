@@ -466,3 +466,13 @@ IDBDatabase 对象有以下属性。
 - `IDBDatabase.onclose`：指定 close 事件（数据库意外关闭）的监听函数。
 - `IDBDatabase.onerror`：指定 error 事件（访问数据库失败）的监听函数。
 - `IDBDatabase.onversionchange`：数据库版本变化时触发（发生`upgradeneeded`事件，或调用`indexedDB.deleteDatabase()`）。
+
+下面是`objectStoreNames`属性的例子。该属性返回一个 DOMStringList 对象，包含了当前数据库所有对象仓库的名称（即表名），可以使用 DOMStringList 对象的`contains`方法，检查数据库是否包含某个对象仓库。
+
+```
+if (!db.objectStoreNames.contains('firstOS')) {
+  db.createObjectStore('firstOS');
+}
+```
+
+上面代码先判断某个对象仓库是否存在，如果不存在就创建该对象仓库。
