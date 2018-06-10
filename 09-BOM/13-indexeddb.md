@@ -421,3 +421,18 @@ IDBRequest 对象表示打开的数据库连接，`indexedDB.open()`方法和`in
 这个对象的所有操作都是异步操作，要通过`readyState`属性判断是否完成，如果为`pending`就表示操作正在进行，如果为`done`就表示操作完成，可能成功也可能失败。
 
 操作完成以后，触发`success`事件或`error`事件，这时可以通过`result`属性和`error`属性拿到操作结果。如果在`pending`阶段，就去读取这两个属性，是会报错的。
+
+IDBRequest 对象有以下属性。
+
+- `IDBRequest.readyState`：等于`pending`表示操作正在进行，等于`done`表示操作正在完成。
+- `IDBRequest.result`：返回请求的结果。如果请求失败、结果不可用，读取该属性会报错。
+- `IDBRequest.error`：请求失败时，返回错误对象。
+- `IDBRequest.source`：返回请求的来源（比如索引对象或 ObjectStore）。
+- `IDBRequest.transaction`：返回当前请求正在进行的事务，如果不包含事务，返回`null`。
+- `IDBRequest.onsuccess`：指定`success`事件的监听函数。
+- `IDBRequest.onerror`：指定`error`事件的监听函数。
+
+IDBOpenDBRequest 对象继承了 IDBRequest 对象，提供了两个额外的事件监听属性。
+
+- `IDBOpenDBRequest.onblocked`：指定`blocked`事件（`upgradeneeded`事件触发时，数据库仍然在使用）的监听函数。
+- `IDBOpenDBRequest.onupgradeneeded`：`upgradeneeded`事件的监听函数。
