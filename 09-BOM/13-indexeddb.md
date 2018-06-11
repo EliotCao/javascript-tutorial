@@ -567,3 +567,45 @@ IDBObjectStore 对象有以下属性。
 - `IDBObjectStore.name`：返回当前对象仓库的名称。
 - `IDBObjectStore.transaction`：返回当前对象仓库所属的事务对象。
 - `IDBObjectStore.autoIncrement`：布尔值，表示主键是否会自动递增。
+
+### 方法
+
+IDBObjectStore 对象有以下方法。
+
+**（1）IDBObjectStore.add()**
+
+`IDBObjectStore.add()`用于向对象仓库添加数据，返回一个 IDBRequest 对象。该方法只用于添加数据，如果主键相同会报错，因此更新数据必须使用`put()`方法。
+
+```
+objectStore.add(value, key)
+```
+
+该方法接受两个参数，第一个参数是键值，第二个参数是主键，该参数可选，如果省略默认为`null`。
+
+创建事务以后，就可以获取对象仓库，然后使用`add()`方法往里面添加数据了。
+
+```
+var db;
+var DBOpenRequest = window.indexedDB.open('demo', 1);
+
+DBOpenRequest.onsuccess = function (event) {
+  db = DBOpenRequest.result;
+  var transaction = db.transaction(['items'], 'readwrite');
+
+  transaction.oncomplete = function (event) {
+    console.log('transaction success');
+  };
+
+  transaction.onerror = function (event) {
+    console.log('transaction error: ' + transaction.error);
+  };
+
+  var objectStore = transaction.objectStore('items');
+  var objectStoreRequest = objectStore.add({ foo: 1 });
+
+  objectStoreRequest.onsuccess = function (event) {
+    console.log('add data success');
+  };
+
+};
+```
