@@ -544,3 +544,16 @@ var t = db.transaction(['items'], 'readwrite');
 ```
 
 `transaction()`方法接受两个参数：第一个参数是一个数组，里面是所涉及的对象仓库，通常是只有一个；第二个参数是一个表示操作类型的字符串。目前，操作类型只有两种：`readonly`（只读）和`readwrite`（读写）。添加数据使用`readwrite`，读取数据使用`readonly`。第二个参数是可选的，省略时默认为`readonly`模式。
+
+## IDBObjectStore 对象
+
+IDBObjectStore 对象对应一个对象仓库（object store）。`IDBDatabase.createObjectStore()`方法返回的就是一个 IDBObjectStore 对象。
+
+IDBDatabase 对象的`transaction()`返回一个事务对象，该对象的`objectStore()`方法返回 IDBObjectStore 对象，因此可以采用下面的链式写法。
+
+```
+db.transaction(['test'], 'readonly')
+  .objectStore('test')
+  .get(X)
+  .onsuccess = function (e) {}
+```
