@@ -557,3 +557,13 @@ db.transaction(['test'], 'readonly')
   .get(X)
   .onsuccess = function (e) {}
 ```
+
+### 属性
+
+IDBObjectStore 对象有以下属性。
+
+- `IDBObjectStore.indexNames`：返回一个类似数组的对象（DOMStringList），包含了当前对象仓库的所有索引。
+- `IDBObjectStore.keyPath`：返回当前对象仓库的主键。
+- `IDBObjectStore.name`：返回当前对象仓库的名称。
+- `IDBObjectStore.transaction`：返回当前对象仓库所属的事务对象。
+- `IDBObjectStore.autoIncrement`：布尔值，表示主键是否会自动递增。
