@@ -659,3 +659,11 @@ objectStore.getKey(key)
 ```
 
 该方法的参数可以是主键值或 IDBKeyRange 对象。
+
+**（7）IDBObjectStore.get()**
+
+`IDBObjectStore.get()`用于获取主键对应的数据记录。该方法返回一个 IDBRequest 对象。
+
+```
+objectStore.get(key)
+```
