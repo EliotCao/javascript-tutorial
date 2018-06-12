@@ -649,3 +649,13 @@ IDBObjectStore.count(key)
 ```
 
 不带参数时，该方法返回当前对象仓库的所有记录数量。如果主键或 IDBKeyRange 对象作为参数，则返回对应的记录数量。
+
+**（6）IDBObjectStore.getKey()**
+
+`IDBObjectStore.getKey()`用于获取主键。该方法返回一个 IDBRequest 对象。
+
+```
+objectStore.getKey(key)
+```
+
+该方法的参数可以是主键值或 IDBKeyRange 对象。
