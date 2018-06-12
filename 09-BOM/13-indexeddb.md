@@ -629,3 +629,13 @@ objectStore.clear()
 ```
 
 该方法不需要参数。
+
+**（4）IDBObjectStore.delete()**
+
+`IDBObjectStore.delete()`方法用于删除指定主键的记录。该方法返回一个 IDBRequest 对象。
+
+```
+objectStore.delete(Key)
+```
+
+该方法的参数为主键的值。
