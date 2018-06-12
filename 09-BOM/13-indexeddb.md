@@ -639,3 +639,13 @@ objectStore.delete(Key)
 ```
 
 该方法的参数为主键的值。
+
+**（5）IDBObjectStore.count()**
+
+`IDBObjectStore.count()`方法用于计算记录的数量。该方法返回一个 IDBRequest 对象。
+
+```
+IDBObjectStore.count(key)
+```
+
+不带参数时，该方法返回当前对象仓库的所有记录数量。如果主键或 IDBKeyRange 对象作为参数，则返回对应的记录数量。
