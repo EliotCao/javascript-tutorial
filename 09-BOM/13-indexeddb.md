@@ -609,3 +609,13 @@ DBOpenRequest.onsuccess = function (event) {
 
 };
 ```
+
+**（2）IDBObjectStore.put()**
+
+`IDBObjectStore.put()`方法用于更新某个主键对应的数据记录，如果对应的键值不存在，则插入一条新的记录。该方法返回一个 IDBRequest 对象。
+
+```
+objectStore.put(item, key)
+```
+
+该方法接受两个参数，第一个参数为新数据，第二个参数为主键，该参数可选，且只在自动递增时才有必要提供，因为那时主键不包含在数据值里面。
