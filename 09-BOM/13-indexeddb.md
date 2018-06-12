@@ -619,3 +619,13 @@ objectStore.put(item, key)
 ```
 
 该方法接受两个参数，第一个参数为新数据，第二个参数为主键，该参数可选，且只在自动递增时才有必要提供，因为那时主键不包含在数据值里面。
+
+**（3）IDBObjectStore.clear()**
+
+`IDBObjectStore.clear()`删除当前对象仓库的所有记录。该方法返回一个 IDBRequest 对象。
+
+```
+objectStore.clear()
+```
+
+该方法不需要参数。
