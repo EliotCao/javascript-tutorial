@@ -697,3 +697,23 @@ objectStore.getAllKeys(query)
 // 指定获取主键的数量
 objectStore.getAllKeys(query, count)
 ```
+
+**（10）IDBObjectStore.index()**
+
+`IDBObjectStore.index()`方法返回指定名称的索引对象 IDBIndex。
+
+```
+objectStore.index(name)
+```
+
+有了索引以后，就可以针对索引所在的属性读取数据。
+
+```
+var t = db.transaction(['people'], 'readonly');
+var store = t.objectStore('people');
+var index = store.index('name');
+
+var request = index.get('foo');
+```
+
+上面代码打开对象仓库以后，先用`index()`方法指定获取`name`属性的索引，然后用`get()`方法读取某个`name`属性(`foo`)对应的数据。如果`name`属性不是对应唯一值，这时`get()`方法有可能取回多个数据对象。另外，`get()`是异步方法，读取成功以后，只能在`success`事件的监听函数中处理数据。
