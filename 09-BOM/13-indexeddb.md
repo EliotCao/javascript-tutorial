@@ -682,3 +682,18 @@ objectStore.getAll(query)
 // 指定获取记录的数量
 objectStore.getAll(query, count)
 ```
+
+**（9）IDBObjectStore.getAllKeys()**
+
+`IDBObjectStore.getAllKeys()`用于获取所有符合条件的主键。该方法返回一个 IDBRequest 对象。
+
+```
+// 获取所有记录的主键
+objectStore.getAllKeys()
+
+// 获取所有符合条件的主键
+objectStore.getAllKeys(query)
+
+// 指定获取主键的数量
+objectStore.getAllKeys(query, count)
+```
