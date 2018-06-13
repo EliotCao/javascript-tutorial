@@ -667,3 +667,18 @@ objectStore.getKey(key)
 ```
 objectStore.get(key)
 ```
+
+**（8）IDBObjectStore.getAll()**
+
+`DBObjectStore.getAll()`用于获取对象仓库的记录。该方法返回一个 IDBRequest 对象。
+
+```
+// 获取所有记录
+objectStore.getAll()
+
+// 获取所有符合指定主键或 IDBKeyRange 的记录
+objectStore.getAll(query)
+
+// 指定获取记录的数量
+objectStore.getAll(query, count)
+```
