@@ -757,3 +757,11 @@ store.createIndex('email', 'email', { unique: true });
 ```
 
 上面代码告诉索引对象，`name`属性不是唯一值，`email`属性是唯一值。
+
+**（12）IDBObjectStore.deleteIndex()**
+
+`IDBObjectStore.deleteIndex()`方法用于删除指定的索引。该方法只能在`VersionChange`监听函数里面调用。
+
+```
+objectStore.deleteIndex(indexName)
+```
