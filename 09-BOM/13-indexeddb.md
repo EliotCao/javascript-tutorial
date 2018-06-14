@@ -717,3 +717,43 @@ var request = index.get('foo');
 ```
 
 上面代码打开对象仓库以后，先用`index()`方法指定获取`name`属性的索引，然后用`get()`方法读取某个`name`属性(`foo`)对应的数据。如果`name`属性不是对应唯一值，这时`get()`方法有可能取回多个数据对象。另外，`get()`是异步方法，读取成功以后，只能在`success`事件的监听函数中处理数据。
+
+**（11）IDBObjectStore.createIndex()**
+
+`IDBObjectStore.createIndex()`方法用于新建当前数据库的一个索引。该方法只能在`VersionChange`监听函数里面调用。
+
+```
+objectStore.createIndex(indexName, keyPath, objectParameters)
+```
+
+该方法可以接受三个参数。
+
+- indexName：索引名
+- keyPath：主键
+- objectParameters：配置对象（可选）
+
+第三个参数可以配置以下属性。
+
+- unique：如果设为`true`，将不允许重复的值
+- multiEntry：如果设为`true`，对于有多个值的主键数组，每个值将在索引里面新建一个条目，否则主键数组对应一个条目。
+
+假定对象仓库中的数据记录都是如下的`person`类型。
+
+```
+var person = {
+  name: name,
+  email: email,
+  created: new Date()
+};
+```
+
+可以指定这个对象的某个属性来建立索引。
+
+```
+var store = db.createObjectStore('people', { autoIncrement: true });
+
+store.createIndex('name', 'name', { unique: false });
+store.createIndex('email', 'email', { unique: true });
+```
+
+上面代码告诉索引对象，`name`属性不是唯一值，`email`属性是唯一值。
