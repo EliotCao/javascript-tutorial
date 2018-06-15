@@ -850,3 +850,18 @@ objectStore1.put('1', 'key');
 上面代码中，`key`对应的键值最终是`2`，而不是`1`。因为事务`trans1`先于`trans2`创建，所以首先执行。
 
 注意，事务有可能失败，只有监听到事务的`complete`事件，才能保证事务操作成功。
+
+IDBTransaction 对象有以下属性。
+
+- `IDBTransaction.db`：返回当前事务所在的数据库对象 IDBDatabase。
+- `IDBTransaction.error`：返回当前事务的错误。如果事务没有结束，或者事务成功结束，或者被手动终止，该方法返回`null`。
+- `IDBTransaction.mode`：返回当前事务的模式，默认是`readonly`（只读），另一个值是`readwrite`。
+- `IDBTransaction.objectStoreNames`：返回一个类似数组的对象 DOMStringList，成员是当前事务涉及的对象仓库的名字。
+- `IDBTransaction.onabort`：指定`abort`事件（事务中断）的监听函数。
+- `IDBTransaction.oncomplete`：指定`complete`事件（事务成功）的监听函数。
+- `IDBTransaction.onerror`：指定`error`事件（事务失败）的监听函数。
+
+IDBTransaction 对象有以下方法。
+
+- `IDBTransaction.abort()`：终止当前事务，回滚所有已经进行的变更。
+- `IDBTransaction.objectStore(name)`：返回指定名称的对象仓库 IDBObjectStore。
