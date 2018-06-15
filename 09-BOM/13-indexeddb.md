@@ -795,3 +795,11 @@ cursor.onsuccess = function (event) {
 监听函数接受一个事件对象作为参数，该对象的`target.result`属性指向当前数据记录。该记录的`key`和`value`分别返回主键和键值（即实际存入的数据）。`continue()`方法将光标移到下一个数据对象，如果当前数据对象已经是最后一个数据了，则光标指向`null`。
 
 `openCursor()`方法的第一个参数是主键值，或者一个 IDBKeyRange 对象。如果指定该参数，将只处理包含指定主键的记录；如果省略，将处理所有的记录。该方法还可以接受第二个参数，表示遍历方向，默认值为`next`，其他可能的值为`prev`、`nextunique`和`prevunique`。后两个值表示如果遇到重复值，会自动跳过。
+
+**（14）IDBObjectStore.openKeyCursor()**
+
+`IDBObjectStore.openKeyCursor()`用于获取一个主键指针对象。
+
+```
+IDBObjectStore.openKeyCursor()
+```
