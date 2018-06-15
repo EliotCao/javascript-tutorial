@@ -835,3 +835,18 @@ DBOpenRequest.onsuccess = function(event) {
 
 };
 ```
+
+事务的执行顺序是按照创建的顺序，而不是发出请求的顺序。
+
+```
+var trans1 = db.transaction('foo', 'readwrite');
+var trans2 = db.transaction('foo', 'readwrite');
+var objectStore2 = trans2.objectStore('foo')
+var objectStore1 = trans1.objectStore('foo')
+objectStore2.put('2', 'key');
+objectStore1.put('1', 'key');
+```
+
+上面代码中，`key`对应的键值最终是`2`，而不是`1`。因为事务`trans1`先于`trans2`创建，所以首先执行。
+
+注意，事务有可能失败，只有监听到事务的`complete`事件，才能保证事务操作成功。
