@@ -907,3 +907,13 @@ IDBIndex 对象有以下属性。
 - `IDBIndex.keyPath`：索引的主键。
 - `IDBIndex.multiEntry`：布尔值，针对`keyPath`为数组的情况，如果设为`true`，创建数组时，每个数组成员都会有一个条目，否则每个数组都只有一个条目。
 - `IDBIndex.unique`：布尔值，表示创建索引时是否允许相同的主键。
+
+IDBIndex 对象有以下方法，它们都是异步的，立即返回的都是一个 IDBRequest 对象。
+
+- `IDBIndex.count()`：用来获取记录的数量。它可以接受主键或 IDBKeyRange 对象作为参数，这时只返回符合主键的记录数量，否则返回所有记录的数量。
+- `IDBIndex.get(key)`：用来获取符合指定主键的数据记录。
+- `IDBIndex.getKey(key)`：用来获取指定的主键。
+- `IDBIndex.getAll()`：用来获取所有的数据记录。它可以接受两个参数，都是可选的，第一个参数用来指定主键，第二个参数用来指定返回记录的数量。如果省略这两个参数，则返回所有记录。由于获取成功时，浏览器必须生成所有对象，所以对性能有影响。如果数据集比较大，建议使用 IDBCursor 对象。
+- `IDBIndex.getAllKeys()`：该方法与`IDBIndex.getAll()`方法相似，区别是获取所有主键。
+- `IDBIndex.openCursor()`：用来获取一个 IDBCursor 对象，用来遍历索引里面的所有条目。
+- `IDBIndex.openKeyCursor()`：该方法与`IDBIndex.openCursor()`方法相似，区别是遍历所有条目的主键。
