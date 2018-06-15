@@ -899,3 +899,11 @@ myIndex.openCursor().onsuccess = function (event) {
   }
 };
 ```
+
+IDBIndex 对象有以下属性。
+
+- `IDBIndex.name`：字符串，索引的名称。
+- `IDBIndex.objectStore`：索引所在的对象仓库。
+- `IDBIndex.keyPath`：索引的主键。
+- `IDBIndex.multiEntry`：布尔值，针对`keyPath`为数组的情况，如果设为`true`，创建数组时，每个数组成员都会有一个条目，否则每个数组都只有一个条目。
+- `IDBIndex.unique`：布尔值，表示创建索引时是否允许相同的主键。
