@@ -803,3 +803,35 @@ cursor.onsuccess = function (event) {
 ```
 IDBObjectStore.openKeyCursor()
 ```
+
+## IDBTransaction 对象
+
+IDBTransaction 对象用来异步操作数据库事务，所有的读写操作都要通过这个对象进行。
+
+`IDBDatabase.transaction()`方法返回的就是一个 IDBTransaction 对象。
+
+```
+var db;
+var DBOpenRequest = window.indexedDB.open('demo', 1);
+
+DBOpenRequest.onsuccess = function(event) {
+  db = DBOpenRequest.result;
+  var transaction = db.transaction(['demo'], 'readwrite');
+
+  transaction.oncomplete = function (event) {
+    console.log('transaction success');
+  };
+
+  transaction.onerror = function (event) {
+    console.log('transaction error: ' + transaction.error);
+  };
+
+  var objectStore = transaction.objectStore('demo');
+  var objectStoreRequest = objectStore.add({ foo: 1 });
+
+  objectStoreRequest.onsuccess = function (event) {
+    console.log('add data success');
+  };
+
+};
+```
