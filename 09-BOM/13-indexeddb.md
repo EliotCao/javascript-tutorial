@@ -865,3 +865,37 @@ IDBTransaction 对象有以下方法。
 
 - `IDBTransaction.abort()`：终止当前事务，回滚所有已经进行的变更。
 - `IDBTransaction.objectStore(name)`：返回指定名称的对象仓库 IDBObjectStore。
+
+## IDBIndex 对象
+
+IDBIndex 对象代表数据库的索引，通过这个对象可以获取数据库里面的记录。数据记录的主键默认就是带有索引，IDBIndex 对象主要用于通过除主键以外的其他键，建立索引获取对象。
+
+IDBIndex 是持久性的键值对存储。只要插入、更新或删除数据记录，引用的对象库中的记录，索引就会自动更新。
+
+`IDBObjectStore.index()`方法可以获取 IDBIndex 对象。
+
+```
+var transaction = db.transaction(['contactsList'], 'readonly');
+var objectStore = transaction.objectStore('contactsList');
+var myIndex = objectStore.index('lName');
+
+myIndex.openCursor().onsuccess = function (event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    var tableRow = document.createElement('tr');
+    tableRow.innerHTML =   '<td>' + cursor.value.id + '</td>'
+                         + '<td>' + cursor.value.lName + '</td>'
+                         + '<td>' + cursor.value.fName + '</td>'
+                         + '<td>' + cursor.value.jTitle + '</td>'
+                         + '<td>' + cursor.value.company + '</td>'
+                         + '<td>' + cursor.value.eMail + '</td>'
+                         + '<td>' + cursor.value.phone + '</td>'
+                         + '<td>' + cursor.value.age + '</td>';
+    tableEntry.appendChild(tableRow);
+
+    cursor.continue();
+  } else {
+    console.log('Entries all displayed.');
+  }
+};
+```
