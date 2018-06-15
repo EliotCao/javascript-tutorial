@@ -917,3 +917,29 @@ IDBIndex 对象有以下方法，它们都是异步的，立即返回的都是�
 - `IDBIndex.getAllKeys()`：该方法与`IDBIndex.getAll()`方法相似，区别是获取所有主键。
 - `IDBIndex.openCursor()`：用来获取一个 IDBCursor 对象，用来遍历索引里面的所有条目。
 - `IDBIndex.openKeyCursor()`：该方法与`IDBIndex.openCursor()`方法相似，区别是遍历所有条目的主键。
+
+## IDBCursor 对象
+
+IDBCursor 对象代表指针对象，用来遍历数据仓库（IDBObjectStore）或索引（IDBIndex）的记录。
+
+IDBCursor 对象一般通过`IDBObjectStore.openCursor()`方法获得。
+
+```
+var transaction = db.transaction(['rushAlbumList'], 'readonly');
+var objectStore = transaction.objectStore('rushAlbumList');
+
+objectStore.openCursor(null, 'next').onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    var listItem = document.createElement('li');
+      listItem.innerHTML = cursor.value.albumTitle + ', ' + cursor.value.year;
+      list.appendChild(listItem);
+
+      console.log(cursor.source);
+      cursor.continue();
+    } else {
+      console.log('Entries all displayed.');
+    }
+  };
+};
+```
