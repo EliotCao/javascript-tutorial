@@ -1010,3 +1010,25 @@ var r9 = IDBKeyRange.only(z);
 - `IDBKeyRange.lowerOpen`：布尔值，表示下限是否为开区间（即下限是否排除在范围之外）
 - `IDBKeyRange.upper`：返回上限
 - `IDBKeyRange.upperOpen`：布尔值，表示上限是否为开区间（即上限是否排除在范围之外）
+
+IDBKeyRange 实例对象生成以后，将它作为参数输入 IDBObjectStore 或 IDBIndex 对象的`openCursor()`方法，就可以在所设定的范围内读取数据。
+
+```
+var t = db.transaction(['people'], 'readonly');
+var store = t.objectStore('people');
+var index = store.index('name');
+
+var range = IDBKeyRange.bound('B', 'D');
+
+index.openCursor(range).onsuccess = function (e) {
+  var cursor = e.target.result;
+  if (cursor) {
+    console.log(cursor.key + ':');
+
+    for (var field in cursor.value) {
+      console.log(cursor.value[field]);
+    }
+    cursor.continue();
+  }
+}
+```
