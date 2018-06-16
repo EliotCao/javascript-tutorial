@@ -970,3 +970,34 @@ IDBKeyRange 可以只包含一个值，也可以指定上限和下限。它有�
 - `IDBKeyRange.upperBound()`：指定上限。
 - `IDBKeyRange.bound()`：同时指定上下限。
 - `IDBKeyRange.only()`：指定只包含一个值。
+
+下面是一些代码实例。
+
+```
+// All keys ≤ x
+var r1 = IDBKeyRange.upperBound(x);
+
+// All keys < x
+var r2 = IDBKeyRange.upperBound(x, true);
+
+// All keys ≥ y
+var r3 = IDBKeyRange.lowerBound(y);
+
+// All keys > y
+var r4 = IDBKeyRange.lowerBound(y, true);
+
+// All keys ≥ x && ≤ y
+var r5 = IDBKeyRange.bound(x, y);
+
+// All keys > x &&< y
+var r6 = IDBKeyRange.bound(x, y, true, true);
+
+// All keys > x && ≤ y
+var r7 = IDBKeyRange.bound(x, y, true, false);
+
+// All keys ≥ x &&< y
+var r8 = IDBKeyRange.bound(x, y, false, true);
+
+// The key = z
+var r9 = IDBKeyRange.only(z);
+```
