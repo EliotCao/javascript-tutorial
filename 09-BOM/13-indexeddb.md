@@ -959,3 +959,14 @@ IDBCursor 对象有如下方法。
 - `IDBCursor.continuePrimaryKey()`：该方法需要两个参数，第一个是`key`，第二个是`primaryKey`，将指针移到符合这两个参数的位置。
 - `IDBCursor.delete()`：用来删除当前位置的记录，返回一个 IDBRequest 对象。该方法不会改变指针的位置。
 - `IDBCursor.update()`：用来更新当前位置的记录，返回一个 IDBRequest 对象。它的参数是要写入数据库的新的值。
+
+## IDBKeyRange 对象
+
+IDBKeyRange 对象代表数据仓库（object store）里面的一组主键。根据这组主键，可以获取数据仓库或索引里面的一组记录。
+
+IDBKeyRange 可以只包含一个值，也可以指定上限和下限。它有四个静态方法，用来指定主键的范围。
+
+- `IDBKeyRange.lowerBound()`：指定下限。
+- `IDBKeyRange.upperBound()`：指定上限。
+- `IDBKeyRange.bound()`：同时指定上下限。
+- `IDBKeyRange.only()`：指定只包含一个值。
