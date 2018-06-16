@@ -1001,3 +1001,12 @@ var r8 = IDBKeyRange.bound(x, y, false, true);
 // The key = z
 var r9 = IDBKeyRange.only(z);
 ```
+
+`IDBKeyRange.lowerBound()`、`IDBKeyRange.upperBound()`、`IDBKeyRange.bound()`这三个方法默认包括端点值，可以传入一个布尔值，修改这个属性。
+
+与之对应，IDBKeyRange 对象有四个只读属性。
+
+- `IDBKeyRange.lower`：返回下限
+- `IDBKeyRange.lowerOpen`：布尔值，表示下限是否为开区间（即下限是否排除在范围之外）
+- `IDBKeyRange.upper`：返回上限
+- `IDBKeyRange.upperOpen`：布尔值，表示上限是否为开区间（即上限是否排除在范围之外）
