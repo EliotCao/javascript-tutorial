@@ -370,3 +370,17 @@ self.name // myWorker
 - Worker.onmessageerror：指定 messageerror 事件的监听函数。发送的数据无法序列化成字符串时，会触发这个事件。
 - Worker.postMessage()：向 Worker 线程发送消息。
 - Worker.terminate()：立即终止 Worker 线程。
+
+### Worker 线程
+
+Web Worker 有自己的全局对象，不是主线程的`window`，而是一个专门为 Worker 定制的全局对象。因此定义在`window`上面的对象和方法不是全部都可以使用。
+
+Worker 线程有一些自己的全局属性和方法。
+
+- self.name： Worker 的名字。该属性只读，由构造函数指定。
+- self.onmessage：指定`message`事件的监听函数。
+- self.onmessageerror：指定 messageerror 事件的监听函数。发送的数据无法序列化成字符串时，会触发这个事件。
+- self.close()：关闭 Worker 线程。
+- self.postMessage()：向产生这个 Worker 线程发送消息。
+- self.importScripts()：加载 JS 脚本。
+
