@@ -362,3 +362,11 @@ var myWorker = new Worker('worker.js', { name : 'myWorker' });
 // Worker 线程
 self.name // myWorker
 ```
+
+`Worker()`构造函数返回一个 Worker 线程对象，用来供主线程操作 Worker。Worker 线程对象的属性和方法如下。
+
+- Worker.onerror：指定 error 事件的监听函数。
+- Worker.onmessage：指定 message 事件的监听函数，发送过来的数据在`Event.data`属性中。
+- Worker.onmessageerror：指定 messageerror 事件的监听函数。发送的数据无法序列化成字符串时，会触发这个事件。
+- Worker.postMessage()：向 Worker 线程发送消息。
+- Worker.terminate()：立即终止 Worker 线程。
