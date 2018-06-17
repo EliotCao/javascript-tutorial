@@ -136,3 +136,22 @@ importScripts('script1.js');
 ```
 importScripts('script1.js', 'script2.js');
 ```
+
+### 错误处理
+
+主线程可以监听 Worker 是否发生错误。如果发生错误，Worker 会触发主线程的`error`事件。
+
+```
+worker.onerror(function (event) {
+  console.log([
+    'ERROR: Line ', event.lineno, ' in ', event.filename, ': ', event.message
+  ].join(''));
+});
+
+// 或者
+worker.addEventListener('error', function (event) {
+  // ...
+});
+```
+
+Worker 内部也可以监听`error`事件。
