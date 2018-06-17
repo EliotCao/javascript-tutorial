@@ -33,3 +33,45 @@ Worker 线程不能执行`alert()`方法和`confirm()`方法，但可以使用 X
 （6）**文件限制**
 
 Worker 线程无法读取本地文件，即不能打开本机的文件系统（`file://`），它所加载的脚本，必须来自网络。
+
+## 基本用法
+
+### 主线程
+
+主线程采用`new`命令，调用`Worker()`构造函数，新建一个 Worker 线程。
+
+```
+var worker = new Worker('work.js');
+```
+
+`Worker()`构造函数的参数是一个脚本文件，该文件就是 Worker 线程所要执行的任务。由于 Worker 不能读取本地文件，所以这个脚本必须来自网络。如果下载没有成功（比如404错误），Worker 就会默默地失败。
+
+然后，主线程调用`worker.postMessage()`方法，向 Worker 发消息。
+
+```
+worker.postMessage('Hello World');
+worker.postMessage({method: 'echo', args: ['Work']});
+```
+
+`worker.postMessage()`方法的参数，就是主线程传给 Worker 的数据。它可以是各种数据类型，包括二进制数据。
+
+接着，主线程通过`worker.onmessage`指定监听函数，接收子线程发回来的消息。
+
+```
+worker.onmessage = function (event) {
+  doSomething(event.data);
+}
+
+function doSomething() {
+  // 执行任务
+  worker.postMessage('Work done!');
+}
+```
+
+上面代码中，事件对象的`data`属性可以获取 Worker 发来的数据。
+
+Worker 完成任务以后，主线程就可以把它关掉。
+
+```
+worker.terminate();
+```
