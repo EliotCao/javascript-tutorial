@@ -155,3 +155,15 @@ worker.addEventListener('error', function (event) {
 ```
 
 Worker 内部也可以监听`error`事件。
+
+### 关闭 Worker
+
+使用完毕，为了节省系统资源，必须关闭 Worker。
+
+```
+// 主线程
+worker.terminate();
+
+// Worker 线程
+self.close();
+```
