@@ -122,3 +122,17 @@ self.addEventListener('message', function (e) {
 ```
 
 上面代码中，`self.close()`用于在 Worker 内部关闭自身。
+
+### Worker 加载脚本
+
+Worker 内部如果要加载其他脚本，有一个专门的方法`importScripts()`。
+
+```
+importScripts('script1.js');
+```
+
+该方法可以同时加载多个脚本。
+
+```
+importScripts('script1.js', 'script2.js');
+```
