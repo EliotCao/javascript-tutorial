@@ -191,3 +191,16 @@ self.onmessage = function (e) {
 ```
 
 但是，拷贝方式发送二进制数据，会造成性能问题。比如，主线程向 Worker 发送一个 500MB 文件，默认情况下浏览器会生成一个原文件的拷贝。为了解决这个问题，JavaScript 允许主线程把二进制数据直接转移给子线程，但是一旦转移，主线程就无法再使用这些二进制数据了，这是为了防止出现多个线程同时修改数据的麻烦局面。这种转移数据的方法，叫做[Transferable Objects](http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#transferable-objects)。这使得主线程可以快速把数据交给 Worker，对于影像处理、声音处理、3D 运算等就非常方便了，不会产生性能负担。
+
+如果要直接转移数据的控制权，就要使用下面的写法。
+
+```
+// Transferable Objects 格式
+worker.postMessage(arrayBuffer, [arrayBuffer]);
+
+// 例子
+var ab = new ArrayBuffer(1);
+worker.postMessage(ab, [ab]);
+```
+
+## 
