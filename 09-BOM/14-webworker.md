@@ -75,3 +75,29 @@ Worker 完成任务以后，主线程就可以把它关掉。
 ```
 worker.terminate();
 ```
+
+### Worker 线程
+
+Worker 线程内部需要有一个监听函数，监听`message`事件。
+
+```
+self.addEventListener('message', function (e) {
+  self.postMessage('You said: ' + e.data);
+}, false);
+```
+
+上面代码中，`self`代表子线程自身，即子线程的全局对象。因此，等同于下面两种写法。
+
+```
+// 写法一
+this.addEventListener('message', function (e) {
+  this.postMessage('You said: ' + e.data);
+}, false);
+
+// 写法二
+addEventListener('message', function (e) {
+  postMessage('You said: ' + e.data);
+}, false);
+```
+
+除了使用`self.addEventListener()`指定监听函数，也可以使用`self.onmessage`指定。监听函数的参数是一个事件对象，它的`data`属性包含主线程发来的数据。`self.postMessage()`方法用来向主线程发送消息。
