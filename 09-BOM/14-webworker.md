@@ -101,3 +101,24 @@ addEventListener('message', function (e) {
 ```
 
 除了使用`self.addEventListener()`指定监听函数，也可以使用`self.onmessage`指定。监听函数的参数是一个事件对象，它的`data`属性包含主线程发来的数据。`self.postMessage()`方法用来向主线程发送消息。
+
+根据主线程发来的数据，Worker 线程可以调用不同的方法，下面是一个例子。
+
+```
+self.addEventListener('message', function (e) {
+  var data = e.data;
+  switch (data.cmd) {
+    case 'start':
+      self.postMessage('WORKER STARTED: ' + data.msg);
+      break;
+    case 'stop':
+      self.postMessage('WORKER STOPPED: ' + data.msg);
+      self.close(); // Terminates the worker.
+      break;
+    default:
+      self.postMessage('Unknown command: ' + data.msg);
+  };
+}, false);
+```
+
+上面代码中，`self.close()`用于在 Worker 内部关闭自身。
