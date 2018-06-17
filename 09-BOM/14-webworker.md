@@ -342,3 +342,23 @@ function work() {
   close();
 }
 ```
+
+## API
+
+### 主线程
+
+浏览器原生提供`Worker()`构造函数，用来供主线程生成 Worker 线程。
+
+```
+var myWorker = new Worker(jsUrl, options);
+```
+
+`Worker()`构造函数，可以接受两个参数。第一个参数是脚本的网址（必须遵守同源政策），该参数是必需的，且只能加载 JS 脚本，否则会报错。第二个参数是配置对象，该对象可选。它的一个作用就是指定 Worker 的名称，用来区分多个 Worker 线程。
+
+```
+// 主线程
+var myWorker = new Worker('worker.js', { name : 'myWorker' });
+
+// Worker 线程
+self.name // myWorker
+```
