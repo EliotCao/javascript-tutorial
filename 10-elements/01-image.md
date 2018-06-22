@@ -143,3 +143,7 @@ if (img.naturalHeight > img.naturalWidth) {
 ```
 
 上面代码中，如果图片的高度大于宽度，则设为`portrait`模式。
+
+## HTMLImageElement.complete
+
+`HTMLImageElement.complete`属性返回一个布尔值，表示图表是否已经加载完成。如果`<img>`元素没有`src`属性，也会返回`true`。
