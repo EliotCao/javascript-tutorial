@@ -36,3 +36,24 @@ var img = new Image();
 img.src = 'image1.png';
 document.body.appendChild(img);
 ```
+
+除了使用`Image`构造，下面的方法也可以得到`HTMLImageElement`实例。
+
+- `document.images`的成员
+- 节点选取方法（比如`document.getElementById`）得到的`<img>`节点
+- `document.createElement('img')`生成的`<img>`节点
+
+```
+document.images[0] instanceof HTMLImageElement
+// true
+
+var img = document.getElementById('myImg');
+img instanceof HTMLImageElement
+// true
+
+var img = document.createElement('img');
+img instanceof HTMLImageElement
+// true
+```
+
+`HTMLImageElement`实例除了具有 Node、Element、HTMLElement 接口以外，还拥有一些独有的属性。这个接口没有定义自己的方法。
