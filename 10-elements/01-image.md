@@ -70,3 +70,11 @@ img instanceof HTMLImageElement
 var img = document.getElementById('img');
 img.src // http://example.com/pic.jpg
 ```
+
+**（2）HTMLImageElement.currentSrc**
+
+`HTMLImageElement.currentSrc`属性返回当前正在展示的图像的网址。JavaScript 和 CSS 的 mediaQuery 都可能改变正在展示的图像。
+
+**（3）HTMLImageElement.alt**
+
+`HTMLImageElement.alt`属性可以读写`<img>`的 HTML 属性`alt`，表示对图片的文字说明。
