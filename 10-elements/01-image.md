@@ -84,3 +84,31 @@ img.src // http://example.com/pic.jpg
 `HTMLImageElement.isMap`属性对应`<img>`元素的 HTML 属性`ismap`，返回一个布尔值，表示图像是否为服务器端的图像映射的一部分。
 
 `HTMLImageElement.useMap`属性对应`<img>`元素的 HTML 属性`usemap`，表示当前图像对应的`<map>`元素。
+
+**（5）HTMLImageElement.srcset，HTMLImageElement.sizes**
+
+`HTMLImageElement.srcset`属性和`HTMLImageElement.sizes`属性，分别用于读写`<img>`元素的`srcset`属性和`sizes`属性。它们用于`<img>`元素的响应式加载。`srcset`属性可以单独使用，但是`sizes`属性必须与`srcset`属性同时使用。
+
+```
+// HTML 代码如下
+// <img srcset="example-320w.jpg 320w,
+//              example-480w.jpg 480w,
+//              example-800w.jpg 800w"
+//      sizes="(max-width: 320px) 280px,
+//             (max-width: 480px) 440px,
+//             800px"
+//      id="myImg"
+//      src="example-800w.jpg">
+var img = document.getElementById('myImg');
+img.srcset
+// "example-320w.jpg 320w,
+//  example-480w.jpg 480w,
+//  example-800w.jpg 800w"
+
+img.sizes
+// "(max-width: 320px) 280px,
+//  (max-width: 480px) 440px,
+//  800px"
+```
+
+上面代码中，`sizes`属性指定，对于小于`320px`的屏幕，图像的宽度为`280px`；对于小于`480px`的屏幕，图像宽度为`440px`；其他情况下，图像宽度为`800px`。然后，浏览器会根据当前屏幕下的图像宽度，到`srcset`属性加载宽度最接近的图像。
