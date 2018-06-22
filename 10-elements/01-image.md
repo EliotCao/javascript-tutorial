@@ -147,3 +147,19 @@ if (img.naturalHeight > img.naturalWidth) {
 ## HTMLImageElement.complete
 
 `HTMLImageElement.complete`属性返回一个布尔值，表示图表是否已经加载完成。如果`<img>`元素没有`src`属性，也会返回`true`。
+
+## HTMLImageElement.crossOrigin
+
+`HTMLImageElement.crossOrigin`属性用于读写`<img>`元素的`crossorigin`属性，表示跨域设置。
+
+这个属性有两个可能的值。
+
+- `anonymous`：跨域请求不要求用户身份（credentials），这是默认值。
+- `use-credentials`：跨域请求要求用户身份。
+
+```
+// HTML 代码如下
+// <img crossorigin="anonymous" id="myImg" src="pic.jpg">
+var img = document.getElementById('img');
+img.crossOrigin // "anonymous"
+```
