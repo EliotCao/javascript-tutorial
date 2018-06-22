@@ -179,3 +179,23 @@ img.crossOrigin // "anonymous"
 ## HTMLImageElement.x，HTMLImageElement.y
 
 `HTMLImageElement.x`属性返回图像左上角相对于页面左上角的横坐标，`HTMLImageElement.y`属性返回纵坐标。
+
+## 事件属性
+
+图像加载完成，会触发`onload`属性指定的回调函数。
+
+```
+// HTML 代码为 <img src="example.jpg" onload="loadImage()">
+function loadImage() {
+  console.log('Image is loaded');
+}
+```
+
+图像加载过程中发生错误，会触发`onerror`属性指定的回调函数。
+
+```
+// HTML 代码为 <img src="image.gif" onerror="myFunction()">
+function myFunction() {
+  console.log('There is something wrong');
+}
+```
