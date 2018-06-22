@@ -163,3 +163,15 @@ if (img.naturalHeight > img.naturalWidth) {
 var img = document.getElementById('img');
 img.crossOrigin // "anonymous"
 ```
+
+## HTMLImageElement.referrerPolicy
+
+`HTMLImageElement.referrerPolicy`用来读写`<img>`元素的 HTML 属性`referrerpolicy`，表示请求图像资源时，如何处理 HTTP 请求的`referrer`字段。
+
+它有五个可能的值。
+
+- `no-referrer`：不带有`referrer`字段。
+- `no-referrer-when-downgrade`：如果请求的地址不是 HTTPS 协议，就不带有`referrer`字段，这是默认值。
+- `origin`：`referrer`字段是当前网页的地址，包含协议、域名和端口。
+- `origin-when-cross-origin`：如果请求的地址与当前网页是同源关系，那么`referrer`字段将带有完整路径，否则将只包含协议、域名和端口。
+- `unsafe-url`：`referrer`字段包含当前网页的地址，除了协议、域名和端口以外，还包括路径。这个设置是不安全的，因为会泄漏路径信息。
