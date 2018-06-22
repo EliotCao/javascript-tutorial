@@ -112,3 +112,19 @@ img.sizes
 ```
 
 上面代码中，`sizes`属性指定，对于小于`320px`的屏幕，图像的宽度为`280px`；对于小于`480px`的屏幕，图像宽度为`440px`；其他情况下，图像宽度为`800px`。然后，浏览器会根据当前屏幕下的图像宽度，到`srcset`属性加载宽度最接近的图像。
+
+## HTMLImageElement.width，HTMLImageElement.height
+
+`width`属性表示`<img>`的 HTML 宽度，`height`属性表示高度。这两个属性返回的都是整数。
+
+```
+// HTML 代码如下
+// <img width="300" height="400" id="myImg" src="pic.jpg">
+var img = document.getElementById('img');
+img.width // 300
+img.height // 400
+```
+
+如果图像还没有加载，这两个属性返回的都是`0`。
+
+如果 HTML 代码没有设置`width`和`height`属性，则它们返回的是图像的实际宽度和高度，即`HTMLImageElement.naturalWidth`属性和`HTMLImageElement.naturalHeight`属性。
