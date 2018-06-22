@@ -128,3 +128,18 @@ img.height // 400
 如果图像还没有加载，这两个属性返回的都是`0`。
 
 如果 HTML 代码没有设置`width`和`height`属性，则它们返回的是图像的实际宽度和高度，即`HTMLImageElement.naturalWidth`属性和`HTMLImageElement.naturalHeight`属性。
+
+## HTMLImageElement.naturalWidth，HTMLImageElement.naturalHeight
+
+`HTMLImageElement.naturalWidth`属性表示图像的实际宽度（单位像素），`HTMLImageElement.naturalHeight`属性表示实际高度。这两个属性返回的都是整数。
+
+如果图像还没有指定或不可得，这两个属性都等于`0`。
+
+```
+var img = document.getElementById('img');
+if (img.naturalHeight > img.naturalWidth) {
+  img.classList.add('portrait');
+}
+```
+
+上面代码中，如果图片的高度大于宽度，则设为`portrait`模式。
