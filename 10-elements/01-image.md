@@ -57,3 +57,16 @@ img instanceof HTMLImageElement
 ```
 
 `HTMLImageElement`实例除了具有 Node、Element、HTMLElement 接口以外，还拥有一些独有的属性。这个接口没有定义自己的方法。
+
+## 特性相关的属性
+
+**（1）HTMLImageElement.src**
+
+`HTMLImageElement.src`属性返回图像的完整网址。
+
+```
+// HTML 代码如下
+// <img width="300" height="400" id="myImg" src="http://example.com/pic.jpg">
+var img = document.getElementById('img');
+img.src // http://example.com/pic.jpg
+```
