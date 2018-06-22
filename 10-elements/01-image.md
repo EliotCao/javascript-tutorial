@@ -175,3 +175,7 @@ img.crossOrigin // "anonymous"
 - `origin`：`referrer`字段是当前网页的地址，包含协议、域名和端口。
 - `origin-when-cross-origin`：如果请求的地址与当前网页是同源关系，那么`referrer`字段将带有完整路径，否则将只包含协议、域名和端口。
 - `unsafe-url`：`referrer`字段包含当前网页的地址，除了协议、域名和端口以外，还包括路径。这个设置是不安全的，因为会泄漏路径信息。
+
+## HTMLImageElement.x，HTMLImageElement.y
+
+`HTMLImageElement.x`属性返回图像左上角相对于页面左上角的横坐标，`HTMLImageElement.y`属性返回纵坐标。
