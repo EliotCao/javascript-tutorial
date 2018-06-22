@@ -21,3 +21,18 @@ Image(width, height)
 // 用法
 var myImage = new Image(100, 200);
 ```
+
+<img>实例的src属性可以定义图像的网址。
+
+```
+var img = new Image();
+img.src = 'picture.jpg';
+```
+
+新生成的`<img>`实例并不属于文档的一部分。如果想让它显示在文档中，必须手动插入文档。
+
+```
+var img = new Image();
+img.src = 'image1.png';
+document.body.appendChild(img);
+```
