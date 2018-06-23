@@ -14,3 +14,19 @@
 - `acceptCharset`：字符串，表示服务器所能接受的字符编码，多个编码格式之间使用逗号或空格分隔。
 - `autocomplete`：字符串`on`或`off`，表示浏览器是否要对`<input>`控件提供自动补全。
 - `noValidate`：布尔值，表示是否关闭表单的自动校验。
+
+## HTMLFormElement 的实例方法
+
+- `submit()`：提交表单，但是不会触发`submit`事件和表单的自动校验。
+- `reset()`：重置表单控件的值为默认值。
+- `checkValidity()`：如果控件能够通过自动校验，返回`true`，否则返回`false`，同时触发`invalid`事件。
+
+下面是一个创建表单并提交的例子。
+
+```
+var f = document.createElement('form');
+document.body.appendChild(f);
+f.action = '/cgi-bin/some.cgi';
+f.method = 'POST';
+f.submit();
+```
