@@ -106,3 +106,30 @@ function SelectText() {
 ```
 
 上面代码中，点击按钮以后，会选中`llo`三个字符。
+
+下面是`setCustomValidity()`的例子。
+
+```
+/* HTML 代码如下
+  <form id="form">
+    <input id="field" type="text" pattern="[a-f,0-9]{4}" autocomplete=off>
+  </form>
+*/
+
+const form   = document.querySelector('#form');
+const field  = document.querySelector('#field');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); // 防止这个例子发出 POST 请求
+});
+
+field.oninvalid = (event) => {
+  event.target.setCustomValidity('必须是一个 4 位十六进制数');
+}
+
+field.oninput = (event) => {
+  event.target.setCustomValidity('');
+}
+```
+
+上面代码中，输入框必须输入一个4位的十六进制数。如果不满足条件（比如输入`xxx`），按下回车键以后，就会提示自定义的报错信息。一旦自定义了报错信息，输入框就会一直处于校验失败状态，因此重新输入时，必须把自定义报错信息设为空字符串。另外，为了避免自动补全提示框遮住报错信息，必须将输入框的`autocomplete`属性关闭。
