@@ -89,3 +89,20 @@
 - `checkValidity()`：返回一个布尔值，表示当前节点的校验结果。如果返回`false`，表示不满足校验要求，否则就是校验成功或不必校验。
 - `stepDown()`：将当前`<input>`节点的值减少一个步长。该方法可以接受一个整数`n`作为参数，表示一次性减少`n`个步长，默认是`1`。有几种情况会抛错：当前`<input>`节点不适合递减或递增、当前节点没有`step`属性、`<input>`节点的值不能转为数字、递减之后的值小于`min`属性或大于`max`属性。
 - `stepUp()`：将当前`<input>`节点的值增加一个步长。其他与`stepDown()`方法相同。
+
+下面是`setSelectionRange()`方法的一个例子。
+
+```
+/* HTML 代码如下
+  <p><input type="text" id="mytextbox" size="20" value="HelloWorld"/></p>
+  <p><button onclick="SelectText()">选择文本</button></p>
+*/
+
+function SelectText() {
+  var input = document.getElementById('mytextbox');
+  input.focus();
+  input.setSelectionRange(2, 5);
+}
+```
+
+上面代码中，点击按钮以后，会选中`llo`三个字符。
