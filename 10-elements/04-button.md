@@ -84,3 +84,7 @@ for(var i = 0; i < button.labels.length; i++) {
 **（14）HTMLButtonElement.validationMessage**
 
 `HTMLButtonElement.validationMessage`属性是一个字符串，表示没有通过校验时显示的提示信息。该属性只读。
+
+**（15）HTMLButtonElement.validity**
+
+`HTMLButtonElement.validity`属性返回该按钮的校验状态（`ValidityState`）。该属性只读。
