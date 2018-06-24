@@ -29,3 +29,14 @@ new Option(text, value, defaultSelected, selected)
 - value：字符串，表示该选项的值。如果省略，默认返回`text`属性的值。
 - defaultSelected：布尔值，表示该项是否默认选中，默认为`false`。注意，即使设为`true`，也不代表该项的`selected`属性为`true`。
 - selected：布尔值，表示该项是否选中，默认为`false`。
+
+```
+var newOption = new Option('hello', 'world', true);
+
+newOption.text // "hello"
+newOption.value // "world"
+newOption.defaultSelected // true
+newOption.selected // false
+```
+
+上面代码中，`newOption`的`defaultSelected`属性为`true`，但是它没有被选中（即`selected`属性为`false`）。
