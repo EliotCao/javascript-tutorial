@@ -68,3 +68,7 @@ for(var i = 0; i < button.labels.length; i++) {
 **（11）HTMLButtonElement.name**
 
 `HTMLButtonElement.name`属性是一个字符串，表示按钮元素的`name`属性。如果没有设置`name`属性，则返回空字符串。该属性可读写。
+
+**（12）HTMLButtonElement.tabIndex**
+
+`HTMLButtonElement.tabIndex`是一个整数，代表按钮元素的 Tab 键顺序。该属性可读写。
