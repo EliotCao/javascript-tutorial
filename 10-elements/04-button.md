@@ -80,3 +80,7 @@ for(var i = 0; i < button.labels.length; i++) {
 - `submit`：默认值，表示提交表单。
 - `reset`：重置表单。
 - `button`：没有任何默认行为。
+
+**（14）HTMLButtonElement.validationMessage**
+
+`HTMLButtonElement.validationMessage`属性是一个字符串，表示没有通过校验时显示的提示信息。该属性只读。
