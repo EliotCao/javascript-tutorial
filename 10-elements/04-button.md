@@ -72,3 +72,11 @@ for(var i = 0; i < button.labels.length; i++) {
 **（12）HTMLButtonElement.tabIndex**
 
 `HTMLButtonElement.tabIndex`是一个整数，代表按钮元素的 Tab 键顺序。该属性可读写。
+
+**（13）HTMLButtonElement.type**
+
+`HTMLButtonElement.type`属性是一个字符串，表示按钮的行为。该属性可读写，可能取以下的值。
+
+- `submit`：默认值，表示提交表单。
+- `reset`：重置表单。
+- `button`：没有任何默认行为。
