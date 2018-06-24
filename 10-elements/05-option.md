@@ -14,3 +14,18 @@
 - `selected`：布尔值，表示该选项是否选中。
 - `text`：字符串，该选项的文本内容。
 - `value`：字符串，该选项的值。表单提交时，上传的就是选中项的这个属性。
+
+## Option() 构造函数
+
+浏览器原生提供`Option()`构造函数，用来生成 HTMLOptionElement 实例。
+
+```
+new Option(text, value, defaultSelected, selected)
+```
+
+它接受四个参数，都是可选的。
+
+- text：字符串，表示该选项的文本内容。如果省略，返回空字符串。
+- value：字符串，表示该选项的值。如果省略，默认返回`text`属性的值。
+- defaultSelected：布尔值，表示该项是否默认选中，默认为`false`。注意，即使设为`true`，也不代表该项的`selected`属性为`true`。
+- selected：布尔值，表示该项是否选中，默认为`false`。
