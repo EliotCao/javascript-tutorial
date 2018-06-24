@@ -64,3 +64,7 @@ for(var i = 0; i < button.labels.length; i++) {
 // "Label 2"
 上面代码中，两个<label>元素绑定<button>元素。button.labels返回这两个<label>元素。
 ```
+
+**（11）HTMLButtonElement.name**
+
+`HTMLButtonElement.name`属性是一个字符串，表示按钮元素的`name`属性。如果没有设置`name`属性，则返回空字符串。该属性可读写。
