@@ -63,3 +63,13 @@
 - HTMLMediaElement.textTracks：返回一个类似数组的对象，包含所有文本轨道。该属性只读。
 - HTMLMediaElement.videoTracks：返回一个类似数组的对象，包含多有视频轨道。该属性只读。
 - HTMLMediaElement.volume：浮点数，表示音量。0.0 表示静音，1.0 表示最大音量。
+
+`HTMLMediaElement`接口有如下方法。
+
+- HTMLMediaElement.addTextTrack()：添加文本轨道（比如字幕）到媒体文件。
+- HTMLMediaElement.captureStream()：返回一个 MediaStream 对象，用来捕获当前媒体文件的流内容。
+- HTMLMediaElement.canPlayType()：该方法接受一个 MIME 字符串作为参数，用来判断这种类型的媒体文件是否可以播放。该反复返回一个字符串，有三种可能的值，`probably`表示似乎可播放，`maybe`表示无法在不播放的情况下判断是否可播放，空字符串表示无法播放。
+- HTMLMediaElement.fastSeek()：该方法接受一个浮点数作为参数，表示指定的时间（单位秒）。该方法将媒体文件移动到指定时间。
+- HTMLMediaElement.load()：重新加载媒体文件。
+- HTMLMediaElement.pause()：暂停播放。该方法没有返回值。
+- HTMLMediaElement.play()：开始播放。该方法返回一个 Promise 对象。
