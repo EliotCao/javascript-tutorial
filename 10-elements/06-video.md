@@ -73,3 +73,18 @@
 - HTMLMediaElement.load()：重新加载媒体文件。
 - HTMLMediaElement.pause()：暂停播放。该方法没有返回值。
 - HTMLMediaElement.play()：开始播放。该方法返回一个 Promise 对象。
+
+下面是`play()`方法的一个例子。
+
+```
+var myVideo = document.getElementById('myVideoElement');
+
+myVideo
+.play()
+.then(() => {
+  console.log('playing');
+})
+.catch((error) => {
+  console.log(error);
+});
+```
