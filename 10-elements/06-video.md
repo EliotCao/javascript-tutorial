@@ -88,3 +88,19 @@ myVideo
   console.log(error);
 });
 ```
+
+## HTMLVideoElement 接口
+
+`HTMLVideoElement`接口代表了`<video>`元素。这个接口继承了`HTMLMediaElement`接口，并且有一些自己的属性和方法。
+
+HTMLVideoElement 接口的属性。
+
+- HTMLVideoElement.height：字符串，表示视频播放区域的高度（单位像素），对应 HTML 属性`height`。
+- HTMLVideoElement.width：字符串，表示视频播放区域的宽度（单位像素），对应 HTML 属性`width`。
+- HTMLVideoElement.videoHeight：该属性只读，返回一个整数，表示视频文件自身的高度（单位像素）。
+- HTMLVideoElement.videoWidth：该属性只读，返回一个整数，表示视频文件自身的宽度（单位像素）。
+- HTMLVideoElement.poster：字符串，表示一个图像文件的 URL，用来在无法获取视频文件时替代显示，对应 HTML 属性`poster`。
+
+HTMLVideoElement 接口的方法。
+
+- HTMLVideoElement.getVideoPlaybackQuality()：返回一个对象，包含了当前视频回访的一些数据。
